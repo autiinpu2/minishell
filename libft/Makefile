@@ -1,5 +1,5 @@
 CC      := cc
-CFLAGS  := -Wall -Wextra -Werror -g -MMD -MP # -MMD creates .d files for headers
+CFLAGS  := -Wall -Wextra -Werror -g -MMD -MP
 LIBC    := ar rcs
 RM      := rm -rf
 
