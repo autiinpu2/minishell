@@ -6,11 +6,13 @@
 /*   By: apuyane <apuyane@student.42angouleme.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/25 06:09:40 by apuyane           #+#    #+#             */
-/*   Updated: 2026/01/25 06:10:11 by apuyane          ###   ########.fr       */
+/*   Updated: 2026/01/25 23:46:53 by apuyane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/env.h"
+#include "../includes/libft.h"
+#include "../includes/minishell.h"
 
 t_env *load_envp(char **envp)
 {
@@ -37,10 +39,8 @@ t_env *load_envp(char **envp)
 			env->top = node;
 		else
 			last->next = node;
-		
 		last = node;
 		i++;
-		
 	}
 	env->size = i;
 	return env;
@@ -56,4 +56,18 @@ void	print_env(t_env *env)
 		printf("%s=%s\n", node->key, node->value);
 		node = node->next;
 	}
+}
+
+char	*get_env_from_name(char *name, t_env *env)
+{
+	t_env_node *node;
+
+	node = env->top;
+	while (node)
+	{
+		if (!ft_strcmp(node->key, name))
+			return node->value;
+		node = node->next;
+	}
+	return (NULL);
 }
