@@ -10,7 +10,7 @@ LIBFT_DIR := libft
 LIBFT   := $(LIBFT_DIR)/libft.a
 
 SRC_DIR := src
-SRC     := test.c
+SRC     := init_envp.c
 
 OBJS    := $(addprefix $(OBJ_DIR)/, $(SRC:.c=.o))
 
