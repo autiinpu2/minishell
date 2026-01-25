@@ -1,13 +1,12 @@
-CC      := cc
-CFLAGS  := -Wall -Wextra -Werror
-LIBC    := ar rcs
-RM      := rm -rf
+CC		:= cc
+CFLAGS	:= -Wall -Wextra -Werror -g
+LIBC	:= ar rcs
+RM		:= rm -rf
 
-NAME    := libft.a
-OBJ_DIR := build
+NAME	:= libft.a
+OBJ_DIR := ../build
 
-# Added missing .c extensions
-SRC     := ft_atoi.c ft_bzero.c ft_calloc.c ft_dprintf.c \
+SRC		:= ft_atoi.c ft_bzero.c ft_calloc.c ft_dprintf.c \
 			ft_isalnum.c ft_isalpha.c ft_isascii.c ft_isdigit.c \
 			ft_isprint.c ft_isspace.c ft_itoa.c ft_memchr.c \
 			ft_memcmp.c ft_memcpy.c ft_memmove.c ft_memset.c \
@@ -17,11 +16,11 @@ SRC     := ft_atoi.c ft_bzero.c ft_calloc.c ft_dprintf.c \
 			ft_strncmp.c ft_strnstr.c ft_strrchr.c ft_strtrim.c \
 			ft_substr.c ft_tolower.c ft_toupper.c
 
-OBJS    := $(patsubst %.c,$(OBJ_DIR)/%.o,$(SRC))
+OBJS	:= $(patsubst %.c,$(OBJ_DIR)/%.o,$(SRC))
 
 all: $(NAME)
 
-$(NAME): $(OBJS)
+$(NAME): $(OBJS) 
 	@$(LIBC) $(NAME) $(OBJS)
 	@echo "\033[1;32m$(NAME) created.\033[0m"
 
@@ -37,7 +36,7 @@ clean:
 
 fclean: clean
 	@$(RM) $(NAME)
-	@echo "\033[1;32mLibrary deleted.\033[0m"
+	@echo "\033[1;32mLibft deleted.\033[0m"
 
 re: fclean all
 
