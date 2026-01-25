@@ -6,13 +6,15 @@
 /*   By: apuyane <apuyane@student.42angouleme.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/25 06:09:40 by apuyane           #+#    #+#             */
-/*   Updated: 2026/01/25 23:46:53 by apuyane          ###   ########.fr       */
+/*   Updated: 2026/01/26 00:03:57 by apuyane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/env.h"
 #include "../includes/libft.h"
 #include "../includes/minishell.h"
+#include <readline/readline.h>
+#include <readline/history.h>
 
 t_env *load_envp(char **envp)
 {

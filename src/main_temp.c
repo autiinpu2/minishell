@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   test.c                                             :+:      :+:    :+:   */
+/*   main_temp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: apuyane <apuyane@student.42angouleme.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/25 04:17:27 by apuyane           #+#    #+#             */
-/*   Updated: 2026/01/25 23:48:17 by apuyane          ###   ########.fr       */
+/*   Updated: 2026/01/26 00:24:51 by apuyane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,7 @@ int main(int ac, char **av, char **envp)
 	{
 		prefix = ft_strdup(get_env_from_name("PWD", env));
 		prefix = ft_strjoin_free(prefix, ">");
-		write(2, prefix, ft_strlen(prefix));
-		line = get_next_line(0);
+		line = readline(prefix);
 		if (!line)
 		{
 			exit_code = EXIT_FAILURE;
