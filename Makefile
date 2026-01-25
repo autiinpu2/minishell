@@ -1,5 +1,5 @@
 CC      := cc
-CFLAGS  := -Wall -Wextra -Werror -g -lreadline
+CFLAGS  := -Wall -Wextra -Werror -g
 RM      := rm -rf
 MAKE    := make --no-print-directory
 
@@ -17,7 +17,7 @@ OBJS    := $(addprefix $(OBJ_DIR)/, $(SRC:.c=.o))
 all: $(NAME)
 
 $(NAME): $(LIBFT) $(OBJS)
-	@$(CC) $(OBJS) -L$(LIBFT_DIR) -lft -o $(NAME)
+	@$(CC) $(OBJS) -L$(LIBFT_DIR) -lft -lreadline -o $(NAME)
 	@echo "\033[1;32m$(NAME) created.\033[0m"
 
 $(LIBFT):
