@@ -6,7 +6,7 @@
 /*   By: apuyane <apuyane@student.42angouleme.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/25 04:16:51 by apuyane           #+#    #+#             */
-/*   Updated: 2026/01/26 04:53:57 by apuyane          ###   ########.fr       */
+/*   Updated: 2026/01/26 06:03:20 by apuyane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@
 # include <readline/history.h>
 # include <readline/readline.h>
 # include <unistd.h>
-# include "libft.h"
 # include "env.h"
 
 typedef struct s_cmd
