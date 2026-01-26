@@ -6,7 +6,7 @@
 /*   By: apuyane <apuyane@student.42angouleme.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/19 23:03:22 by apuyane           #+#    #+#             */
-/*   Updated: 2026/01/26 03:23:10 by apuyane          ###   ########.fr       */
+/*   Updated: 2026/01/26 04:41:53 by apuyane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ char	*ft_strjoin(char *s1, char *s2)
 	return (s);
 }
 
-char	*ft_strjoin_free(char *s1, char *s2, int char_to_free)
+char	*ft_strjoin_free(char *s1, char *s2)
 {
 	size_t	s1_length;
 	size_t	s2_length;
@@ -53,14 +53,14 @@ char	*ft_strjoin_free(char *s1, char *s2, int char_to_free)
 	s = malloc(s1_length + s2_length + 1);
 	if (!s)
 		return (NULL);
-	while (i++ < s1_length)
+	while (i < s1_length)
+	{
 		s[i] = s1[i];
+		i++;
+	}
 	while (j < s2_length)
 		s[i++] = s2[j++];
 	s[s1_length + s2_length] = '\0';
-	if (char_to_free == 1)
-		free(s1);
-	else
-		free(s2);
+	free(s1);
 	return (s);
 }
