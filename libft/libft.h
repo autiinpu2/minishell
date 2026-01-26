@@ -6,7 +6,7 @@
 /*   By: apuyane <apuyane@student.42angouleme.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/15 17:43:58 by apuyane           #+#    #+#             */
-/*   Updated: 2026/01/26 04:42:21 by apuyane          ###   ########.fr       */
+/*   Updated: 2026/01/26 04:54:10 by apuyane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,4 +66,3 @@ int				ft_toupper(int c);
 char			*get_next_line(int fd);
 
 #endif
-	

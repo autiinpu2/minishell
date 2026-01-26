@@ -6,7 +6,7 @@
 /*   By: apuyane <apuyane@student.42angouleme.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/25 04:16:51 by apuyane           #+#    #+#             */
-/*   Updated: 2026/01/26 04:38:06 by apuyane          ###   ########.fr       */
+/*   Updated: 2026/01/26 04:53:57 by apuyane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,14 +21,14 @@
 # include "libft.h"
 # include "env.h"
 
-typedef struct	s_cmd
+typedef struct s_cmd
 {
-	int			infile;
-	char		*path;
-	char		**args;
-	int			outfile;
-	int			is_build_in;
-	char		*function_name;
+	int				infile;
+	char			*path;
+	char			**args;
+	int				outfile;
+	int				is_build_in;
+	char			*function_name;
 	struct s_cmd	*next;
 }			t_cmd;
 

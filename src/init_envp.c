@@ -6,34 +6,27 @@
 /*   By: apuyane <apuyane@student.42angouleme.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/25 06:09:40 by apuyane           #+#    #+#             */
-/*   Updated: 2026/01/26 00:03:57 by apuyane          ###   ########.fr       */
+/*   Updated: 2026/01/26 05:02:34 by apuyane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/env.h"
 #include "../includes/libft.h"
 #include "../includes/minishell.h"
-#include <readline/readline.h>
-#include <readline/history.h>
 
-t_env *load_envp(char **envp)
+static t_env	*fill_env(t_env *env, char **envp)
 {
-	int i;
-	int	j;
-	t_env	*env;
+	int			i;
+	int			j;
 	t_env_node	*node;
 	t_env_node	*last;
-	
-	i = 0;
-	while (envp[i])
-		i++;
-	env = ft_calloc(1, sizeof(t_env));
+
 	i = 0;
 	while (envp[i])
 	{
 		node = ft_calloc(1, sizeof(t_env_node));
 		j = 0;
-		while(envp[i][j] != '=')
+		while (envp[i][j] != '=')
 			j++;
 		node->key = ft_substr(envp[i], 0, j);
 		node->value = ft_strdup(envp[i] + j + 1);
@@ -44,13 +37,26 @@ t_env *load_envp(char **envp)
 		last = node;
 		i++;
 	}
+	return (env);
+}
+
+t_env	*load_envp(char **envp)
+{
+	int			i;
+	t_env		*env;
+
+	i = 0;
+	while (envp[i])
+		i++;
+	env = ft_calloc(1, sizeof(t_env));
+	env = fill_env(env, envp);
 	env->size = i;
-	return env;
+	return (env);
 }
 
 void	print_env(t_env *env)
 {
-	t_env_node *node;
+	t_env_node	*node;
 
 	node = env->top;
 	while (node)
@@ -62,13 +68,13 @@ void	print_env(t_env *env)
 
 char	*get_env_from_name(char *name, t_env *env)
 {
-	t_env_node *node;
+	t_env_node	*node;
 
 	node = env->top;
 	while (node)
 	{
 		if (!ft_strcmp(node->key, name))
-			return node->value;
+			return (node->value);
 		node = node->next;
 	}
 	return (NULL);
