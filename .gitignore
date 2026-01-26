@@ -1,0 +1,4 @@
+/build
+compile_commands.json
+minishell
+libft/libft.a
