@@ -6,7 +6,7 @@
 /*   By: apuyane <apuyane@student.42angouleme.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/15 17:43:58 by apuyane           #+#    #+#             */
-/*   Updated: 2026/01/26 03:22:08 by apuyane          ###   ########.fr       */
+/*   Updated: 2026/01/26 03:23:07 by apuyane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ char			*ft_strchr(const char *s, int c);
 int				ft_strcmp(const char *s1, const char *s2);
 char			*ft_strdup(const char *s);
 char			*ft_strjoin(char *s1, char *s2);
-char			*ft_strjoin_free_s1(char *s1, char *s2, int char_to_free);
+char			*ft_strjoin_free(char *s1, char *s2, int char_to_free);
 size_t			ft_strlcat(char *dst, const char *src, size_t size);
 size_t			ft_strlcpy(char *dst, const char *src, size_t size);
 int				ft_strlen(char *str);
@@ -66,3 +66,4 @@ int				ft_toupper(int c);
 char			*get_next_line(int fd);
 
 #endif
+	

@@ -6,7 +6,7 @@
 /*   By: apuyane <apuyane@student.42angouleme.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/19 23:03:22 by apuyane           #+#    #+#             */
-/*   Updated: 2026/01/26 03:21:52 by apuyane          ###   ########.fr       */
+/*   Updated: 2026/01/26 03:23:10 by apuyane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ char	*ft_strjoin(char *s1, char *s2)
 	return (s);
 }
 
-char	*ft_strjoin_free_s1(char *s1, char *s2, int char_to_free)
+char	*ft_strjoin_free(char *s1, char *s2, int char_to_free)
 {
 	size_t	s1_length;
 	size_t	s2_length;
