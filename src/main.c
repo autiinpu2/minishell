@@ -6,7 +6,7 @@
 /*   By: apuyane <apuyane@student.42angouleme.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/25 04:17:27 by apuyane           #+#    #+#             */
-/*   Updated: 2026/01/26 08:22:18 by apuyane          ###   ########.fr       */
+/*   Updated: 2026/01/27 00:43:41 by apuyane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ int	main(int ac, char **av, char **envp)
 	(void)av;
 	env = load_envp(envp);
 	exit_code = EXIT_SUCCESS;
-	// cmd = fake_cmd();
+	cmd = fake_cmd();
 	while (true)
 	{
 		prefix = ft_strdup(get_env_from_name("PWD", env));
@@ -53,7 +53,6 @@ int	main(int ac, char **av, char **envp)
 			exit_code = 1;
 			break ;
 		}
-		// exec(cmd, env);
 		free(line);
 		free(prefix);
 	}

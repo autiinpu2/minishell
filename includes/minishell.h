@@ -6,7 +6,7 @@
 /*   By: apuyane <apuyane@student.42angouleme.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/25 04:16:51 by apuyane           #+#    #+#             */
-/*   Updated: 2026/01/26 08:16:42 by apuyane          ###   ########.fr       */
+/*   Updated: 2026/01/27 00:44:03 by apuyane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,6 @@ typedef struct s_cmd
 }			t_cmd;
 
 t_cmd	*parsing(t_env *env, char *line);
-
-void	exec(t_cmd *cmd, t_env *env);
 
 void	free_cmd(t_cmd *cmd);
 void	free_env(t_env *env);
