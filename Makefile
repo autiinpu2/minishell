@@ -1,5 +1,5 @@
 CC      := cc
-CFLAGS  := -Wall -Wextra -Werror -g
+CFLAGS  := -Wall -Wextra -Werror -g -I includes
 RM      := rm -rf
 MAKE    := make --no-print-directory
 
@@ -10,7 +10,7 @@ LIBFT_DIR := libft
 LIBFT   := $(LIBFT_DIR)/libft.a
 
 SRC_DIR := src
-SRC     := init_envp.c main.c init_parsing.c free_utils.c
+SRC     := envp_utils.c main.c init_parsing.c free_utils.c
 
 OBJS    := $(addprefix $(OBJ_DIR)/, $(SRC:.c=.o))
 

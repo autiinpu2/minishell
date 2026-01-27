@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init_envp.c                                        :+:      :+:    :+:   */
+/*   envp_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: apuyane <apuyane@student.42angouleme.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/25 06:09:40 by apuyane           #+#    #+#             */
-/*   Updated: 2026/01/26 05:02:34 by apuyane          ###   ########.fr       */
+/*   Updated: 2026/01/27 05:20:51 by apuyane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/env.h"
-#include "../includes/libft.h"
-#include "../includes/minishell.h"
+#include "env.h"
+#include "libft.h"
+#include "minishell.h"
 
 static t_env	*fill_env(t_env *env, char **envp)
 {
@@ -30,6 +30,7 @@ static t_env	*fill_env(t_env *env, char **envp)
 			j++;
 		node->key = ft_substr(envp[i], 0, j);
 		node->value = ft_strdup(envp[i] + j + 1);
+		node->text = ft_strdup(envp[i]);
 		if (!env->top)
 			env->top = node;
 		else
@@ -37,6 +38,7 @@ static t_env	*fill_env(t_env *env, char **envp)
 		last = node;
 		i++;
 	}
+	env->size = i;
 	return (env);
 }
 

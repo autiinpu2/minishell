@@ -6,13 +6,13 @@
 /*   By: apuyane <apuyane@student.42angouleme.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/26 02:35:09 by mcomin            #+#    #+#             */
-/*   Updated: 2026/01/26 06:16:47 by apuyane          ###   ########.fr       */
+/*   Updated: 2026/01/27 05:19:46 by apuyane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/minishell.h"
-#include "../includes/env.h"
-#include "../includes/libft.h"
+#include "env.h"
+#include "libft.h"
+#include "minishell.h"
 
 char	*is_path_cmd(char *prefix_cmd_name, char **tab_paths)
 {

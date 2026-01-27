@@ -1,36 +1,42 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   env.h                                              :+:      :+:    :+:   */
+/*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: apuyane <apuyane@student.42angouleme.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/01/24 03:34:34 by apuyane           #+#    #+#             */
-/*   Updated: 2026/01/27 05:20:05 by apuyane          ###   ########.fr       */
+/*   Created: 2026/01/27 01:56:49 by apuyane           #+#    #+#             */
+/*   Updated: 2026/01/27 06:49:22 by apuyane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef ENV_H
-# define ENV_H
+#include "env.h"
+#include "libft.h"
+#include "minishell.h"
 
-# include <stdlib.h>
-
-typedef struct s_env_node
+char **env_to_envp(t_env *env)
 {
-	char				*key;
-	char				*value;
-	char				*text;
-	struct s_env_node	*next;
-}					t_env_node;
+	t_env_node	*node;
+	char		**envp;
+	int			i;
 
-typedef struct s_env
+	i = 0;
+	envp = ft_calloc(env->size, sizeof(char *));
+	node = env->top;
+	while (node)
+	{
+		envp[i] = node->text;
+		node = node->next;
+		i++;
+	}
+	return (envp);
+}
+
+void	exec(t_env *env)
 {
-	int			size;
-	t_env_node	*top;
-}				t_env;
+	char	**envp;
 
-t_env	*load_envp(char **envp);
-void	print_env(t_env *env);
-char	*get_env_from_name(char *name, t_env *env);
+	envp = env_to_envp(env);
 
-#endif
+	free_tab(envp);
+}

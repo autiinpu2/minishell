@@ -6,13 +6,13 @@
 /*   By: apuyane <apuyane@student.42angouleme.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/26 08:16:06 by apuyane           #+#    #+#             */
-/*   Updated: 2026/01/26 08:16:21 by apuyane          ###   ########.fr       */
+/*   Updated: 2026/01/27 06:51:54 by apuyane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/minishell.h"
-#include "../includes/env.h"
-#include "../includes/libft.h"
+#include "env.h"
+#include "libft.h"
+#include "minishell.h"
 
 void	free_env(t_env *env)
 {
@@ -24,6 +24,7 @@ void	free_env(t_env *env)
 	{
 		free(node->key);
 		free(node->value);
+		free(node->text);
 		tmp = node->next;
 		free(node);
 		node = tmp;
@@ -31,19 +32,34 @@ void	free_env(t_env *env)
 	free(env);
 }
 
-void	free_cmd(t_cmd *cmd)
+void	free_tab(char **tab)
 {
-	t_cmd	*node;
-	t_cmd	*tmp;
-	
-	node = cmd;
-	while (node)
+	int i;
+
+	i = 0;
+	if (!tab)
+		return ;
+	while (tab[i])
 	{
-		free(node->args);
-		free(node->function_name);
-		free(node->path);
-		tmp = node->next;
-		free(node);
-		node = tmp;
+		free(tab[i]);
+		tab[i] = NULL;
+		i++;
 	}
+}
+
+void	free_tab_cmd(t_tab_cmd *cmd)
+{
+	int	i;
+	
+	i = 0;
+	while ((size_t)i < cmd->size)
+	{
+		free_tab(cmd->tab[i].args);
+		free(cmd->tab[i].args);
+		free(cmd->tab[i].function_name);
+		free(cmd->tab[i].path);
+		i++;
+	}
+	free(cmd->tab);
+	free(cmd);
 }

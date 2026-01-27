@@ -6,7 +6,7 @@
 /*   By: apuyane <apuyane@student.42angouleme.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/25 04:16:51 by apuyane           #+#    #+#             */
-/*   Updated: 2026/01/27 00:44:03 by apuyane          ###   ########.fr       */
+/*   Updated: 2026/01/27 06:40:18 by apuyane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,20 +27,25 @@
 typedef struct s_cmd
 {
 	int				infile;
+	int				outfile;
 	bool			infile_is_pipe;
+	bool			outfile_is_pipe;
+	char			*function_name;
+	bool			is_build_in;
 	char			*path;
 	char			**args;
-	int				outfile;
-	bool			outfile_is_pipe;
-	int				is_build_in;
-	char			*function_name;
 	pid_t			pid;
-	struct s_cmd	*next;
 }			t_cmd;
+
+typedef struct s_tab_cmd {
+	size_t	size;
+	t_cmd	*tab;
+}				t_tab_cmd;
 
 t_cmd	*parsing(t_env *env, char *line);
 
-void	free_cmd(t_cmd *cmd);
+void	free_tab_cmd(t_tab_cmd *cmd);
 void	free_env(t_env *env);
+void	free_tab(char **tab);
 
 #endif
