@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_isspace                                         :+:      :+:    :+:   */
+/*   ft_isspace.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apuyane <apuyane@student.42.fr>            +#+  +:+       +#+        */
+/*   By: apuyane <apuyane@student.42angouleme.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/18 19:52:52 by apuyane           #+#    #+#             */
-/*   Updated: 2026/01/18 19:56:38 by apuyane          ###   ########.fr       */
+/*   Updated: 2026/01/27 07:20:37 by apuyane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-bool	ft_is_space(char c)
+bool	ft_isspace(char c)
 {
 	return (c == ' ' || (c >= 9 && c <= 13));
 }

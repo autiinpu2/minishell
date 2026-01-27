@@ -6,7 +6,7 @@
 /*   By: apuyane <apuyane@student.42angouleme.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/17 01:00:40 by apuyane           #+#    #+#             */
-/*   Updated: 2026/01/24 04:02:17 by apuyane          ###   ########.fr       */
+/*   Updated: 2026/01/27 09:01:03 by apuyane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ static char	**do_malloc(char const *s, char c, int n)
 	return (str);
 }
 
-char	**fill_str(char const *s, char c, int n, char **str)
+static char	**fill_str(char const *s, char c, int n, char **str)
 {
 	int	i;
 	int	j;
