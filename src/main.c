@@ -38,20 +38,19 @@ int	main(int ac, char **av, char **envp)
 	char	*prefix;
 	char	*line;
 	t_env	*env;
-	t_tab_cmd	*cmd;
 	int		exit_code;
 
 	(void)ac;
 	(void)av;
 	env = load_envp(envp);
 	exit_code = EXIT_SUCCESS;
-	cmd = fake_cmd();
 	while (true)
 	{
 		prefix = ft_strdup(get_env_from_name("PWD", env));
 		prefix = ft_strjoin_free(prefix, ">");
 		line = readline(prefix);
-		// cmd = parsing(env, line);
+		if (*line)
+			add_history(line);
 		if (!ft_strcmp(line, "exit"))
 		{
 			exit_code = 1;
@@ -65,6 +64,5 @@ int	main(int ac, char **av, char **envp)
 	if (prefix)
 		free(prefix);
 	free_env(env);
-	free_tab_cmd(cmd);
 	return (exit_code);
 }
