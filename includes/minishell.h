@@ -6,7 +6,7 @@
 /*   By: apuyane <apuyane@student.42angouleme.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/25 04:16:51 by apuyane           #+#    #+#             */
-/*   Updated: 2026/01/27 06:40:18 by apuyane          ###   ########.fr       */
+/*   Updated: 2026/01/28 08:14:49 by apuyane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,8 @@
 # include <sys/wait.h>
 # include "env.h"
 
+# define BUILT_INS (const char*[]){"exit", "env", NULL}
+
 typedef struct s_cmd
 {
 	int				infile;
@@ -37,15 +39,19 @@ typedef struct s_cmd
 	pid_t			pid;
 }			t_cmd;
 
-typedef struct s_tab_cmd {
+typedef struct s_tab_cmd
+{
 	size_t	size;
 	t_cmd	*tab;
 }				t_tab_cmd;
 
 t_cmd	*parsing(t_env *env, char *line);
+int		exec(t_env *env, t_tab_cmd *cmd, int exit_code);
 
 void	free_tab_cmd(t_tab_cmd *cmd);
 void	free_env(t_env *env);
 void	free_tab(char **tab);
+void	free_single(void *s);
+void	free_double(void *s1, void *s2);
 
 #endif

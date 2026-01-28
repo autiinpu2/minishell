@@ -1,42 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   exec.c                                             :+:      :+:    :+:   */
+/*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: apuyane <apuyane@student.42angouleme.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/01/27 01:56:49 by apuyane           #+#    #+#             */
-/*   Updated: 2026/01/27 06:49:22 by apuyane          ###   ########.fr       */
+/*   Created: 2026/01/28 07:14:33 by apuyane           #+#    #+#             */
+/*   Updated: 2026/01/28 08:17:34 by apuyane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "env.h"
-#include "libft.h"
-#include "minishell.h"
+#include "exec.h"
 
-char **env_to_envp(t_env *env)
+void	print_env(t_env *env)
 {
 	t_env_node	*node;
-	char		**envp;
-	int			i;
 
-	i = 0;
-	envp = ft_calloc(env->size, sizeof(char *));
 	node = env->top;
 	while (node)
 	{
-		envp[i] = node->text;
+		printf("%s=%s\n", node->key, node->value);
 		node = node->next;
-		i++;
 	}
-	return (envp);
-}
-
-void	exec(t_env *env)
-{
-	char	**envp;
-
-	envp = env_to_envp(env);
-
-	free_tab(envp);
 }

@@ -6,7 +6,7 @@
 /*   By: apuyane <apuyane@student.42angouleme.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/25 06:09:40 by apuyane           #+#    #+#             */
-/*   Updated: 2026/01/27 05:20:51 by apuyane          ###   ########.fr       */
+/*   Updated: 2026/01/28 07:14:50 by apuyane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,18 +54,6 @@ t_env	*load_envp(char **envp)
 	env = fill_env(env, envp);
 	env->size = i;
 	return (env);
-}
-
-void	print_env(t_env *env)
-{
-	t_env_node	*node;
-
-	node = env->top;
-	while (node)
-	{
-		printf("%s=%s\n", node->key, node->value);
-		node = node->next;
-	}
 }
 
 char	*get_env_from_name(char *name, t_env *env)

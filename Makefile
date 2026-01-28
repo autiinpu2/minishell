@@ -1,18 +1,21 @@
-CC      := cc
-CFLAGS  := -Wall -Wextra -Werror -g -I includes
-RM      := rm -rf
-MAKE    := make --no-print-directory
+CC				:= cc
+CFLAGS			:= -Wall -Wextra -Werror -g -I includes
+RM				:= rm -rf
+MAKE			:= make --no-print-directory
 
-NAME    := minishell
-OBJ_DIR := build
+NAME			:= minishell
+OBJ_DIR			:= build
 
-LIBFT_DIR := libft
-LIBFT   := $(LIBFT_DIR)/libft.a
+LIBFT_DIR		:= libft
+LIBFT   		:= $(LIBFT_DIR)/libft.a
 
-SRC_DIR := src
-SRC     := envp_utils.c main.c init_parsing.c free_utils.c
+SRC_DIR 		:= src
+SRC				:= envp_utils.c main.c init_parsing.c free_utils.c \
+                    execution/close_fds.c execution/exec.c \
+					execution/pids.c execution/run.c \
+					built_in/exit.c built_in/env.c built_in/launch.c
 
-OBJS    := $(addprefix $(OBJ_DIR)/, $(SRC:.c=.o))
+OBJS	:= $(addprefix $(OBJ_DIR)/, $(SRC:.c=.o))
 
 all: $(NAME)
 
@@ -23,7 +26,8 @@ $(NAME): $(LIBFT) $(OBJS)
 $(LIBFT):
 	@$(MAKE) -C $(LIBFT_DIR)
 
-$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c | $(OBJ_DIR)
+$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
+	@mkdir -p $(dir $@)
 	@$(CC) $(CFLAGS) -c $< -o $@
 
 $(OBJ_DIR):
