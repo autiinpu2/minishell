@@ -14,6 +14,24 @@
 #include "libft.h"
 #include "minishell.h"
 
+t_tab_cmd	init_tab()
+
+unsigned int	parse_pipe(char *line)
+{
+	int i;
+	int count;
+
+	i = 0;
+	count = 0;
+	while (line[i])
+	{
+		if (line[i] == '|')
+			count++;
+		i++;
+	}
+	return (count);
+}
+
 char	*is_path_cmd(char *prefix_cmd_name, char **tab_paths)
 {
 	int		i;
@@ -53,13 +71,19 @@ char	*find_cmd_path(t_env *env, char *cmd_name)
 
 t_cmd	*parsing(t_env *env, char *line)
 {
-	t_cmd	*cmd;
-	char	**line_elements;
+	t_cmd		*cmd;
+	t_tab_cmd	tab;
+	char		**tokens;
+	unsigned int	count_pipe;
 
-	cmd = ft_calloc(1, sizeof(t_cmd));
-	line_elements = ft_split(line, ' ');
-	cmd->path = find_cmd_path(env, line_elements[0]);
-	if (cmd->path || cmd->is_build_in)
-		cmd->function_name = line_elements[0];
+	count_pipe = parse_pipe(line);	
+	if (count_pipe > 0)
+	{
+		
+	}
+	else
+	{
+		args = ft_split(line, ' ');	
+	}
 	return (cmd);
 }

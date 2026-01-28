@@ -39,7 +39,7 @@ typedef struct s_cmd
 
 typedef struct s_tab_cmd {
 	size_t	size;
-	t_cmd	*tab;
+	t_cmd	*cmd;
 }				t_tab_cmd;
 
 t_cmd	*parsing(t_env *env, char *line);
