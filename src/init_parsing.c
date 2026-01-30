@@ -6,7 +6,7 @@
 /*   By: apuyane <apuyane@student.42angouleme.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/26 02:35:09 by mcomin            #+#    #+#             */
-/*   Updated: 2026/01/27 05:19:46 by apuyane          ###   ########.fr       */
+/*   Updated: 2026/01/30 01:14:49 by mcomin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,76 +14,24 @@
 #include "libft.h"
 #include "minishell.h"
 
-t_tab_cmd	init_tab()
-
-unsigned int	parse_pipe(char *line)
+t_tab_cmd	*ft_init_tab(char *line)
 {
-	int i;
-	int count;
+	char		**tab_split;
+	t_tab_cmd	*tab;
+	//t_cmd		*cmd;
+	int			i;
+	int			len;
 
 	i = 0;
-	count = 0;
-	while (line[i])
-	{
-		if (line[i] == '|')
-			count++;
+	tab_split = ft_split(line, '|');
+	while(tab_split[i])
 		i++;
-	}
-	return (count);
-}
-
-char	*is_path_cmd(char *prefix_cmd_name, char **tab_paths)
-{
-	int		i;
-	char	*test_path;
-
+	len = i;
 	i = 0;
-	while (tab_paths[i])
-	{
-		test_path = ft_strjoin(tab_paths[i], prefix_cmd_name);
-		if (access(test_path, X_OK) == 0)
-			return (test_path);
-		else
-			free(test_path);
-		i++;
-	}
-	return (NULL);
+	tab = ft_calloc(1, sizeof(t_tab_cmd));
+	tab->size = len;
+	tab->cmd = ft_calloc(len, sizeof(t_cmd));
+	tab->cmd[i]
+	return (tab->size);
 }
 
-char	*find_cmd_path(t_env *env, char *cmd_name)
-{
-	char	*prefix_cmd_name;
-	char	*env_path;
-	char	**tab_paths;
-	char	*test_path;
-
-	if (!cmd_name[0])
-		return (NULL);
-	if (access(cmd_name, X_OK) == 0)
-		return (cmd_name);
-	env_path = get_env_from_name("PATH", env);
-	tab_paths = ft_split(env_path, ':');
-	prefix_cmd_name = ft_strjoin("/", cmd_name);
-	test_path = is_path_cmd(prefix_cmd_name, tab_paths);
-	free(prefix_cmd_name);
-	return (test_path);
-}
-
-t_cmd	*parsing(t_env *env, char *line)
-{
-	t_cmd		*cmd;
-	t_tab_cmd	tab;
-	char		**tokens;
-	unsigned int	count_pipe;
-
-	count_pipe = parse_pipe(line);	
-	if (count_pipe > 0)
-	{
-		
-	}
-	else
-	{
-		args = ft_split(line, ' ');	
-	}
-	return (cmd);
-}

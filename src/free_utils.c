@@ -6,7 +6,7 @@
 /*   By: apuyane <apuyane@student.42angouleme.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/26 08:16:06 by apuyane           #+#    #+#             */
-/*   Updated: 2026/01/27 06:51:54 by apuyane          ###   ########.fr       */
+/*   Updated: 2026/01/30 00:52:07 by mcomin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,19 +47,19 @@ void	free_tab(char **tab)
 	}
 }
 
-void	free_tab_cmd(t_tab_cmd *cmd)
+void	free_tab_cmd(t_tab_cmd *tab)
 {
-	int	i;
+	size_t	i;
 	
 	i = 0;
-	while ((size_t)i < cmd->size)
+	while (i < tab->size)
 	{
-		free_tab(cmd->tab[i].args);
-		free(cmd->tab[i].args);
-		free(cmd->tab[i].function_name);
-		free(cmd->tab[i].path);
+		free_tab(tab->cmd[i].args);
+		free(tab->cmd[i].args);
+		free(tab->cmd[i].function_name);
+		free(tab->cmd[i].path);
 		i++;
 	}
-	free(cmd->tab);
-	free(cmd);
+	free(tab->cmd);
+	free(tab);
 }
