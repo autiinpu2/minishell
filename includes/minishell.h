@@ -6,7 +6,7 @@
 /*   By: apuyane <apuyane@student.42angouleme.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/25 04:16:51 by apuyane           #+#    #+#             */
-/*   Updated: 2026/01/28 08:14:49 by apuyane          ###   ########.fr       */
+/*   Updated: 2026/01/30 03:21:56 by apuyane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ typedef struct s_cmd
 typedef struct s_tab_cmd
 {
 	size_t	size;
-	t_cmd	*tab;
+	t_cmd	*cmd;
 }				t_tab_cmd;
 
 t_cmd	*parsing(t_env *env, char *line);
