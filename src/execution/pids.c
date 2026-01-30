@@ -6,7 +6,7 @@
 /*   By: apuyane <apuyane@student.42angouleme.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/28 06:52:38 by apuyane           #+#    #+#             */
-/*   Updated: 2026/01/28 08:17:26 by apuyane          ###   ########.fr       */
+/*   Updated: 2026/01/30 03:53:11 by apuyane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,35 +21,35 @@ int	built_in_exeption(t_cmd *cmd, t_built_in *built_in)
 	return (built_in->exit_code);
 }
 
-void	create_processes(t_tab_cmd *cmd, char **envp, t_built_in *built_in)
+void	create_processes(t_tab_cmd *tab, char **envp, t_built_in *built_in)
 {
 	int		i;
-	t_cmd	*tab;
+	t_cmd	*cmd;
 
 	i = 0;
-	tab = cmd->tab;
-	while (tab[i].function_name)
+	cmd = tab->cmd;
+	while (cmd[i].function_name)
 	{
-		if (built_in_exeption(tab, built_in))
+		if (built_in_exeption(&cmd[i], built_in))
 		{
 			i++;
 			continue ;
 		}
-		tab[i].pid = fork();
-		if (tab[i].pid < 0)
+		cmd[i].pid = fork();
+		if (cmd[i].pid < 0)
 		{
 			perror("fork");
-			close_all_fds(tab);
-			free_tab_cmd(cmd);
+			close_all_fds(&cmd[i]);
+			free_tab_cmd(tab);
 			exit(1);
 		}
-		if (tab[i].pid == 0)
-			run_cmd(cmd, envp, i);
+		if (cmd[i].pid == 0)
+			run_cmd(tab, envp, i);
 		i++;
 	}
 }
 
-int	wait_all_pids(t_tab_cmd *cmd)
+int	wait_all_pids(t_tab_cmd *tab)
 {
 	int	i;
 	int	exit_code;
@@ -57,10 +57,10 @@ int	wait_all_pids(t_tab_cmd *cmd)
 
 	i = 0;
 	exit_code = 14;
-	while (cmd->tab[i].function_name)
+	while (tab->cmd[i].function_name)
 	{
 		status = -1;
-		waitpid(cmd->tab[i].pid, &status, 0);
+		waitpid(tab->cmd[i].pid, &status, 0);
 		if (WIFEXITED(status))
 			exit_code = WEXITSTATUS(status);
 		else if (WIFSIGNALED(status))

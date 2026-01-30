@@ -6,7 +6,7 @@
 /*   By: apuyane <apuyane@student.42angouleme.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/25 04:16:51 by apuyane           #+#    #+#             */
-/*   Updated: 2026/01/30 03:21:56 by apuyane          ###   ########.fr       */
+/*   Updated: 2026/01/30 03:54:53 by apuyane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,13 +45,15 @@ typedef struct s_tab_cmd
 	t_cmd	*cmd;
 }				t_tab_cmd;
 
-t_cmd	*parsing(t_env *env, char *line);
-int		exec(t_env *env, t_tab_cmd *cmd, int exit_code);
+t_tab_cmd	*parsing(t_env *env, char *line);
+t_tab_cmd	*ft_init_tab(char *line);
 
-void	free_tab_cmd(t_tab_cmd *cmd);
-void	free_env(t_env *env);
-void	free_tab(char **tab);
-void	free_single(void *s);
-void	free_double(void *s1, void *s2);
+int			exec(t_env *env, t_tab_cmd *cmd, int exit_code);
+
+void		free_tab_cmd(t_tab_cmd *cmd);
+void		free_env(t_env *env);
+void		free_tab(char **tab);
+void		free_single(void *s);
+void		free_double(void *s1, void *s2);
 
 #endif

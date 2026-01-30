@@ -6,7 +6,7 @@
 /*   By: apuyane <apuyane@student.42angouleme.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/25 04:17:27 by apuyane           #+#    #+#             */
-/*   Updated: 2026/01/30 03:23:24 by apuyane          ###   ########.fr       */
+/*   Updated: 2026/01/30 03:57:08 by apuyane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 #include "minishell.h"
 #include "exec.h"
 
-t_tab_cmd   *fake_cmd(void)
+t_tab_cmd   *fake_cmd()
 {
 	t_tab_cmd   *tab;
 	t_cmd       *cmds;
@@ -47,7 +47,7 @@ t_tab_cmd   *fake_cmd(void)
 	cmds[1].outfile = open("test_files/output_files", O_CREAT | O_WRONLY | O_APPEND, 0664);
 	
 	tab->size = 3;
-	tab->tab = cmds;
+	tab->cmd = cmds;
 	return (tab);
 }
 
@@ -56,7 +56,7 @@ int	main(int ac, char **av, char **envp)
 	char		*prefix;
 	char		*line;
 	t_env		*env;
-	t_tab_cmd	*cmd;
+	t_tab_cmd	*tab;
 	int			exit_code;
 
 	(void)ac;
@@ -68,7 +68,8 @@ int	main(int ac, char **av, char **envp)
 		prefix = ft_strdup(get_env_from_name("PWD", env));
 		prefix = ft_strjoin_free(prefix, ">");
 		line = readline(prefix);
-		parsing(env, line);
+		// tab = parsing(env, line);
+		tab = fake_cmd();
 		if (*line)
 			add_history(line);
 		if (!ft_strcmp(line, "exit"))
@@ -76,6 +77,7 @@ int	main(int ac, char **av, char **envp)
 			exit_code = 1;
 			break ;
 		}
+		exit_code = exec(env, tab, exit_code);
 		free(line);
 		free(prefix);
 	}

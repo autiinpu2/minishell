@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcomin <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: apuyane <apuyane@student.42angouleme.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/30 01:11:37 by mcomin            #+#    #+#             */
-/*   Updated: 2026/01/30 01:16:29 by mcomin           ###   ########.fr       */
+/*   Updated: 2026/01/30 03:43:31 by apuyane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,10 +69,11 @@ char	*find_cmd_path(t_env *env, char *cmd_name)
 
 t_tab_cmd	*parsing(t_env *env, char *line)
 {
-	unsigned int	count_pipe;
+	t_tab_cmd	*tab;
+	size_t	count_pipe;
 
 	(void)env;
 	count_pipe = parse_pipe(line);
-	ft_init_tab(line);
-	return (0);
+	tab = ft_init_tab(line);
+	return (tab);
 }

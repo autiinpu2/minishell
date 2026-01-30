@@ -6,7 +6,7 @@
 /*   By: apuyane <apuyane@student.42angouleme.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/27 01:56:49 by apuyane           #+#    #+#             */
-/*   Updated: 2026/01/28 08:09:57 by apuyane          ###   ########.fr       */
+/*   Updated: 2026/01/30 03:33:36 by apuyane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,21 +30,21 @@ char	**env_to_envp(t_env *env)
 	return (envp);
 }
 
-int	exec(t_env *env, t_tab_cmd *cmd, int exit_code)
+int	exec(t_env *env, t_tab_cmd *tab, int exit_code)
 {
 	char		**envp;
 	t_built_in	*built_in;
 
 	envp = env_to_envp(env);
 	built_in = ft_calloc(1, sizeof(t_built_in));
-	built_in->args = cmd->tab[0].args;
+	built_in->args = tab->cmd[0].args;
 	built_in->exit_code = exit_code;
 	built_in->env = env;
-	create_processes(cmd, envp, built_in);
+	create_processes(tab, envp, built_in);
 	free_tab(envp);
 	free_single(envp);
 	free_single(built_in);
-	close_all_fds(cmd->tab);
-	exit_code = wait_all_pids(cmd);
+	close_all_fds(tab->cmd);
+	exit_code = wait_all_pids(tab);
 	return (exit_code);
 }
