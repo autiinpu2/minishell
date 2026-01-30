@@ -6,7 +6,7 @@
 /*   By: apuyane <apuyane@student.42angouleme.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/28 07:38:04 by apuyane           #+#    #+#             */
-/*   Updated: 2026/01/28 08:17:57 by apuyane          ###   ########.fr       */
+/*   Updated: 2026/01/30 11:03:28 by apuyane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,10 +26,14 @@ bool	is_built_in(char *name)
 	return (false);
 }
 
-void	run_built_in(char *function, t_built_in *built)
+void	run_built_in(char *function, t_built_in *built, int i)
 {
 	if (!ft_strcmp(function, "exit"))
-		built_in_exit(built);
-	if (!ft_strcmp(function, "env"))
-		print_env(built->env);
+		ft_exit(built);
+	else if (!ft_strcmp(function, "env"))
+		print_env(built->env, built, i);
+	else if (!ft_strcmp(function, "pwd"))
+		ft_pwd(built->env, built, i);
+	else if (!ft_strcmp(function, "unset"))
+		ft_unset(built->env, built->args[1]);
 }

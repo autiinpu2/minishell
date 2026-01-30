@@ -6,7 +6,7 @@
 /*   By: apuyane <apuyane@student.42angouleme.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/27 01:56:49 by apuyane           #+#    #+#             */
-/*   Updated: 2026/01/30 03:33:36 by apuyane          ###   ########.fr       */
+/*   Updated: 2026/01/30 10:42:05 by apuyane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,19 +30,38 @@ char	**env_to_envp(t_env *env)
 	return (envp);
 }
 
+t_built_in *init_built_in(t_tab_cmd *tab, int exit_code, t_env *env, char **envp)
+{
+	t_built_in *built;
+	int			i;
+
+	i = 0;
+	built = ft_calloc(tab->size + 1, sizeof(t_built_in));
+	while ((size_t)i < tab->size)
+	{
+		if (!tab->cmd[i].is_valid)
+			break ;
+		built[0].args = tab->cmd[i].args;
+		built->exit_code = exit_code;
+		built->env = env;
+		built->tab = tab;
+		built->envp = envp;
+		i++;
+	}
+	if ((size_t)i == tab->size)
+		return (built);
+	return (NULL);
+}
+
 int	exec(t_env *env, t_tab_cmd *tab, int exit_code)
 {
 	char		**envp;
 	t_built_in	*built_in;
 
 	envp = env_to_envp(env);
-	built_in = ft_calloc(1, sizeof(t_built_in));
-	built_in->args = tab->cmd[0].args;
-	built_in->exit_code = exit_code;
-	built_in->env = env;
+	built_in = init_built_in(tab, exit_code, env, envp);
 	create_processes(tab, envp, built_in);
 	free_tab(envp);
-	free_single(envp);
 	free_single(built_in);
 	close_all_fds(tab->cmd);
 	exit_code = wait_all_pids(tab);

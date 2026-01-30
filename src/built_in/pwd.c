@@ -1,23 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parsing.h                                          :+:      :+:    :+:   */
+/*   pwd.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: apuyane <apuyane@student.42angouleme.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/01/30 07:27:45 by mcomin            #+#    #+#             */
-/*   Updated: 2026/01/30 08:39:10 by apuyane          ###   ########.fr       */
+/*   Created: 2026/01/28 07:14:33 by apuyane           #+#    #+#             */
+/*   Updated: 2026/01/30 11:03:57 by apuyane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PARSING_H
-# define PARSING_H
+#include "exec.h"
 
-# include "minishell.h"
-# include "env.h"
-# include "libft.h" 
+void	ft_pwd(t_env *env, t_built_in *built, int i)
+{
+	int         stdout_backup;
 
-t_tab_cmd	*ft_init_tab(char *line, t_env *env, int count_pipe);
-char        *find_cmd_path(t_env *env, char *cmd_name);
-
-#endif
+	stdout_backup = dup(STDOUT_FILENO);
+	dup2(built->tab->cmd[i].outfile, STDOUT_FILENO);
+	printf("%s\n", get_env_from_name("PWD", env));
+	dup2(stdout_backup, STDOUT_FILENO);
+	close(stdout_backup);
+}

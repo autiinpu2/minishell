@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcomin <mcomin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: apuyane <apuyane@student.42angouleme.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/25 04:17:27 by apuyane           #+#    #+#             */
-/*   Updated: 2026/01/30 07:44:13 by mcomin           ###   ########.fr       */
+/*   Updated: 2026/01/30 10:38:49 by apuyane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,19 +68,15 @@ int	main(int ac, char **av, char **envp)
 		prefix = ft_strdup(get_env_from_name("PWD", env));
 		prefix = ft_strjoin_free(prefix, ">");
 		line = readline(prefix);
+		if (!line)
+			break ;
 		tab = parsing(env, line);
 		//tab = fake_cmd();
 		if (*line)
 			add_history(line);
-		if (!ft_strcmp(line, "exit"))
-		{
-			exit_code = 1;
-			break ;
-		}
-		//exit_code = exec(env, tab, exit_code);
+		free_double(line, prefix);
+		exit_code = exec(env, tab, exit_code);
 		free_tab_cmd(tab);
-		free(line);
-		free(prefix);
 	}
 	free_double(line, prefix);
 	free_env(env);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcomin <mcomin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: apuyane <apuyane@student.42angouleme.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/25 04:16:51 by apuyane           #+#    #+#             */
-/*   Updated: 2026/01/30 07:33:13 by mcomin           ###   ########.fr       */
+/*   Updated: 2026/01/30 09:28:33 by apuyane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@
 # include <sys/wait.h>
 # include "env.h"
 
-# define BUILT_INS (const char*[]){"exit", "env", NULL}
+# define BUILT_INS (const char*[]){"exit", "env", "pwd", "unset", NULL}
 
 typedef struct s_cmd
 {

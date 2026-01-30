@@ -6,7 +6,7 @@
 /*   By: apuyane <apuyane@student.42angouleme.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/28 06:53:48 by apuyane           #+#    #+#             */
-/*   Updated: 2026/01/30 03:35:40 by apuyane          ###   ########.fr       */
+/*   Updated: 2026/01/30 10:28:55 by apuyane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	run_cmd(t_tab_cmd *tab, char **envp, int i)
 {
-	if (!tab->cmd[i].path)
+	if (tab->cmd[i].is_valid == false)
 	{
 		write(2, tab->cmd[i].function_name,
 			ft_strlen(tab->cmd[i].function_name));

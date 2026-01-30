@@ -6,19 +6,22 @@
 /*   By: apuyane <apuyane@student.42angouleme.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/28 06:52:38 by apuyane           #+#    #+#             */
-/*   Updated: 2026/01/30 03:53:11 by apuyane          ###   ########.fr       */
+/*   Updated: 2026/01/30 10:58:19 by apuyane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "exec.h"
 
-int	built_in_exeption(t_cmd *cmd, t_built_in *built_in)
+int	built_in_exeption(t_cmd *cmd, t_built_in *built_in, int i)
 {
+	if (!built_in)
+		return (false);
 	if (is_built_in(cmd->function_name))
 	{
-		run_built_in(cmd->function_name, built_in);
+		run_built_in(cmd->function_name, built_in, i);
+		return (true);
 	}
-	return (built_in->exit_code);
+	return (false);
 }
 
 void	create_processes(t_tab_cmd *tab, char **envp, t_built_in *built_in)
@@ -30,7 +33,7 @@ void	create_processes(t_tab_cmd *tab, char **envp, t_built_in *built_in)
 	cmd = tab->cmd;
 	while (cmd[i].function_name)
 	{
-		if (built_in_exeption(&cmd[i], built_in))
+		if (built_in_exeption(&cmd[i], built_in, i))
 		{
 			i++;
 			continue ;

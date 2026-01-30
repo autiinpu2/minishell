@@ -6,7 +6,7 @@
 /*   By: apuyane <apuyane@student.42angouleme.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/28 07:14:30 by apuyane           #+#    #+#             */
-/*   Updated: 2026/01/28 08:17:42 by apuyane          ###   ########.fr       */
+/*   Updated: 2026/01/30 10:42:19 by apuyane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static int	get_args_number(char **args)
 	return (i);
 }
 
-void	built_in_exit(t_built_in *built_in)
+void	ft_exit(t_built_in *built_in)
 {
 	int	num_args;
 	int	exit_code;
@@ -36,6 +36,9 @@ void	built_in_exit(t_built_in *built_in)
 	else if (num_args == 1)
 	{
 		ft_dprintf(2, "%s", "exit\n");
+		free_tab_cmd(built_in->tab);
+		free_env(built_in->env);
+		free_tab(built_in->envp);
 		free(built_in);
 		exit(exit_code);
 	}

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcomin <mcomin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: apuyane <apuyane@student.42angouleme.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/30 01:11:37 by mcomin            #+#    #+#             */
-/*   Updated: 2026/01/30 07:45:39 by mcomin           ###   ########.fr       */
+/*   Updated: 2026/01/30 09:32:30 by apuyane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,7 @@ char	*find_cmd_path(t_env *env, char *cmd_name)
 	tab_paths = ft_split(env_path, ':');
 	prefix_cmd_name = ft_strjoin("/", cmd_name);
 	test_path = is_path_cmd(prefix_cmd_name, tab_paths);
+	free_tab(tab_paths);
 	free(prefix_cmd_name);
 	return (test_path);
 }
@@ -71,6 +72,6 @@ t_tab_cmd	*parsing(t_env *env, char *line)
 	size_t	count_pipe;
 
 	count_pipe = parse_pipe(line);
-	tab = ft_init_tab(line, env);
+	tab = ft_init_tab(line, env, count_pipe);
 	return (tab);
 }
