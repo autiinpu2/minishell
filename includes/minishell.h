@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apuyane <apuyane@student.42angouleme.fr    +#+  +:+       +#+        */
+/*   By: mcomin <mcomin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/25 04:16:51 by apuyane           #+#    #+#             */
-/*   Updated: 2026/01/30 03:54:53 by apuyane          ###   ########.fr       */
+/*   Updated: 2026/01/30 07:33:13 by mcomin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,9 +34,10 @@ typedef struct s_cmd
 	bool			outfile_is_pipe;
 	char			*function_name;
 	bool			is_build_in;
-	char			*path;
+	char				*path;
 	char			**args;
 	pid_t			pid;
+	bool			is_valid;
 }			t_cmd;
 
 typedef struct s_tab_cmd
@@ -45,8 +46,8 @@ typedef struct s_tab_cmd
 	t_cmd	*cmd;
 }				t_tab_cmd;
 
+bool	is_built_in(char *name);
 t_tab_cmd	*parsing(t_env *env, char *line);
-t_tab_cmd	*ft_init_tab(char *line);
 
 int			exec(t_env *env, t_tab_cmd *cmd, int exit_code);
 

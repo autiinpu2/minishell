@@ -3,16 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   parse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apuyane <apuyane@student.42angouleme.fr    +#+  +:+       +#+        */
+/*   By: mcomin <mcomin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/30 01:11:37 by mcomin            #+#    #+#             */
-/*   Updated: 2026/01/30 03:43:31 by apuyane          ###   ########.fr       */
+/*   Updated: 2026/01/30 07:45:39 by mcomin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "env.h"
-#include "libft.h"
-#include "minishell.h"
+#include "parsing.h"
 
 unsigned int	parse_pipe(char *line)
 {
@@ -72,8 +70,7 @@ t_tab_cmd	*parsing(t_env *env, char *line)
 	t_tab_cmd	*tab;
 	size_t	count_pipe;
 
-	(void)env;
 	count_pipe = parse_pipe(line);
-	tab = ft_init_tab(line);
+	tab = ft_init_tab(line, env);
 	return (tab);
 }
