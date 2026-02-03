@@ -1,25 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   free.h                                             :+:      :+:    :+:   */
+/*   parsing.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: apuyane <apuyane@student.42angouleme.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/02/03 02:59:58 by apuyane           #+#    #+#             */
-/*   Updated: 2026/02/03 05:54:07 by apuyane          ###   ########.fr       */
+/*   Created: 2026/01/30 07:27:45 by mcomin            #+#    #+#             */
+/*   Updated: 2026/02/03 04:14:18 by apuyane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FREE_H
-# define FREE_H
+#ifndef PARSING_H
+# define PARSING_H
 
 # include "minishell.h"
 # include "env.h"
+# include "libft.h" 
 
-void	free_tab_cmd(t_tab_cmd *cmd);
-void	free_env(t_env *env);
-void	free_tab(char **tab);
-void	free_single(void *s);
-void	free_double(void *s1, void *s2);
+t_tab_cmd	*ft_init_tab(char *line, t_env *env, int count_pipe);
+char        *find_cmd_path(t_env *env, char *cmd_name);
 
 #endif

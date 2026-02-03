@@ -10,9 +10,21 @@ LIBFT_DIR		:= libs/libft
 LIBFT   		:= $(LIBFT_DIR)/libft.a
 
 SRC_DIR 		:= src
-SRC			:= 
+SRC				:= main.c
+
+UTILS_DIR		:= $(SRC_DIR)/utils
+UTILS_SRC		:= envp_utils.c free_utils.c
+
+PARSE_DIR		:= $(SRC_DIR)/parse
+PARSE_SRC		:= 
+
+EXEC_DIR		:= $(SRC_DIR)/exec
+EXEC_SRC		:= 
 
 OBJS	:= $(addprefix $(OBJ_DIR)/, $(SRC:.c=.o))
+OBJS	+= $(addprefix $(UTILS_DIR)/, $(UTILS_SRC:.c=.o))
+OBJS	+= $(addprefix $(PARSE_DIR)/, $(PARSE_SRC:.c=.o))
+OBJS	+= $(addprefix $(EXEC_DIR)/, $(EXEC_SRC:.c=.o))
 
 all: $(NAME)
 

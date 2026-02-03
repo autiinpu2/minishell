@@ -6,7 +6,7 @@
 /*   By: apuyane <apuyane@student.42angouleme.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/25 04:17:27 by apuyane           #+#    #+#             */
-/*   Updated: 2026/01/30 10:38:49 by apuyane          ###   ########.fr       */
+/*   Updated: 2026/02/03 05:50:54 by apuyane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #include "libft.h"
 #include "minishell.h"
 #include "exec.h"
+#include "free.h"
 
 int	main(int ac, char **av, char **envp)
 {
