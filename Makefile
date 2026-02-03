@@ -6,7 +6,7 @@ MAKE			:= make --no-print-directory
 NAME			:= minishell
 OBJ_DIR			:= build
 
-LIBFT_DIR		:= utils/libft
+LIBFT_DIR		:= libs/libft
 LIBFT   		:= $(LIBFT_DIR)/libft.a
 
 SRC_DIR 		:= src
