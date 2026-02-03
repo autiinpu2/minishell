@@ -6,11 +6,11 @@ MAKE			:= make --no-print-directory
 NAME			:= minishell
 OBJ_DIR			:= build
 
-LIBFT_DIR		:= libft
+LIBFT_DIR		:= utils/libft
 LIBFT   		:= $(LIBFT_DIR)/libft.a
 
 SRC_DIR 		:= src
-SRC				:= main.c free_utils.c envp_utils.c
+SRC			:= 
 
 OBJS	:= $(addprefix $(OBJ_DIR)/, $(SRC:.c=.o))
 
