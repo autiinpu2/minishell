@@ -6,7 +6,7 @@
 /*   By: apuyane <apuyane@student.42angouleme.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/15 17:43:58 by apuyane           #+#    #+#             */
-/*   Updated: 2026/01/27 09:00:58 by apuyane          ###   ########.fr       */
+/*   Updated: 2026/01/31 08:14:44 by apuyane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ bool			ft_isalnum(int c);
 bool			ft_isalpha(int c);
 bool			ft_isascii(int c);
 bool			ft_isdigit(int c);
+bool			ft_contain_digit_only(char *s);
 bool			ft_isprint(int c);
 bool			ft_isspace(char c);
 

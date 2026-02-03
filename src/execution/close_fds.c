@@ -6,7 +6,7 @@
 /*   By: apuyane <apuyane@student.42angouleme.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/28 06:51:39 by apuyane           #+#    #+#             */
-/*   Updated: 2026/01/30 03:46:50 by apuyane          ###   ########.fr       */
+/*   Updated: 2026/01/31 16:37:35 by apuyane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,10 +36,12 @@ void	close_every_pipe(t_tab_cmd *tab, int i)
 	{
 		if (j != i)
 		{
-			if (tab->cmd[j].infile_is_pipe)
+			if (tab->cmd[j].infile > 2)
 				close (tab->cmd[j].infile);
-			if (tab->cmd[j].outfile_is_pipe)
+			if (tab->cmd[j].outfile > 2)
 				close (tab->cmd[j].outfile);
+			tab->cmd[j].infile = -1;
+	        tab->cmd[j].outfile = -1;
 		}
 		j++;
 	}

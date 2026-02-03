@@ -3,33 +3,33 @@
 /*                                                        :::      ::::::::   */
 /*   ft_memchr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apuyane <apuyane@student.42.fr>            +#+  +:+       +#+        */
+/*   By: apuyane <apuyane@student.42angouleme.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/18 21:02:21 by apuyane           #+#    #+#             */
-/*   Updated: 2026/01/19 23:19:37 by apuyane          ###   ########.fr       */
+/*   Updated: 2026/01/31 12:32:36 by apuyane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	*ft_memchr(const void *s, int c, size_t n)
+void    *ft_memchr(const void *s, int c, size_t n)
 {
-	int		i;
-	char	*s2;
+    size_t        i;
+    char        *s2;
 
-	i = 0;
-	s2 = (char *)s;
-	if (!n)
-		return (NULL);
-	while (n < (size_t)i)
-	{
-		if (s2[i] == c)
-			return (s2 + i);
-		i++;
-	}
-	if ((size_t)i == n)
-		return (NULL);
-	if (c == '\0')
-		return (s2 + i);
-	return (NULL);
+    s2 = (char *)s;
+    i = 0;
+    if (n == 0)
+        return (NULL);
+    while (n > i)
+    {
+        if (s2[i] == (char)c)
+            return (s2 + i);
+        i++;
+    }
+    if (i == n)
+        return (NULL);
+    if ((char)c == '\0')
+        return (s2 + i);
+    return (NULL);
 }

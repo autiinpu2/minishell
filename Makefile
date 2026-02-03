@@ -13,7 +13,7 @@ SRC_DIR 		:= src
 SRC				:= envp_utils.c main.c free_utils.c \
 					execution/close_fds.c execution/exec.c \
 					execution/pids.c execution/run.c \
-					built_in/exit.c built_in/env.c built_in/launch.c built_in/pwd.c built_in/unset.c \
+					built_in/exit.c built_in/env.c built_in/launch.c built_in/pwd.c built_in/unset.c built_in/cd.c \
 					parsing/parse.c parsing/init_parsing.c
 
 OBJS	:= $(addprefix $(OBJ_DIR)/, $(SRC:.c=.o))

@@ -6,7 +6,7 @@
 /*   By: apuyane <apuyane@student.42angouleme.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/28 06:53:48 by apuyane           #+#    #+#             */
-/*   Updated: 2026/01/30 10:28:55 by apuyane          ###   ########.fr       */
+/*   Updated: 2026/02/03 01:00:25 by apuyane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	run_cmd(t_tab_cmd *tab, char **envp, int i)
 		dup2(tab->cmd[i].outfile, STDOUT_FILENO);
 		close(tab->cmd[i].outfile);
 	}
-	close_every_pipe(tab, i);
+	close_every_pipe(tab, -1);
 	execve(tab->cmd[i].path, tab->cmd[i].args, envp);
 	perror("execve failed");
 	free_tab_cmd(tab);

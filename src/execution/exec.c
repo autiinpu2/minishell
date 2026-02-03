@@ -6,7 +6,7 @@
 /*   By: apuyane <apuyane@student.42angouleme.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/27 01:56:49 by apuyane           #+#    #+#             */
-/*   Updated: 2026/01/30 10:42:05 by apuyane          ###   ########.fr       */
+/*   Updated: 2026/02/03 00:59:42 by apuyane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ int	exec(t_env *env, t_tab_cmd *tab, int exit_code)
 
 	envp = env_to_envp(env);
 	built_in = init_built_in(tab, exit_code, env, envp);
-	create_processes(tab, envp, built_in);
+	create_processes(tab, envp);
 	free_tab(envp);
 	free_single(built_in);
 	close_all_fds(tab->cmd);

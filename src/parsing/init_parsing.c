@@ -6,7 +6,7 @@
 /*   By: apuyane <apuyane@student.42angouleme.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/26 02:35:09 by mcomin            #+#    #+#             */
-/*   Updated: 2026/01/30 09:49:19 by apuyane          ###   ########.fr       */
+/*   Updated: 2026/01/31 09:54:37 by apuyane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,11 @@ t_cmd		ft_init_cmd(char *token, t_env *env, t_tab_cmd *tab, int current)
 {
 	tab->cmd[current].args = ft_split(token, ' ');
 	tab->cmd[current].function_name = ft_strdup(tab->cmd[current].args[0]);
-	tab->cmd[current].path = find_cmd_path(env, tab->cmd[current].function_name);
 	tab->cmd[current].is_build_in = is_built_in(tab->cmd[current].function_name);
+	if (!tab->cmd[current].is_build_in)
+		tab->cmd[current].path = ft_strdup(find_cmd_path(env, tab->cmd[current].function_name));
+	else
+		tab->cmd[current].path = ft_strdup(tab->cmd[current].function_name);
 	tab->cmd[current].is_valid = true;
 	if (tab->cmd[current].is_build_in == false && !tab->cmd[current].path)
 		tab->cmd[current].is_valid = false;

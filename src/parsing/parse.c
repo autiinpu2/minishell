@@ -6,7 +6,7 @@
 /*   By: apuyane <apuyane@student.42angouleme.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/30 01:11:37 by mcomin            #+#    #+#             */
-/*   Updated: 2026/01/30 09:32:30 by apuyane          ###   ########.fr       */
+/*   Updated: 2026/01/31 12:12:31 by apuyane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,7 @@ char	*is_path_cmd(char *prefix_cmd_name, char **tab_paths)
 		test_path = ft_strjoin(tab_paths[i], prefix_cmd_name);
 		if (access(test_path, X_OK) == 0)
 			return (test_path);
-		else
-			free(test_path);
+		free(test_path);
 		i++;
 	}
 	return (NULL);
@@ -61,6 +60,8 @@ char	*find_cmd_path(t_env *env, char *cmd_name)
 	tab_paths = ft_split(env_path, ':');
 	prefix_cmd_name = ft_strjoin("/", cmd_name);
 	test_path = is_path_cmd(prefix_cmd_name, tab_paths);
+	if (!test_path)
+		test_path = ft_strdup("");
 	free_tab(tab_paths);
 	free(prefix_cmd_name);
 	return (test_path);
