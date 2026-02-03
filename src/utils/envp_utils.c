@@ -6,12 +6,13 @@
 /*   By: apuyane <apuyane@student.42angouleme.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/25 06:09:40 by apuyane           #+#    #+#             */
-/*   Updated: 2026/01/31 09:08:16 by apuyane          ###   ########.fr       */
+/*   Updated: 2026/02/03 07:31:04 by apuyane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "env.h"
 #include "libft.h"
+#include "free.h"
 #include "minishell.h"
 
 t_env	*change_env_value(t_env *env, char *key, char *new_value)

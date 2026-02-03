@@ -6,7 +6,7 @@
 /*   By: apuyane <apuyane@student.42angouleme.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/25 04:17:27 by apuyane           #+#    #+#             */
-/*   Updated: 2026/02/03 05:50:54 by apuyane          ###   ########.fr       */
+/*   Updated: 2026/02/03 07:33:35 by apuyane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ int	main(int ac, char **av, char **envp)
 		if (*line)
 			add_history(line);
 		free_double(line, prefix);
-		exit_code = exec(env, tab, exit_code);
+		exit_code = exec(env, tab);
 		free_tab_cmd(tab);
 	}
 	free_double(line, prefix);

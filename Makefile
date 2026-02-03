@@ -1,35 +1,37 @@
-CC				:= cc
-CFLAGS			:= -Wall -Wextra -Werror -g -I includes
-RM				:= rm -rf
-MAKE			:= make --no-print-directory
+NAME        := minishell
+CC          := cc
+CFLAGS      := -Wall -Wextra -Werror -g -I includes
+RM          := rm -rf
+MAKE        := make --no-print-directory
 
-NAME			:= minishell
-OBJ_DIR			:= build
+OBJ_DIR     := build
+SRC_DIR     := src
+LIBFT_DIR   := libs/libft
+LIBFT       := $(LIBFT_DIR)/libft.a
 
-LIBFT_DIR		:= libs/libft
-LIBFT   		:= $(LIBFT_DIR)/libft.a
+SRC_MAIN_DIR    := $(SRC_DIR)
+SRC_MAIN        := main.c
 
-SRC_DIR 		:= src
-SRC				:= main.c
+SRC_UTILS_DIR   := $(SRC_DIR)/utils
+SRC_UTILS       := envp_utils.c free_utils.c builtin_utils.c
 
-UTILS_DIR		:= $(SRC_DIR)/utils
-UTILS_SRC		:= envp_utils.c free_utils.c
+SRC_PARSE_DIR   := $(SRC_DIR)/parse
+SRC_PARSE       := init_parsing.c parse.c
 
-PARSE_DIR		:= $(SRC_DIR)/parse
-PARSE_SRC		:= 
+SRC_EXEC_DIR    := $(SRC_DIR)/exec
+SRC_EXEC        := exec.c builtin.c
 
-EXEC_DIR		:= $(SRC_DIR)/exec
-EXEC_SRC		:= 
+SRCS        := $(addprefix $(SRC_MAIN_DIR)/, $(SRC_MAIN)) \
+               $(addprefix $(SRC_UTILS_DIR)/, $(SRC_UTILS)) \
+               $(addprefix $(SRC_PARSE_DIR)/, $(SRC_PARSE)) \
+               $(addprefix $(SRC_EXEC_DIR)/, $(SRC_EXEC))
 
-OBJS	:= $(addprefix $(OBJ_DIR)/, $(SRC:.c=.o))
-OBJS	+= $(addprefix $(UTILS_DIR)/, $(UTILS_SRC:.c=.o))
-OBJS	+= $(addprefix $(PARSE_DIR)/, $(PARSE_SRC:.c=.o))
-OBJS	+= $(addprefix $(EXEC_DIR)/, $(EXEC_SRC:.c=.o))
+OBJS        := $(patsubst $(SRC_DIR)/%.c,$(OBJ_DIR)/%.o,$(SRCS))
 
 all: $(NAME)
 
 $(NAME): $(LIBFT) $(OBJS)
-	@$(CC) $(OBJS) -L$(LIBFT_DIR) -lft -lreadline -o $(NAME)
+	@$(CC) $(CFLAGS) $(OBJS) -L$(LIBFT_DIR) -lft -lreadline -o $(NAME)
 	@echo "\033[1;32m$(NAME) created.\033[0m"
 
 $(LIBFT):
@@ -38,9 +40,6 @@ $(LIBFT):
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
 	@mkdir -p $(dir $@)
 	@$(CC) $(CFLAGS) -c $< -o $@
-
-$(OBJ_DIR):
-	@mkdir -p $(OBJ_DIR)
 
 clean:
 	@$(RM) $(OBJ_DIR)

@@ -1,30 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   exec.h                                             :+:      :+:    :+:   */
+/*   builtin_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: apuyane <apuyane@student.42angouleme.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/02/03 05:48:25 by apuyane           #+#    #+#             */
-/*   Updated: 2026/02/03 11:13:01 by apuyane          ###   ########.fr       */
+/*   Created: 2026/02/03 07:26:31 by apuyane           #+#    #+#             */
+/*   Updated: 2026/02/03 11:13:03 by apuyane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef EXEC_H
-# define EXEC_H
-
 #include "minishell.h"
+#include "libft.h"
 
-typedef struct s_exec
+bool	is_built_in(char *name)
 {
-	bool	exist;
-	bool	is_built_in;
-	int		exit_code;
-}				t_exec;
-
-int	exec(t_env *env, t_tab_cmd	*tab);
-int wait_all_pids(t_tab_cmd *tab, t_exec *exec);
-
-int	ft_env(t_env *env, t_cmd cmd);
-
-#endif
+	if (!ft_strcmp(name, "env"))
+		return (true);
+	else if (!ft_strcmp(name, "pwd"))
+		return (true);
+	else if (!ft_strcmp(name, "cd"))
+		return (true);
+	else if (!ft_strcmp(name, "exit"))
+		return (true);
+	else if (!ft_strcmp(name, "unset"))
+		return (true);
+	else
+		return (false);
+}
