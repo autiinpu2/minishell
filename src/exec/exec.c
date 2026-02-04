@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcomin <mcomin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: apuyane <apuyane@student.42angouleme.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/03 06:00:50 by apuyane           #+#    #+#             */
-/*   Updated: 2026/02/04 04:20:47 by mcomin           ###   ########.fr       */
+/*   Updated: 2026/02/04 07:44:26 by apuyane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,24 +17,21 @@
 
 int	run_built_in(t_cmd cmd, t_env *env, t_exec exec)
 {
-	(void)env;
 	(void)exec;
 	int exit_code;
 	exit_code = 2;
 	if (!ft_strcmp(cmd.function_name, "env"))
 		exit_code = ft_env(env, cmd);
 	else if (!ft_strcmp(cmd.function_name, "pwd"))
-		//exit_code = ft_pwd(env);
-		return 0 ;
+		exit_code = ft_pwd(env, cmd);
 	else if (!ft_strcmp(cmd.function_name, "cd"))
-		//exit_code = ft_cd(cmd.args[1]);
-		return 0 ;
+		exit_code = ft_cd(env, cmd);
 	else if (!ft_strcmp(cmd.function_name, "exit"))
-		//exit_code = ft_exit(cmd.args[1]);
-		return 0 ;
+		exit_code = ft_exit(cmd);
 	else if (!ft_strcmp(cmd.function_name, "unset"))
-		//exit_code = ft_unset(env);
-		return 0 ;
+		exit_code = ft_unset(env, cmd);
+	else if (!ft_strcmp(cmd.function_name, "export"))
+		exit_code = ft_export(env, cmd);
 	return (exit_code);
 }
 
@@ -46,8 +43,8 @@ void	run_processes(t_env *env, t_data *data, t_exec *exec)
 	while (data->cmds[i].function_name)
 	{
 		if (data->cmds[i].is_built_in)
-			run_built_in(data->cmds[i], env, exec[i]);
-		else
+			exec->exit_code = run_built_in(data->cmds[i], env, exec[i]);
+		// else
 			//run_forks(data->cmds[i], env, exec[i]);
 		i++;
 	}
@@ -65,6 +62,7 @@ t_exec *init_exec(t_data *data)
 		exec[i].exist = true;
 		exec[i].exist = 0;
 		exec[i].is_built_in = is_built_in(data->cmds[i].function_name);
+		i++;
 	}
 	return (exec);
 }

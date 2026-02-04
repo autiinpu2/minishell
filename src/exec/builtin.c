@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcomin <mcomin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: apuyane <apuyane@student.42angouleme.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/03 09:56:58 by apuyane           #+#    #+#             */
-/*   Updated: 2026/02/04 04:16:08 by mcomin           ###   ########.fr       */
+/*   Updated: 2026/02/04 07:43:28 by apuyane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,3 +43,51 @@ int	ft_env(t_env *env, t_cmd cmd)
 	close(stdout);
 	return (0);
 }
+
+int	ft_pwd(t_env *env, t_cmd cmd)
+{
+	int         stdout_backup;
+	int			exit_code;
+	char		*pwd;
+
+	pwd = NULL;
+	exit_code = 0;
+	if (!env)
+		return (1);
+	stdout_backup = dup(STDOUT_FILENO);
+	dup2(cmd.outfile, STDOUT_FILENO);
+	pwd = get_env_from_name("PWD", env);
+	if (pwd)
+		printf("%s\n", pwd);
+	else
+		exit_code = 1;
+	dup2(stdout_backup, STDOUT_FILENO);
+	close(stdout_backup);
+	return (exit_code);
+}
+
+int	ft_exit(t_cmd cmd)
+{
+	int	num_args;
+	int	exit_code;
+
+	num_args = get_args_number(cmd.args);
+	exit_code = 0;
+	ft_dprintf(2, "exit\n");
+	if (num_args == 1)
+	{
+		exit(exit_code);
+	}
+	else if (num_args == 2)
+	{
+		exit_code = ft_atoi(cmd.args[1]);
+		exit(exit_code);
+	}
+	else
+	{
+		exit_code = 1;
+		ft_dprintf(2, "exit: too many arguments\n");
+	}
+	return (exit_code);
+}
+

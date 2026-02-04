@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   envp_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcomin <mcomin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: apuyane <apuyane@student.42angouleme.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/25 06:09:40 by apuyane           #+#    #+#             */
-/*   Updated: 2026/02/03 23:54:46 by mcomin           ###   ########.fr       */
+/*   Updated: 2026/02/04 07:46:29 by apuyane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,4 +90,22 @@ char	*get_env_from_name(char *name, t_env *env)
 		node = node->next;
 	}
 	return (NULL);
+}
+
+char	**env_to_envp(t_env *env)
+{
+	t_env_node	*node;
+	char		**envp;
+	int			i;
+
+	i = 0;
+	envp = ft_calloc(env->size + 1, sizeof(char *));
+	node = env->top;
+	while (i < env->size)
+	{
+		envp[i] = ft_strdup(node->text);
+		node = node->next;
+		i++;
+	}
+	return (envp);
 }

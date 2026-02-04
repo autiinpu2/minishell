@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcomin <mcomin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: apuyane <apuyane@student.42angouleme.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/03 03:01:53 by apuyane           #+#    #+#             */
-/*   Updated: 2026/02/04 04:15:42 by mcomin           ###   ########.fr       */
+/*   Updated: 2026/02/04 07:43:55 by apuyane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,33 +28,36 @@
 
 typedef struct s_redir
 {
-    int		type;// 1">"" 2">>"" 3"<" 4"<<"
-    char	*file;
+	int		type;// 1">"" 2">>"" 3"<" 4"<<"
+	char	*file;
 }   		t_redir;
 
 typedef struct s_cmd
 {
-    char	**args;
+	char	**args;
 	char	*function_name;
 	char	*path;
-    t_redir	*redirs;
-    int		redir_count;
+	t_redir	*redirs;
+	int		redir_count;
 	int		infile;
 	int		outfile;
 	bool	is_built_in;
-    int     pid;
+	int     pid;
 }   		t_cmd;
 
 typedef struct s_data
 {
-    t_cmd	*cmds;
-    size_t		size;
+	t_cmd	*cmds;
+	size_t		size;
 	t_env	*env;
-    int		exit_code;
+	int		exit_code;
 	
 }   		t_data;
 
 t_data	*parsing(t_env *env, char *line);
+
 bool	is_built_in(char *name);
+
+int	get_args_number(char **args);
 
 #endif
