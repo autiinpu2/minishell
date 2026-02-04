@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apuyane <apuyane@student.42angouleme.fr    +#+  +:+       +#+        */
+/*   By: mcomin <mcomin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/03 05:48:25 by apuyane           #+#    #+#             */
-/*   Updated: 2026/02/03 11:13:01 by apuyane          ###   ########.fr       */
+/*   Updated: 2026/02/04 00:39:01 by mcomin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,8 @@ typedef struct s_exec
 	int		exit_code;
 }				t_exec;
 
-int	exec(t_env *env, t_tab_cmd	*tab);
-int wait_all_pids(t_tab_cmd *tab, t_exec *exec);
+int	exec(t_env *env, t_data	*data);
+int wait_all_pids(t_data *data, t_exec *exec);
 
 int	ft_env(t_env *env, t_cmd cmd);
 

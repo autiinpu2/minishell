@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apuyane <apuyane@student.42angouleme.fr    +#+  +:+       +#+        */
+/*   By: mcomin <mcomin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/03 06:00:50 by apuyane           #+#    #+#             */
-/*   Updated: 2026/02/03 11:16:03 by apuyane          ###   ########.fr       */
+/*   Updated: 2026/02/04 00:49:31 by mcomin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,66 +17,73 @@
 
 int	run_built_in(t_cmd cmd, t_env *env, t_exec exec)
 {
+	(void)env;
+	(void)exec;
 	int exit_code;
 	exit_code = 2;
 	if (!ft_strcmp(cmd.function_name, "env"))
-		exit_code = ft_env(env, cmd);
-	// else if (!ft_strcmp(cmd.function_name, "pwd"))
-	// 	exit_code = ft_pwd(env);
-	// else if (!ft_strcmp(cmd.function_name, "cd"))
-	// 	exit_code = ft_cd(cmd.args[1]);
-	// else if (!ft_strcmp(cmd.function_name, "exit"))
-	// 	exit_code = ft_exit(cmd.args[1]);
-	// else if (!ft_strcmp(cmd.function_name, "unset"))
-	// 	exit_code = ft_unset(env);
+		//exit_code = ft_env(env, cmd);
+		return 0 ;
+	else if (!ft_strcmp(cmd.function_name, "pwd"))
+		//exit_code = ft_pwd(env);
+		return 0 ;
+	else if (!ft_strcmp(cmd.function_name, "cd"))
+		//exit_code = ft_cd(cmd.args[1]);
+		return 0 ;
+	else if (!ft_strcmp(cmd.function_name, "exit"))
+		//exit_code = ft_exit(cmd.args[1]);
+		return 0 ;
+	else if (!ft_strcmp(cmd.function_name, "unset"))
+		//exit_code = ft_unset(env);
+		return 0 ;
 	return (exit_code);
 }
 
-void	run_processes(t_env *env, t_tab_cmd	*tab, t_exec *exec)
+void	run_processes(t_env *env, t_data *data, t_exec *exec)
 {
-	t_cmd	*cmd;
+	//t_cmd	*cmds;
 	int		i;
 
 	i = 0;
-	cmd = tab->cmd;
-	while (cmd[i].function_name)
+	//cmds = data->cmds;
+	while (data->cmds[i].function_name)
 	{
-		if (cmd[i].is_build_in)
-			run_built_in(cmd[i], env, exec[i]);
+		if (data->cmds[i].is_built_in)
+			run_built_in(data->cmds[i], env, exec[i]);
 		else
-			run_forks(cmd[i], env, exec[i]);
+			//run_forks(cmd[i], env, exec[i]);
 		i++;
 	}
 }
 
-t_exec *init_exec(t_tab_cmd *tab)
+t_exec *init_exec(t_data *data)
 {
 	t_exec	*exec;
 	size_t	i;
 
 	i = 0;
-	exec = ft_calloc(tab->size, sizeof(t_exec));
-	while (i < tab->size)
+	exec = ft_calloc(data->size, sizeof(t_exec));
+	while (i < data->size)
 	{
 		exec[i].exist = true;
 		exec[i].exist = 0;
-		exec[i].is_built_in = is_built_in(tab->cmd[i].function_name);
+		exec[i].is_built_in = is_built_in(data->cmds[i].function_name);
 	}
 	return (exec);
 }
 
-int	exec(t_env *env, t_tab_cmd	*tab)
+int	exec(t_env *env, t_data	*data)
 {
 	t_exec	*exec;
 
-	exec = init_exec(tab);
-	run_processes(env, tab, exec);
-	wait_all_pids(tab, exec);
+	exec = init_exec(data);
+	run_processes(env, data, exec);
+	wait_all_pids(data, exec);
 	
-	return (exec[tab->size - 1].exit_code);
+	return (exec[data->size - 1].exit_code);
 }
 
-int wait_all_pids(t_tab_cmd *tab, t_exec *exec)
+int wait_all_pids(t_data *data, t_exec *exec)
 {
 	size_t i;
 	int status;
@@ -84,15 +91,15 @@ int wait_all_pids(t_tab_cmd *tab, t_exec *exec)
 
 	i = 0;
 	exit_code = 0;
-	while (i < tab->size)
+	while (i < data->size)
 	{
-		if (tab->cmd[i].is_build_in == true)
+		if (data->cmds[i].is_built_in == true)
 		{
 			exit_code = exec[i].exit_code;
 		}
 		else
 		{
-			waitpid(tab->cmd[i].pid, &status, 0);
+			waitpid(data->cmds[i].pid, &status, 0);
 			if (WIFEXITED(status))
 				exit_code = WEXITSTATUS(status);
 			else if (WIFSIGNALED(status))

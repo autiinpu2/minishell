@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apuyane <apuyane@student.42angouleme.fr    +#+  +:+       +#+        */
+/*   By: mcomin <mcomin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/30 07:27:45 by mcomin            #+#    #+#             */
-/*   Updated: 2026/02/03 07:33:44 by apuyane          ###   ########.fr       */
+/*   Updated: 2026/02/04 00:52:39 by mcomin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,9 @@
 # include "libft.h"
 # include "free.h"
 
-t_tab_cmd	*ft_init_tab(char *line, t_env *env, int count_pipe);
-char        *find_cmd_path(t_env *env, char *cmd_name);
+char	*find_cmd_path(t_env *env, char *cmd_name);
+size_t	count_pipe(char *input);
+char	*is_path_cmd(char *prefix_cmd_name, char **tab_paths);
+char	*cmd_path(t_env *env, char *cmd_name);
 
 #endif

@@ -1,21 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parse.c                                            :+:      :+:    :+:   */
+/*   path.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mcomin <mcomin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/01/30 01:11:37 by mcomin            #+#    #+#             */
-/*   Updated: 2026/02/04 00:51:07 by mcomin           ###   ########.fr       */
+/*   Created: 2026/02/04 00:35:21 by mcomin            #+#    #+#             */
+/*   Updated: 2026/02/04 00:42:45 by mcomin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parsing.h"
 
-size_t	count_pipe(char *input)
+int	count_pipe(char *input)
 {
 	int i;
-	size_t count;
+	int count;
 
 	i = 0;
 	count = 0;
@@ -65,12 +65,4 @@ char	*cmd_path(t_env *env, char *cmd_name)
 	free_tab(tab_paths);
 	free(prefix_cmd_name);
 	return (test_path);
-}
-
-t_data	*parsing(t_env *env, char *input)
-{
-	t_data	*data;
-
-	data = ft_init_data(input, env);
-	return (data);
 }

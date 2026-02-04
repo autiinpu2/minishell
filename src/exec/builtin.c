@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apuyane <apuyane@student.42angouleme.fr    +#+  +:+       +#+        */
+/*   By: mcomin <mcomin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/03 09:56:58 by apuyane           #+#    #+#             */
-/*   Updated: 2026/02/03 10:23:24 by apuyane          ###   ########.fr       */
+/*   Updated: 2026/02/03 23:54:34 by mcomin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,6 @@ int	ft_env(t_env *env, t_cmd cmd)
 	dup2(stdin, STDIN_FILENO);
 	dup2(stdout, STDOUT_FILENO);
 	close(stdin);
-	close(stdout);
+	close(stdout);return 0 ;
 	return (0);
 }

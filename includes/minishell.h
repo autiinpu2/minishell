@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apuyane <apuyane@student.42angouleme.fr    +#+  +:+       +#+        */
+/*   By: mcomin <mcomin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/03 03:01:53 by apuyane           #+#    #+#             */
-/*   Updated: 2026/02/03 07:29:33 by apuyane          ###   ########.fr       */
+/*   Updated: 2026/02/04 00:52:28 by mcomin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,28 +26,36 @@
 
 # include "env.h"
 
+typedef struct s_redir
+{
+    int		type;// 1">"" 2">>"" 3"<" 4"<<"
+    char	*file;
+}   		t_redir;
+
 typedef struct s_cmd
 {
-	int				infile;
-	int				outfile;
-	bool			infile_is_pipe;
-	bool			outfile_is_pipe;
-	char			*function_name;
-	bool			is_build_in;
-	char			*path;
-	char			**args;
-	pid_t			pid;
-	bool			is_valid;
-}			t_cmd;
+    char	**args;
+	char	*function_name;
+	char	*path;
+    t_redir	*redirs;
+	int		infile;
+	int		outfile;
+    int		redir_count;
+	bool	is_built_in;
+    int     pid;
+}   		t_cmd;
 
-typedef struct s_tab_cmd
+typedef struct s_data
 {
-	size_t	size;
-	t_cmd	*cmd;
-	bool	is_valid;
-}				t_tab_cmd;
+    t_cmd	*cmds;
+    size_t		size;
+	t_env	*env;
+    int		last_exit;
+	
+}   		t_data;
 
-t_tab_cmd	*parsing(t_env *env, char *line);
-bool		is_built_in(char *name);
+t_data	*parsing(t_env *env, char *line);
+t_data	*ft_init_data(char *input, t_env *env);
+bool	is_built_in(char *name);
 
 #endif

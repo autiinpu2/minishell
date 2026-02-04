@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apuyane <apuyane@student.42angouleme.fr    +#+  +:+       +#+        */
+/*   By: mcomin <mcomin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/25 04:17:27 by apuyane           #+#    #+#             */
-/*   Updated: 2026/02/03 07:33:35 by apuyane          ###   ########.fr       */
+/*   Updated: 2026/02/04 00:41:01 by mcomin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int	main(int ac, char **av, char **envp)
 	char		*prefix;
 	char		*line;
 	t_env		*env;
-	t_tab_cmd	*tab;
+	t_data	*data;
 	int			exit_code;
 
 	(void)ac;
@@ -35,12 +35,12 @@ int	main(int ac, char **av, char **envp)
 		line = readline(prefix);
 		if (!line)
 			break ;
-		tab = parsing(env, line);
+		data = parsing(env, line);
 		if (*line)
 			add_history(line);
 		free_double(line, prefix);
-		exit_code = exec(env, tab);
-		free_tab_cmd(tab);
+		exit_code = exec(env, data);
+		free_data(data);
 	}
 	free_double(line, prefix);
 	free_env(env);

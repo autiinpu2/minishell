@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apuyane <apuyane@student.42angouleme.fr    +#+  +:+       +#+        */
+/*   By: mcomin <mcomin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/03 02:59:58 by apuyane           #+#    #+#             */
-/*   Updated: 2026/02/03 05:54:07 by apuyane          ###   ########.fr       */
+/*   Updated: 2026/02/04 00:39:45 by mcomin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 # include "minishell.h"
 # include "env.h"
 
-void	free_tab_cmd(t_tab_cmd *cmd);
+void	free_data(t_data *data);
 void	free_env(t_env *env);
 void	free_tab(char **tab);
 void	free_single(void *s);

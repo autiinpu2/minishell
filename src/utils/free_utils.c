@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apuyane <apuyane@student.42angouleme.fr    +#+  +:+       +#+        */
+/*   By: mcomin <mcomin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/26 08:16:06 by apuyane           #+#    #+#             */
-/*   Updated: 2026/02/03 07:31:30 by apuyane          ###   ########.fr       */
+/*   Updated: 2026/02/04 00:41:59 by mcomin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,22 +49,22 @@ void	free_tab(char **tab)
 	free_single(tab);
 }
 
-void	free_tab_cmd(t_tab_cmd *tab)
+void	free_data(t_data *data)
 {
 	size_t	i;
 	
 	i = 0;
-	while (i < tab->size)
+	while (i < data->size)
 	{
-		if (tab->cmd[i].infile > 2)
-			close(tab->cmd[i].infile);
-		free_tab(tab->cmd[i].args);
-		free_single(tab->cmd[i].function_name);
-		free_single(tab->cmd[i].path);
+		if (data->cmds[i].infile > 2)
+			close(data->cmds[i].infile);
+		free_tab(data->cmds[i].args);
+		free_single(data->cmds[i].function_name);
+		free_single(data->cmds[i].path);
 		i++;
 	}
-	free_single(tab->cmd);
-	free_single(tab);
+	free_single(data->cmds);
+	free_single(data);
 }
 
 void	free_single(void *s)
