@@ -13,10 +13,10 @@ SRC_MAIN_DIR    := $(SRC_DIR)
 SRC_MAIN        := main.c
 
 SRC_UTILS_DIR   := $(SRC_DIR)/utils
-SRC_UTILS       := envp_utils.c free_utils.c builtin_utils.c path.c
+SRC_UTILS       := envp_utils.c free_utils.c builtin_utils.c
 
 SRC_PARSE_DIR   := $(SRC_DIR)/parse
-SRC_PARSE       := init_parsing.c parse.c
+SRC_PARSE       := init_parsing.c parse.c path.c
 
 SRC_EXEC_DIR    := $(SRC_DIR)/exec
 SRC_EXEC        := exec.c builtin.c

@@ -6,7 +6,7 @@
 /*   By: mcomin <mcomin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/25 04:17:27 by apuyane           #+#    #+#             */
-/*   Updated: 2026/02/04 00:41:01 by mcomin           ###   ########.fr       */
+/*   Updated: 2026/02/04 04:17:21 by mcomin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,12 +22,10 @@ int	main(int ac, char **av, char **envp)
 	char		*line;
 	t_env		*env;
 	t_data	*data;
-	int			exit_code;
 
 	(void)ac;
 	(void)av;
 	env = load_envp(envp);
-	exit_code = EXIT_SUCCESS;
 	while (true)
 	{
 		prefix = ft_strdup(get_env_from_name("PWD", env));
@@ -39,10 +37,10 @@ int	main(int ac, char **av, char **envp)
 		if (*line)
 			add_history(line);
 		free_double(line, prefix);
-		exit_code = exec(env, data);
+		data->exit_code = exec(env, data);
 		free_data(data);
 	}
 	free_double(line, prefix);
 	free_env(env);
-	return (exit_code);
+	return (data->exit_code);
 }

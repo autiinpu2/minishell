@@ -6,7 +6,7 @@
 /*   By: mcomin <mcomin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/03 03:01:53 by apuyane           #+#    #+#             */
-/*   Updated: 2026/02/04 01:47:50 by mcomin           ###   ########.fr       */
+/*   Updated: 2026/02/04 04:15:42 by mcomin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,9 +38,9 @@ typedef struct s_cmd
 	char	*function_name;
 	char	*path;
     t_redir	*redirs;
+    int		redir_count;
 	int		infile;
 	int		outfile;
-    int		redir_count;
 	bool	is_built_in;
     int     pid;
 }   		t_cmd;
@@ -50,7 +50,7 @@ typedef struct s_data
     t_cmd	*cmds;
     size_t		size;
 	t_env	*env;
-    int		last_exit;
+    int		exit_code;
 	
 }   		t_data;
 

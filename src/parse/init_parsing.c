@@ -6,7 +6,7 @@
 /*   By: mcomin <mcomin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/26 02:35:09 by mcomin            #+#    #+#             */
-/*   Updated: 2026/02/04 00:43:40 by mcomin           ###   ########.fr       */
+/*   Updated: 2026/02/04 01:58:43 by mcomin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,7 @@ t_data	*ft_init_data(char *input, t_env *env)
 	tab_split = ft_split(input, '|');
 	data = ft_calloc(1, sizeof(t_data));
 	data->size = count_pipe(input) + 1;
+	data->exit_code = EXIT_SUCCESS;
 	data->cmds = ft_calloc(data->size + 2, sizeof(t_cmd));
 	while ((size_t)i < data->size)
 	{

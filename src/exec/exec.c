@@ -6,7 +6,7 @@
 /*   By: mcomin <mcomin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/03 06:00:50 by apuyane           #+#    #+#             */
-/*   Updated: 2026/02/04 00:49:31 by mcomin           ###   ########.fr       */
+/*   Updated: 2026/02/04 04:20:47 by mcomin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,7 @@ int	run_built_in(t_cmd cmd, t_env *env, t_exec exec)
 	int exit_code;
 	exit_code = 2;
 	if (!ft_strcmp(cmd.function_name, "env"))
-		//exit_code = ft_env(env, cmd);
-		return 0 ;
+		exit_code = ft_env(env, cmd);
 	else if (!ft_strcmp(cmd.function_name, "pwd"))
 		//exit_code = ft_pwd(env);
 		return 0 ;
@@ -41,17 +40,15 @@ int	run_built_in(t_cmd cmd, t_env *env, t_exec exec)
 
 void	run_processes(t_env *env, t_data *data, t_exec *exec)
 {
-	//t_cmd	*cmds;
 	int		i;
 
 	i = 0;
-	//cmds = data->cmds;
 	while (data->cmds[i].function_name)
 	{
 		if (data->cmds[i].is_built_in)
 			run_built_in(data->cmds[i], env, exec[i]);
 		else
-			//run_forks(cmd[i], env, exec[i]);
+			//run_forks(data->cmds[i], env, exec[i]);
 		i++;
 	}
 }
