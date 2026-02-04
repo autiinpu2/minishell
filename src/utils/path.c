@@ -6,7 +6,7 @@
 /*   By: mcomin <mcomin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/04 00:35:21 by mcomin            #+#    #+#             */
-/*   Updated: 2026/02/04 00:42:45 by mcomin           ###   ########.fr       */
+/*   Updated: 2026/02/04 01:49:58 by mcomin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int	count_pipe(char *input)
 	return (count);
 }
 
-char	*is_path_cmd(char *prefix_cmd_name, char **tab_paths)
+char	*is_path(char *prefix_cmd_name, char **tab_paths)
 {
 	int		i;
 	char	*test_path;
@@ -59,7 +59,7 @@ char	*cmd_path(t_env *env, char *cmd_name)
 	env_path = get_env_from_name("PATH", env);
 	tab_paths = ft_split(env_path, ':');
 	prefix_cmd_name = ft_strjoin("/", cmd_name);
-	test_path = is_path_cmd(prefix_cmd_name, tab_paths);
+	test_path = is_path(prefix_cmd_name, tab_paths);
 	if (!test_path)
 		test_path = ft_strdup("");
 	free_tab(tab_paths);
