@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcomin <mcomin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: apuyane <apuyane@student.42angouleme.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/25 04:17:27 by apuyane           #+#    #+#             */
-/*   Updated: 2026/02/05 05:01:50 by mcomin           ###   ########.fr       */
+/*   Updated: 2026/02/05 05:30:43 by apuyane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,8 +48,8 @@ int	main(int ac, char **av, char **envp)
 		if(!parsing(data, line))
 			data->exit_code = exec(data->env, data);
 		free_double(line, prefix);
-		free_data(data);
 	}
+	free_data(data);
 	free_double(line, prefix);
 	free_env(data->env);
 	return (data->exit_code);
