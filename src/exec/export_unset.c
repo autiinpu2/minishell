@@ -6,7 +6,7 @@
 /*   By: apuyane <apuyane@student.42angouleme.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/04 07:33:49 by apuyane           #+#    #+#             */
-/*   Updated: 2026/02/04 08:47:30 by apuyane          ###   ########.fr       */
+/*   Updated: 2026/02/05 05:32:45 by apuyane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,8 +98,7 @@ int	ft_export(t_env *env, t_cmd cmd)
 	len_args = get_args_number(cmd.args);
 	if (len_args == 1)
 	{
-		ft_env(env, cmd);
-		// print_export(env);
+		print_export(env);
 		return 0;
 	}
 	i = 0;

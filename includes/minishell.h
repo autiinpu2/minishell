@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apuyane <marvin@d42.fr>                    +#+  +:+       +#+        */
+/*   By: apuyane <apuyane@student.42angouleme.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/05 05:21:42 by apuyane           #+#    #+#             */
-/*   Updated: 2026/02/05 05:21:42 by apuyane          ###   ########.fr       */
+/*   Updated: 2026/02/05 06:27:35 by apuyane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,10 +48,10 @@ typedef struct s_cmd
 typedef struct s_data
 {
 	t_cmd	*cmds;
-	size_t		size;
+	size_t	size;
 	t_env	*env;
 	int		exit_code;
-	
+	bool	exit;
 }   		t_data;
 
 int     parsing(t_data *data, char *line);

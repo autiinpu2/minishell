@@ -6,7 +6,7 @@
 /*   By: apuyane <apuyane@student.42angouleme.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/03 09:56:58 by apuyane           #+#    #+#             */
-/*   Updated: 2026/02/04 07:43:28 by apuyane          ###   ########.fr       */
+/*   Updated: 2026/02/05 05:28:46 by apuyane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,4 +90,3 @@ int	ft_exit(t_cmd cmd)
 	}
 	return (exit_code);
 }
-

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apuyane <marvin@d42.fr>                    +#+  +:+       +#+        */
+/*   By: apuyane <apuyane@student.42angouleme.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/05 05:22:21 by apuyane           #+#    #+#             */
-/*   Updated: 2026/02/05 05:22:21 by apuyane          ###   ########.fr       */
+/*   Updated: 2026/02/05 06:13:20 by apuyane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ int	run_built_in(t_cmd cmd, t_env *env, t_exec exec)
 	return (exit_code);
 }
 
-void	run_processes(t_env *env, t_data *data, t_exec *exec)
+void	run_processes(t_data *data, t_exec *exec)
 {
 	int		i;
 
@@ -43,7 +43,7 @@ void	run_processes(t_env *env, t_data *data, t_exec *exec)
 	while (data->cmds[i].function_name)
 	{
 		if (data->cmds[i].is_built_in)
-			exec->exit_code = run_built_in(data->cmds[i], env, exec[i]);
+			exec->exit_code = run_built_in(data->cmds[i], data->env, exec[i]);
 		// else
 			//run_forks(data->cmds[i], env, exec[i]);
 		i++;
@@ -67,12 +67,12 @@ t_exec *init_exec(t_data *data)
 	return (exec);
 }
 
-int	exec(t_env *env, t_data	*data)
+int	exec(t_data	*data)
 {
 	t_exec	*exec;
 
 	exec = init_exec(data);
-	run_processes(env, data, exec);
+	run_processes(data, exec);
 	wait_all_pids(data, exec);
 	
 	return (exec[data->size - 1].exit_code);
