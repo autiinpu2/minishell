@@ -6,7 +6,7 @@
 /*   By: mcomin <mcomin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/03 03:01:53 by apuyane           #+#    #+#             */
-/*   Updated: 2026/02/04 04:15:42 by mcomin           ###   ########.fr       */
+/*   Updated: 2026/02/05 05:06:38 by mcomin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,10 @@ typedef struct s_data
 	
 }   		t_data;
 
-t_data	*parsing(t_env *env, char *line);
+int     parsing(t_data *data, char *line);
+t_data  *new_data(char **envp);
+int     check_syntax(char *input);
+int     is_empty_or_spaces(char *input);
 bool	is_built_in(char *name);
 
 #endif
