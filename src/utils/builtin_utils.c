@@ -6,7 +6,7 @@
 /*   By: apuyane <apuyane@student.42angouleme.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/03 07:26:31 by apuyane           #+#    #+#             */
-/*   Updated: 2026/02/04 07:59:18 by apuyane          ###   ########.fr       */
+/*   Updated: 2026/02/05 08:34:54 by apuyane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,8 @@ bool	is_built_in(char *name)
 	else if (!ft_strcmp(name, "unset"))
 		return (true);
 	else if (!ft_strcmp(name, "export"))
+		return (true);
+	else if (!ft_strcmp(name, "echo"))
 		return (true);
 	else
 		return (false);

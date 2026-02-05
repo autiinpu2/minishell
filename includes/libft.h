@@ -6,7 +6,7 @@
 /*   By: apuyane <apuyane@student.42angouleme.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/15 17:43:58 by apuyane           #+#    #+#             */
-/*   Updated: 2026/01/31 08:15:18 by apuyane          ###   ########.fr       */
+/*   Updated: 2026/02/05 08:09:40 by apuyane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,8 @@ int				ft_toupper(int c);
 
 // ascii/int conversions
 int				ft_atoi(const char *nptr);
+long			ft_strtol(const char *nptr, char **endptr);
+long long		ft_strtoll(const char *nptr, char **endptr);
 char			*ft_itoa(int n);
 
 // memory functions

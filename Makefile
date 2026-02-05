@@ -19,7 +19,7 @@ SRC_PARSE_DIR   := $(SRC_DIR)/parse
 SRC_PARSE       := init_parsing.c parse.c path.c error.c ft_split_quotes.c
 
 SRC_EXEC_DIR    := $(SRC_DIR)/exec
-SRC_EXEC        := exec.c builtin.c ft_cd.c export_unset.c
+SRC_EXEC        := exec.c builtin.c ft_cd.c export_unset.c forks.c
 
 SRCS        := $(addprefix $(SRC_MAIN_DIR)/, $(SRC_MAIN)) \
                $(addprefix $(SRC_UTILS_DIR)/, $(SRC_UTILS)) \

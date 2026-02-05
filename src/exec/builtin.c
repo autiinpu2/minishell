@@ -6,7 +6,7 @@
 /*   By: apuyane <apuyane@student.42angouleme.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/03 09:56:58 by apuyane           #+#    #+#             */
-/*   Updated: 2026/02/05 05:28:46 by apuyane          ###   ########.fr       */
+/*   Updated: 2026/02/05 10:13:45 by apuyane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,18 +15,15 @@
 #include "libft.h"
 #include "exec.h"
 
-int	ft_env(t_env *env, t_cmd cmd)
+int	ft_env(t_data *data, t_cmd cmd)
 {
 	t_env_node *node;
-	int			stdin;
 	int			stdout;
 	
-	stdin = dup(STDIN_FILENO);
 	stdout = dup(STDOUT_FILENO);
-	node = env->top;
+	node = data->env->top;
 	if (!node)
 		return (1);
-	dup2(cmd.infile, STDIN_FILENO);
 	dup2(cmd.outfile, STDOUT_FILENO);
 	if (cmd.infile > 2)
 		close(cmd.infile);
@@ -37,14 +34,12 @@ int	ft_env(t_env *env, t_cmd cmd)
 		printf("%s\n", node->text);
 		node = node->next;
 	}
-	dup2(stdin, STDIN_FILENO);
 	dup2(stdout, STDOUT_FILENO);
-	close(stdin);
 	close(stdout);
 	return (0);
 }
 
-int	ft_pwd(t_env *env, t_cmd cmd)
+int	ft_pwd(t_data *data, t_cmd cmd)
 {
 	int         stdout_backup;
 	int			exit_code;
@@ -52,11 +47,11 @@ int	ft_pwd(t_env *env, t_cmd cmd)
 
 	pwd = NULL;
 	exit_code = 0;
-	if (!env)
+	if (!data->env)
 		return (1);
 	stdout_backup = dup(STDOUT_FILENO);
 	dup2(cmd.outfile, STDOUT_FILENO);
-	pwd = get_env_from_name("PWD", env);
+	pwd = get_env_from_name("PWD", data->env);
 	if (pwd)
 		printf("%s\n", pwd);
 	else
@@ -66,27 +61,59 @@ int	ft_pwd(t_env *env, t_cmd cmd)
 	return (exit_code);
 }
 
-int	ft_exit(t_cmd cmd)
+int	ft_exit(t_data *data, t_cmd cmd)
 {
-	int	num_args;
-	int	exit_code;
-
+	int		num_args;
+	long long n;
+	char	*endptr;
+	
 	num_args = get_args_number(cmd.args);
-	exit_code = 0;
-	ft_dprintf(2, "exit\n");
-	if (num_args == 1)
+	if (data->size == 1)
 	{
-		exit(exit_code);
+		data->exit = true;
+		ft_dprintf(2, "exit\n");
 	}
+	if (num_args == 1)
+		data->exit_code = 0;
 	else if (num_args == 2)
 	{
-		exit_code = ft_atoi(cmd.args[1]);
-		exit(exit_code);
+		n = ft_strtoll(cmd.args[1], &endptr);
+		if (*endptr != '\0' || n > LONG_MAX || n < LONG_MIN)
+		{
+			ft_dprintf(2, "exit: %s: numeric argument required\n", cmd.args[1]);
+			n = 2;
+		}
+		data->exit_code = (int)(n % 256);
 	}
 	else
 	{
-		exit_code = 1;
+		data->exit_code = 2;
 		ft_dprintf(2, "exit: too many arguments\n");
 	}
-	return (exit_code);
+	return (data->exit_code);
+}
+
+int	ft_echo(t_data *data, t_cmd cmd)
+{
+	int i;
+	char n;
+
+	i = 1;
+	if (!ft_strcmp(cmd.args[1], "-n\0"))
+	{
+		n = '\0';
+		i++;
+	}
+	else
+		n = '\n';
+	while (cmd.args[i])
+	{
+		if (!ft_strcmp(cmd.args[1], "$?\0"))
+			printf("%d", data->exit_code);
+		else
+			printf("%s", cmd.args[i]);
+		i++;
+	}
+	printf("%c", n);
+	return (0);
 }

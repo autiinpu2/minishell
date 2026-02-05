@@ -6,7 +6,7 @@
 /*   By: apuyane <apuyane@student.42angouleme.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/31 09:02:27 by apuyane           #+#    #+#             */
-/*   Updated: 2026/02/04 07:43:32 by apuyane          ###   ########.fr       */
+/*   Updated: 2026/02/05 07:13:20 by apuyane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int	call_chdir(char *path)
 		return 0;
 }
 
-int	ft_cd(t_env *env, t_cmd cmd)
+int	ft_cd(t_data *data, t_cmd cmd)
 {
 	int	args_len;
 	char	*tmp;
@@ -38,22 +38,22 @@ int	ft_cd(t_env *env, t_cmd cmd)
 	}
 	else if (args_len == 1)
 	{
-		exit_code = call_chdir(get_env_from_name("HOME", env));
-		change_env_value(env, "OLDPWD", get_env_from_name("PWD", env));
-		change_env_value(env, "PWD", get_env_from_name("HOME", env));
+		exit_code = call_chdir(get_env_from_name("HOME", data->env));
+		change_env_value(data->env, "OLDPWD", get_env_from_name("PWD", data->env));
+		change_env_value(data->env, "PWD", get_env_from_name("HOME", data->env));
 		return (exit_code);
 	}
 	else if (!ft_strcmp(cmd.args[1], "-"))
 	{
-		exit_code = call_chdir(get_env_from_name("OLDPWD", env));
-		tmp = ft_strdup(get_env_from_name("OLDPWD", env));
-		change_env_value(env, "OLDPWD", get_env_from_name("PWD", env));
-		change_env_value(env, "PWD", tmp);
+		exit_code = call_chdir(get_env_from_name("OLDPWD", data->env));
+		tmp = ft_strdup(get_env_from_name("OLDPWD", data->env));
+		change_env_value(data->env, "OLDPWD", get_env_from_name("PWD", data->env));
+		change_env_value(data->env, "PWD", tmp);
 		return (exit_code);
 	}
 	exit_code = call_chdir(cmd.args[1]);
 	tmp = getcwd(NULL, 0);
-	change_env_value(env, "OLDPWD", get_env_from_name("PWD", env));
-	change_env_value(env, "PWD", tmp);
+	change_env_value(data->env, "OLDPWD", get_env_from_name("PWD", data->env));
+	change_env_value(data->env, "PWD", tmp);
 	return (exit_code);
 }

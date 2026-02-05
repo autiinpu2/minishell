@@ -45,7 +45,7 @@ char	*ft_itoa(int n)
 	while (num)
 	{
 		number[--digits] = num % 10 + '0';
-		num *= 10;
+		num /= 10;
 	}
 	return (number);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_parsing.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcomin <mcomin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: apuyane <apuyane@student.42angouleme.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/05 05:22:34 by apuyane           #+#    #+#             */
-/*   Updated: 2026/02/05 07:39:55 by mcomin           ###   ########.fr       */
+/*   Updated: 2026/02/05 10:25:18 by apuyane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,20 @@ t_data	*load_data(t_data *data, char *input)
 	free_tab(tab_split);
 	return (data);
 }
+
+void	update_shlvl(t_env *env)
+{
+	int		value;
+	char	*actual_value;
+	char	*new_value;
+	
+	actual_value = get_env_from_name("SHLVL", env);
+	value = ft_strtol(actual_value, NULL);
+	value += 1;
+	new_value = ft_itoa(value);
+	change_env_value(env, "SHLVL", new_value);
+}
+
 t_data	*new_data(char **envp)
 {
 	t_data	*data;
@@ -75,6 +89,7 @@ t_data	*new_data(char **envp)
 	data->cmds = NULL;
 	data->size = 0;
 	data->env = load_envp(envp);
+	update_shlvl(data->env);
 	data->exit_code = EXIT_SUCCESS;
 	return (data);	
 }

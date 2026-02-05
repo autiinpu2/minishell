@@ -6,7 +6,7 @@
 /*   By: apuyane <apuyane@student.42angouleme.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/04 07:33:49 by apuyane           #+#    #+#             */
-/*   Updated: 2026/02/05 05:32:45 by apuyane          ###   ########.fr       */
+/*   Updated: 2026/02/05 07:20:02 by apuyane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,12 @@
 #include "libft.h"
 #include "free.h"
 
-int	ft_unset(t_env *env, t_cmd cmd)
+int	ft_unset(t_data *data, t_cmd cmd)
 {
 	t_env_node	*node;
 	t_env_node	*tmp;
 
-	node = env->top;
+	node = data->env->top;
 	tmp = node;
 	while (node)
 	{
@@ -90,7 +90,7 @@ void	add_new_env_node(t_env *env, char *arg)
 	node->text = ft_strjoin_free(node->text, node->value);
 }
 
-int	ft_export(t_env *env, t_cmd cmd)
+int	ft_export(t_data *data, t_cmd cmd)
 {
 	size_t	len_args;
 	size_t	i;
@@ -98,13 +98,13 @@ int	ft_export(t_env *env, t_cmd cmd)
 	len_args = get_args_number(cmd.args);
 	if (len_args == 1)
 	{
-		print_export(env);
+		print_export(data->env);
 		return 0;
 	}
 	i = 0;
 	while (i < len_args - 1)
 	{
-		add_new_env_node(env, cmd.args[i + 1]);
+		add_new_env_node(data->env, cmd.args[i + 1]);
 		i++;
 	}
 	return (0);
