@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_parsing.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apuyane <apuyane@student.42angouleme.fr    +#+  +:+       +#+        */
+/*   By: mcomin <mcomin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/05 05:22:34 by apuyane           #+#    #+#             */
-/*   Updated: 2026/02/05 06:14:17 by apuyane          ###   ########.fr       */
+/*   Updated: 2026/02/05 07:39:55 by mcomin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ t_cmd		cmd_is_pipe(t_data *data, int i)
 
 t_cmd	new_cmd(char *token, t_data *data, int i)
 {
-	data->cmds[i].args = ft_split(token, ' ');
+	data->cmds[i].args = ft_split_quotes(token, ' ');
 	data->cmds[i].function_name = ft_strdup(data->cmds[i].args[0]);
 	data->cmds[i].is_built_in = is_built_in(data->cmds[i].function_name);
 	if (!data->cmds[i].is_built_in)

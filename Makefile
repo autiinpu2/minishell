@@ -16,7 +16,7 @@ SRC_UTILS_DIR   := $(SRC_DIR)/utils
 SRC_UTILS       := envp_utils.c free_utils.c builtin_utils.c
 
 SRC_PARSE_DIR   := $(SRC_DIR)/parse
-SRC_PARSE       := init_parsing.c parse.c path.c error.c
+SRC_PARSE       := init_parsing.c parse.c path.c error.c ft_split_quotes.c
 
 SRC_EXEC_DIR    := $(SRC_DIR)/exec
 SRC_EXEC        := exec.c builtin.c ft_cd.c export_unset.c
