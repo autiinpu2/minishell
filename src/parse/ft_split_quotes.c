@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split_quotes.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcomin <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: apuyane <apuyane@student.42angouleme.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/05 07:37:34 by mcomin            #+#    #+#             */
-/*   Updated: 2026/02/05 07:37:39 by mcomin           ###   ########.fr       */
+/*   Updated: 2026/02/05 10:58:44 by apuyane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ static char **wordsmalloc(char const *s, char c)
     return (str);
 }
 
-static char **fill(char const *s, char **str, char c)
+static void fill(char const *s, char **str, char c)
 {
     size_t  beg;
     size_t  end;
@@ -84,12 +84,11 @@ static char **fill(char const *s, char **str, char c)
         {
             str[i] = ft_substr(s, beg, end - beg);
             if (!str[i])
-                return (NULL);
+                return ;
             i++;
         }
     }
-    str[i] = 0;
-    return (str);
+    str[i] = NULL;
 }
 
 char **ft_split_quotes(char const *s, char c)
@@ -104,17 +103,17 @@ char **ft_split_quotes(char const *s, char c)
     str = wordsmalloc(s, c);
     if (!str)
         return (NULL);
-
-    if (!fill(s, str, c))
+    fill(s, str, c);
+    if (!str)
     {
         while (str[i])
         {
             free(str[i]);
+            str[i] = NULL;
             i++;
         }
         free(str);
         str = NULL;
     }
-
     return (str);
 }

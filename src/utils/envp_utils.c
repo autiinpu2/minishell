@@ -6,7 +6,7 @@
 /*   By: apuyane <apuyane@student.42angouleme.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/25 06:09:40 by apuyane           #+#    #+#             */
-/*   Updated: 2026/02/05 10:22:13 by apuyane          ###   ########.fr       */
+/*   Updated: 2026/02/05 10:33:55 by apuyane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,8 @@ t_env	*change_env_value(t_env *env, char *key, char *new_value)
 			free_double(node->value, node->text);
 			node->value = ft_strdup(new_value);
 			node->text = ft_strdup(node->key);
-			node->text = ft_strjoin(node->text, "=");
-			node->text = ft_strjoin(node->text, new_value);
+			node->text = ft_strjoin_free(node->text, "=");
+			node->text = ft_strjoin_free(node->text, new_value);
 			return (env);
 		}
 		node = node->next;

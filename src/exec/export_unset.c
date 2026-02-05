@@ -6,7 +6,7 @@
 /*   By: apuyane <apuyane@student.42angouleme.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/04 07:33:49 by apuyane           #+#    #+#             */
-/*   Updated: 2026/02/05 07:20:02 by apuyane          ###   ########.fr       */
+/*   Updated: 2026/02/05 11:17:59 by apuyane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,8 @@ int	ft_unset(t_data *data, t_cmd cmd)
 		{
 			tmp->next = node->next;
 			free_double(node->key, node->value);
-			free_single(node->text);
+			free_double(node->text, node);
+			data->env->size -= 1;
 			return (0);
 		}
 		tmp = node;
@@ -71,6 +72,7 @@ void	print_export(t_env *env)
 		printf("%s\n", envp[i]);
 		i++;
 	}
+	free_tab(envp);
 }
 
 void	add_new_env_node(t_env *env, char *arg)
@@ -85,9 +87,12 @@ void	add_new_env_node(t_env *env, char *arg)
 	node->next = ft_calloc(1, sizeof(t_env_node));
 	node = node->next;
 	node->key = ft_strdup(args[0]);
-	node->value = ft_strdup(args[1]);
+	if (args[1])
+		node->value = ft_strdup(args[1]);
 	node->text = ft_strjoin(node->key, "=");
 	node->text = ft_strjoin_free(node->text, node->value);
+	env->size += 1;
+	free_tab(args);
 }
 
 int	ft_export(t_data *data, t_cmd cmd)

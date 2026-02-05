@@ -6,12 +6,13 @@
 /*   By: apuyane <apuyane@student.42angouleme.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/31 09:02:27 by apuyane           #+#    #+#             */
-/*   Updated: 2026/02/05 07:13:20 by apuyane          ###   ########.fr       */
+/*   Updated: 2026/02/05 11:13:12 by apuyane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "exec.h"
 #include "libft.h"
+#include "free.h"
 
 int	call_chdir(char *path)
 {
@@ -55,5 +56,6 @@ int	ft_cd(t_data *data, t_cmd cmd)
 	tmp = getcwd(NULL, 0);
 	change_env_value(data->env, "OLDPWD", get_env_from_name("PWD", data->env));
 	change_env_value(data->env, "PWD", tmp);
+	free_single(tmp);
 	return (exit_code);
 }

@@ -6,7 +6,7 @@
 /*   By: apuyane <apuyane@student.42angouleme.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/05 05:22:34 by apuyane           #+#    #+#             */
-/*   Updated: 2026/02/05 10:25:18 by apuyane          ###   ########.fr       */
+/*   Updated: 2026/02/05 10:52:51 by apuyane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ t_cmd	new_cmd(char *token, t_data *data, int i)
 	data->cmds[i].function_name = ft_strdup(data->cmds[i].args[0]);
 	data->cmds[i].is_built_in = is_built_in(data->cmds[i].function_name);
 	if (!data->cmds[i].is_built_in)
-		data->cmds[i].path = ft_strdup(cmd_path(data->env, data->cmds[i].function_name));
+		data->cmds[i].path = cmd_path(data->env, data->cmds[i].function_name);
 	else
 		data->cmds[i].path = ft_strdup(data->cmds[i].function_name);
 	if (!data->cmds[i].path)
@@ -79,6 +79,7 @@ void	update_shlvl(t_env *env)
 	value += 1;
 	new_value = ft_itoa(value);
 	change_env_value(env, "SHLVL", new_value);
+	free(new_value);
 }
 
 t_data	*new_data(char **envp)

@@ -6,7 +6,7 @@
 /*   By: apuyane <apuyane@student.42angouleme.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/25 04:17:27 by apuyane           #+#    #+#             */
-/*   Updated: 2026/02/05 08:43:44 by apuyane          ###   ########.fr       */
+/*   Updated: 2026/02/05 11:05:53 by apuyane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ int	main(int ac, char **av, char **envp)
 	char		*prefix;
 	char		*line;
 	t_data		*data;
+	int			exit_code;
 
 	(void)ac;
 	(void)av;
@@ -54,9 +55,10 @@ int	main(int ac, char **av, char **envp)
 		if (data->exit)
 			break ;
 		free_double(line, prefix);
+		free_cmds(data);
 	}
+	exit_code = data->exit_code;
 	free_data(data);
 	free_double(line, prefix);
-	free_env(data->env);
-	return (data->exit_code);
+	return (exit_code);
 }
