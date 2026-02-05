@@ -6,16 +6,14 @@
 /*   By: mcomin <mcomin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/30 01:11:37 by mcomin            #+#    #+#             */
-/*   Updated: 2026/02/04 01:47:15 by mcomin           ###   ########.fr       */
+/*   Updated: 2026/02/05 04:43:18 by mcomin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parsing.h"
 
-t_data	*parsing(t_env *env, char *input)
+int	parsing(t_data *data, char *input)
 {
-	t_data	*data;
-
-	data = ft_init_data(input, env);
-	return (data);
+	load_data(data, input);
+	return (0);
 }

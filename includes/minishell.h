@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apuyane <apuyane@student.42angouleme.fr    +#+  +:+       +#+        */
+/*   By: apuyane <marvin@d42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/02/03 03:01:53 by apuyane           #+#    #+#             */
-/*   Updated: 2026/02/04 07:43:55 by apuyane          ###   ########.fr       */
+/*   Created: 2026/02/05 05:21:42 by apuyane           #+#    #+#             */
+/*   Updated: 2026/02/05 05:21:42 by apuyane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,8 +54,10 @@ typedef struct s_data
 	
 }   		t_data;
 
-t_data	*parsing(t_env *env, char *line);
-
+int     parsing(t_data *data, char *line);
+t_data  *new_data(char **envp);
+int     check_syntax(char *input);
+int     is_empty_or_spaces(char *input);
 bool	is_built_in(char *name);
 
 int	get_args_number(char **args);

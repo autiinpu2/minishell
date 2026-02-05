@@ -3,16 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   init_parsing.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apuyane <apuyane@student.42angouleme.fr    +#+  +:+       +#+        */
+/*   By: apuyane <marvin@d42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/01/26 02:35:09 by mcomin            #+#    #+#             */
-/*   Updated: 2026/02/04 06:17:58 by apuyane          ###   ########.fr       */
+/*   Created: 2026/02/05 05:22:34 by apuyane           #+#    #+#             */
+/*   Updated: 2026/02/05 05:22:34 by apuyane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+
 #include "parsing.h"
 
-t_cmd		ft_init_cmd_is_pipe(t_data *data, int i)
+t_cmd		cmd_is_pipe(t_data *data, int i)
 {
 	int		pipes[2];
 
@@ -33,45 +34,47 @@ t_cmd		ft_init_cmd_is_pipe(t_data *data, int i)
 	return (data->cmds[i]);
 }
 
-t_cmd		ft_init_cmd(char *token, t_env *env, t_data *data, int i)
+t_cmd	new_cmd(char *token, t_data *data, int i)
 {
-	(void)env;
 	data->cmds[i].args = ft_split(token, ' ');
 	data->cmds[i].function_name = ft_strdup(data->cmds[i].args[0]);
 	data->cmds[i].is_built_in = is_built_in(data->cmds[i].function_name);
 	if (!data->cmds[i].is_built_in)
-		data->cmds[i].path = ft_strdup(cmd_path(env, data->cmds[i].function_name));
+		data->cmds[i].path = ft_strdup(cmd_path(data->env, data->cmds[i].function_name));
 	else
 		data->cmds[i].path = ft_strdup(data->cmds[i].function_name);
 	if (!data->cmds[i].path)
 		data->cmds[i].path = ft_strdup(data->cmds[i].function_name);
-	ft_init_cmd_is_pipe(data, i);
+	cmd_is_pipe(data, i);
 	i++;
 	return (data->cmds[i]);
 }
 
-t_data	*ft_init_data(char *input, t_env *env)
+t_data	*load_data(t_data *data, char *input)
 {
 	char		**tab_split;
-	t_data	*data;
 	int			i;
 
 	i = 0;
 	tab_split = ft_split(input, '|');
-	data = ft_calloc(1, sizeof(t_data));
 	data->size = count_pipe(input) + 1;
-	data->exit_code = EXIT_SUCCESS;
 	data->cmds = ft_calloc(data->size + 2, sizeof(t_cmd));
 	while ((size_t)i < data->size)
 	{
-		ft_init_cmd(tab_split[i], env, data, i);
-		//if (data->cmds[i].is_valid == false)
-		//{
-		//	tab->is_valid = false;
-		//	break ;
-		//}
+		new_cmd(tab_split[i], data, i);
 		i++;
 	}
 	free_tab(tab_split);
 	return (data);
+}
+t_data	*new_data(char **envp)
+{
+	t_data	*data;
+	
+	data = ft_calloc(1, sizeof(t_data));
+	data->cmds = NULL;
+	data->size = 0;
+	data->env = load_envp(envp);
+	data->exit_code = EXIT_SUCCESS;
+	return (data);	
 }
