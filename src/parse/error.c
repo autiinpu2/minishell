@@ -6,7 +6,7 @@
 /*   By: mcomin <mcomin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/04 01:46:10 by mcomin            #+#    #+#             */
-/*   Updated: 2026/02/04 04:10:59 by mcomin           ###   ########.fr       */
+/*   Updated: 2026/02/05 02:14:48 by mcomin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,46 +52,61 @@ int check_quotes(char *input)
         return (1);
     return (0);
 }
-
 int check_pipes(char *input)
 {
     int i;
-    int save;
-
+    
     i = 0;
-    save = i;
-    while(input[i])
+    while (input[i] && (input[i] == ' ' || input[i] == '\t'))
+        i++;
+    if (input[i] == '|')
+        return (1);
+    i = 0;
+    while (input[i])
     {
-        if(input[i] == '|')
+        if (input[i] == '|')
         {
-            save = i;
-            while (i >= 0)
-            {
-                if(input[i] != ' ' || input[i] != '\t')
-                    break ;
-                if (i == 0)
-                    return (1);
-                i--; 
-            }
-            i = save;
-            while (input[i])
-            {
-                if(input[i] != ' ' || input[i] != '\t')
-                    break ;
-                if (i == 0)
-                    return (1);
-                i++; 
-            }
-        }   
+            i++;
+            while (input[i] && (input[i] == ' ' || input[i] == '\t'))
+                i++;
+            if (input[i] == '|' || input[i] == '\0')
+                return (1);
+        }
         i++;
     }
+    return (0);
 }
-
+int check_redirections(char *input)
+{
+    int i;
+    
+    i = 0;
+    while (input[i])
+    {
+        if (input[i] == '<' || input[i] == '>')
+        {
+            char redir_char = input[i];
+            
+            i++;
+            if (input[i] == redir_char)
+                i++;
+            while (input[i] && (input[i] == ' ' || input[i] == '\t'))
+                i++;
+            if (input[i] == '\0' || input[i] == '|' || input[i] == '<'
+                || input[i] == '>')
+                return (1);
+        }
+        i++;
+    }
+    return (0);
+}
 int check_syntax(char *input)
 {
-    if (check_quotes)
+    if (check_quotes(input))
         return (1);
-    if (check_pipes)
+    if (check_pipes(input))
+        return (1);
+    if(check_redirections(input))
         return (1);
     return (0);
 }
