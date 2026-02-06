@@ -6,7 +6,7 @@
 /*   By: apuyane <apuyane@student.42angouleme.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/25 04:17:27 by apuyane           #+#    #+#             */
-/*   Updated: 2026/02/05 11:05:53 by apuyane          ###   ########.fr       */
+/*   Updated: 2026/02/06 15:54:53 by apuyane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,6 @@ int	main(int ac, char **av, char **envp)
 		if (!line)
 		{
 			ft_dprintf(2, "exit\n");
-			data->exit_code = 0;
 			break ;
 		}
 		if (*line)
@@ -46,8 +45,8 @@ int	main(int ac, char **av, char **envp)
 		}
 		if (check_syntax(line))
 		{
-			data->exit_code = 2;
 			free_double(line, prefix);
+			data->exit_code = 2;
 			continue;
 		}
 		if (!parsing(data, line))
@@ -55,7 +54,6 @@ int	main(int ac, char **av, char **envp)
 		if (data->exit)
 			break ;
 		free_double(line, prefix);
-		free_cmds(data);
 	}
 	exit_code = data->exit_code;
 	free_data(data);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcomin <mcomin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: apuyane <apuyane@student.42angouleme.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/03 09:56:58 by apuyane           #+#    #+#             */
-/*   Updated: 2026/02/06 03:03:38 by mcomin           ###   ########.fr       */
+/*   Updated: 2026/02/06 15:51:33 by apuyane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,7 +111,9 @@ int	ft_echo(t_data *data, t_cmd cmd)
 		if (!ft_strcmp(cmd.args[1], "$?\0"))
 			printf("%d", data->exit_code);
 		else
-			printf("%s ", cmd.args[i]);
+			printf("%s", cmd.args[i]);
+		if (cmd.args[i + 1])
+			printf("%c", ' ');
 		i++;
 	}
 	printf("%c", n);
