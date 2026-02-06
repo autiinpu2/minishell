@@ -6,7 +6,7 @@
 /*   By: apuyane <apuyane@student.42angouleme.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/05 05:21:42 by apuyane           #+#    #+#             */
-/*   Updated: 2026/02/05 06:27:35 by apuyane          ###   ########.fr       */
+/*   Updated: 2026/02/06 16:57:55 by apuyane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,9 @@
 
 typedef struct s_redir
 {
-	int		type;// 1">"" 2">>"" 3"<" 4"<<"
+	int		type; // 1">"" 2">>"" 3"<" 4"<<"
 	char	*file;
-}   		t_redir;
+}				t_redir;
 
 typedef struct s_cmd
 {
@@ -42,8 +42,8 @@ typedef struct s_cmd
 	int		infile;
 	int		outfile;
 	bool	is_built_in;
-	int     pid;
-}   		t_cmd;
+	int		pid;
+}			t_cmd;
 
 typedef struct s_data
 {
@@ -52,14 +52,14 @@ typedef struct s_data
 	t_env	*env;
 	int		exit_code;
 	bool	exit;
-}   		t_data;
+}			t_data;
 
-int     parsing(t_data *data, char *line);
-t_data  *new_data(char **envp);
-int     check_syntax(char *input);
-int     is_empty_or_spaces(char *input);
+int		parsing(t_data *data, char *line);
+t_data	*new_data(char **envp);
+int		check_syntax(char *input);
+int		is_empty_or_spaces(char *input);
 bool	is_built_in(char *name);
 
-int	get_args_number(char **args);
+int		get_args_number(char **args);
 
 #endif

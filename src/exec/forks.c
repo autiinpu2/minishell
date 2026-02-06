@@ -6,7 +6,7 @@
 /*   By: apuyane <apuyane@student.42angouleme.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/05 09:08:22 by apuyane           #+#    #+#             */
-/*   Updated: 2026/02/05 09:54:46 by apuyane          ###   ########.fr       */
+/*   Updated: 2026/02/06 16:53:59 by apuyane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,12 +54,13 @@ void	run_cmd(t_data *data, t_cmd cmd)
 {
 	char **envp;
 	
-	if (!cmd.path)
+	if (!cmd.path[0])
 	{
 		ft_dprintf(2, "%s: command not found\n", cmd.function_name);
 		close_every_pipe(data->cmds, -1);
 		exit(127);
 	}
+	ft_dprintf(2, "path is :%s\n", cmd.path);
 	envp = env_to_envp(data->env);
 	check_pipes(cmd);
 	dup2(cmd.infile, 0);
