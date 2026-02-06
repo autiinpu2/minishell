@@ -6,7 +6,7 @@
 /*   By: apuyane <apuyane@student.42angouleme.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/05 09:08:22 by apuyane           #+#    #+#             */
-/*   Updated: 2026/02/06 17:13:15 by apuyane          ###   ########.fr       */
+/*   Updated: 2026/02/06 22:10:21 by apuyane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,15 +60,11 @@ void	run_cmd(t_data *data, t_cmd cmd)
 		close_every_pipe(data->cmds, -1);
 		exit(127);
 	}
-	ft_dprintf(2, "path is :%s\n", cmd.path);
 	envp = env_to_envp(data->env);
 	check_pipes(cmd);
 	dup2(cmd.infile, 0);
 	dup2(cmd.outfile, 1);
-	if (cmd.infile > 2)
-		close(cmd.infile);
-	if (cmd.outfile > 2)
-		close(cmd.outfile);
+	close_every_pipe(data->cmds, -1);
 	execve(cmd.path, cmd.args, envp);
 	perror("execve failed");
 	exit(1);

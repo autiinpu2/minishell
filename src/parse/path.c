@@ -6,11 +6,27 @@
 /*   By: apuyane <apuyane@student.42angouleme.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/04 00:35:21 by mcomin            #+#    #+#             */
-/*   Updated: 2026/02/06 17:03:05 by apuyane          ###   ########.fr       */
+/*   Updated: 2026/02/06 21:12:01 by apuyane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parsing.h"
+
+bool	check_access(char *path)
+{
+	#include <sys/stat.h>
+	#include <unistd.h>
+
+	struct stat st;
+	if (stat(path, &st) == 0)
+	{
+		if (S_ISDIR(st.st_mode))
+			return (false);
+	}
+	else if (S_ISREG(st.st_mode) && access(path, X_OK) == 0)
+		return (true);
+	return (false);
+}
 
 int	count_pipe(char *input)
 {
@@ -55,7 +71,10 @@ char	*cmd_path(t_env *env, char *cmd_name)
 	if (!cmd_name[0])
 		return (NULL);
 	if (access(cmd_name, X_OK) == 0)
-		return (cmd_name);
+	{
+		test_path = ft_strdup(cmd_name);
+		return (test_path);
+	}
 	env_path = get_env_from_name("PATH", env);
 	tab_paths = ft_split(env_path, ':');
 	prefix_cmd_name = ft_strjoin("/", cmd_name);
