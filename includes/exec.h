@@ -6,7 +6,7 @@
 /*   By: apuyane <apuyane@student.42angouleme.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/03 05:48:25 by apuyane           #+#    #+#             */
-/*   Updated: 2026/02/05 09:43:35 by apuyane          ###   ########.fr       */
+/*   Updated: 2026/02/06 17:00:13 by apuyane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ typedef struct s_exec
 }				t_exec;
 
 int		exec(t_data	*data);
-int 	wait_all_pids(t_data *data);
+int		wait_all_pids(t_data *data);
 
 int		ft_env(t_data *data, t_cmd cmd);
 int		ft_pwd(t_data *data, t_cmd cmd);

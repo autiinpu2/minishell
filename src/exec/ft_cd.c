@@ -6,7 +6,7 @@
 /*   By: apuyane <apuyane@student.42angouleme.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/31 09:02:27 by apuyane           #+#    #+#             */
-/*   Updated: 2026/02/05 11:13:12 by apuyane          ###   ########.fr       */
+/*   Updated: 2026/02/06 17:12:36 by apuyane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,16 +18,16 @@ int	call_chdir(char *path)
 {
 	if (chdir(path) == -1)
 	{
-		ft_dprintf(2, "cd: %s: %s\n", path,  strerror(errno));
+		ft_dprintf(2, "cd: %s: %s\n", path, strerror(errno));
 		return (1);
 	}
 	else
-		return 0;
+		return (0);
 }
 
 int	ft_cd(t_data *data, t_cmd cmd)
 {
-	int	args_len;
+	int		args_len;
 	char	*tmp;
 	int		exit_code;
 

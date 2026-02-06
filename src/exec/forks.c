@@ -6,7 +6,7 @@
 /*   By: apuyane <apuyane@student.42angouleme.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/05 09:08:22 by apuyane           #+#    #+#             */
-/*   Updated: 2026/02/06 16:53:59 by apuyane          ###   ########.fr       */
+/*   Updated: 2026/02/06 17:13:15 by apuyane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,8 +52,8 @@ static void	check_pipes(t_cmd cmd)
 
 void	run_cmd(t_data *data, t_cmd cmd)
 {
-	char **envp;
-	
+	char	**envp;
+
 	if (!cmd.path[0])
 	{
 		ft_dprintf(2, "%s: command not found\n", cmd.function_name);
@@ -77,7 +77,7 @@ void	run_cmd(t_data *data, t_cmd cmd)
 void	run_forks(t_cmd cmd, t_data *data, int id)
 {
 	int	i;
-	
+
 	i = 0;
 	data->cmds[id].pid = fork();
 	if (data->cmds[id].pid < 0)

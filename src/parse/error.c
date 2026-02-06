@@ -6,15 +6,15 @@
 /*   By: apuyane <apuyane@student.42angouleme.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/04 01:46:10 by mcomin            #+#    #+#             */
-/*   Updated: 2026/02/06 16:23:29 by apuyane          ###   ########.fr       */
+/*   Updated: 2026/02/06 17:07:03 by apuyane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parsing.h"
 
-int is_empty_or_spaces(char *input)
+int	is_empty_or_spaces(char *input)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	if (!input[i])
@@ -29,36 +29,36 @@ int is_empty_or_spaces(char *input)
 	return (0);
 }
 
-int check_quotes(char *input)
+int	check_quotes(char *input)
 {
-	int i;
-	char quotes;
-	
+	int		i;
+	char	quotes;
+
 	i = 0;
-	quotes = 0;
-	while(input[i])
+	quotes = '\0';
+	while (input[i])
 	{
 		if (input[i] == '\'' && !quotes)
 			quotes = input[i];
 		else if (input[i] == '\'' && quotes == '\'')
-			quotes = 0; 
+			quotes = '\0';
 		else if (input[i] == '\"' && !quotes)
 			quotes = input[i];
 		else if (input[i] == '\"' && quotes == '\"')
-			quotes = 0;
-		i++; 
+			quotes = '\0';
+		i++;
 	}
 	if (quotes)
 		return (1);
 	return (0);
 }
 
-int check_pipes(char *input)
+int	check_pipes(char *input)
 {
-	int i;
-	
+	int	i;
+
 	i = 0;
-	while (input[i] && ft_isspace(input[i]))
+	while (ft_isspace(input[i]))
 		i++;
 	if (input[i] == '|')
 	{
@@ -85,17 +85,17 @@ int check_pipes(char *input)
 	return (0);
 }
 
-int check_redirections(char *input)
+int	check_redirections(char *input)
 {
-	int i;
-	
+	int		i;
+	char	redir_char;
+
 	i = 0;
 	while (input[i])
 	{
 		if (input[i] == '<' || input[i] == '>')
 		{
-			char redir_char = input[i];
-			
+			redir_char = input[i];
 			i++;
 			if (input[i] == redir_char)
 				i++;
@@ -109,13 +109,14 @@ int check_redirections(char *input)
 	}
 	return (0);
 }
-int check_syntax(char *input)
+
+int	check_syntax(char *input)
 {
 	if (check_quotes(input))
 		return (1);
 	if (check_pipes(input))
 		return (1);
-	if(check_redirections(input))
+	if (check_redirections(input))
 		return (1);
 	return (0);
 }

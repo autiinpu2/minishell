@@ -6,7 +6,7 @@
 /*   By: apuyane <apuyane@student.42angouleme.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/03 09:56:58 by apuyane           #+#    #+#             */
-/*   Updated: 2026/02/06 15:51:33 by apuyane          ###   ########.fr       */
+/*   Updated: 2026/02/06 17:14:07 by apuyane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	ft_env(t_data *data, t_cmd cmd)
 {
 	t_env_node	*node;
 	int			stdout;
-	
+
 	stdout = dup(STDOUT_FILENO);
 	node = data->env->top;
 	if (!node)
@@ -41,32 +41,32 @@ int	ft_env(t_data *data, t_cmd cmd)
 
 int	ft_pwd(t_data *data, t_cmd cmd)
 {
-	int         stdout_backup;
-	int			exit_code;
-	char		*pwd;
+	int		stdout;
+	int		exit_code;
+	char	*pwd;
 
 	pwd = NULL;
 	exit_code = 0;
 	if (!data->env)
 		return (1);
-	stdout_backup = dup(STDOUT_FILENO);
+	stdout = dup(STDOUT_FILENO);
 	dup2(cmd.outfile, STDOUT_FILENO);
 	pwd = get_env_from_name("PWD", data->env);
 	if (pwd)
 		printf("%s\n", pwd);
 	else
 		exit_code = 1;
-	dup2(stdout_backup, STDOUT_FILENO);
-	close(stdout_backup);
+	dup2(stdout, STDOUT_FILENO);
+	close(stdout);
 	return (exit_code);
 }
 
 int	ft_exit(t_data *data, t_cmd cmd)
 {
-	int		num_args;
-	long long n;
-	char	*endptr;
-	
+	int			num_args;
+	long long	n;
+	char		*endptr;
+
 	num_args = get_args_number(cmd.args);
 	if (data->size == 1)
 	{
@@ -95,8 +95,8 @@ int	ft_exit(t_data *data, t_cmd cmd)
 
 int	ft_echo(t_data *data, t_cmd cmd)
 {
-	int i;
-	char n;
+	int		i;
+	char	n;
 
 	i = 1;
 	if (!ft_strcmp(cmd.args[1], "-n\0"))

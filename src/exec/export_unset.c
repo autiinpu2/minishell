@@ -6,7 +6,7 @@
 /*   By: apuyane <apuyane@student.42angouleme.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/04 07:33:49 by apuyane           #+#    #+#             */
-/*   Updated: 2026/02/05 11:17:59 by apuyane          ###   ########.fr       */
+/*   Updated: 2026/02/06 17:11:55 by apuyane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void	sort_envp(char **envp, size_t len)
 {
 	size_t	i;
 	char	*tmp;
-	
+
 	i = 0;
 	while (i + 1 < len)
 	{
@@ -60,9 +60,9 @@ void	sort_envp(char **envp, size_t len)
 void	print_export(t_env *env)
 {
 	char	**envp;
-	size_t 	len;
+	size_t	len;
 	size_t	i;
-	
+
 	i = 0;
 	envp = env_to_envp(env);
 	len = get_args_number(envp);
@@ -77,8 +77,8 @@ void	print_export(t_env *env)
 
 void	add_new_env_node(t_env *env, char *arg)
 {
-	char **args;
-	t_env_node *node;
+	char		**args;
+	t_env_node	*node;
 
 	node = env->top;
 	while (node->next)
@@ -104,7 +104,7 @@ int	ft_export(t_data *data, t_cmd cmd)
 	if (len_args == 1)
 	{
 		print_export(data->env);
-		return 0;
+		return (0);
 	}
 	i = 0;
 	while (i < len_args - 1)

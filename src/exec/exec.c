@@ -6,7 +6,7 @@
 /*   By: apuyane <apuyane@student.42angouleme.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/05 05:22:21 by apuyane           #+#    #+#             */
-/*   Updated: 2026/02/06 16:48:51 by apuyane          ###   ########.fr       */
+/*   Updated: 2026/02/06 17:11:13 by apuyane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@
 
 int	run_built_in(t_cmd cmd, t_data *data)
 {
-	(void)exec;
-	int exit_code;
+	int	exit_code;
+
 	exit_code = 2;
 	if (!ft_strcmp(cmd.function_name, "env"))
 		exit_code = ft_env(data, cmd);
@@ -56,15 +56,14 @@ int	exec(t_data	*data)
 {
 	run_processes(data);
 	data->exit_code = wait_all_pids(data);
-	
 	return (data->exit_code);
 }
 
-int wait_all_pids(t_data *data)
+int	wait_all_pids(t_data *data)
 {
-	size_t i;
-	int status;
-	int exit_code;
+	size_t	i;
+	int		status;
+	int		exit_code;
 
 	i = 0;
 	exit_code = 0;

@@ -6,7 +6,7 @@
 /*   By: apuyane <apuyane@student.42angouleme.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/26 08:16:06 by apuyane           #+#    #+#             */
-/*   Updated: 2026/02/05 11:06:07 by apuyane          ###   ########.fr       */
+/*   Updated: 2026/02/06 17:02:37 by apuyane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ void	free_tab(char **tab)
 
 void	free_cmds(t_data *data)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (i < (int)data->size)
@@ -70,22 +70,9 @@ void	free_cmds(t_data *data)
 void	free_data(t_data *data)
 {
 	size_t	i;
-	
+
 	i = 0;
 	free_cmds(data);
 	free_env(data->env);
 	free_single(data);
-}
-
-void	free_single(void *s)
-{
-	if (s)
-		free(s);
-	s = NULL;
-}
-
-void	free_double(void *s1, void *s2)
-{
-	free_single(s1);
-	free_single(s2);
 }

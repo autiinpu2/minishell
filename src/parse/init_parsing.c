@@ -6,16 +6,15 @@
 /*   By: apuyane <apuyane@student.42angouleme.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/05 05:22:34 by apuyane           #+#    #+#             */
-/*   Updated: 2026/02/05 10:52:51 by apuyane          ###   ########.fr       */
+/*   Updated: 2026/02/06 17:08:19 by apuyane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-
 #include "parsing.h"
 
-t_cmd		cmd_is_pipe(t_data *data, int i)
+t_cmd	cmd_is_pipe(t_data *data, int i)
 {
-	int		pipes[2];
+	int	pipes[2];
 
 	if (i == 0)
 		data->cmds[i].infile = STDIN_FILENO;
@@ -27,7 +26,7 @@ t_cmd		cmd_is_pipe(t_data *data, int i)
 			return (data->cmds[i]);
 		}
 		data->cmds[i].outfile = pipes[1];
-		data->cmds[i + 1].infile = pipes[0];	
+		data->cmds[i + 1].infile = pipes[0];
 	}
 	else
 		data->cmds[i].outfile = STDOUT_FILENO;
@@ -73,7 +72,7 @@ void	update_shlvl(t_env *env)
 	int		value;
 	char	*actual_value;
 	char	*new_value;
-	
+
 	actual_value = get_env_from_name("SHLVL", env);
 	value = ft_strtol(actual_value, NULL);
 	value += 1;
@@ -85,12 +84,12 @@ void	update_shlvl(t_env *env)
 t_data	*new_data(char **envp)
 {
 	t_data	*data;
-	
+
 	data = ft_calloc(1, sizeof(t_data));
 	data->cmds = NULL;
 	data->size = 0;
 	data->env = load_envp(envp);
 	update_shlvl(data->env);
 	data->exit_code = EXIT_SUCCESS;
-	return (data);	
+	return (data);
 }
