@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apuyane <apuyane@student.42angouleme.fr    +#+  +:+       +#+        */
+/*   By: mcomin <mcomin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/03 09:56:58 by apuyane           #+#    #+#             */
-/*   Updated: 2026/02/05 10:13:45 by apuyane          ###   ########.fr       */
+/*   Updated: 2026/02/06 03:03:38 by mcomin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 
 int	ft_env(t_data *data, t_cmd cmd)
 {
-	t_env_node *node;
+	t_env_node	*node;
 	int			stdout;
 	
 	stdout = dup(STDOUT_FILENO);
@@ -111,7 +111,7 @@ int	ft_echo(t_data *data, t_cmd cmd)
 		if (!ft_strcmp(cmd.args[1], "$?\0"))
 			printf("%d", data->exit_code);
 		else
-			printf("%s", cmd.args[i]);
+			printf("%s ", cmd.args[i]);
 		i++;
 	}
 	printf("%c", n);

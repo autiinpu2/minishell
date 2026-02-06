@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split_quotes.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apuyane <apuyane@student.42angouleme.fr    +#+  +:+       +#+        */
+/*   By: mcomin <mcomin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/05 07:37:34 by mcomin            #+#    #+#             */
-/*   Updated: 2026/02/05 10:58:44 by apuyane          ###   ########.fr       */
+/*   Updated: 2026/02/06 03:07:52 by mcomin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static int is_in_quotes(char const *s, size_t pos)
 
     while (i < pos)
     {
-        if (s[i] == '"')
+        if (s[i] == '\"' || s[i] == '\'')
             in_quote = !in_quote;
         i++;
     }
@@ -49,9 +49,7 @@ static char **wordsmalloc(char const *s, char c)
             in_word = 1;
         }
         else if (in_word && s[i] == c && !is_in_quotes(s, i))
-        {
             in_word = 0;
-        }
         i++;
     }
     str = calloc(words + 1, sizeof(char *));
@@ -79,7 +77,6 @@ static void fill(char const *s, char **str, char c)
                 break;
             end++;
         }
-
         if (end > beg)
         {
             str[i] = ft_substr(s, beg, end - beg);
