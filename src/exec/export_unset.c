@@ -6,7 +6,7 @@
 /*   By: apuyane <apuyane@student.42angouleme.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/04 07:33:49 by apuyane           #+#    #+#             */
-/*   Updated: 2026/02/06 17:11:55 by apuyane          ###   ########.fr       */
+/*   Updated: 2026/02/06 22:26:47 by apuyane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,22 @@ int	ft_unset(t_data *data, t_cmd cmd)
 {
 	t_env_node	*node;
 	t_env_node	*tmp;
+	int		stdout;
 
 	node = data->env->top;
 	tmp = node;
+	stdout = dup(STDOUT_FILENO);
+	dup2(cmd.outfile, STDOUT_FILENO);
+	if (cmd.infile > 2)
+		close(cmd.infile);
+	if (cmd.outfile > 2)
+		close(cmd.outfile);
+	if (data->size != 1)
+	{
+		dup2(stdout, STDOUT_FILENO);
+		close(stdout);
+		return (1);
+	}
 	while (node)
 	{
 		node = node->next;
@@ -30,10 +43,14 @@ int	ft_unset(t_data *data, t_cmd cmd)
 			free_double(node->key, node->value);
 			free_double(node->text, node);
 			data->env->size -= 1;
+			dup2(stdout, STDOUT_FILENO);
+			close(stdout);
 			return (0);
 		}
 		tmp = node;
 	}
+	dup2(stdout, STDOUT_FILENO);
+	close(stdout);
 	return (0);
 }
 
@@ -99,18 +116,30 @@ int	ft_export(t_data *data, t_cmd cmd)
 {
 	size_t	len_args;
 	size_t	i;
+	int		stdout;
 
 	len_args = get_args_number(cmd.args);
+	stdout = dup(STDOUT_FILENO);
+	dup2(cmd.outfile, STDOUT_FILENO);
+	if (cmd.infile > 2)
+		close(cmd.infile);
+	if (cmd.outfile > 2)
+		close(cmd.outfile);
 	if (len_args == 1)
 	{
 		print_export(data->env);
+		dup2(stdout, STDOUT_FILENO);
+		close(stdout);
 		return (0);
 	}
 	i = 0;
 	while (i < len_args - 1)
 	{
-		add_new_env_node(data->env, cmd.args[i + 1]);
+		if (data->size == 1)
+			add_new_env_node(data->env, cmd.args[i + 1]);
 		i++;
 	}
+	dup2(stdout, STDOUT_FILENO);
+	close(stdout);
 	return (0);
 }
