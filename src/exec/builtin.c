@@ -6,7 +6,7 @@
 /*   By: apuyane <apuyane@student.42angouleme.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/03 09:56:58 by apuyane           #+#    #+#             */
-/*   Updated: 2026/02/06 21:22:22 by apuyane          ###   ########.fr       */
+/*   Updated: 2026/02/07 00:38:46 by apuyane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,24 +18,19 @@
 int	ft_env(t_data *data, t_cmd cmd)
 {
 	t_env_node	*node;
-	int			stdout;
+	int		stdout;
+	int		stdin;
 
-	stdout = dup(STDOUT_FILENO);
 	node = data->env->top;
 	if (!node)
 		return (1);
-	dup2(cmd.outfile, STDOUT_FILENO);
-	if (cmd.infile > 2)
-		close(cmd.infile);
-	if (cmd.outfile > 2)
-		close(cmd.outfile);
+	duplicate_fds(cmd.infile, cmd.outfile, &stdin, &stdout);
 	while (node)
 	{
 		printf("%s\n", node->text);
 		node = node->next;
 	}
-	dup2(stdout, STDOUT_FILENO);
-	close(stdout);
+	restore_fds(stdin, stdout);
 	return (0);
 }
 
@@ -50,23 +45,13 @@ int	ft_pwd(t_data *data, t_cmd cmd)
 	exit_code = 0;
 	if (!data->env)
 		return (1);
-	stdin = dup(STDIN_FILENO);
-	stdout = dup(STDOUT_FILENO);
-	dup2(cmd.outfile, STDOUT_FILENO);
-	dup2(cmd.infile, STDIN_FILENO);
-	if (cmd.infile > 2)
-		close(cmd.infile);
-	if (cmd.outfile > 2)
-		close(cmd.outfile);
+	duplicate_fds(cmd.infile, cmd.outfile, &stdin, &stdout);
 	pwd = get_env_from_name("PWD", data->env);
 	if (pwd)
 		printf("%s\n", pwd);
 	else
 		exit_code = 1;
-	dup2(stdin, STDIN_FILENO);
-	close(stdin);
-	dup2(stdout, STDOUT_FILENO);
-	close(stdout);
+	restore_fds(stdin, stdout);
 	return (exit_code);
 }
 
@@ -110,14 +95,7 @@ int	ft_echo(t_data *data, t_cmd cmd)
 	int		stdin;
 
 	i = 1;
-	stdin = dup(STDIN_FILENO);
-	stdout = dup(STDOUT_FILENO);
-	dup2(cmd.outfile, STDOUT_FILENO);
-	dup2(cmd.infile, STDIN_FILENO);
-	if (cmd.infile > 2)
-		close(cmd.infile);
-	if (cmd.outfile > 2)
-		close(cmd.outfile);
+	duplicate_fds(cmd.infile, cmd.outfile, &stdin, &stdout);
 	if (!ft_strcmp(cmd.args[1], "-n\0"))
 	{
 		n = '\0';
@@ -136,9 +114,6 @@ int	ft_echo(t_data *data, t_cmd cmd)
 		i++;
 	}
 	write(1, &n, 1);
-	dup2(stdin, STDIN_FILENO);
-	close(stdin);
-	dup2(stdout, STDOUT_FILENO);
-	close(stdout);
+	restore_fds(stdin, stdout);
 	return (0);
 }

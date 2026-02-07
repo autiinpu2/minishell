@@ -6,12 +6,14 @@
 /*   By: apuyane <apuyane@student.42angouleme.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/30 07:27:45 by mcomin            #+#    #+#             */
-/*   Updated: 2026/02/06 16:59:56 by apuyane          ###   ########.fr       */
+/*   Updated: 2026/02/06 23:10:24 by apuyane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PARSING_H
 # define PARSING_H
+
+#include <sys/stat.h>
 
 # include "minishell.h"
 # include "env.h"

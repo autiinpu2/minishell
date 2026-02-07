@@ -6,7 +6,7 @@
 /*   By: apuyane <apuyane@student.42angouleme.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/04 00:35:21 by mcomin            #+#    #+#             */
-/*   Updated: 2026/02/06 21:12:01 by apuyane          ###   ########.fr       */
+/*   Updated: 2026/02/06 23:10:19 by apuyane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,6 @@
 
 bool	check_access(char *path)
 {
-	#include <sys/stat.h>
-	#include <unistd.h>
-
 	struct stat st;
 	if (stat(path, &st) == 0)
 	{

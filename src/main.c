@@ -6,7 +6,7 @@
 /*   By: apuyane <apuyane@student.42angouleme.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/25 04:17:27 by apuyane           #+#    #+#             */
-/*   Updated: 2026/02/06 17:01:40 by apuyane          ###   ########.fr       */
+/*   Updated: 2026/02/07 00:24:38 by apuyane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,7 @@ int	main(int ac, char **av, char **envp)
 	data = new_data(envp);
 	while (true)
 	{
-		prefix = ft_strdup(get_env_from_name("PWD", data->env));
-		prefix = ft_strjoin_free(prefix, ">");
+		prefix = ft_strjoin(get_env_from_name("PWD", data->env), ">");
 		line = readline(prefix);
 		if (!line)
 		{
@@ -38,16 +37,12 @@ int	main(int ac, char **av, char **envp)
 		}
 		if (*line)
 			add_history(line);
-		if (is_empty_or_spaces(line))
+		if (is_empty_or_spaces(line) || check_syntax(line))
 		{
+			if (check_syntax(line))
+				data->exit_code = 2;
 			free_double(line, prefix);
-			continue ;
-		}
-		if (check_syntax(line))
-		{
-			free_double(line, prefix);
-			data->exit_code = 2;
-			continue ;
+			continue;
 		}
 		if (!parsing(data, line))
 			data->exit_code = exec(data);
