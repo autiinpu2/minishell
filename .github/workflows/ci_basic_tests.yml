@@ -1,0 +1,64 @@
+name: test
+
+on: [push, pull_request]
+
+jobs:
+  check-quality:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      # --- ÉTAPE CRUCIALE AJOUTÉE : READLINE ---
+      - name: Install System Dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y libreadline-dev
+
+      - name: Install Norminette
+        run: |
+          python3 -m pip install --upgrade pip
+          pip install norminette
+
+      - name: Norminette
+        run: |
+          norminette . > norm.log || true
+
+          cat norm.log
+          # On filtre pour ignorer les globales autorisées
+          ERRORS=$(grep "Error:" norm.log | grep -v "Global variable" | grep -v "WRONG_SCOPE_VAR")
+          
+          if [ -n "$ERRORS" ]; then
+            echo "❌ Norminette Errors"
+            echo "$ERRORS"
+            exit 1
+          fi
+          echo "✅ Norminette Success"
+      
+      - name: Compilation
+        run: |
+          make
+          make clean
+          make fclean
+          make re
+
+      - name: Basic tests
+        run: |
+          # TEST 1 : CTRL + D (EOF)
+          timeout 2s ./minishell < /dev/null
+
+          # TEST 2 : Simple Command + Args
+          echo "ls -la" | timeout 2s ./minishell
+
+          # TEST 3 : Absolute Path
+          echo "/bin/ls" | timeout 2s ./minishell
+
+          # TEST 4 : Environment Variable
+          echo "env " | timeout 2s ./minishell
+
+          # TEST 5 : Pipe
+          echo "ls | cat -e" | timeout 2s ./minishell
