@@ -1,0 +1,51 @@
+name: Tester Check
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  run-tester:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Minishell
+        uses: actions/checkout@v4
+
+      - name: Install Dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y libreadline-dev valac libglib2.0-dev build-essential
+
+      - name: Build Minishell
+        run: make re
+
+      - name: Setup & Run Tester
+        run: |
+          git clone https://gitlab.com/nda-cunh/minishell_tester.git tester_dir
+          cd tester_dir
+          make
+          chmod +x ./tester
+          
+          timeout 30s ./tester ../minishell > test_output.txt 2>&1 || true
+
+          echo -e "\033[1;34m==========================================\033[0m\n"
+          
+          echo -e "\n\033[1;34m"
+          echo "=========================================="
+          echo "          MINISHELL TEST RESULTS          "
+          echo "=========================================="
+          echo -e "\033[0m"
+          
+          SCORE=$(grep "\[Total\]:" test_output.txt | sed 's/\[Total\]: //')
+          
+          if [ -z "$SCORE" ]; then
+            echo -e "\033[1;31m[!] Error: Score not found (Timeout or Build failed)\033[0m"
+            tail -n 10 test_output.txt
+          else
+            echo -e "\033[1;32m[✓] FINAL SCORE: $SCORE\033[0m"
+          fi
+          
+          echo -e "\n\033[1;34m==========================================\033[0m\n"
