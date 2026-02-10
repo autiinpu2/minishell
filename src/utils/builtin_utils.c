@@ -6,7 +6,7 @@
 /*   By: apuyane <apuyane@student.42angouleme.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/03 07:26:31 by apuyane           #+#    #+#             */
-/*   Updated: 2026/02/07 00:36:40 by apuyane          ###   ########.fr       */
+/*   Updated: 2026/02/10 02:11:14 by apuyane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,28 +43,4 @@ int	get_args_number(char **args)
 	while (args[i])
 		i++;
 	return (i);
-}
-
-void	duplicate_fds(int in, int out, int *saved_in, int *saved_out)
-{
-	*saved_in = dup(STDIN_FILENO);
-	*saved_out = dup(STDOUT_FILENO);
-	if (in > 2)
-	{
-		dup2(in, STDIN_FILENO);
-		close(in);
-	}
-	if (out > 2)
-	{
-		dup2(out, STDOUT_FILENO);
-		close(out);
-	}
-}
-
-void	restore_fds(int saved_in, int saved_out)
-{
-	dup2(saved_in, STDIN_FILENO);
-	close(saved_in);
-	dup2(saved_out, STDOUT_FILENO);
-	close(saved_out);
 }

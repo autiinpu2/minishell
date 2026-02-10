@@ -6,7 +6,7 @@
 /*   By: apuyane <apuyane@student.42angouleme.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/24 04:14:21 by apuyane           #+#    #+#             */
-/*   Updated: 2026/01/24 04:27:50 by apuyane          ###   ########.fr       */
+/*   Updated: 2026/02/10 02:35:28 by apuyane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,6 @@ char	*ft_strnstr(const char *big, const char *little, size_t len)
 
 	i = 0;
 	j = 0;
-	if (len < 0)
-		len = (size_t)ft_strlen((char *)big);
 	while (big[j] && j < len)
 	{
 		if (big[j] == little[i] && i < len)

@@ -6,7 +6,7 @@
 /*   By: apuyane <apuyane@student.42angouleme.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/04 01:46:10 by mcomin            #+#    #+#             */
-/*   Updated: 2026/02/06 17:07:03 by apuyane          ###   ########.fr       */
+/*   Updated: 2026/02/09 22:10:09 by apuyane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,10 +61,7 @@ int	check_pipes(char *input)
 	while (ft_isspace(input[i]))
 		i++;
 	if (input[i] == '|')
-	{
-		ft_dprintf(2, "syntax error near unexpected token `|'\n");
 		return (1);
-	}
 	i = 0;
 	while (input[i])
 	{
@@ -74,10 +71,7 @@ int	check_pipes(char *input)
 			while (input[i] && ft_isspace(input[i]))
 				i++;
 			if (input[i] == '|' || input[i] == '\0')
-			{
-				ft_dprintf(2, "syntax error near unexpected token `|'\n");
 				return (1);
-			}
 		}
 		else
 			i++;

@@ -6,7 +6,7 @@
 /*   By: apuyane <apuyane@student.42angouleme.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/31 09:02:27 by apuyane           #+#    #+#             */
-/*   Updated: 2026/02/06 17:12:36 by apuyane          ###   ########.fr       */
+/*   Updated: 2026/02/10 00:46:00 by apuyane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,48 +14,65 @@
 #include "libft.h"
 #include "free.h"
 
-int	call_chdir(char *path)
+static void	call_chdir(char *path, t_data *data)
 {
+	char	*tmp;
+
 	if (chdir(path) == -1)
 	{
 		ft_dprintf(2, "cd: %s: %s\n", path, strerror(errno));
-		return (1);
+		data->exit_code = 1;
+		return ;
 	}
 	else
-		return (0);
+	{
+		tmp = getcwd(NULL, 0);
+		change_env_value(data->env, "OLDPWD",
+			get_env_from_name("PWD", data->env));
+		change_env_value(data->env, "PWD", tmp);
+		data->exit_code = 0;
+		free(tmp);
+		return ;
+	}
 }
 
-int	ft_cd(t_data *data, t_cmd cmd)
+static void	special_case(char *name, t_data *data)
+{
+	if (!ft_strcmp(name, "-"))
+	{
+		call_chdir(get_env_from_name("OLDPWD", data->env), data);
+		return ;
+	}
+	else if (!ft_strcmp(name, "~"))
+	{
+		call_chdir(get_env_from_name("HOME", data->env), data);
+		return ;
+	}
+}
+
+static bool	is_special(char *name)
+{
+	return ((!ft_strcmp(name, "-") || !ft_strcmp(name, "~")));
+}
+
+void	ft_cd(t_data *data, t_cmd cmd)
 {
 	int		args_len;
-	char	*tmp;
-	int		exit_code;
 
 	args_len = get_args_number(cmd.args);
 	if (args_len > 2)
 	{
 		ft_dprintf(2, "cd: too many arguments");
-		return (1);
+		data->exit_code = 1;
 	}
 	else if (args_len == 1)
 	{
-		exit_code = call_chdir(get_env_from_name("HOME", data->env));
-		change_env_value(data->env, "OLDPWD", get_env_from_name("PWD", data->env));
-		change_env_value(data->env, "PWD", get_env_from_name("HOME", data->env));
-		return (exit_code);
+		call_chdir(get_env_from_name("HOME", data->env), data);
 	}
-	else if (!ft_strcmp(cmd.args[1], "-"))
+	else if (is_special(cmd.args[1]))
 	{
-		exit_code = call_chdir(get_env_from_name("OLDPWD", data->env));
-		tmp = ft_strdup(get_env_from_name("OLDPWD", data->env));
-		change_env_value(data->env, "OLDPWD", get_env_from_name("PWD", data->env));
-		change_env_value(data->env, "PWD", tmp);
-		return (exit_code);
+		special_case(cmd.args[1], data);
 	}
-	exit_code = call_chdir(cmd.args[1]);
-	tmp = getcwd(NULL, 0);
-	change_env_value(data->env, "OLDPWD", get_env_from_name("PWD", data->env));
-	change_env_value(data->env, "PWD", tmp);
-	free_single(tmp);
-	return (exit_code);
+	else
+		call_chdir(cmd.args[1], data);
 }

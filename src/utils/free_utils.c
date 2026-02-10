@@ -6,7 +6,7 @@
 /*   By: apuyane <apuyane@student.42angouleme.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/26 08:16:06 by apuyane           #+#    #+#             */
-/*   Updated: 2026/02/06 17:02:37 by apuyane          ###   ########.fr       */
+/*   Updated: 2026/02/10 02:37:57 by apuyane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,9 +69,6 @@ void	free_cmds(t_data *data)
 
 void	free_data(t_data *data)
 {
-	size_t	i;
-
-	i = 0;
 	free_cmds(data);
 	free_env(data->env);
 	free_single(data);

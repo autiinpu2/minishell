@@ -6,7 +6,7 @@
 /*   By: apuyane <apuyane@student.42angouleme.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/05 09:08:22 by apuyane           #+#    #+#             */
-/*   Updated: 2026/02/06 22:10:21 by apuyane          ###   ########.fr       */
+/*   Updated: 2026/02/10 02:38:21 by apuyane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,9 +72,6 @@ void	run_cmd(t_data *data, t_cmd cmd)
 
 void	run_forks(t_cmd cmd, t_data *data, int id)
 {
-	int	i;
-
-	i = 0;
 	data->cmds[id].pid = fork();
 	if (data->cmds[id].pid < 0)
 	{
