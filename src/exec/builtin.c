@@ -6,7 +6,7 @@
 /*   By: apuyane <apuyane@student.42angouleme.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/03 09:56:58 by apuyane           #+#    #+#             */
-/*   Updated: 2026/02/07 00:38:46 by apuyane          ###   ########.fr       */
+/*   Updated: 2026/02/10 01:42:51 by apuyane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,8 @@
 int	ft_env(t_data *data, t_cmd cmd)
 {
 	t_env_node	*node;
-	int		stdout;
-	int		stdin;
+	int			stdout;
+	int			stdin;
 
 	node = data->env->top;
 	if (!node)
@@ -55,6 +55,15 @@ int	ft_pwd(t_data *data, t_cmd cmd)
 	return (exit_code);
 }
 
+void	ft_exit_utils(t_data *data)
+{
+	if (data->size == 1)
+	{
+		data->exit = true;
+		ft_dprintf(2, "exit\n");
+	}
+}
+
 int	ft_exit(t_data *data, t_cmd cmd)
 {
 	int			num_args;
@@ -62,11 +71,7 @@ int	ft_exit(t_data *data, t_cmd cmd)
 	char		*endptr;
 
 	num_args = get_args_number(cmd.args);
-	if (data->size == 1)
-	{
-		data->exit = true;
-		ft_dprintf(2, "exit\n");
-	}
+	ft_exit_utils(data);
 	if (num_args == 1)
 		data->exit_code = 0;
 	else if (num_args == 2)
@@ -87,7 +92,7 @@ int	ft_exit(t_data *data, t_cmd cmd)
 	return (data->exit_code);
 }
 
-int	ft_echo(t_data *data, t_cmd cmd)
+int	ft_echo(t_cmd cmd)
 {
 	int		i;
 	char	n;
@@ -105,10 +110,7 @@ int	ft_echo(t_data *data, t_cmd cmd)
 		n = '\n';
 	while (cmd.args[i])
 	{
-		if (!ft_strcmp(cmd.args[1], "$?\0"))
-			printf("%d", data->exit_code);
-		else
-			write(1, cmd.args[i], ft_strlen(cmd.args[i]));
+		write(1, cmd.args[i], ft_strlen(cmd.args[i]));
 		if (cmd.args[i + 1])
 			write(1, " ", 1);
 		i++;

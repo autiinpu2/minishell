@@ -1,4 +1,4 @@
-name: test
+name: push-test
 
 on: [push, pull_request]
 
@@ -13,7 +13,6 @@ jobs:
         with:
           python-version: '3.12'
 
-      # --- ÉTAPE CRUCIALE AJOUTÉE : READLINE ---
       - name: Install System Dependencies
         run: |
           sudo apt-get update
@@ -27,17 +26,15 @@ jobs:
       - name: Norminette
         run: |
           norminette . > norm.log || true
-
           cat norm.log
-          # On filtre pour ignorer les globales autorisées
-          ERRORS=$(grep "Error:" norm.log | grep -v "Global variable" | grep -v "WRONG_SCOPE_VAR")
-          
-          if [ -n "$ERRORS" ]; then
-            echo "❌ Norminette Errors"
-            echo "$ERRORS"
+
+          if grep "Error:" norm.log | grep -v -E "Global variable|WRONG_SCOPE_VAR" > filtered_errors.log; then
+            echo "❌ Norminette Errors Found:"
+            cat filtered_errors.log
             exit 1
+          else
+            echo "✅ Norminette Success"
           fi
-          echo "✅ Norminette Success"
       
       - name: Compilation
         run: |

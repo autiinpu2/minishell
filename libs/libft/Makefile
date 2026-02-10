@@ -4,7 +4,7 @@ LIBC    := ar rcs
 RM      := rm -rf
 
 NAME    := libft.a
-OBJ_DIR := ../build
+OBJ_DIR := ../../build
 
 SRC     := ft_atoi.c ft_bzero.c ft_calloc.c ft_dprintf.c \
            ft_isalnum.c ft_isalpha.c ft_isascii.c ft_isdigit.c \
@@ -28,7 +28,6 @@ $(NAME): $(OBJS)
 	@$(LIBC) $(NAME) $(OBJS)
 	@echo "\033[1;32m$(NAME) created.\033[0m"
 
-# The rule to compile .o files
 $(OBJ_DIR)/%.o: %.c
 	@mkdir -p $(dir $@)
 	@$(CC) $(CFLAGS) -c $< -o $@

@@ -6,7 +6,7 @@
 /*   By: apuyane <apuyane@student.42angouleme.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/05 05:22:21 by apuyane           #+#    #+#             */
-/*   Updated: 2026/02/06 17:11:13 by apuyane          ###   ########.fr       */
+/*   Updated: 2026/02/10 01:14:39 by apuyane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,10 @@ int	run_built_in(t_cmd cmd, t_data *data)
 	else if (!ft_strcmp(cmd.function_name, "pwd"))
 		exit_code = ft_pwd(data, cmd);
 	else if (!ft_strcmp(cmd.function_name, "cd"))
-		exit_code = ft_cd(data, cmd);
+	{
+		ft_cd(data, cmd);
+		return (data->exit_code);
+	}
 	else if (!ft_strcmp(cmd.function_name, "exit"))
 		exit_code = ft_exit(data, cmd);
 	else if (!ft_strcmp(cmd.function_name, "unset"))
@@ -33,7 +36,7 @@ int	run_built_in(t_cmd cmd, t_data *data)
 	else if (!ft_strcmp(cmd.function_name, "export"))
 		exit_code = ft_export(data, cmd);
 	else if (!ft_strcmp(cmd.function_name, "echo"))
-		exit_code = ft_echo(data, cmd);
+		exit_code = ft_echo(cmd);
 	return (exit_code);
 }
 

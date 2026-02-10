@@ -6,7 +6,7 @@
 /*   By: apuyane <apuyane@student.42angouleme.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/05 07:37:34 by mcomin            #+#    #+#             */
-/*   Updated: 2026/02/06 17:10:16 by apuyane          ###   ########.fr       */
+/*   Updated: 2026/02/10 02:17:40 by apuyane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,6 @@ static void	fill(char const *s, char **str, char c)
 			i++;
 		}
 	}
-	str[i] = NULL;
 }
 
 char	**ft_split_quotes(char const *s, char c)

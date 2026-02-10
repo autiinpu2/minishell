@@ -1,58 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   export_unset.c                                     :+:      :+:    :+:   */
+/*   ft_export.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: apuyane <apuyane@student.42angouleme.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/02/04 07:33:49 by apuyane           #+#    #+#             */
-/*   Updated: 2026/02/07 02:09:09 by apuyane          ###   ########.fr       */
+/*   Created: 2026/02/10 01:44:35 by apuyane           #+#    #+#             */
+/*   Updated: 2026/02/10 02:16:17 by apuyane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "exec.h"
 #include "libft.h"
 #include "free.h"
-
-int	ft_unset(t_data *data, t_cmd cmd)
-{
-	t_env_node	*node;
-	t_env_node	*tmp;
-	int		stdout;
-
-	node = data->env->top;
-	tmp = node;
-	stdout = dup(STDOUT_FILENO);
-	dup2(cmd.outfile, STDOUT_FILENO);
-	if (cmd.infile > 2)
-		close(cmd.infile);
-	if (cmd.outfile > 2)
-		close(cmd.outfile);
-	if (data->size != 1)
-	{
-		dup2(stdout, STDOUT_FILENO);
-		close(stdout);
-		return (1);
-	}
-	while (node)
-	{
-		node = node->next;
-		if (!ft_strcmp(node->key, cmd.args[1]))
-		{
-			tmp->next = node->next;
-			free_double(node->key, node->value);
-			free_double(node->text, node);
-			data->env->size -= 1;
-			dup2(stdout, STDOUT_FILENO);
-			close(stdout);
-			return (0);
-		}
-		tmp = node;
-	}
-	dup2(stdout, STDOUT_FILENO);
-	close(stdout);
-	return (0);
-}
 
 void	sort_envp(char **envp, size_t len)
 {
@@ -74,7 +34,7 @@ void	sort_envp(char **envp, size_t len)
 	}
 }
 
-void	print_export(t_env *env)
+static void	print_export(t_env *env)
 {
 	char	**envp;
 	size_t	len;
@@ -119,17 +79,11 @@ int	ft_export(t_data *data, t_cmd cmd)
 	int		stdout;
 
 	len_args = get_args_number(cmd.args);
-	stdout = dup(STDOUT_FILENO);
-	dup2(cmd.outfile, STDOUT_FILENO);
-	if (cmd.infile > 2)
-		close(cmd.infile);
-	if (cmd.outfile > 2)
-		close(cmd.outfile);
+	duplicate_outfile(cmd.infile, cmd.outfile, &stdout);
 	if (len_args == 1)
 	{
 		print_export(data->env);
-		dup2(stdout, STDOUT_FILENO);
-		close(stdout);
+		restore_fd(stdout, STDOUT_FILENO);
 		return (0);
 	}
 	i = 0;
@@ -139,7 +93,6 @@ int	ft_export(t_data *data, t_cmd cmd)
 			add_new_env_node(data->env, cmd.args[i + 1]);
 		i++;
 	}
-	dup2(stdout, STDOUT_FILENO);
-	close(stdout);
+	restore_fd(stdout, STDOUT_FILENO);
 	return (0);
 }

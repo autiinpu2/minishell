@@ -6,15 +6,14 @@
 /*   By: apuyane <apuyane@student.42angouleme.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/30 07:27:45 by mcomin            #+#    #+#             */
-/*   Updated: 2026/02/06 23:10:24 by apuyane          ###   ########.fr       */
+/*   Updated: 2026/02/10 00:47:21 by apuyane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PARSING_H
 # define PARSING_H
 
-#include <sys/stat.h>
-
+# include <sys/stat.h>
 # include "minishell.h"
 # include "env.h"
 # include "libft.h"
@@ -26,5 +25,7 @@ int		count_pipe(char *input);
 char	*is_path(char *prefix_cmd_name, char **tab_paths);
 char	*cmd_path(t_env *env, char *cmd_name);
 int		is_empty_or_spaces(char *input);
+
+void	expand(char **tab_split, t_data *data);
 
 #endif
