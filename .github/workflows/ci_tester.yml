@@ -29,8 +29,12 @@ jobs:
           make
           chmod +x ./tester
           
-          timeout 30s ./tester ../minishell > test_output.txt 2>&1 || true
+          timeout 30s ./tester ../minishell > ../test_output.txt 2>&1 || true
 
+          cat ../test_output.txt
+          
+      - name: Display result
+        run: |
           echo -e "\033[1;34m==========================================\033[0m\n"
           
           echo -e "\n\033[1;34m"
@@ -47,5 +51,6 @@ jobs:
           else
             echo -e "\033[1;32m[✓] FINAL SCORE: $SCORE\033[0m"
           fi
-          
           echo -e "\n\033[1;34m==========================================\033[0m\n"
+
+      
