@@ -6,7 +6,7 @@
 /*   By: apuyane <apuyane@student.42angouleme.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/04 00:35:21 by mcomin            #+#    #+#             */
-/*   Updated: 2026/02/09 22:09:35 by apuyane          ###   ########.fr       */
+/*   Updated: 2026/02/11 00:40:43 by apuyane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,9 @@ bool	check_access(char *path)
 	{
 		if (S_ISDIR(st.st_mode))
 			return (false);
+		else if (S_ISREG(st.st_mode) && access(path, X_OK) == 0)
+			return (true);
 	}
-	else if (S_ISREG(st.st_mode) && access(path, X_OK) == 0)
-		return (true);
 	return (false);
 }
 
@@ -51,7 +51,7 @@ char	*is_path(char *prefix_cmd_name, char **tab_paths)
 	while (tab_paths[i])
 	{
 		test_path = ft_strjoin(tab_paths[i], prefix_cmd_name);
-		if (access(test_path, X_OK) == 0)
+		if (check_access(test_path))
 			return (test_path);
 		free(test_path);
 		i++;
@@ -68,7 +68,7 @@ char	*cmd_path(t_env *env, char *cmd_name)
 
 	if (!cmd_name[0])
 		return (NULL);
-	if (access(cmd_name, X_OK) == 0)
+	if (check_access(cmd_name))
 	{
 		test_path = ft_strdup(cmd_name);
 		return (test_path);
