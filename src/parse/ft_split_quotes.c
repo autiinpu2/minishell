@@ -6,13 +6,13 @@
 /*   By: mcomin <mcomin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/05 07:37:34 by mcomin            #+#    #+#             */
-/*   Updated: 2026/02/11 01:14:33 by mcomin           ###   ########.fr       */
+/*   Updated: 2026/02/11 06:36:53 by mcomin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parsing.h"
 
-static int	is_in_quotes(char const *s, size_t pos)
+int	is_in_quotes(char const *s, size_t pos)
 {
 	size_t	i;
 	int		single_quotes;

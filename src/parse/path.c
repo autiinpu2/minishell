@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   path.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apuyane <apuyane@student.42angouleme.fr    +#+  +:+       +#+        */
+/*   By: mcomin <mcomin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/04 00:35:21 by mcomin            #+#    #+#             */
-/*   Updated: 2026/02/11 00:40:43 by apuyane          ###   ########.fr       */
+/*   Updated: 2026/02/11 06:38:46 by mcomin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ int	count_pipe(char *input)
 	count = 0;
 	while (input[i])
 	{
-		if (input[i] == '|')
+		if (input[i] == '|' && !is_in_quotes(input, i))
 			count++;
 		i++;
 	}
