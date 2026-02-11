@@ -6,7 +6,7 @@
 /*   By: apuyane <apuyane@student.42angouleme.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/25 04:17:27 by apuyane           #+#    #+#             */
-/*   Updated: 2026/02/10 02:29:25 by apuyane          ###   ########.fr       */
+/*   Updated: 2026/02/11 05:36:40 by apuyane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,17 +22,21 @@ static char	*get_prefix(t_data *data)
 	char	*prompt;
 
 	pwd = get_env_from_name("PWD", data->env);
-	prompt = ft_strjoin(pwd, "> ");
+	if (!pwd)
+		pwd = getcwd(NULL, 0);
+	else
+		pwd = ft_strdup(pwd);
+	prompt = ft_strjoin_free(pwd, "> ");
 	return (prompt);
 }
 
-int	is_invalid(char *line, t_data *data, char *prefix)
+int	is_invalid(char *line, t_data *data)
 {
 	if (is_empty_or_spaces(line) || check_syntax(line))
 	{
 		if (check_syntax(line))
 			data->exit_code = 2;
-		free_double(line, prefix);
+		free_single(line);
 		return (1);
 	}
 	return (0);
@@ -47,6 +51,7 @@ void	loop(t_data *data)
 	{
 		prefix = get_prefix(data);
 		line = readline(prefix);
+		free_single(prefix);
 		if (!line)
 		{
 			ft_dprintf(2, "exit\n");
@@ -54,15 +59,15 @@ void	loop(t_data *data)
 		}
 		if (*line)
 			add_history(line);
-		if (is_invalid(line, data, prefix))
+		if (is_invalid(line, data))
 			continue ;
 		if (!parsing(data, line))
 			data->exit_code = exec(data);
+		free_cmds(data);
+		free_single(line);
 		if (data->exit)
 			break ;
-		free_double(line, prefix);
 	}
-	free_double(line, prefix);
 }
 
 int	main(int ac, char **av, char **envp)

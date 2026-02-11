@@ -42,8 +42,6 @@ t_cmd	new_cmd(char *token, t_data *data, int i)
 		data->cmds[i].path = cmd_path(data->env, data->cmds[i].function_name);
 	else
 		data->cmds[i].path = ft_strdup(data->cmds[i].function_name);
-	if (!data->cmds[i].path)
-		data->cmds[i].path = ft_strdup(data->cmds[i].function_name);
 	cmd_is_pipe(data, i);
 	i++;
 	return (data->cmds[i]);

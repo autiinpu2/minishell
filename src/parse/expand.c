@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expand.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcomin <mcomin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: apuyane <apuyane@student.42angouleme.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/10 00:46:40 by apuyane           #+#    #+#             */
-/*   Updated: 2026/02/11 05:50:54 by mcomin           ###   ########.fr       */
+/*   Updated: 2026/02/11 06:08:28 by apuyane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ char	*get_expanded_string(char *string, int begin, int end, t_data *data)
 	char	*str_end;
 	char	*total;
 	char	*var;
+	char	*exit;
 
 	if (begin)
 		str_begin = ft_substr(string, 0, begin - 1);
@@ -25,10 +26,14 @@ char	*get_expanded_string(char *string, int begin, int end, t_data *data)
 		str_begin = ft_strdup("");
 	var = ft_substr(string, begin, end - begin);
 	if (!ft_strcmp(var, "?"))
-		total = ft_strjoin(str_begin, ft_itoa(data->exit_code));
+	{
+		exit = ft_itoa(data->exit_code);
+		total = ft_strjoin(str_begin, exit);
+		free_single(exit);
+	}
 	else
 		total = ft_strjoin(str_begin, get_env_from_name(var, data->env));
-	str_end = ft_substr(string, end + 1, ft_strlen(string));
+	str_end = ft_substr(string, end, ft_strlen(string));
 	total = ft_strjoin_free(total, str_end);
 	free_double(str_begin, var);
 	free_single(str_end);

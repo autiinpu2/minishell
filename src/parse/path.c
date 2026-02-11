@@ -68,15 +68,15 @@ char	*cmd_path(t_env *env, char *cmd_name)
 
 	if (!cmd_name[0])
 		return (NULL);
-	if (check_access(cmd_name))
-	{
-		test_path = ft_strdup(cmd_name);
-		return (test_path);
-	}
 	env_path = get_env_from_name("PATH", env);
 	tab_paths = ft_split(env_path, ':');
 	prefix_cmd_name = ft_strjoin("/", cmd_name);
 	test_path = is_path(prefix_cmd_name, tab_paths);
+	if (!test_path && check_access(cmd_name))
+	{
+		test_path = ft_strdup(cmd_name);
+		return (test_path);
+	}
 	if (!test_path)
 		test_path = ft_strdup("");
 	free_tab(tab_paths);
