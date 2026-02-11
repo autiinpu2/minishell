@@ -6,7 +6,7 @@
 /*   By: apuyane <apuyane@student.42angouleme.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/10 01:44:35 by apuyane           #+#    #+#             */
-/*   Updated: 2026/02/10 02:16:17 by apuyane          ###   ########.fr       */
+/*   Updated: 2026/02/11 05:35:38 by apuyane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,8 @@ void	add_new_env_node(t_env *env, char *arg)
 	while (node->next)
 		node = node->next;
 	args = ft_split(arg, '=');
+	if (!args)
+		return ;
 	node->next = ft_calloc(1, sizeof(t_env_node));
 	node = node->next;
 	node->key = ft_strdup(args[0]);
