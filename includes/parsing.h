@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apuyane <apuyane@student.42angouleme.fr    +#+  +:+       +#+        */
+/*   By: mcomin <mcomin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/30 07:27:45 by mcomin            #+#    #+#             */
-/*   Updated: 2026/02/10 00:47:21 by apuyane          ###   ########.fr       */
+/*   Updated: 2026/02/11 06:37:41 by mcomin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 # include "libft.h"
 # include "free.h"
 
+int		is_in_quotes(char const *s, size_t pos);
 char	**ft_split_quotes(char const *s, char c);
 t_data	*load_data(t_data *data, char *input);
 int		count_pipe(char *input);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_parsing.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apuyane <apuyane@student.42angouleme.fr    +#+  +:+       +#+        */
+/*   By: mcomin <mcomin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/05 05:22:34 by apuyane           #+#    #+#             */
-/*   Updated: 2026/02/11 04:53:41 by apuyane          ###   ########.fr       */
+/*   Updated: 2026/02/11 06:25:29 by mcomin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ t_data	*load_data(t_data *data, char *input)
 	int			i;
 
 	i = 0;
-	tab_split = ft_split(input, '|');
+	tab_split = ft_split_quotes(input, '|');
 	data->size = count_pipe(input) + 1;
 	data->cmds = ft_calloc(data->size + 2, sizeof(t_cmd));
 	expand(tab_split, data);
