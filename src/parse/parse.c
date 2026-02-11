@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcomin <mcomin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: apuyane <apuyane@student.42angouleme.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/30 01:11:37 by mcomin            #+#    #+#             */
-/*   Updated: 2026/02/11 05:50:41 by mcomin           ###   ########.fr       */
+/*   Updated: 2026/02/11 07:09:44 by apuyane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ void	handle_token(t_data *data)
 	char	*tmp;
 
 	i = 0;
-	y = 1;
+	y = 0;
 	while (i < data->size)
 	{
 		while (data->cmds[i].args[y])
@@ -80,14 +80,14 @@ void	handle_token(t_data *data)
 				|| (strchr(data->cmds[i].args[y], '\"')))
 			{
 				tmp = supp_quotes_ext(data->cmds[i].args[y]);
-				free(data->cmds[i].args[y]);
-				data->cmds[i].args[y] = NULL;
+				free_single(data->cmds[i].args[y]);
 				data->cmds[i].args[y] = ft_strdup(tmp);
-				free(tmp);
-				tmp = NULL;
+				free_single(tmp);
 			}
 			y++;
 		}
+		free_single(data->cmds[i].function_name);
+		data->cmds[i].function_name = ft_strdup(data->cmds[i].args[0]);
 		i++;
 	}
 }
