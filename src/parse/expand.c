@@ -6,7 +6,7 @@
 /*   By: apuyane <apuyane@student.42angouleme.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/10 00:46:40 by apuyane           #+#    #+#             */
-/*   Updated: 2026/02/11 07:30:10 by apuyane          ###   ########.fr       */
+/*   Updated: 2026/02/11 08:17:43 by apuyane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@ char	*ft_exit_code(t_data *data, char *str_begin)
 
 static bool	is_in_single_quotes(char *string, size_t pos)
 {
-	
 	size_t	i;
 	int		single_quotes;
 
@@ -56,7 +55,7 @@ char	*get_expanded_string(char *string, int begin, int end, t_data *data)
 	var = ft_substr(string, begin, end - begin);
 	if (!ft_strcmp(var, "?"))
 		total = ft_exit_code(data, str_begin);
-	else 
+	else
 		total = ft_strjoin(str_begin, get_env_from_name(var, data->env));
 	str_end = ft_substr(string, end, ft_strlen(string));
 	total = ft_strjoin_free(total, str_end);
