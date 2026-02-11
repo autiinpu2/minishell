@@ -6,34 +6,34 @@
 /*   By: mcomin <mcomin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/30 01:11:37 by mcomin            #+#    #+#             */
-/*   Updated: 2026/02/11 05:42:12 by mcomin           ###   ########.fr       */
+/*   Updated: 2026/02/11 05:50:41 by mcomin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parsing.h"
 
-int		count_quotes_closed(char *str)
+int	count_quotes_closed(char *str)
 {
-    int		count;
-    char	in_quote;
-    
+	int		count;
+	char	in_quote;
+
 	count = 0;
 	in_quote = 0;
-    while (*str) 
+	while (*str)
 	{
-        if (!in_quote && (*str == '\"' || *str == '\''))
+		if (!in_quote && (*str == '\"' || *str == '\''))
 		{
-            in_quote = *str;
+			in_quote = *str;
 			count++;
 		}
-        else if (*str == in_quote) 
+		else if (*str == in_quote)
 		{
-            in_quote = 0;
-            count++;
-        }
-        str++;
-    }
-    return (count);
+			in_quote = 0;
+			count++;
+		}
+		str++;
+	}
+	return (count);
 }
 
 char	*supp_quotes_ext(char *str)
@@ -43,13 +43,13 @@ char	*supp_quotes_ext(char *str)
 	int		size;
 	int		j;
 	int		i;
-	
+
 	type_quote = 0;
 	j = 0;
 	i = -1;
 	size = ft_strlen(str) - count_quotes_closed(str);
 	res = ft_calloc(size + 1, sizeof(char));
-	while(str[++i])
+	while (str[++i])
 	{
 		if (!type_quote && (str[i] == '\"' || str[i] == '\''))
 			type_quote = str[i];
@@ -68,13 +68,13 @@ void	handle_token(t_data *data)
 {
 	size_t	i;
 	size_t	y;
-	char 	*tmp;
+	char	*tmp;
 
 	i = 0;
 	y = 1;
 	while (i < data->size)
 	{
-		while(data->cmds[i].args[y])
+		while (data->cmds[i].args[y])
 		{
 			if (strchr(data->cmds[i].args[y], '\'')
 				|| (strchr(data->cmds[i].args[y], '\"')))
@@ -89,8 +89,8 @@ void	handle_token(t_data *data)
 			y++;
 		}
 		i++;
-	}		
-}	
+	}
+}
 
 int	parsing(t_data *data, char *input)
 {
