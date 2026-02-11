@@ -6,7 +6,7 @@
 /*   By: apuyane <apuyane@student.42angouleme.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/04 01:46:10 by mcomin            #+#    #+#             */
-/*   Updated: 2026/02/09 22:10:09 by apuyane          ###   ########.fr       */
+/*   Updated: 2026/02/11 09:26:25 by apuyane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ int	check_pipes(char *input)
 	i = 0;
 	while (input[i])
 	{
-		if (input[i] == '|')
+		if (input[i] == '|' && !is_in_quotes(input, i))
 		{
 			i++;
 			while (input[i] && ft_isspace(input[i]))
@@ -87,7 +87,7 @@ int	check_redirections(char *input)
 	i = 0;
 	while (input[i])
 	{
-		if (input[i] == '<' || input[i] == '>')
+		if ((input[i] == '<' || input[i] == '>') && !is_in_quotes(input, i))
 		{
 			redir_char = input[i];
 			i++;
