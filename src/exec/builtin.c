@@ -6,7 +6,7 @@
 /*   By: apuyane <apuyane@student.42angouleme.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/03 09:56:58 by apuyane           #+#    #+#             */
-/*   Updated: 2026/02/10 01:42:51 by apuyane          ###   ########.fr       */
+/*   Updated: 2026/02/11 05:37:58 by apuyane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,7 +101,7 @@ int	ft_echo(t_cmd cmd)
 
 	i = 1;
 	duplicate_fds(cmd.infile, cmd.outfile, &stdin, &stdout);
-	if (!ft_strcmp(cmd.args[1], "-n\0"))
+	if (cmd.args[1] && !ft_strcmp(cmd.args[1], "-n\0"))
 	{
 		n = '\0';
 		i++;

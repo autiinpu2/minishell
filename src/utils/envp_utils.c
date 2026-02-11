@@ -6,7 +6,7 @@
 /*   By: apuyane <apuyane@student.42angouleme.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/25 06:09:40 by apuyane           #+#    #+#             */
-/*   Updated: 2026/02/05 10:33:55 by apuyane          ###   ########.fr       */
+/*   Updated: 2026/02/11 05:30:43 by apuyane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 t_env	*change_env_value(t_env *env, char *key, char *new_value)
 {
 	t_env_node	*node;
+	char		*new_val;
 
 	node = env->top;
 	while (node)
@@ -33,6 +34,10 @@ t_env	*change_env_value(t_env *env, char *key, char *new_value)
 		}
 		node = node->next;
 	}
+	new_val = ft_strjoin(key, "=");
+	new_val = ft_strjoin_free(new_val, new_value);
+	add_new_env_node(env, new_val);
+	free_single(new_val);
 	return (env);
 }
 

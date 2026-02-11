@@ -6,7 +6,7 @@
 /*   By: apuyane <apuyane@student.42angouleme.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/05 05:22:34 by apuyane           #+#    #+#             */
-/*   Updated: 2026/02/10 01:24:34 by apuyane          ###   ########.fr       */
+/*   Updated: 2026/02/11 04:53:41 by apuyane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,6 @@ t_cmd	new_cmd(char *token, t_data *data, int i)
 	if (!data->cmds[i].is_built_in)
 		data->cmds[i].path = cmd_path(data->env, data->cmds[i].function_name);
 	else
-		data->cmds[i].path = ft_strdup(data->cmds[i].function_name);
-	if (!data->cmds[i].path)
 		data->cmds[i].path = ft_strdup(data->cmds[i].function_name);
 	cmd_is_pipe(data, i);
 	i++;
