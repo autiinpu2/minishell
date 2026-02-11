@@ -6,7 +6,7 @@
 /*   By: mcomin <mcomin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/30 01:11:37 by mcomin            #+#    #+#             */
-/*   Updated: 2026/02/11 03:02:05 by mcomin           ###   ########.fr       */
+/*   Updated: 2026/02/11 05:42:12 by mcomin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,49 +14,53 @@
 
 int		count_quotes_closed(char *str)
 {
-	char	type_quotes;
-	int		quotes;
-	int		i;
-
-	i = 0;
-	quotes = 0;
-	while(str[i])
+    int		count;
+    char	in_quote;
+    
+	count = 0;
+	in_quote = 0;
+    while (*str) 
 	{
-		if(str[i] != '\'' && str[i] != '\"')
+        if (!in_quote && (*str == '\"' || *str == '\''))
 		{
-			type_quotes = str[i];
-			quotes = !quotes;
+            in_quote = *str;
+			count++;
 		}
-		
-	}
+        else if (*str == in_quote) 
+		{
+            in_quote = 0;
+            count++;
+        }
+        str++;
+    }
+    return (count);
 }
 
 char	*supp_quotes_ext(char *str)
 {
+	char	type_quote;
 	char	*res;
+	int		size;
 	int		j;
 	int		i;
-	char	type_quote;
 	
-	i = 0;
-	j = 0;
 	type_quote = 0;
-	while(str[i] && (str[i] != '\'' && str[i] != '\"'))
-		i++;
-	type_quote = str[i];
-	i = 0;
-	res = ft_calloc(ft_strlen(str) - 2 + 1, sizeof(char));
-	while(str[i])
+	j = 0;
+	i = -1;
+	size = ft_strlen(str) - count_quotes_closed(str);
+	res = ft_calloc(size + 1, sizeof(char));
+	while(str[++i])
 	{
-		if (str[i] == type_quote)
-			i++;
-		if(!str[i])
-			break;
-		res[j] = str[i];
-		i++;
-		j++;
+		if (!type_quote && (str[i] == '\"' || str[i] == '\''))
+			type_quote = str[i];
+		else if (str[i] == type_quote)
+			type_quote = 0;
+		else
+		{
+			res[j] = str[i];
+			j++;
+		}
 	}
-	res[j] = '\0';
 	return (res);
 }
 
