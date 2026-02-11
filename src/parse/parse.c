@@ -3,17 +3,98 @@
 /*                                                        :::      ::::::::   */
 /*   parse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apuyane <apuyane@student.42angouleme.fr    +#+  +:+       +#+        */
+/*   By: mcomin <mcomin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/30 01:11:37 by mcomin            #+#    #+#             */
-/*   Updated: 2026/02/05 06:09:25 by apuyane          ###   ########.fr       */
+/*   Updated: 2026/02/11 05:50:41 by mcomin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parsing.h"
 
+int	count_quotes_closed(char *str)
+{
+	int		count;
+	char	in_quote;
+
+	count = 0;
+	in_quote = 0;
+	while (*str)
+	{
+		if (!in_quote && (*str == '\"' || *str == '\''))
+		{
+			in_quote = *str;
+			count++;
+		}
+		else if (*str == in_quote)
+		{
+			in_quote = 0;
+			count++;
+		}
+		str++;
+	}
+	return (count);
+}
+
+char	*supp_quotes_ext(char *str)
+{
+	char	type_quote;
+	char	*res;
+	int		size;
+	int		j;
+	int		i;
+
+	type_quote = 0;
+	j = 0;
+	i = -1;
+	size = ft_strlen(str) - count_quotes_closed(str);
+	res = ft_calloc(size + 1, sizeof(char));
+	while (str[++i])
+	{
+		if (!type_quote && (str[i] == '\"' || str[i] == '\''))
+			type_quote = str[i];
+		else if (str[i] == type_quote)
+			type_quote = 0;
+		else
+		{
+			res[j] = str[i];
+			j++;
+		}
+	}
+	return (res);
+}
+
+void	handle_token(t_data *data)
+{
+	size_t	i;
+	size_t	y;
+	char	*tmp;
+
+	i = 0;
+	y = 1;
+	while (i < data->size)
+	{
+		while (data->cmds[i].args[y])
+		{
+			if (strchr(data->cmds[i].args[y], '\'')
+				|| (strchr(data->cmds[i].args[y], '\"')))
+			{
+				tmp = supp_quotes_ext(data->cmds[i].args[y]);
+				free(data->cmds[i].args[y]);
+				data->cmds[i].args[y] = NULL;
+				data->cmds[i].args[y] = ft_strdup(tmp);
+				free(tmp);
+				tmp = NULL;
+			}
+			y++;
+		}
+		i++;
+	}
+}
+
 int	parsing(t_data *data, char *input)
 {
 	load_data(data, input);
+	handle_token(data);
 	return (0);
 }

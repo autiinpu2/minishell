@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split_quotes.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apuyane <apuyane@student.42angouleme.fr    +#+  +:+       +#+        */
+/*   By: mcomin <mcomin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/05 07:37:34 by mcomin            #+#    #+#             */
-/*   Updated: 2026/02/10 02:17:40 by apuyane          ###   ########.fr       */
+/*   Updated: 2026/02/11 01:14:33 by mcomin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,17 +15,21 @@
 static int	is_in_quotes(char const *s, size_t pos)
 {
 	size_t	i;
-	int		in_quote;
+	int		single_quotes;
+	int		double_quotes;
 
 	i = 0;
-	in_quote = 0;
+	single_quotes = 0;
+	double_quotes = 0;
 	while (i < pos)
 	{
-		if (s[i] == '\"' || s[i] == '\'')
-			in_quote = !in_quote;
+		if (s[i] == '\"')
+			double_quotes = !double_quotes;
+		if (s[i] == '\'')
+			single_quotes = !single_quotes;
 		i++;
 	}
-	return (in_quote);
+	return (single_quotes | double_quotes);
 }
 
 static char	**wordsmalloc(char const *s, char c)
