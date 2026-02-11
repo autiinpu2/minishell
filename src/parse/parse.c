@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apuyane <apuyane@student.42angouleme.fr    +#+  +:+       +#+        */
+/*   By: mcomin <mcomin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/30 01:11:37 by mcomin            #+#    #+#             */
-/*   Updated: 2026/02/11 07:09:44 by apuyane          ###   ########.fr       */
+/*   Updated: 2026/02/11 08:52:01 by mcomin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ int	count_quotes_closed(char *str)
 	return (count);
 }
 
-char	*supp_quotes_ext(char *str)
+char	*supp_quotes(char *str)
 {
 	char	type_quote;
 	char	*res;
@@ -79,7 +79,7 @@ void	handle_token(t_data *data)
 			if (strchr(data->cmds[i].args[y], '\'')
 				|| (strchr(data->cmds[i].args[y], '\"')))
 			{
-				tmp = supp_quotes_ext(data->cmds[i].args[y]);
+				tmp = supp_quotes(data->cmds[i].args[y]);
 				free_single(data->cmds[i].args[y]);
 				data->cmds[i].args[y] = ft_strdup(tmp);
 				free_single(tmp);
