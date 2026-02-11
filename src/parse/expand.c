@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expand.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apuyane <apuyane@student.42angouleme.fr    +#+  +:+       +#+        */
+/*   By: mcomin <mcomin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/10 00:46:40 by apuyane           #+#    #+#             */
-/*   Updated: 2026/02/10 01:39:58 by apuyane          ###   ########.fr       */
+/*   Updated: 2026/02/11 03:21:20 by mcomin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ char	*get_expanded_string(char *string, int begin, int end, t_data *data)
 	char	*str_end;
 	char	*total;
 	char	*var;
-
+	
 	if (begin)
 		str_begin = ft_substr(string, 0, begin - 1);
 	else
