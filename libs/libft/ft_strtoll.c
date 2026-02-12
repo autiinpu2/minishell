@@ -6,7 +6,7 @@
 /*   By: apuyane <apuyane@student.42angouleme.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/18 10:11:23 by apuyane           #+#    #+#             */
-/*   Updated: 2026/02/05 07:59:16 by apuyane          ###   ########.fr       */
+/*   Updated: 2026/02/12 20:18:03 by apuyane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,25 +36,22 @@ long long	ft_strtoll(const char *nptr, char **endptr)
 	long long	n;
 	int			sign;
 	int			i;
-	int			digits;
 
 	n = 0;
 	sign = 1;
 	i = 0;
-	digits = 0;
 	skip_beginning(nptr, &i, &sign);
 	while (nptr[i] && (nptr[i] >= '0' && nptr[i] <= '9'))
 	{
-		if (sign == 1 && n > (LLONG_MAX - (nptr[i] - '0')) / 10)
-			return (LLONG_MAX);
-		else if (sign == -1 && (-n) < (LLONG_MIN + (nptr[i] - '0')) / 10)
-			return (LLONG_MIN);
+		if (sign == 1 && (n > LLONG_MAX / 10
+				|| (n == LLONG_MAX / 10 && (nptr[i] - '0') > 7)))
+			break ;
+		if (sign == -1 && (n > -(LLONG_MIN / 10)
+				|| (n == -(LLONG_MIN / 10) && (nptr[i] - '0') > 8)))
+			break ;
 		n = n * 10 + nptr[i] - '0';
 		i++;
-		digits++;
 	}
-	if (digits == 0)
-		i = 0;
 	if (endptr)
 		*endptr = (char *)(nptr + i);
 	return (n * sign);
