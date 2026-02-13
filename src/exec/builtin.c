@@ -6,7 +6,7 @@
 /*   By: apuyane <apuyane@student.42angouleme.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/03 09:56:58 by apuyane           #+#    #+#             */
-/*   Updated: 2026/02/11 05:37:58 by apuyane          ###   ########.fr       */
+/*   Updated: 2026/02/13 06:19:44 by apuyane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,32 +90,4 @@ int	ft_exit(t_data *data, t_cmd cmd)
 		ft_dprintf(2, "exit: too many arguments\n");
 	}
 	return (data->exit_code);
-}
-
-int	ft_echo(t_cmd cmd)
-{
-	int		i;
-	char	n;
-	int		stdout;
-	int		stdin;
-
-	i = 1;
-	duplicate_fds(cmd.infile, cmd.outfile, &stdin, &stdout);
-	if (cmd.args[1] && !ft_strcmp(cmd.args[1], "-n\0"))
-	{
-		n = '\0';
-		i++;
-	}
-	else
-		n = '\n';
-	while (cmd.args[i])
-	{
-		write(1, cmd.args[i], ft_strlen(cmd.args[i]));
-		if (cmd.args[i + 1])
-			write(1, " ", 1);
-		i++;
-	}
-	write(1, &n, 1);
-	restore_fds(stdin, stdout);
-	return (0);
 }

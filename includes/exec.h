@@ -6,7 +6,7 @@
 /*   By: apuyane <apuyane@student.42angouleme.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/03 05:48:25 by apuyane           #+#    #+#             */
-/*   Updated: 2026/02/10 02:14:34 by apuyane          ###   ########.fr       */
+/*   Updated: 2026/02/13 05:40:23 by apuyane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,9 @@ typedef struct s_exec
 
 int		exec(t_data	*data);
 int		wait_all_pids(t_data *data);
+
+void	add_new_env_node(t_data *data, char *arg);
+t_env	*change_env_value(t_data *data, char *key, char *new_value);
 
 void	duplicate_fds(int in, int out, int *saved_in, int *saved_out);
 void	duplicate_outfile(int in, int out, int *saved_out);

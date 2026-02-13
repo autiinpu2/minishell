@@ -6,7 +6,7 @@
 /*   By: apuyane <apuyane@student.42angouleme.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/10 01:44:35 by apuyane           #+#    #+#             */
-/*   Updated: 2026/02/11 05:35:38 by apuyane          ###   ########.fr       */
+/*   Updated: 2026/02/13 05:44:43 by apuyane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,17 +52,23 @@ static void	print_export(t_env *env)
 	free_tab(envp);
 }
 
-void	add_new_env_node(t_env *env, char *arg)
+void	add_new_env_node(t_data *data, char *arg)
 {
 	char		**args;
 	t_env_node	*node;
 
-	node = env->top;
+	node = data->env->top;
 	while (node->next)
 		node = node->next;
 	args = ft_split(arg, '=');
 	if (!args)
 		return ;
+	if (!ft_isalpha(args[0][0]))
+	{
+		ft_dprintf(2, "export: `1': not a valid identifier\n");
+		data->exit_code = 1;
+		return ;
+	}
 	node->next = ft_calloc(1, sizeof(t_env_node));
 	node = node->next;
 	node->key = ft_strdup(args[0]);
@@ -70,7 +76,7 @@ void	add_new_env_node(t_env *env, char *arg)
 		node->value = ft_strdup(args[1]);
 	node->text = ft_strjoin(node->key, "=");
 	node->text = ft_strjoin_free(node->text, node->value);
-	env->size += 1;
+	data->env->size += 1;
 	free_tab(args);
 }
 
@@ -92,9 +98,9 @@ int	ft_export(t_data *data, t_cmd cmd)
 	while (i < len_args - 1)
 	{
 		if (data->size == 1)
-			add_new_env_node(data->env, cmd.args[i + 1]);
+			add_new_env_node(data, cmd.args[i + 1]);
 		i++;
 	}
 	restore_fd(stdout, STDOUT_FILENO);
-	return (0);
+	return (data->exit_code);
 }

@@ -6,21 +6,22 @@
 /*   By: apuyane <apuyane@student.42angouleme.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/25 06:09:40 by apuyane           #+#    #+#             */
-/*   Updated: 2026/02/11 05:30:43 by apuyane          ###   ########.fr       */
+/*   Updated: 2026/02/13 05:39:33 by apuyane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "env.h"
 #include "libft.h"
 #include "free.h"
+#include "exec.h"
 #include "minishell.h"
 
-t_env	*change_env_value(t_env *env, char *key, char *new_value)
+t_env	*change_env_value(t_data *data, char *key, char *new_value)
 {
 	t_env_node	*node;
 	char		*new_val;
 
-	node = env->top;
+	node = data->env->top;
 	while (node)
 	{
 		if (!ft_strcmp(node->key, key))
@@ -30,15 +31,15 @@ t_env	*change_env_value(t_env *env, char *key, char *new_value)
 			node->text = ft_strdup(node->key);
 			node->text = ft_strjoin_free(node->text, "=");
 			node->text = ft_strjoin_free(node->text, new_value);
-			return (env);
+			return (data->env);
 		}
 		node = node->next;
 	}
 	new_val = ft_strjoin(key, "=");
 	new_val = ft_strjoin_free(new_val, new_value);
-	add_new_env_node(env, new_val);
+	add_new_env_node(data, new_val);
 	free_single(new_val);
-	return (env);
+	return (data->env);
 }
 
 static t_env	*fill_env(t_env *env, char **envp)
