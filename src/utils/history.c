@@ -6,7 +6,7 @@
 /*   By: apuyane <apuyane@student.42angouleme.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/13 03:32:53 by apuyane           #+#    #+#             */
-/*   Updated: 2026/02/13 03:48:06 by apuyane          ###   ########.fr       */
+/*   Updated: 2026/02/13 04:05:19 by apuyane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,24 +43,28 @@ char	*remove_n(char *line)
 void	load_history(t_data *data)
 {
 	int		fd;
+	int 	edited;
 	char	*path;
 	char	*line;
 
+	edited = 0;
 	path = ft_strjoin(get_env_from_name("HOME", data->env),
 			"/.minishell_history");
 	fd = open(path, O_CREAT | O_RDWR | O_APPEND, 0600);
-	while (line)
+	while (!edited|| line)
 	{
+		edited = 1;
 		line = get_next_line(fd);
 		line = remove_n(line);
-		add_history(line);
+		if (line)
+			add_history(line);
 		free(line);
 	}
 	free(path);
 	close(fd);
 }
 
-void	add_historique(char *line, t_data *data)
+void	ft_add_history(char *line, t_data *data)
 {
 	int		fd;
 	char	*path;

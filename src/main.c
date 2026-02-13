@@ -6,7 +6,7 @@
 /*   By: apuyane <apuyane@student.42angouleme.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/25 04:17:27 by apuyane           #+#    #+#             */
-/*   Updated: 2026/02/13 03:34:59 by apuyane          ###   ########.fr       */
+/*   Updated: 2026/02/13 04:05:38 by apuyane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ void	loop(t_data *data)
 			break ;
 		}
 		if (*line)
-			add_historique(line, data);
+			ft_add_history(line, data);
 		if (is_invalid(line, data))
 			continue ;
 		if (!parsing(data, line))
