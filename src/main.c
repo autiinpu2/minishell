@@ -6,7 +6,7 @@
 /*   By: apuyane <apuyane@student.42angouleme.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/25 04:17:27 by apuyane           #+#    #+#             */
-/*   Updated: 2026/02/11 05:36:40 by apuyane          ###   ########.fr       */
+/*   Updated: 2026/02/13 03:34:59 by apuyane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ void	loop(t_data *data)
 			break ;
 		}
 		if (*line)
-			add_history(line);
+			add_historique(line, data);
 		if (is_invalid(line, data))
 			continue ;
 		if (!parsing(data, line))
@@ -78,6 +78,7 @@ int	main(int ac, char **av, char **envp)
 	(void)ac;
 	(void)av;
 	data = new_data(envp);
+	load_history(data);
 	loop(data);
 	exit_code = data->exit_code;
 	free_data(data);
