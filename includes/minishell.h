@@ -6,7 +6,7 @@
 /*   By: apuyane <apuyane@student.42angouleme.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/05 05:21:42 by apuyane           #+#    #+#             */
-/*   Updated: 2026/02/06 16:57:55 by apuyane          ###   ########.fr       */
+/*   Updated: 2026/02/13 04:05:34 by apuyane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,5 +61,8 @@ int		is_empty_or_spaces(char *input);
 bool	is_built_in(char *name);
 
 int		get_args_number(char **args);
+
+void	load_history(t_data *data);
+void	ft_add_history(char *line, t_data *data);
 
 #endif
