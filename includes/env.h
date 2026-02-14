@@ -6,7 +6,7 @@
 /*   By: apuyane <apuyane@student.42angouleme.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/24 03:34:34 by apuyane           #+#    #+#             */
-/*   Updated: 2026/02/11 05:31:20 by apuyane          ###   ########.fr       */
+/*   Updated: 2026/02/13 05:40:19 by apuyane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,6 @@ typedef struct s_env
 
 t_env	*load_envp(char **envp);
 char	*get_env_from_name(char *name, t_env *env);
-t_env	*change_env_value(t_env *env, char *key, char *new_value);
 char	**env_to_envp(t_env *env);
-void	add_new_env_node(t_env *env, char *arg);
 
 #endif

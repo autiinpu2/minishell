@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   init_parsing.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcomin <mcomin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: apuyane <apuyane@student.42angouleme.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/05 05:22:34 by apuyane           #+#    #+#             */
-/*   Updated: 2026/02/11 09:05:40 by mcomin           ###   ########.fr       */
+/*   Updated: 2026/02/13 05:56:39 by apuyane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parsing.h"
+#include "exec.h"
 
 t_cmd	cmd_is_pipe(t_data *data, int i)
 {
@@ -43,7 +44,7 @@ t_cmd	new_cmd(char *token, t_data *data, int i)
 	data->cmds[i].is_built_in = is_built_in(data->cmds[i].function_name);
 	if (count_quotes_closed(data->cmds[i].function_name))
 	{
-		tmp = ft_strdup (data->cmds[i].function_name);
+		tmp = ft_strdup(data->cmds[i].function_name);
 		free_single(data->cmds[i].function_name);
 		data->cmds[i].function_name = supp_quotes(tmp);
 		free_single(tmp);
@@ -76,17 +77,17 @@ t_data	*load_data(t_data *data, char *input)
 	return (data);
 }
 
-void	update_shlvl(t_env *env)
+void	update_shlvl(t_data *data)
 {
 	int		value;
 	char	*actual_value;
 	char	*new_value;
 
-	actual_value = get_env_from_name("SHLVL", env);
+	actual_value = get_env_from_name("SHLVL", data->env);
 	value = ft_strtol(actual_value, NULL);
 	value += 1;
 	new_value = ft_itoa(value);
-	change_env_value(env, "SHLVL", new_value);
+	change_env_value(data, "SHLVL", new_value);
 	free(new_value);
 }
 
@@ -98,7 +99,7 @@ t_data	*new_data(char **envp)
 	data->cmds = NULL;
 	data->size = 0;
 	data->env = load_envp(envp);
-	update_shlvl(data->env);
+	update_shlvl(data);
 	data->exit_code = EXIT_SUCCESS;
 	return (data);
 }

@@ -6,7 +6,7 @@
 /*   By: apuyane <apuyane@student.42angouleme.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/31 09:02:27 by apuyane           #+#    #+#             */
-/*   Updated: 2026/02/11 05:26:35 by apuyane          ###   ########.fr       */
+/*   Updated: 2026/02/13 05:41:44 by apuyane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,9 @@ static void	call_chdir(char *path, t_data *data)
 	else
 	{
 		tmp = getcwd(NULL, 0);
-		change_env_value(data->env, "OLDPWD",
+		change_env_value(data, "OLDPWD",
 			get_env_from_name("PWD", data->env));
-		change_env_value(data->env, "PWD", tmp);
+		change_env_value(data, "PWD", tmp);
 		data->exit_code = 0;
 		free(tmp);
 		return ;

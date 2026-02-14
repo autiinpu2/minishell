@@ -1,6 +1,6 @@
 NAME        := minishell
 CC          := cc
-CFLAGS      := -Wall -Wextra -Werror -g -I includes
+CFLAGS      := -Wall -Wextra -Werror -g -I includes -D_XOPEN_SOURCE=700
 RM          := rm -rf
 MAKE        := make --no-print-directory
 
@@ -13,13 +13,13 @@ SRC_MAIN_DIR    := $(SRC_DIR)
 SRC_MAIN        := main.c
 
 SRC_UTILS_DIR   := $(SRC_DIR)/utils
-SRC_UTILS       := envp_utils.c free_utils.c builtin_utils.c free_protected.c fds_utils.c history.c
+SRC_UTILS       := envp_utils.c free_utils.c builtin_utils.c free_protected.c fds_utils.c history.c signals.c
 
 SRC_PARSE_DIR   := $(SRC_DIR)/parse
-SRC_PARSE       := init_parsing.c parse.c path.c error.c ft_split_quotes.c expand.c
+SRC_PARSE       := init_parsing.c parse.c path.c error.c ft_split_quotes.c expand.c expand_utils.c 
 
 SRC_EXEC_DIR    := $(SRC_DIR)/exec
-SRC_EXEC        := exec.c builtin.c ft_cd.c ft_unset.c ft_export.c forks.c
+SRC_EXEC        := exec.c builtin.c ft_cd.c ft_unset.c ft_export.c forks.c ft_echo.c
 
 SRCS        := $(addprefix $(SRC_MAIN_DIR)/, $(SRC_MAIN)) \
                $(addprefix $(SRC_UTILS_DIR)/, $(SRC_UTILS)) \
