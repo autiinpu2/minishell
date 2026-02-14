@@ -6,7 +6,7 @@
 /*   By: apuyane <apuyane@student.42angouleme.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/25 06:09:40 by apuyane           #+#    #+#             */
-/*   Updated: 2026/02/13 05:39:33 by apuyane          ###   ########.fr       */
+/*   Updated: 2026/02/14 08:40:44 by apuyane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,4 +114,18 @@ char	**env_to_envp(t_env *env)
 		i++;
 	}
 	return (envp);
+}
+
+bool	env_exist(char *name, t_env *env)
+{
+	t_env_node	*node;
+
+	node = env->top;
+	while (node)
+	{
+		if (!ft_strcmp(node->key, name))
+			return (true);
+		node = node->next;
+	}
+	return (false);
 }

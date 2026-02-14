@@ -6,7 +6,7 @@
 /*   By: apuyane <apuyane@student.42angouleme.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/10 01:44:35 by apuyane           #+#    #+#             */
-/*   Updated: 2026/02/14 07:43:06 by apuyane          ###   ########.fr       */
+/*   Updated: 2026/02/14 09:17:21 by apuyane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ static void	print_export(t_env *env)
 {
 	char	**envp;
 	size_t	len;
+	char	**text;
 	size_t	i;
 
 	i = 0;
@@ -46,7 +47,13 @@ static void	print_export(t_env *env)
 	sort_envp(envp, len);
 	while (i < len)
 	{
-		ft_dprintf(1, "%s\n", envp[i]);
+		text = ft_split(envp[i], '=');
+		ft_dprintf(1, "declare -x %s=", text[0]);
+		if (text[1])
+			ft_dprintf(1, "\"%s\"\n", text[1]);
+		else
+			ft_dprintf(1, "\n");
+		free_tab(text);
 		i++;
 	}
 	free_tab(envp);
@@ -69,14 +76,19 @@ void	add_new_env_node(t_data *data, char *arg)
 		data->exit_code = 1;
 		return ;
 	}
-	node->next = ft_calloc(1, sizeof(t_env_node));
-	node = node->next;
-	node->key = ft_strdup(args[0]);
-	if (args[1])
-		node->value = ft_strdup(args[1]);
-	node->text = ft_strjoin(node->key, "=");
-	node->text = ft_strjoin_free(node->text, node->value);
-	data->env->size += 1;
+	if (env_exist(args[0], data->env))
+		change_env_value(data, args[0], args[1]);
+	else
+	{
+		node->next = ft_calloc(1, sizeof(t_env_node));
+		node = node->next;
+		node->key = ft_strdup(args[0]);
+		if (args[1])
+			node->value = ft_strdup(args[1]);
+		node->text = ft_strjoin(node->key, "=");
+		node->text = ft_strjoin_free(node->text, node->value);
+		data->env->size += 1;
+	}
 	free_tab(args);
 }
 

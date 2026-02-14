@@ -6,7 +6,7 @@
 /*   By: apuyane <apuyane@student.42angouleme.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/15 17:43:58 by apuyane           #+#    #+#             */
-/*   Updated: 2026/02/14 08:17:11 by apuyane          ###   ########.fr       */
+/*   Updated: 2026/02/14 08:46:10 by apuyane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ typedef struct s_dprintf
 
 // is_functions
 bool			ft_isalnum(int c);
+bool			ft_isalnum_string(char *s);
 bool			ft_isalpha(int c);
 bool			ft_isascii(int c);
 bool			ft_isdigit(int c);
