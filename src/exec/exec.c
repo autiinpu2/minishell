@@ -6,7 +6,7 @@
 /*   By: apuyane <apuyane@student.42angouleme.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/05 05:22:21 by apuyane           #+#    #+#             */
-/*   Updated: 2026/02/10 01:14:39 by apuyane          ###   ########.fr       */
+/*   Updated: 2026/02/14 06:51:58 by apuyane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,7 @@ int	wait_all_pids(t_data *data)
 
 	i = 0;
 	exit_code = 0;
+	signal(SIGINT, SIG_IGN);
 	while (i < data->size)
 	{
 		if (data->cmds[i].is_built_in == true)
@@ -84,5 +85,6 @@ int	wait_all_pids(t_data *data)
 		}
 		i++;
 	}
+	signals(data);
 	return (exit_code);
 }

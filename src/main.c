@@ -6,7 +6,7 @@
 /*   By: apuyane <apuyane@student.42angouleme.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/25 04:17:27 by apuyane           #+#    #+#             */
-/*   Updated: 2026/02/14 04:46:17 by apuyane          ###   ########.fr       */
+/*   Updated: 2026/02/14 06:52:36 by apuyane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,15 @@ int	is_invalid(char *line, t_data *data)
 	return (0);
 }
 
+void	check_signal(t_data *data)
+{
+	if (g_signal_status == SIGINT)
+	{
+		data->exit_code = 128 + SIGINT;
+		g_signal_status = 0;
+	}
+}
+
 void	loop(t_data *data)
 {
 	char	*line;
@@ -52,6 +61,7 @@ void	loop(t_data *data)
 		prefix = get_prefix(data);
 		line = readline(prefix);
 		free_single(prefix);
+		check_signal(data);
 		if (!line)
 		{
 			ft_dprintf(2, "exit\n");
@@ -77,9 +87,9 @@ int	main(int ac, char **av, char **envp)
 
 	(void)ac;
 	(void)av;
-	signals();
 	data = new_data(envp);
 	load_history(data);
+	signals(data);
 	loop(data);
 	exit_code = data->exit_code;
 	free_data(data);
