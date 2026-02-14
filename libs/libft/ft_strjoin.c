@@ -6,7 +6,7 @@
 /*   By: apuyane <apuyane@student.42angouleme.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/19 23:03:22 by apuyane           #+#    #+#             */
-/*   Updated: 2026/01/26 04:41:53 by apuyane          ###   ########.fr       */
+/*   Updated: 2026/02/14 08:16:53 by apuyane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,5 +62,20 @@ char	*ft_strjoin_free(char *s1, char *s2)
 		s[i++] = s2[j++];
 	s[s1_length + s2_length] = '\0';
 	free(s1);
+	return (s);
+}
+
+char	*ft_strjoin_tab(char **tab)
+{
+	int		i;
+	char	*s;
+
+	i = 0;
+	s = ft_strdup("");
+	while (tab[i])
+	{
+		s = ft_strjoin_free(s, tab[i]);
+		i++;
+	}
 	return (s);
 }

@@ -6,7 +6,7 @@
 /*   By: apuyane <apuyane@student.42angouleme.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/10 02:11:16 by apuyane           #+#    #+#             */
-/*   Updated: 2026/02/10 02:14:14 by apuyane          ###   ########.fr       */
+/*   Updated: 2026/02/14 07:47:37 by apuyane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,26 +16,20 @@ void	duplicate_fds(int in, int out, int *saved_in, int *saved_out)
 {
 	*saved_in = dup(STDIN_FILENO);
 	*saved_out = dup(STDOUT_FILENO);
+	dup2(in, STDIN_FILENO);
 	if (in > 2)
-	{
-		dup2(in, STDIN_FILENO);
 		close(in);
-	}
+	dup2(out, STDOUT_FILENO);
 	if (out > 2)
-	{
-		dup2(out, STDOUT_FILENO);
 		close(out);
-	}
 }
 
 void	duplicate_outfile(int in, int out, int *saved_out)
 {
 	*saved_out = dup(STDOUT_FILENO);
+	dup2(out, STDOUT_FILENO);
 	if (out > 2)
-	{
-		dup2(out, STDOUT_FILENO);
 		close(out);
-	}
 	if (in > 2)
 		close(in);
 }

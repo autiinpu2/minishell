@@ -6,7 +6,7 @@
 /*   By: apuyane <apuyane@student.42angouleme.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/25 04:17:27 by apuyane           #+#    #+#             */
-/*   Updated: 2026/02/14 06:52:36 by apuyane          ###   ########.fr       */
+/*   Updated: 2026/02/14 08:21:44 by apuyane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,6 @@ void	loop(t_data *data)
 		prefix = get_prefix(data);
 		line = readline(prefix);
 		free_single(prefix);
-		check_signal(data);
 		if (!line)
 		{
 			ft_dprintf(2, "exit\n");

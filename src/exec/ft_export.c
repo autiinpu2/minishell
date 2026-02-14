@@ -6,7 +6,7 @@
 /*   By: apuyane <apuyane@student.42angouleme.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/10 01:44:35 by apuyane           #+#    #+#             */
-/*   Updated: 2026/02/13 05:44:43 by apuyane          ###   ########.fr       */
+/*   Updated: 2026/02/14 07:43:06 by apuyane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ static void	print_export(t_env *env)
 	sort_envp(envp, len);
 	while (i < len)
 	{
-		printf("%s\n", envp[i]);
+		ft_dprintf(1, "%s\n", envp[i]);
 		i++;
 	}
 	free_tab(envp);

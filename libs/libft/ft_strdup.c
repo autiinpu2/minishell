@@ -6,7 +6,7 @@
 /*   By: apuyane <apuyane@student.42angouleme.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/25 04:22:34 by apuyane           #+#    #+#             */
-/*   Updated: 2026/01/25 04:22:35 by apuyane          ###   ########.fr       */
+/*   Updated: 2026/02/14 08:04:17 by apuyane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 char	*ft_strdup(const char *s)
 {
-	int		i;
+	size_t	i;
 	size_t	slen;
 	char	*s2;
 
@@ -23,7 +23,7 @@ char	*ft_strdup(const char *s)
 	if (!s2)
 		return (NULL);
 	i = 0;
-	while (s[i])
+	while (i < slen)
 	{
 		s2[i] = s[i];
 		i++;
