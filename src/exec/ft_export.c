@@ -6,7 +6,7 @@
 /*   By: apuyane <apuyane@student.42angouleme.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/10 01:44:35 by apuyane           #+#    #+#             */
-/*   Updated: 2026/02/14 09:17:21 by apuyane          ###   ########.fr       */
+/*   Updated: 2026/02/14 10:28:56 by apuyane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,37 +59,64 @@ static void	print_export(t_env *env)
 	free_tab(envp);
 }
 
-void	add_new_env_node(t_data *data, char *arg)
+char    **export_split(char *arg, t_data *data)
 {
-	char		**args;
-	t_env_node	*node;
+    int     i = 0;
+    char    **tab;
+    char    *old_val;
 
-	node = data->env->top;
-	while (node->next)
-		node = node->next;
-	args = ft_split(arg, '=');
-	if (!args)
-		return ;
-	if (!ft_isalpha(args[0][0]))
-	{
-		ft_dprintf(2, "export: `1': not a valid identifier\n");
-		data->exit_code = 1;
-		return ;
-	}
-	if (env_exist(args[0], data->env))
-		change_env_value(data, args[0], args[1]);
-	else
-	{
-		node->next = ft_calloc(1, sizeof(t_env_node));
-		node = node->next;
-		node->key = ft_strdup(args[0]);
-		if (args[1])
-			node->value = ft_strdup(args[1]);
-		node->text = ft_strjoin(node->key, "=");
-		node->text = ft_strjoin_free(node->text, node->value);
-		data->env->size += 1;
-	}
-	free_tab(args);
+    if (!arg || !ft_isalpha(arg[i]))
+        return (NULL);
+    while (arg[i] && (ft_isalnum(arg[i]) || arg[i] == '_'))
+        i++;
+    if (arg[i] != '\0' && arg[i] != '=' && !(arg[i] == '+' && arg[i + 1] == '='))
+        return (NULL);
+    tab = ft_calloc(3, sizeof(char *));
+    if (!tab) return (NULL);
+    tab[0] = ft_substr(arg, 0, i);
+    if (arg[i] == '+')
+    {
+        old_val = get_env_from_name(tab[0], data->env);
+		tab[1] = ft_strjoin(old_val, arg + i + 2);
+    }
+    else if (arg[i] == '=')
+        tab[1] = ft_strdup(arg + i + 1);
+    return (tab);
+}
+
+void    add_new_env_node(t_data *data, char *arg)
+{
+    char        **args;
+    t_env_node  *new_node;
+    t_env_node  *curr;
+
+    args = export_split(arg, data);
+    if (!args)
+    {
+        ft_dprintf(2, "export: `%s': not a valid identifier\n", arg);
+        data->exit_code = 1;
+        return ;
+    }
+    if (env_exist(args[0], data->env))
+        change_env_value(data, args[0], args[1]);
+    else
+    {
+        new_node = ft_calloc(1, sizeof(t_env_node));
+        if (!new_node) return ;
+        new_node->key = ft_strdup(args[0]);
+        new_node->value = args[1] ? ft_strdup(args[1]) : ft_strdup("");
+        if (!data->env->top)
+            data->env->top = new_node;
+        else
+        {
+            curr = data->env->top;
+            while (curr->next)
+                curr = curr->next;
+            curr->next = new_node;
+        }
+        data->env->size++;
+    }
+    free_tab(args);
 }
 
 int	ft_export(t_data *data, t_cmd cmd)
