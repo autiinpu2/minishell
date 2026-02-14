@@ -27,6 +27,6 @@ To launch the program, you have this command
 <code style="margin-left: 35px;"><span style="color: #ff7b00ff;">./minishell</span></code>
 </pre>
 # Ressources
-This project is using our [Libft](libft/Readme.md)
+This project is using our [Libft](libs/libft/Readme.md)
 
 ...
