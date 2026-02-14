@@ -3,3 +3,4 @@ compile_commands.json
 minishell
 build
 libs/libft/libft.a
+.vscode

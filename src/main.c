@@ -6,7 +6,7 @@
 /*   By: apuyane <apuyane@student.42angouleme.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/25 04:17:27 by apuyane           #+#    #+#             */
-/*   Updated: 2026/02/13 04:05:38 by apuyane          ###   ########.fr       */
+/*   Updated: 2026/02/14 04:46:17 by apuyane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,7 @@ int	main(int ac, char **av, char **envp)
 
 	(void)ac;
 	(void)av;
+	signals();
 	data = new_data(envp);
 	load_history(data);
 	loop(data);

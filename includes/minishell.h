@@ -6,7 +6,7 @@
 /*   By: apuyane <apuyane@student.42angouleme.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/05 05:21:42 by apuyane           #+#    #+#             */
-/*   Updated: 2026/02/13 05:38:25 by apuyane          ###   ########.fr       */
+/*   Updated: 2026/02/14 04:47:56 by apuyane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,8 @@
 # include <stdlib.h>
 # include <string.h>
 # include <limits.h>
+# include <signal.h>
 # include <sys/wait.h>
-
 # include "env.h"
 
 typedef struct s_redir
@@ -64,5 +64,7 @@ int		get_args_number(char **args);
 
 void	load_history(t_data *data);
 void	ft_add_history(char *line, t_data *data);
+
+void	signals();
 
 #endif
