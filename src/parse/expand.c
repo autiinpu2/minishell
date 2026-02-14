@@ -6,7 +6,7 @@
 /*   By: apuyane <apuyane@student.42angouleme.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/10 00:46:40 by apuyane           #+#    #+#             */
-/*   Updated: 2026/02/14 05:02:28 by apuyane          ###   ########.fr       */
+/*   Updated: 2026/02/14 06:55:59 by apuyane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,19 +22,21 @@ void	skip_chars(char *tab, int *j)
 	}
 }
 
-void	second_if(char *tab_split, t_data *data, int *j)
+void	second_if(char **tab_split, t_data *data, int *j)
 {
-	int	reminder;
+	int		reminder;
+	char	*str;
 
-	if (tab_split[*j] == '$' && tab_split[*j + 1]
-		&& (ft_isalpha(tab_split[*j + 1]) || tab_split[*j + 1] == '_'
-			|| tab_split[*j + 1] == '?') && get_quote_state(tab_split, *j) != 1)
+	str = *tab_split;
+	if (str[*j] == '$' && str[*j + 1]
+		&& (ft_isalpha(str[*j + 1]) || str[*j + 1] == '_'
+			|| str[*j + 1] == '?') && get_quote_state(str, *j) != 1)
 	{
 		reminder = *j + 1;
 		(*j)++;
-		if (tab_split[reminder] != '?')
-			skip_chars(tab_split, j);
-		tab_split = get_expanded_string(tab_split, reminder,
+		if (str[reminder] != '?')
+			skip_chars(str, j);
+		*tab_split = get_expanded_string(str, reminder,
 				*j + 1, data);
 		*j = -1;
 	}
@@ -58,7 +60,7 @@ void	expand(char **tab_split, t_data *data)
 				tab_split[i] = remove_char_i(tab_split[i], j);
 				continue ;
 			}
-			second_if(tab_split[i], data, &j);
+			second_if(&tab_split[i], data, &j);
 			j++;
 		}
 		i++;
