@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   path.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcomin <mcomin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: apuyane <apuyane@student.42angouleme.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/04 00:35:21 by mcomin            #+#    #+#             */
-/*   Updated: 2026/02/11 08:53:23 by mcomin           ###   ########.fr       */
+/*   Updated: 2026/02/14 06:31:38 by apuyane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,12 +66,15 @@ char	*cmd_path(t_env *env, char *cmd_name)
 	char	**tab_paths;
 	char	*test_path;
 
-	if (!cmd_name[0])
+	if (!cmd_name[0] || !cmd_name)
 		return (NULL);
 	env_path = get_env_from_name("PATH", env);
 	tab_paths = ft_split(env_path, ':');
 	prefix_cmd_name = ft_strjoin("/", cmd_name);
-	test_path = is_path(prefix_cmd_name, tab_paths);
+	if (tab_paths)
+		test_path = is_path(prefix_cmd_name, tab_paths);
+	else
+		test_path = ft_strdup("");
 	if (!test_path && check_access(cmd_name))
 	{
 		test_path = ft_strdup(cmd_name);
