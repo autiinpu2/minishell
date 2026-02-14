@@ -6,7 +6,7 @@
 /*   By: apuyane <apuyane@student.42angouleme.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/14 04:13:18 by apuyane           #+#    #+#             */
-/*   Updated: 2026/02/14 04:47:43 by apuyane          ###   ########.fr       */
+/*   Updated: 2026/02/14 04:53:03 by apuyane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	sig_handler(int signal)
 	}
 }
 
-void	signals()
+void	signals(void)
 {
 	struct sigaction	act;
 
