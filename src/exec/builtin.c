@@ -6,7 +6,7 @@
 /*   By: apuyane <apuyane@student.42angouleme.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/03 09:56:58 by apuyane           #+#    #+#             */
-/*   Updated: 2026/02/14 07:41:56 by apuyane          ###   ########.fr       */
+/*   Updated: 2026/02/15 22:32:53 by apuyane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,8 @@ int	ft_exit(t_data *data, t_cmd cmd)
 		n = ft_strtoll(cmd.args[1], &endptr);
 		if (*endptr != '\0' || n > LONG_MAX || n < LONG_MIN)
 		{
-			ft_dprintf(2, "exit: %s: numeric argument required\n", cmd.args[1]);
+			ft_dprintf(2, "minishell: exit: %s: numeric argument required\n",
+				cmd.args[1]);
 			n = 2;
 		}
 		data->exit_code = (int)(n % 256);
@@ -87,7 +88,7 @@ int	ft_exit(t_data *data, t_cmd cmd)
 	else
 	{
 		data->exit_code = 1;
-		ft_dprintf(2, "exit: too many arguments\n");
+		ft_dprintf(2, "minishell: exit: too many arguments\n");
 	}
 	return (data->exit_code);
 }
