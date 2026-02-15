@@ -1,4 +1,4 @@
-name: Fedora Quality Check
+name: Fedora
 
 on: [pull_request]
 

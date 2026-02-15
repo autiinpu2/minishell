@@ -1,4 +1,4 @@
-name: C Quality Check
+name: Alpine
 
 on: [pull_request]
 
