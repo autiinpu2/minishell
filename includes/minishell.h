@@ -6,7 +6,7 @@
 /*   By: apuyane <apuyane@student.42angouleme.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/05 05:21:42 by apuyane           #+#    #+#             */
-/*   Updated: 2026/02/15 12:30:09 by apuyane          ###   ########.fr       */
+/*   Updated: 2026/02/15 15:48:33 by apuyane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # include <stdbool.h>
 # include <stdio.h>
+# include <errno.h>
 # include <readline/history.h>
 # include <readline/readline.h>
 # include <unistd.h>
@@ -71,6 +72,8 @@ void	ft_add_history(char *line, t_data *data);
 
 void	signals(t_data *data);
 
+int		ft_mark(t_data *data, t_cmd cmd);
 char	*get_prefix(t_data *data);
+char	*get_path(t_data *data, char *file);
 
 #endif

@@ -6,35 +6,13 @@
 /*   By: apuyane <apuyane@student.42angouleme.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/31 09:02:27 by apuyane           #+#    #+#             */
-/*   Updated: 2026/02/14 07:37:12 by apuyane          ###   ########.fr       */
+/*   Updated: 2026/02/15 15:35:32 by apuyane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "exec.h"
 #include "libft.h"
 #include "free.h"
-
-static void	call_chdir(char *path, t_data *data)
-{
-	char	*tmp;
-
-	if (chdir(path) == -1)
-	{
-		ft_dprintf(2, "cd: %s: %s\n", path, strerror(errno));
-		data->exit_code = 1;
-		return ;
-	}
-	else
-	{
-		tmp = getcwd(NULL, 0);
-		change_env_value(data, "OLDPWD",
-			get_env_from_name("PWD", data->env));
-		change_env_value(data, "PWD", tmp);
-		data->exit_code = 0;
-		free(tmp);
-		return ;
-	}
-}
 
 static void	special_case(char *name, t_data *data)
 {

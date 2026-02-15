@@ -6,7 +6,7 @@
 /*   By: apuyane <apuyane@student.42angouleme.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/13 03:32:53 by apuyane           #+#    #+#             */
-/*   Updated: 2026/02/15 10:47:16 by apuyane          ###   ########.fr       */
+/*   Updated: 2026/02/15 15:48:03 by apuyane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,16 +15,6 @@
 #include "free.h"
 #include "libft.h"
 #include "minishell.h"
-
-static char	*get_hist_path(t_data *data)
-{
-	char	*home;
-
-	home = get_env_from_name("HOME", data->env);
-	if (!home)
-		return (NULL);
-	return (ft_strjoin(home, "/.minishell_history"));
-}
 
 static char	*find_last_line(char *buf, int size)
 {
@@ -80,7 +70,7 @@ void	ft_add_history(char *line, t_data *data)
 
 	if (!line || !*line)
 		return ;
-	path = get_hist_path(data);
+	path = get_path(data, "/.minishell_history");
 	last = get_last_line(path);
 	if ((!last || ft_strcmp(line, last)) || !path)
 	{
