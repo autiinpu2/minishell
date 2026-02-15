@@ -6,7 +6,7 @@
 /*   By: apuyane <apuyane@student.42angouleme.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/15 17:43:58 by apuyane           #+#    #+#             */
-/*   Updated: 2026/02/14 08:47:07 by apuyane          ###   ########.fr       */
+/*   Updated: 2026/02/15 02:56:31 by apuyane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,7 @@ int				ft_putchar_fd(char c, int fd);
 int				ft_putnbr(int nb);
 int				ft_putnbr_fd(int nb, int fd);
 int				ft_putstr_fd(char *str, int fd);
+void			ft_putendl_fd(char *s, int fd);
 
 // input functions
 char			*get_next_line(int fd);

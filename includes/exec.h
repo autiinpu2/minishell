@@ -6,7 +6,7 @@
 /*   By: apuyane <apuyane@student.42angouleme.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/03 05:48:25 by apuyane           #+#    #+#             */
-/*   Updated: 2026/02/13 05:40:23 by apuyane          ###   ########.fr       */
+/*   Updated: 2026/02/15 09:15:16 by apuyane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,9 @@ void	ft_cd(t_data *data, t_cmd cmd);
 int		ft_exit( t_data *data, t_cmd cmd);
 int		ft_unset(t_data *data, t_cmd cmd);
 int		ft_export(t_data *data, t_cmd cmd);
+void	sort_envp(char **envp, size_t len);
+void	print_export(t_env *env);
+char	**export_split(char *arg, t_data *data);
 int		ft_echo(t_cmd cmd);
 
 void	run_forks(t_cmd cmd, t_data *data, int id);

@@ -6,7 +6,7 @@
 /*   By: apuyane <apuyane@student.42angouleme.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/30 07:27:45 by mcomin            #+#    #+#             */
-/*   Updated: 2026/02/13 06:35:45 by apuyane          ###   ########.fr       */
+/*   Updated: 2026/02/15 07:30:32 by apuyane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,8 @@ int		is_in_quotes(char const *s, size_t pos);
 char	**ft_split_quotes(char const *s, char c);
 t_data	*load_data(t_data *data, char *input);
 int		count_pipe(char *input);
-char	*is_path(char *prefix_cmd_name, char **tab_paths);
-char	*cmd_path(t_env *env, char *cmd_name);
+char	*is_path(char *prefix_cmd_name, char **tab_paths, t_cmd *cmd);
+char	*cmd_path(t_env *env, char *cmd_name, t_cmd *cmd);
 int		is_empty_or_spaces(char *input);
 
 void	expand(char **tab_split, t_data *data);

@@ -6,7 +6,7 @@
 /*   By: apuyane <apuyane@student.42angouleme.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/13 03:32:53 by apuyane           #+#    #+#             */
-/*   Updated: 2026/02/13 04:12:13 by apuyane          ###   ########.fr       */
+/*   Updated: 2026/02/15 09:05:22 by apuyane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,51 +16,61 @@
 #include "libft.h"
 #include "minishell.h"
 
-char	*remove_n(char *line)
-{
-	int		i;
-	char	*s;
-	int		len;
+#include "minishell.h"
 
-	if (!line)
+/* Returns the full path to the history file. Protected against NULL HOME. */
+static char	*get_hist_path(t_data *data)
+{
+	char	*home;
+
+	home = get_env_from_name("HOME", data->env);
+	if (!home)
 		return (NULL);
-	len = ft_strlen(line);
-	if (len > 0 && line[len - 1] == '\n')
-		len--;
-	s = ft_calloc((len + 1), sizeof(char));
-	if (!s)
-		return (NULL);
-	i = 0;
-	while (i < len)
-	{
-		s[i] = line[i];
-		i++;
-	}
-	free(line);
-	return (s);
+	return (ft_strjoin(home, "/.minishell_history"));
 }
 
+/* Iterates through the buffer, replacing \n with \0 to add lines to history. */
+static void	parse_history_buffer(char *buf)
+{
+	char	*s;
+	char	*nl;
+
+	s = buf;
+	while (s && *s)
+	{
+		nl = ft_strchr(s, '\n');
+		if (nl)
+			*nl = '\0';
+		if (*s)
+			add_history(s);
+		if (nl)
+			s = nl + 1;
+		else
+			break ;
+	}
+}
+
+/* Reads the entire history file into a dynamically allocated string. */
 void	load_history(t_data *data)
 {
 	int		fd;
-	int		edited;
 	char	*path;
-	char	*line;
+	char	*buf;
+	int		sz;
 
-	edited = 0;
-	path = ft_strjoin(get_env_from_name("HOME", data->env),
-			"/.minishell_history");
-	fd = open(path, O_CREAT | O_RDWR | O_APPEND, 0600);
-	while (!edited || line)
-	{
-		edited = 1;
-		line = get_next_line(fd);
-		line = remove_n(line);
-		if (line)
-			add_history(line);
-		free(line);
-	}
+	path = get_hist_path(data);
+	if (!path)
+		return ;
+	fd = open(path, O_RDONLY);
 	free(path);
+	if (fd < 0)
+		return ;
+	sz = lseek(fd, 0, SEEK_END);
+	lseek(fd, 0, SEEK_SET);
+	buf = ft_calloc(sz + 1, sizeof(char));
+	if (buf && read(fd, buf, sz) > 0)
+		parse_history_buffer(buf);
+	free(buf);
 	close(fd);
 }
 
@@ -69,11 +79,16 @@ void	ft_add_history(char *line, t_data *data)
 	int		fd;
 	char	*path;
 
-	path = ft_strjoin(get_env_from_name("HOME", data->env),
-			"/.minishell_history");
+	if (!line || !*line)
+		return ;
+	path = get_hist_path(data);
+	if (!path)
+		return ;
 	fd = open(path, O_CREAT | O_RDWR | O_APPEND, 0600);
-	write(fd, line, ft_strlen(line));
-	write(fd, "\n", 1);
+	free(path);
+	if (fd < 0)
+		return ;
+	ft_putendl_fd(line, fd);
 	close(fd);
 	add_history(line);
 }
