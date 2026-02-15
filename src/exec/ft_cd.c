@@ -6,7 +6,7 @@
 /*   By: apuyane <apuyane@student.42angouleme.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/31 09:02:27 by apuyane           #+#    #+#             */
-/*   Updated: 2026/02/15 15:35:32 by apuyane          ###   ########.fr       */
+/*   Updated: 2026/02/15 21:09:43 by apuyane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void	ft_cd(t_data *data, t_cmd cmd)
 	args_len = get_args_number(cmd.args);
 	if (args_len > 2)
 	{
-		ft_dprintf(2, "cd: too many arguments");
+		ft_dprintf(2, "minishell: cd: too many arguments");
 		data->exit_code = 1;
 	}
 	else if (args_len == 1)
