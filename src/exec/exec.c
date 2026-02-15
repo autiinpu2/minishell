@@ -6,7 +6,7 @@
 /*   By: apuyane <apuyane@student.42angouleme.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/05 05:22:21 by apuyane           #+#    #+#             */
-/*   Updated: 2026/02/15 09:48:50 by apuyane          ###   ########.fr       */
+/*   Updated: 2026/02/15 15:16:37 by apuyane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,8 @@ int	run_built_in(t_cmd cmd, t_data *data)
 		exit_code = ft_export(data, cmd);
 	else if (!ft_strcmp(cmd.function_name, "echo"))
 		exit_code = ft_echo(cmd);
+	else if (!ft_strcmp(cmd.function_name, "mark"))
+		exit_code = ft_mark(data, cmd);
 	return (exit_code);
 }
 

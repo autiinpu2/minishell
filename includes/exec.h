@@ -6,7 +6,7 @@
 /*   By: apuyane <apuyane@student.42angouleme.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/03 05:48:25 by apuyane           #+#    #+#             */
-/*   Updated: 2026/02/15 09:15:16 by apuyane          ###   ########.fr       */
+/*   Updated: 2026/02/15 15:34:42 by apuyane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,5 +46,6 @@ char	**export_split(char *arg, t_data *data);
 int		ft_echo(t_cmd cmd);
 
 void	run_forks(t_cmd cmd, t_data *data, int id);
+void	call_chdir(char *path, t_data *data);
 
 #endif

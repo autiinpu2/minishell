@@ -6,7 +6,7 @@
 /*   By: apuyane <apuyane@student.42angouleme.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/15 10:46:29 by apuyane           #+#    #+#             */
-/*   Updated: 2026/02/15 10:47:46 by apuyane          ###   ########.fr       */
+/*   Updated: 2026/02/15 15:48:09 by apuyane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,14 +16,14 @@
 #include "libft.h"
 #include "minishell.h"
 
-static char	*get_hist_path(t_data *data)
+char	*get_path(t_data *data, char *file)
 {
 	char	*home;
 
 	home = get_env_from_name("HOME", data->env);
 	if (!home)
 		return (NULL);
-	return (ft_strjoin(home, "/.minishell_history"));
+	return (ft_strjoin(home, file));
 }
 
 static void	parse_history_buffer(char *buf)
@@ -53,7 +53,7 @@ void	load_history(t_data *data)
 	char		*buf;
 	struct stat	st;
 
-	path = get_hist_path(data);
+	path = get_path(data, "/.minishell_history");
 	if (!path)
 		return ;
 	if (stat(path, &st) == -1 || st.st_size <= 0)
