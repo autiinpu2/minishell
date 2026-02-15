@@ -4,6 +4,13 @@ CFLAGS      := -Wall -Wextra -Werror -g -I includes -D_XOPEN_SOURCE=700
 RM          := rm -rf
 MAKE        := make --no-print-directory
 
+UNAME_S := $(shell uname -s)
+ifeq ($(UNAME_S), Darwin)
+    READLINE_DIR := $(shell brew --prefix readline)
+    CFLAGS  += -I$(READLINE_DIR)/include
+    LDFLAGS += -L$(READLINE_DIR)/lib
+endif
+
 OBJ_DIR     := build
 SRC_DIR     := src
 LIBFT_DIR   := libs/libft
