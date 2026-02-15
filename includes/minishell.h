@@ -6,7 +6,7 @@
 /*   By: apuyane <apuyane@student.42angouleme.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/05 05:21:42 by apuyane           #+#    #+#             */
-/*   Updated: 2026/02/15 10:33:12 by apuyane          ###   ########.fr       */
+/*   Updated: 2026/02/15 12:30:09 by apuyane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,5 +70,7 @@ void	load_history(t_data *data);
 void	ft_add_history(char *line, t_data *data);
 
 void	signals(t_data *data);
+
+char	*get_prefix(t_data *data);
 
 #endif

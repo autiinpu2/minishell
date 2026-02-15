@@ -6,7 +6,7 @@
 /*   By: apuyane <apuyane@student.42angouleme.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/25 04:17:27 by apuyane           #+#    #+#             */
-/*   Updated: 2026/02/14 08:21:44 by apuyane          ###   ########.fr       */
+/*   Updated: 2026/02/15 12:28:52 by apuyane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,20 +15,6 @@
 #include "minishell.h"
 #include "exec.h"
 #include "free.h"
-
-static char	*get_prefix(t_data *data)
-{
-	char	*pwd;
-	char	*prompt;
-
-	pwd = get_env_from_name("PWD", data->env);
-	if (!pwd)
-		pwd = getcwd(NULL, 0);
-	else
-		pwd = ft_strdup(pwd);
-	prompt = ft_strjoin_free(pwd, "> ");
-	return (prompt);
-}
 
 int	is_invalid(char *line, t_data *data)
 {
