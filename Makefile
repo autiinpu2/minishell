@@ -4,6 +4,13 @@ CFLAGS      := -Wall -Wextra -Werror -g -I includes -D_XOPEN_SOURCE=700
 RM          := rm -rf
 MAKE        := make --no-print-directory
 
+UNAME_S := $(shell uname -s)
+ifeq ($(UNAME_S), Darwin)
+    READLINE_DIR := $(shell brew --prefix readline)
+    CFLAGS  += -I$(READLINE_DIR)/include
+    LDFLAGS += -L$(READLINE_DIR)/lib
+endif
+
 OBJ_DIR     := build
 SRC_DIR     := src
 LIBFT_DIR   := libs/libft
@@ -31,7 +38,7 @@ OBJS        := $(patsubst $(SRC_DIR)/%.c,$(OBJ_DIR)/%.o,$(SRCS))
 all: $(NAME)
 
 $(NAME): $(LIBFT) $(OBJS)
-	@$(CC) $(CFLAGS) $(OBJS) -L$(LIBFT_DIR) -lft -lreadline -o $(NAME)
+	@$(CC) $(CFLAGS) $(LDFLAGS) $(OBJS) -L$(LIBFT_DIR) -lft -lreadline -o $(NAME)
 	@echo "\033[1;32m$(NAME) created.\033[0m"
 
 $(LIBFT):
