@@ -1,18 +1,20 @@
-name: MacOS
+name: Apline
 
 on: [pull_request]
 
 jobs:
   check-quality:
-    runs-on: macos-latest
+    runs-on: ubuntu-latest
+    container:
+      image: alpine:latest
     continue-on-error: true
     steps:
       - uses: actions/checkout@v4
 
       - name: Install System Dependencies
         run: |
-          brew update
-          brew install readline coreutils
+          apk update
+          apk add build-base readline-dev coreutils python3 py3-pip
 
       - uses: actions/setup-python@v5
         with:
