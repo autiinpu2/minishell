@@ -6,7 +6,7 @@
 /*   By: apuyane <apuyane@student.42angouleme.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/05 05:22:21 by apuyane           #+#    #+#             */
-/*   Updated: 2026/02/15 09:44:58 by apuyane          ###   ########.fr       */
+/*   Updated: 2026/02/15 09:48:50 by apuyane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ int	wait_all_pids(t_data *data)
 			exit_code = data->exit_code;
 		else
 		{
-			if (waitpid(data->cmds[i].pid, &status, 0) != -1) 
+			if (waitpid(data->cmds[i].pid, &status, 0) != -1)
 			{
 				if (WIFEXITED(status))
 					exit_code = WEXITSTATUS(status);

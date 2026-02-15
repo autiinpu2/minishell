@@ -6,7 +6,7 @@
 /*   By: apuyane <apuyane@student.42angouleme.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/10 01:44:35 by apuyane           #+#    #+#             */
-/*   Updated: 2026/02/15 09:31:19 by apuyane          ###   ########.fr       */
+/*   Updated: 2026/02/15 09:48:34 by apuyane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,31 +14,31 @@
 #include "libft.h"
 #include "free.h"
 
-void    create_new_var(char **args, t_data *data)
+void	create_new_var(char **args, t_data *data)
 {
-    t_env_node  *new_node;
-    t_env_node  *curr;
+	t_env_node	*new_node;
+	t_env_node	*curr;
 
-    new_node = ft_calloc(1, sizeof(t_env_node));
-    if (!new_node)
-        return ;
-    new_node->key = ft_strdup(args[0]);
+	new_node = ft_calloc(1, sizeof(t_env_node));
+	if (!new_node)
+		return ;
+	new_node->key = ft_strdup(args[0]);
 	if (args[1])
 		new_node->value = ft_strdup(args[1]);
 	else
 		new_node->value = ft_strdup("");
-    new_node->text = ft_strjoin(new_node->key, "=");
-    new_node->text = ft_strjoin_free(new_node->text, new_node->value);
-    if (!data->env->top)
-        data->env->top = new_node;
-    else
-    {
-        curr = data->env->top;
-        while (curr->next)
-            curr = curr->next;
-        curr->next = new_node;
-    }
-    data->env->size++;
+	new_node->text = ft_strjoin(new_node->key, "=");
+	new_node->text = ft_strjoin_free(new_node->text, new_node->value);
+	if (!data->env->top)
+		data->env->top = new_node;
+	else
+	{
+		curr = data->env->top;
+		while (curr->next)
+			curr = curr->next;
+		curr->next = new_node;
+	}
+	data->env->size++;
 }
 
 void	add_new_env_node(t_data *data, char *arg)
