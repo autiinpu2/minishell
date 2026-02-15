@@ -6,7 +6,7 @@
 /*   By: apuyane <apuyane@student.42angouleme.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/03 09:56:58 by apuyane           #+#    #+#             */
-/*   Updated: 2026/02/15 21:09:51 by apuyane          ###   ########.fr       */
+/*   Updated: 2026/02/15 22:12:23 by apuyane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,8 @@ int	ft_exit(t_data *data, t_cmd cmd)
 		n = ft_strtoll(cmd.args[1], &endptr);
 		if (*endptr != '\0' || n > LONG_MAX || n < LONG_MIN)
 		{
-			ft_dprintf(2, "minishell: exit: %s: numeric argument required\n", cmd.args[1]);
+			ft_dprintf(2, "minishell: exit: %s: numeric argument required\n",
+				cmd.args[1]);
 			n = 2;
 		}
 		data->exit_code = (int)(n % 256);
