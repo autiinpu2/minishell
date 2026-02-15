@@ -6,7 +6,7 @@
 /*   By: apuyane <apuyane@student.42angouleme.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/05 05:21:42 by apuyane           #+#    #+#             */
-/*   Updated: 2026/02/15 05:21:20 by apuyane          ###   ########.fr       */
+/*   Updated: 2026/02/15 10:33:12 by apuyane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
 # include <fcntl.h>
 # include <stdlib.h>
 # include <string.h>
+# include <sys/stat.h>
 # include <limits.h>
 # include <signal.h>
 # include <sys/wait.h>
