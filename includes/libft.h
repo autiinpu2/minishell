@@ -6,7 +6,7 @@
 /*   By: apuyane <apuyane@student.42angouleme.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/15 17:43:58 by apuyane           #+#    #+#             */
-/*   Updated: 2026/02/05 08:09:40 by apuyane          ###   ########.fr       */
+/*   Updated: 2026/02/15 02:56:31 by apuyane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ typedef struct s_dprintf
 
 // is_functions
 bool			ft_isalnum(int c);
+bool			ft_isalnum_string(char *s);
 bool			ft_isalpha(int c);
 bool			ft_isascii(int c);
 bool			ft_isdigit(int c);
@@ -68,6 +69,7 @@ char			*ft_strdup(const char *s);
 char			*ft_substr(char const *s, unsigned int start, size_t len);
 char			*ft_strjoin(char *s1, char *s2);
 char			*ft_strjoin_free(char *s1, char *s2);
+char			*ft_strjoin_tab(char **tab); //add_to_readme
 char			*ft_strtrim(char const *s1, char const *set);
 char			**ft_split(char const *s, char c);
 
@@ -77,6 +79,7 @@ int				ft_putchar_fd(char c, int fd);
 int				ft_putnbr(int nb);
 int				ft_putnbr_fd(int nb, int fd);
 int				ft_putstr_fd(char *str, int fd);
+void			ft_putendl_fd(char *s, int fd);
 
 // input functions
 char			*get_next_line(int fd);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcomin <mcomin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: apuyane <apuyane@student.42angouleme.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/30 01:11:37 by mcomin            #+#    #+#             */
-/*   Updated: 2026/02/11 08:52:01 by mcomin           ###   ########.fr       */
+/*   Updated: 2026/02/15 08:03:24 by apuyane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,10 +71,10 @@ void	handle_token(t_data *data)
 	char	*tmp;
 
 	i = 0;
-	y = 0;
 	while (i < data->size)
 	{
-		while (data->cmds[i].args[y])
+		y = 0;
+		while (data->cmds[i].args && data->cmds[i].args[y])
 		{
 			if (strchr(data->cmds[i].args[y], '\'')
 				|| (strchr(data->cmds[i].args[y], '\"')))
@@ -87,7 +87,8 @@ void	handle_token(t_data *data)
 			y++;
 		}
 		free_single(data->cmds[i].function_name);
-		data->cmds[i].function_name = ft_strdup(data->cmds[i].args[0]);
+		if (data->cmds[i].args)
+			data->cmds[i].function_name = ft_strdup(data->cmds[i].args[0]);
 		i++;
 	}
 }

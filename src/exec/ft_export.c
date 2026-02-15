@@ -6,7 +6,7 @@
 /*   By: apuyane <apuyane@student.42angouleme.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/10 01:44:35 by apuyane           #+#    #+#             */
-/*   Updated: 2026/02/13 05:44:43 by apuyane          ###   ########.fr       */
+/*   Updated: 2026/02/15 09:48:34 by apuyane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,69 +14,53 @@
 #include "libft.h"
 #include "free.h"
 
-void	sort_envp(char **envp, size_t len)
+void	create_new_var(char **args, t_data *data)
 {
-	size_t	i;
-	char	*tmp;
+	t_env_node	*new_node;
+	t_env_node	*curr;
 
-	i = 0;
-	while (i + 1 < len)
+	new_node = ft_calloc(1, sizeof(t_env_node));
+	if (!new_node)
+		return ;
+	new_node->key = ft_strdup(args[0]);
+	if (args[1])
+		new_node->value = ft_strdup(args[1]);
+	else
+		new_node->value = ft_strdup("");
+	new_node->text = ft_strjoin(new_node->key, "=");
+	new_node->text = ft_strjoin_free(new_node->text, new_node->value);
+	if (!data->env->top)
+		data->env->top = new_node;
+	else
 	{
-		if (ft_strcmp(envp[i], envp[i + 1]) > 0)
-		{
-			tmp = envp[i];
-			envp[i] = envp[i + 1];
-			envp[i + 1] = tmp;
-			i = 0;
-		}
-		else
-			i++;
+		curr = data->env->top;
+		while (curr->next)
+			curr = curr->next;
+		curr->next = new_node;
 	}
-}
-
-static void	print_export(t_env *env)
-{
-	char	**envp;
-	size_t	len;
-	size_t	i;
-
-	i = 0;
-	envp = env_to_envp(env);
-	len = get_args_number(envp);
-	sort_envp(envp, len);
-	while (i < len)
-	{
-		printf("%s\n", envp[i]);
-		i++;
-	}
-	free_tab(envp);
+	data->env->size++;
 }
 
 void	add_new_env_node(t_data *data, char *arg)
 {
 	char		**args;
-	t_env_node	*node;
 
-	node = data->env->top;
-	while (node->next)
-		node = node->next;
-	args = ft_split(arg, '=');
+	args = export_split(arg, data);
 	if (!args)
-		return ;
-	if (!ft_isalpha(args[0][0]))
 	{
-		ft_dprintf(2, "export: `1': not a valid identifier\n");
+		ft_dprintf(2, "export: `%s': not a valid identifier\n", arg);
 		data->exit_code = 1;
 		return ;
 	}
-	node->next = ft_calloc(1, sizeof(t_env_node));
-	node = node->next;
-	node->key = ft_strdup(args[0]);
-	if (args[1])
-		node->value = ft_strdup(args[1]);
-	node->text = ft_strjoin(node->key, "=");
-	node->text = ft_strjoin_free(node->text, node->value);
-	data->env->size += 1;
+	if (env_exist(args[0], data->env) && args[1])
+		change_env_value(data, args[0], args[1]);
+	else if (!args[1])
+	{
+		free_tab(args);
+		return ;
+	}
+	else
+		create_new_var(args, data);
 	free_tab(args);
 }
 

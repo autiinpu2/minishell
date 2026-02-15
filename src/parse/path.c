@@ -6,24 +6,36 @@
 /*   By: apuyane <apuyane@student.42angouleme.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/04 00:35:21 by mcomin            #+#    #+#             */
-/*   Updated: 2026/02/14 06:31:38 by apuyane          ###   ########.fr       */
+/*   Updated: 2026/02/15 09:12:33 by apuyane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parsing.h"
 
-bool	check_access(char *path)
+int	check_access(char *path, t_cmd *cmd)
 {
 	struct stat	st;
 
 	if (stat(path, &st) == 0)
 	{
 		if (S_ISDIR(st.st_mode))
-			return (false);
+		{
+			cmd->access = 2;
+			return (2);
+		}
 		else if (S_ISREG(st.st_mode) && access(path, X_OK) == 0)
-			return (true);
+		{
+			cmd->access = 0;
+			return (0);
+		}
+		else if (S_ISREG(st.st_mode) && access(path, F_OK) == 0)
+		{
+			cmd->access = 3;
+			return (3);
+		}
 	}
-	return (false);
+	cmd->access = 1;
+	return (1);
 }
 
 int	count_pipe(char *input)
@@ -42,47 +54,69 @@ int	count_pipe(char *input)
 	return (count);
 }
 
-char	*is_path(char *prefix_cmd_name, char **tab_paths)
+char	*is_path(char *prefix_cmd_name, char **tab_paths, t_cmd *cmd)
 {
-	int		i;
-	char	*test_path;
+	int			i;
+	char		*test_path;
+	struct stat	st;
 
 	i = 0;
-	while (tab_paths[i])
+	while (tab_paths && tab_paths[i])
 	{
 		test_path = ft_strjoin(tab_paths[i], prefix_cmd_name);
-		if (check_access(test_path))
-			return (test_path);
+		if (!test_path)
+			return (NULL);
+		if (stat(test_path, &st) == 0)
+		{
+			if (S_ISREG(st.st_mode) && access(test_path, X_OK) == 0)
+			{
+				cmd->access = 0;
+				return (test_path);
+			}
+		}
 		free(test_path);
 		i++;
 	}
 	return (NULL);
 }
 
-char	*cmd_path(t_env *env, char *cmd_name)
+static char	**get_search_paths(t_env *env)
 {
-	char	*prefix_cmd_name;
-	char	*env_path;
-	char	**tab_paths;
-	char	*test_path;
+	char	*path;
+	char	**paths;
 
-	if (!cmd_name[0] || !cmd_name)
-		return (NULL);
-	env_path = get_env_from_name("PATH", env);
-	tab_paths = ft_split(env_path, ':');
-	prefix_cmd_name = ft_strjoin("/", cmd_name);
-	if (tab_paths)
-		test_path = is_path(prefix_cmd_name, tab_paths);
-	else
-		test_path = ft_strdup("");
-	if (!test_path && check_access(cmd_name))
+	path = get_env_from_name("PATH", env);
+	if (!path)
+		path = get_env_from_name("PWD", env);
+	paths = ft_split(path, ':');
+	return (paths);
+}
+
+char	*cmd_path(t_env *env, char *cmd_name, t_cmd *cmd)
+{
+	char	**tab_paths;
+	char	*prefix;
+	char	*res_path;
+
+	if (!cmd_name)
 	{
-		test_path = ft_strdup(cmd_name);
-		return (test_path);
+		cmd->access = 1;
+		return (NULL);
 	}
-	if (!test_path)
-		test_path = ft_strdup("");
+	if (ft_strchr(cmd_name, '/'))
+	{
+		check_access(cmd_name, cmd);
+		return (ft_strdup(cmd_name));
+	}
+	tab_paths = get_search_paths(env);
+	prefix = ft_strjoin("/", cmd_name);
+	res_path = is_path(prefix, tab_paths, cmd);
+	free(prefix);
 	free_tab(tab_paths);
-	free(prefix_cmd_name);
-	return (test_path);
+	if (!res_path)
+	{
+		cmd->access = 1;
+		return (ft_strdup(cmd_name));
+	}
+	return (res_path);
 }

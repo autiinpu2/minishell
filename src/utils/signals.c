@@ -6,7 +6,7 @@
 /*   By: apuyane <apuyane@student.42angouleme.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/14 04:13:18 by apuyane           #+#    #+#             */
-/*   Updated: 2026/02/14 06:56:22 by apuyane          ###   ########.fr       */
+/*   Updated: 2026/02/14 07:28:55 by apuyane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	sig_handler(int signal)
 	if (signal == SIGINT)
 	{
 		g_signal_status = SIGINT;
-		write(1, "\n", 1);
+		write(2, "\n", 1);
 		rl_on_new_line();
 		rl_replace_line("", 0);
 		rl_redisplay();

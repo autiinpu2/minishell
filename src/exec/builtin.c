@@ -6,7 +6,7 @@
 /*   By: apuyane <apuyane@student.42angouleme.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/03 09:56:58 by apuyane           #+#    #+#             */
-/*   Updated: 2026/02/13 06:19:44 by apuyane          ###   ########.fr       */
+/*   Updated: 2026/02/14 07:41:56 by apuyane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int	ft_env(t_data *data, t_cmd cmd)
 	duplicate_fds(cmd.infile, cmd.outfile, &stdin, &stdout);
 	while (node)
 	{
-		printf("%s\n", node->text);
+		ft_dprintf(1, "%s\n", node->text);
 		node = node->next;
 	}
 	restore_fds(stdin, stdout);
@@ -48,7 +48,7 @@ int	ft_pwd(t_data *data, t_cmd cmd)
 	duplicate_fds(cmd.infile, cmd.outfile, &stdin, &stdout);
 	pwd = get_env_from_name("PWD", data->env);
 	if (pwd)
-		printf("%s\n", pwd);
+		ft_dprintf(1, "%s\n", pwd);
 	else
 		exit_code = 1;
 	restore_fds(stdin, stdout);

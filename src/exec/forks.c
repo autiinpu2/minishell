@@ -6,7 +6,7 @@
 /*   By: apuyane <apuyane@student.42angouleme.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/05 09:08:22 by apuyane           #+#    #+#             */
-/*   Updated: 2026/02/14 06:55:22 by apuyane          ###   ########.fr       */
+/*   Updated: 2026/02/15 08:00:26 by apuyane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,17 +50,34 @@ static void	check_pipes(t_cmd cmd)
 	}
 }
 
-void	run_cmd(t_data *data, t_cmd cmd)
+void	err(t_cmd cmd, t_data *data)
 {
-	char	**envp;
-
-	if (!cmd.path || !cmd.path[0])
+	if (cmd.access == -1)
+		exit(0);
+	if (cmd.access == 1)
 	{
 		ft_dprintf(2, "%s: command not found\n", cmd.function_name);
 		close_every_pipe(data->cmds, -1);
 		free_data(data);
 		exit(127);
 	}
+	else if (cmd.access == 2)
+		ft_dprintf(2, "%s: Is a directory\n", cmd.function_name);
+	else if (cmd.access == 3)
+		ft_dprintf(2, "%s: Permission denied\n", cmd.function_name);
+	if (cmd.access >= 2)
+	{
+		close_every_pipe(data->cmds, -1);
+		free_data(data);
+		exit(126);
+	}
+}
+
+void	run_cmd(t_data *data, t_cmd cmd)
+{
+	char	**envp;
+
+	err(cmd, data);
 	envp = env_to_envp(data->env);
 	check_pipes(cmd);
 	dup2(cmd.infile, 0);

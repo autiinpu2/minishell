@@ -1,14 +1,12 @@
-name: Tester Check
+name: Minishell Tester
 
 on:
   push:
     branches: [ "main" ]
-  pull_request:
-    branches: [ "main" ]
 
 jobs:
   run-tester:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
 
     steps:
       - name: Checkout Minishell
@@ -17,40 +15,59 @@ jobs:
       - name: Install Dependencies
         run: |
           sudo apt-get update
-          sudo apt-get install -y libreadline-dev valac libglib2.0-dev build-essential
+          sudo apt-get install -y libreadline-dev valac libglib2.0-dev build-essential valgrind
 
+      # 1. COMPILATION
       - name: Build Minishell
         run: make re
 
-      - name: Setup & Run Tester
+      - name: Setup Tester
         run: |
-          git clone https://gitlab.com/nda-cunh/minishell_tester.git tester_dir
-          cd tester_dir
-          make
-          chmod +x ./tester
-          
-          timeout 30s ./tester -j 1 ../minishell > ../test_output.txt 2>&1 || true
+          git clone https://gitlab.com/nda-cunh/minishell_tester.git tester_repo
+          cd tester_repo && make
+          # We leave 'tester' inside 'tester_repo' so it can find '../minishell'
 
-          cat ../test_output.txt
-          
-      - name: Display result
+      # 2. RUN TESTS
+      - name: Run All Tests
         run: |
+          # Change directory into the tester folder so '../minishell' works
+          cd tester_repo
+          
+          echo "Running Standard Tests..."
+          timeout 120s ./tester -j 1 ../minishell > ../test_output.txt 2>&1 || true
+          
+          echo "Running Leak Tests (Valgrind)..."
+          timeout 240s ./tester -v ../minishell > ../test_output_leaks.txt 2>&1 || true
+
+      # 3. PRINT LOGS
+      - name: Print Raw Logs
+        run: |
+          echo -e "\n--- STANDARD TEST LOGS ---"
+          cat test_output.txt
+          echo -e "\n--- LEAK TEST LOGS ---"
+          cat test_output_leaks.txt
+
+      # 4. PRINT RESULT
+      - name: Print Final Result
+        if: always()
+        run: |
+          echo -e "\n\033[1;34m==========================================\033[0m"
+          echo -e "\033[1;34m          MINISHELL FINAL REPORT          \033[0m"
           echo -e "\033[1;34m==========================================\033[0m\n"
           
-          echo -e "\n\033[1;34m"
-          echo "=========================================="
-          echo "          MINISHELL TEST RESULTS          "
-          echo "=========================================="
-          echo -e "\033[0m"
+          SCORE=$(grep "\[Total\]:" test_output.txt | sed 's/\[Total\]: //' || echo "N/A")
+          LEAK_SCORE=$(grep "\[Total\]:" test_output_leaks.txt | sed 's/\[Total\]: //' || echo "N/A")
           
-          SCORE=$(grep "\[Total\]:" test_output.txt | sed 's/\[Total\]: //')
-          
-          if [ -z "$SCORE" ]; then
-            echo -e "\033[1;31m[!] Error: Score not found (Timeout or Build failed)\033[0m"
-            tail -n 10 test_output.txt
+          if [[ "$SCORE" == *"/"* ]]; then
+            echo -e "\033[1;32m[✓] MANDATORY SCORE: $SCORE\033[0m"
           else
-            echo -e "\033[1;32m[✓] FINAL SCORE: $SCORE\033[0m"
+            echo -e "\033[1;31m[!] MANDATORY SCORE: FAILED/TIMEOUT\033[0m"
           fi
-          echo -e "\n\033[1;34m==========================================\033[0m\n"
-
-      
+          
+          if [[ "$LEAK_SCORE" == *"/"* ]]; then
+            echo -e "\033[1;32m[✓] LEAK SCORE:      $LEAK_SCORE\033[0m"
+          else
+            echo -e "\033[1;31m[!] LEAK SCORE:      FAILED/TIMEOUT\033[0m"
+          fi
+          
+          echo -e "\n\033[1;34m==========================================\033[0m"

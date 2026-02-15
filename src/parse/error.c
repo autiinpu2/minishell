@@ -6,7 +6,7 @@
 /*   By: apuyane <apuyane@student.42angouleme.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/04 01:46:10 by mcomin            #+#    #+#             */
-/*   Updated: 2026/02/11 09:26:25 by apuyane          ###   ########.fr       */
+/*   Updated: 2026/02/14 08:09:46 by apuyane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,9 @@ int	is_empty_or_spaces(char *input)
 	i = 0;
 	if (!input[i])
 		return (1);
-	else if (input[i] == ' ')
+	else if (ft_isspace(input[i]))
 	{
-		while (input[i] == ' ')
+		while (ft_isspace(input[i]))
 			i++;
 		if (input[i] == '\0')
 			return (1);
