@@ -6,7 +6,7 @@
 /*   By: apuyane <apuyane@student.42angouleme.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/25 04:17:27 by apuyane           #+#    #+#             */
-/*   Updated: 2026/02/15 12:28:52 by apuyane          ###   ########.fr       */
+/*   Updated: 2026/02/16 23:09:40 by apuyane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ void	loop(t_data *data)
 		if (!line)
 		{
 			ft_dprintf(2, "exit\n");
-			break ;
+			return ;
 		}
 		if (*line)
 			ft_add_history(line, data);
@@ -61,7 +61,7 @@ void	loop(t_data *data)
 		free_cmds(data);
 		free_single(line);
 		if (data->exit)
-			break ;
+			return ;
 	}
 }
 
@@ -75,6 +75,7 @@ int	main(int ac, char **av, char **envp)
 	data = new_data(envp);
 	load_history(data);
 	signals(data);
+	minishellrc(data);
 	loop(data);
 	exit_code = data->exit_code;
 	free_data(data);

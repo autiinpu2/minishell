@@ -6,7 +6,7 @@
 /*   By: apuyane <apuyane@student.42angouleme.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/30 07:27:45 by mcomin            #+#    #+#             */
-/*   Updated: 2026/02/15 10:33:27 by apuyane          ###   ########.fr       */
+/*   Updated: 2026/02/17 00:28:53 by apuyane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ int		is_empty_or_spaces(char *input);
 
 void	expand(char **tab_split, t_data *data);
 char	*get_expanded_string(char *string, int begin, int end, t_data *data);
+char	*get_expanded_home(char *string, int begin, int end, t_data *data);
 char	*ft_exit_code(t_data *data, char *str_begin);
 char	*remove_char_i(char *str, int index);
 int		get_quote_state(char *string, size_t pos);

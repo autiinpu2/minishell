@@ -6,7 +6,7 @@
 /*   By: apuyane <apuyane@student.42angouleme.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/05 05:21:42 by apuyane           #+#    #+#             */
-/*   Updated: 2026/02/15 15:48:33 by apuyane          ###   ########.fr       */
+/*   Updated: 2026/02/16 23:15:03 by apuyane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,11 +64,14 @@ t_data	*new_data(char **envp);
 int		check_syntax(char *input);
 int		is_empty_or_spaces(char *input);
 bool	is_built_in(char *name);
+int		is_invalid(char *line, t_data *data);
 
 int		get_args_number(char **args);
 
 void	load_history(t_data *data);
 void	ft_add_history(char *line, t_data *data);
+
+void	minishellrc(t_data *data);
 
 void	signals(t_data *data);
 

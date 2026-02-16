@@ -6,7 +6,7 @@
 /*   By: apuyane <apuyane@student.42angouleme.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/10 00:46:40 by apuyane           #+#    #+#             */
-/*   Updated: 2026/02/14 06:55:59 by apuyane          ###   ########.fr       */
+/*   Updated: 2026/02/17 00:29:40 by apuyane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	skip_chars(char *tab, int *j)
 	}
 }
 
-void	second_if(char **tab_split, t_data *data, int *j)
+void	expand_variable(char **tab_split, t_data *data, int *j)
 {
 	int		reminder;
 	char	*str;
@@ -37,6 +37,14 @@ void	second_if(char **tab_split, t_data *data, int *j)
 		if (str[reminder] != '?')
 			skip_chars(str, j);
 		*tab_split = get_expanded_string(str, reminder,
+				*j + 1, data);
+		*j = -1;
+	}
+	if (str[*j] == '~')
+	{
+		reminder = *j + 1;
+		(*j)++;
+		*tab_split = get_expanded_home(str, reminder,
 				*j + 1, data);
 		*j = -1;
 	}
@@ -60,7 +68,7 @@ void	expand(char **tab_split, t_data *data)
 				tab_split[i] = remove_char_i(tab_split[i], j);
 				continue ;
 			}
-			second_if(&tab_split[i], data, &j);
+			expand_variable(&tab_split[i], data, &j);
 			j++;
 		}
 		i++;
