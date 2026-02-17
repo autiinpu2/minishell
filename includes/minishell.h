@@ -6,7 +6,7 @@
 /*   By: apuyane <apuyane@student.42angouleme.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/05 05:21:42 by apuyane           #+#    #+#             */
-/*   Updated: 2026/02/16 23:15:03 by apuyane          ###   ########.fr       */
+/*   Updated: 2026/02/17 01:02:04 by apuyane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,8 @@
 # include <limits.h>
 # include <signal.h>
 # include <sys/wait.h>
+# include <termios.h>
+# include <sys/ioctl.h>
 # include "env.h"
 
 extern int	g_signal_status;
