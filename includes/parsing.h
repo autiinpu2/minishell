@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apuyane <apuyane@student.42angouleme.fr    +#+  +:+       +#+        */
+/*   By: mcomin <mcomin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/30 07:27:45 by mcomin            #+#    #+#             */
-/*   Updated: 2026/02/17 00:28:53 by apuyane          ###   ########.fr       */
+/*   Updated: 2026/02/17 05:44:47 by mcomin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,5 +34,11 @@ char	*get_expanded_home(char *string, int begin, int end, t_data *data);
 char	*ft_exit_code(t_data *data, char *str_begin);
 char	*remove_char_i(char *str, int index);
 int		get_quote_state(char *string, size_t pos);
+int		is_redir(char *args);
+int     handle_redir(t_data *data);
+int		redir_1 (t_data *data, int i);
+int		redir_2 (t_data *data, int i);
+int		redir_3 (t_data *data, int i);
+int		redir_4 (t_data *data, int i);
 
 #endif

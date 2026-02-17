@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apuyane <apuyane@student.42angouleme.fr    +#+  +:+       +#+        */
+/*   By: mcomin <mcomin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/05 05:21:42 by apuyane           #+#    #+#             */
-/*   Updated: 2026/02/17 01:10:21 by apuyane          ###   ########.fr       */
+/*   Updated: 2026/02/17 04:43:10 by mcomin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ extern int	g_signal_status;
 
 typedef struct s_redir
 {
-	int		type; // 1">"" 2">>"" 3"<" 4"<<"
+	int		type;
 	char	*file;
 }				t_redir;
 

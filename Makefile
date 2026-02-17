@@ -21,10 +21,11 @@ SRC_MAIN        := main.c
 
 SRC_UTILS_DIR   := $(SRC_DIR)/utils
 SRC_UTILS       := envp_utils.c free_utils.c builtin_utils.c free_protected.c fds_utils.c \
-					history.c signals.c envp_info.c history_load.c prompt.c run_commands.c
+					history.c signals.c envp_info.c history_load.c prompt.c run_commands.c redir_utils.c
 
 SRC_PARSE_DIR   := $(SRC_DIR)/parse
-SRC_PARSE       := init_parsing.c parse.c path.c error.c ft_split_quotes.c expand.c expand_utils.c 
+SRC_PARSE       := init_parsing.c parse.c path.c error.c ft_split_quotes.c expand.c expand_utils.c redir_file.c \
+					redir.c
 
 SRC_EXEC_DIR    := $(SRC_DIR)/exec
 SRC_EXEC        := exec.c builtin.c ft_cd.c ft_unset.c ft_export.c forks.c ft_echo.c ft_export_utils.c mark.c
