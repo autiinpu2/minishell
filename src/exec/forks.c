@@ -6,7 +6,7 @@
 /*   By: apuyane <apuyane@student.42angouleme.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/05 09:08:22 by apuyane           #+#    #+#             */
-/*   Updated: 2026/02/15 21:09:21 by apuyane          ###   ########.fr       */
+/*   Updated: 2026/02/17 08:27:52 by apuyane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,8 +44,7 @@ static void	check_pipes(t_cmd cmd)
 	}
 	if (cmd.outfile == -1)
 	{
-		if (cmd.infile != -1)
-			close(cmd.infile);
+		close(cmd.infile);
 		exit(1);
 	}
 }

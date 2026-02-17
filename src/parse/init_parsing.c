@@ -6,7 +6,7 @@
 /*   By: apuyane <apuyane@student.42angouleme.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/05 05:22:34 by apuyane           #+#    #+#             */
-/*   Updated: 2026/02/15 09:06:50 by apuyane          ###   ########.fr       */
+/*   Updated: 2026/02/17 08:17:27 by apuyane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,8 @@ t_data	*load_data(t_data *data, char *input)
 	tab_split = ft_split_quotes(input, '|');
 	data->size = count_pipe(input) + 1;
 	data->cmds = ft_calloc(data->size + 2, sizeof(t_cmd));
+	if (!data->cmds)
+		return (NULL);
 	expand(tab_split, data);
 	while ((size_t)i < data->size)
 	{
@@ -87,22 +89,27 @@ void	update_shlvl(t_data *data)
 	int		value;
 	char	*actual_value;
 	char	*new_value;
+	char	*endptr;
 
 	actual_value = get_env_from_name("SHLVL", data->env);
-	value = ft_strtol(actual_value, NULL);
+	value = ft_strtol(actual_value, &endptr);
+	if (*endptr != '\0')
+		value = 0;
 	value += 1;
 	new_value = ft_itoa(value);
+	if (!new_value)
+		return ;
 	change_env_value(data, "SHLVL", new_value);
 	free(new_value);
 }
 
-t_data	*new_data(char **envp)
+t_data	*init_data(char **envp)
 {
 	t_data	*data;
 
 	data = ft_calloc(1, sizeof(t_data));
-	data->cmds = NULL;
-	data->size = 0;
+	if (!data)
+		return (NULL);
 	data->env = load_envp(envp);
 	update_shlvl(data);
 	data->exit_code = EXIT_SUCCESS;
