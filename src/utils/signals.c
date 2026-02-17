@@ -6,10 +6,11 @@
 /*   By: apuyane <apuyane@student.42angouleme.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/14 04:13:18 by apuyane           #+#    #+#             */
-/*   Updated: 2026/02/17 02:29:13 by apuyane          ###   ########.fr       */
+/*   Updated: 2026/02/17 05:21:52 by apuyane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "libft.h"
 #include "minishell.h"
 
 int	g_signal_status = 0;
@@ -36,7 +37,7 @@ void	signals(void)
 {
 	struct sigaction	act;
 
-	memset(&act, 0, sizeof(act));
+	ft_memset(&act, 0, sizeof(act));
 	act.sa_handler = &sig_handler;
 	sigemptyset(&act.sa_mask);
 	if (isatty(STDIN_FILENO))

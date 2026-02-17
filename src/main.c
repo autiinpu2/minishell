@@ -6,7 +6,7 @@
 /*   By: apuyane <apuyane@student.42angouleme.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/25 04:17:27 by apuyane           #+#    #+#             */
-/*   Updated: 2026/02/17 04:16:34 by apuyane          ###   ########.fr       */
+/*   Updated: 2026/02/17 05:32:31 by apuyane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,12 +30,13 @@ int	is_invalid(char *line, t_data *data)
 
 int	check_signal(t_data *data)
 {
-	if (g_signal_status == SIGINT)
+	if (g_signal_status != 0)
 	{
-		data->exit_code = 128 + SIGINT;
+		data->exit_code = 128 + g_signal_status;
+		g_signal_status = 0;
+		return (1);
 	}
-	g_signal_status = 0;
-	return (data->exit_code);
+	return (0);
 }
 
 void	process_input(t_data *data, char *line)
@@ -62,7 +63,8 @@ void	loop(t_data *data)
 		prefix = get_prefix(data);
 		line = readline(prefix);
 		free_single(prefix);
-		data->exit_code = check_signal(data);
+		if (check_signal(data) != 0)
+			continue ;
 		if (!line)
 			break ;
 		process_input(data, line);
