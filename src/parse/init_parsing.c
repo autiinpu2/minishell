@@ -6,7 +6,7 @@
 /*   By: apuyane <apuyane@student.42angouleme.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/05 05:22:34 by apuyane           #+#    #+#             */
-/*   Updated: 2026/02/17 03:27:26 by apuyane          ###   ########.fr       */
+/*   Updated: 2026/02/17 06:54:08 by apuyane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ t_cmd	new_cmd(char *token, t_data *data, int i)
 		return (data->cmds[i]);
 	}
 	data->cmds[i].args = ft_split_quotes(token, ' ');
+	handle_redir(data);
 	data->cmds[i].function_name = ft_strdup(data->cmds[i].args[0]);
 	data->cmds[i].is_built_in = is_built_in(data->cmds[i].function_name);
 	if (count_quotes_closed(data->cmds[i].function_name))
@@ -59,7 +60,6 @@ t_cmd	new_cmd(char *token, t_data *data, int i)
 	else
 		data->cmds[i].path = ft_strdup(data->cmds[i].function_name);
 	cmd_is_pipe(data, i);
-	i++;
 	return (data->cmds[i]);
 }
 

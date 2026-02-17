@@ -6,7 +6,7 @@
 /*   By: apuyane <apuyane@student.42angouleme.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/05 05:21:42 by apuyane           #+#    #+#             */
-/*   Updated: 2026/02/17 06:44:07 by apuyane          ###   ########.fr       */
+/*   Updated: 2026/02/17 06:53:49 by apuyane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ extern int	g_signal_status;
 
 typedef struct s_redir
 {
-	int		type; // 1">"" 2">>"" 3"<" 4"<<"
+	int		type;
 	char	*file;
 }				t_redir;
 
