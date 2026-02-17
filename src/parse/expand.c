@@ -6,7 +6,7 @@
 /*   By: apuyane <apuyane@student.42angouleme.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/10 00:46:40 by apuyane           #+#    #+#             */
-/*   Updated: 2026/02/17 08:29:29 by apuyane          ###   ########.fr       */
+/*   Updated: 2026/02/17 08:40:22 by apuyane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,8 @@ void	expand(char **tab_split, t_data *data)
 	int	j;
 
 	i = 0;
+	if (!tab_split)
+		return ;
 	while (tab_split[i])
 	{
 		j = 0;
