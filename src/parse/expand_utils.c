@@ -6,7 +6,7 @@
 /*   By: apuyane <apuyane@student.42angouleme.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/13 06:33:48 by apuyane           #+#    #+#             */
-/*   Updated: 2026/02/13 06:36:21 by apuyane          ###   ########.fr       */
+/*   Updated: 2026/02/17 00:28:18 by apuyane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,28 @@ int	get_quote_state(char *string, size_t pos)
 		i++;
 	}
 	return (state);
+}
+
+char	*get_expanded_home(char *string, int begin, int end, t_data *data)
+{
+	char	*str_begin;
+	char	*str_end;
+	char	*total;
+	char	*var;
+
+	if (get_quote_state(string, begin) == 1)
+		return (string);
+	if (begin)
+		str_begin = ft_substr(string, 0, begin - 1);
+	else
+		str_begin = ft_strdup("");
+	var = get_env_from_name("HOME", data->env);
+	total = ft_strjoin(str_begin, var);
+	str_end = ft_substr(string, end, ft_strlen(string));
+	total = ft_strjoin_free(total, str_end);
+	free_double(str_begin, var);
+	free_double(str_end, string);
+	return (total);
 }
 
 char	*get_expanded_string(char *string, int begin, int end, t_data *data)
