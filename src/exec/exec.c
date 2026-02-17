@@ -6,7 +6,7 @@
 /*   By: apuyane <apuyane@student.42angouleme.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/05 05:22:21 by apuyane           #+#    #+#             */
-/*   Updated: 2026/02/17 02:29:52 by apuyane          ###   ########.fr       */
+/*   Updated: 2026/02/17 08:44:00 by apuyane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,8 @@ void	run_processes(t_data *data)
 	int		i;
 
 	i = 0;
+	if (!data->cmds)
+		return ;
 	while (data->cmds[i].function_name)
 	{
 		if (data->cmds[i].is_built_in)

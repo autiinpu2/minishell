@@ -6,7 +6,7 @@
 /*   By: apuyane <apuyane@student.42angouleme.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/30 01:11:37 by mcomin            #+#    #+#             */
-/*   Updated: 2026/02/15 08:03:24 by apuyane          ###   ########.fr       */
+/*   Updated: 2026/02/17 08:38:10 by apuyane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,8 @@ char	*supp_quotes(char *str)
 	i = -1;
 	size = ft_strlen(str) - count_quotes_closed(str);
 	res = ft_calloc(size + 1, sizeof(char));
+	if (!res)
+		return (NULL);
 	while (str[++i])
 	{
 		if (!type_quote && (str[i] == '\"' || str[i] == '\''))
@@ -56,10 +58,7 @@ char	*supp_quotes(char *str)
 		else if (str[i] == type_quote)
 			type_quote = 0;
 		else
-		{
-			res[j] = str[i];
-			j++;
-		}
+			res[j++] = str[i];
 	}
 	return (res);
 }

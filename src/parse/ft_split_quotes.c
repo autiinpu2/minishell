@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split_quotes.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcomin <mcomin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: apuyane <apuyane@student.42angouleme.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/05 07:37:34 by mcomin            #+#    #+#             */
-/*   Updated: 2026/02/11 06:36:53 by mcomin           ###   ########.fr       */
+/*   Updated: 2026/02/17 08:30:21 by apuyane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ static char	**wordsmalloc(char const *s, char c)
 			in_word = 0;
 		i++;
 	}
-	str = calloc(words + 1, sizeof(char *));
+	str = ft_calloc(words + 1, sizeof(char *));
 	if (!str)
 		return (NULL);
 	return (str);
@@ -100,16 +100,13 @@ char	**ft_split_quotes(char const *s, char c)
 	if (!str)
 		return (NULL);
 	fill(s, str, c);
-	if (!str)
+	while (str[i])
 	{
-		while (str[i])
-		{
-			free(str[i]);
-			str[i] = NULL;
-			i++;
-		}
-		free(str);
-		str = NULL;
+		free(str[i]);
+		str[i] = NULL;
+		i++;
 	}
+	free(str);
+	str = NULL;
 	return (str);
 }

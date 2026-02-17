@@ -6,7 +6,7 @@
 /*   By: apuyane <apuyane@student.42angouleme.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/13 06:33:48 by apuyane           #+#    #+#             */
-/*   Updated: 2026/02/17 00:28:18 by apuyane          ###   ########.fr       */
+/*   Updated: 2026/02/17 07:43:39 by apuyane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ char	*get_expanded_home(char *string, int begin, int end, t_data *data)
 	total = ft_strjoin(str_begin, var);
 	str_end = ft_substr(string, end, ft_strlen(string));
 	total = ft_strjoin_free(total, str_end);
-	free_double(str_begin, var);
+	free_single(str_begin);
 	free_double(str_end, string);
 	return (total);
 }
