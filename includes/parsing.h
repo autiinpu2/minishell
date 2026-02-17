@@ -6,7 +6,7 @@
 /*   By: apuyane <apuyane@student.42angouleme.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/30 07:27:45 by mcomin            #+#    #+#             */
-/*   Updated: 2026/02/17 03:31:44 by apuyane          ###   ########.fr       */
+/*   Updated: 2026/02/17 04:03:36 by apuyane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,5 @@ int		count_pipe(char *input);
 char	*is_path(char *prefix_cmd_name, char **tab_paths, t_cmd *cmd);
 char	*cmd_path(t_env *env, char *cmd_name, t_cmd *cmd);
 int		is_empty_or_spaces(char *input);
-
 
 #endif

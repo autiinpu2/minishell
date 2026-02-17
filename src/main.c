@@ -6,7 +6,7 @@
 /*   By: apuyane <apuyane@student.42angouleme.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/25 04:17:27 by apuyane           #+#    #+#             */
-/*   Updated: 2026/02/17 03:50:13 by apuyane          ###   ########.fr       */
+/*   Updated: 2026/02/17 04:16:34 by apuyane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,34 +38,37 @@ int	check_signal(t_data *data)
 	return (data->exit_code);
 }
 
+void	process_input(t_data *data, char *line)
+{
+	if (*line)
+		ft_add_history(line, data);
+	expand(&line, data);
+	if (!is_invalid(line, data))
+	{
+		if (!parsing(data, line))
+			data->exit_code = exec(data);
+	}
+	free_cmds(data);
+	free_single(line);
+}
+
 void	loop(t_data *data)
 {
 	char	*line;
 	char	*prefix;
 
-	while (true)
+	while (!data->exit)
 	{
 		prefix = get_prefix(data);
 		line = readline(prefix);
 		free_single(prefix);
 		data->exit_code = check_signal(data);
 		if (!line)
-		{
-			ft_dprintf(2, "exit\n");
-			return ;
-		}
-		if (*line)
-			ft_add_history(line, data);
-		expand(&line, data);
-		if (is_invalid(line, data))
-			continue ;
-		if (!parsing(data, line))
-			data->exit_code = exec(data);
-		free_cmds(data);
-		free_single(line);
-		if (data->exit)
-			return ;
+			break ;
+		process_input(data, line);
 	}
+	if (!line)
+		ft_dprintf(2, "exit\n");
 }
 
 int	main(int ac, char **av, char **envp)
