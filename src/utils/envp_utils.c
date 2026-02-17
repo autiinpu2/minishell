@@ -6,7 +6,7 @@
 /*   By: apuyane <apuyane@student.42angouleme.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/25 06:09:40 by apuyane           #+#    #+#             */
-/*   Updated: 2026/02/17 08:18:09 by apuyane          ###   ########.fr       */
+/*   Updated: 2026/02/17 08:32:45 by apuyane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,7 +109,7 @@ char	**env_to_envp(t_env *env)
 	i = 0;
 	envp = ft_calloc(env->size + 1, sizeof(char *));
 	if (!envp)
-		return NULL;
+		return (NULL);
 	node = env->top;
 	while (i < env->size)
 	{

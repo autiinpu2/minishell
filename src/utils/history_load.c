@@ -6,7 +6,7 @@
 /*   By: apuyane <apuyane@student.42angouleme.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/15 10:46:29 by apuyane           #+#    #+#             */
-/*   Updated: 2026/02/17 08:18:50 by apuyane          ###   ########.fr       */
+/*   Updated: 2026/02/17 08:33:41 by apuyane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ void	load_history(t_data *data)
 	if (fd < 0)
 		return ;
 	buf = ft_calloc(st.st_size + 1, sizeof(char));
-	if(!buf)
+	if (!buf)
 		return ;
 	if (read(fd, buf, st.st_size) > 0)
 		parse_history_buffer(buf);

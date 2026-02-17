@@ -6,7 +6,7 @@
 /*   By: apuyane <apuyane@student.42angouleme.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/05 05:21:42 by apuyane           #+#    #+#             */
-/*   Updated: 2026/02/17 07:24:23 by apuyane          ###   ########.fr       */
+/*   Updated: 2026/02/17 08:33:58 by apuyane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ t_data	*init_data(char **envp);
 int		check_syntax(char *input);
 int		is_empty_or_spaces(char *input);
 bool	is_built_in(char *name);
-bool		is_invalid(char *line, t_data *data);
+bool	is_invalid(char *line, t_data *data);
 
 int		get_args_number(char **args);
 

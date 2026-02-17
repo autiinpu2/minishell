@@ -6,7 +6,7 @@
 /*   By: apuyane <apuyane@student.42angouleme.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/13 03:32:53 by apuyane           #+#    #+#             */
-/*   Updated: 2026/02/17 08:14:58 by apuyane          ###   ########.fr       */
+/*   Updated: 2026/02/17 08:33:20 by apuyane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,11 +47,6 @@ char	*get_last_line(char *path)
 	if (fd < 0)
 		return (NULL);
 	buf = malloc(sizeof(char) * (st.st_size + 1));
-	if (!buf)
-	{
-		close(fd);
-		return (NULL);
-	}
 	if (read(fd, buf, st.st_size) <= 0)
 	{
 		free(buf);
