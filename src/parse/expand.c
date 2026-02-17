@@ -6,7 +6,7 @@
 /*   By: apuyane <apuyane@student.42angouleme.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/10 00:46:40 by apuyane           #+#    #+#             */
-/*   Updated: 2026/02/17 00:51:50 by apuyane          ###   ########.fr       */
+/*   Updated: 2026/02/17 02:40:47 by apuyane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void	expand_variable(char **tab_split, t_data *data, int *j)
 				*j + 1, data);
 		*j = -1;
 	}
-	if (str[*j] == '~')
+	if (str[*j] && str[*j] == '~')
 	{
 		reminder = *j + 1;
 		(*j)++;
