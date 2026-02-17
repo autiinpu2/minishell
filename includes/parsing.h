@@ -6,7 +6,7 @@
 /*   By: apuyane <apuyane@student.42angouleme.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/30 07:27:45 by mcomin            #+#    #+#             */
-/*   Updated: 2026/02/17 06:54:35 by apuyane          ###   ########.fr       */
+/*   Updated: 2026/02/17 06:56:45 by apuyane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,10 +35,10 @@ char	*ft_exit_code(t_data *data, char *str_begin);
 char	*remove_char_i(char *str, int index);
 int		get_quote_state(char *string, size_t pos);
 int		is_redir(char *args);
-int     handle_redir(t_data *data);
-int		redir_1 (t_data *data, int i);
-int		redir_2 (t_data *data, int i);
-int		redir_3 (t_data *data, int i);
-int		redir_4 (t_data *data, int i);
+int		handle_redir(t_data *data);
+int		redir_1(t_data *data, int i);
+int		redir_2(t_data *data, int i);
+int		redir_3(t_data *data, int i);
+int		redir_4(t_data *data, int i);
 
 #endif

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redir.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcomin <mcomin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: apuyane <apuyane@student.42angouleme.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/17 03:02:09 by mcomin            #+#    #+#             */
-/*   Updated: 2026/02/17 06:22:53 by mcomin           ###   ########.fr       */
+/*   Updated: 2026/02/17 06:58:57 by apuyane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ int	setup_redirs(t_data *data)
 {
 	int	i;
 	int	exit;
-	
+
 	i = 0;
 	exit = 0;
 	while (i < data->cmds->redir_count)
@@ -37,8 +37,8 @@ int	setup_redirs(t_data *data)
 
 void	init_redirs(t_data *data)
 {
-	int i;
-	int j;
+	int	i;
+	int	j;
 
 	i = 0;
 	j = 0;
@@ -60,9 +60,9 @@ void	init_redirs(t_data *data)
 	}
 }
 
-void    check_order(t_data *data)
+void	check_order(t_data *data)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (data->cmds->args[i])
@@ -74,10 +74,10 @@ void    check_order(t_data *data)
 	}
 }
 
-int redir_count(char **args)
+int	redir_count(char **args)
 {
-	int i;
-	int count;
+	int	i;
+	int	count;
 
 	i = 0;
 	count = 0;
@@ -90,11 +90,11 @@ int redir_count(char **args)
 	return (count);
 }
 
-int handle_redir(t_data *data)
+int	handle_redir(t_data *data)
 {
-	int i;
-	int j;
-	int exit;
+	int	i;
+	int	j;
+	int	exit;
 
 	i = 0;
 	j = 0;
@@ -104,7 +104,8 @@ int handle_redir(t_data *data)
 		if (is_redir(data->cmds->args[i]))
 		{
 			data->cmds->redir_count = redir_count(data->cmds->args);
-			data->cmds->redirs = ft_calloc(data->cmds->redir_count + 1, sizeof(t_redir));
+			data->cmds->redirs = ft_calloc(data->cmds->redir_count + 1,
+					sizeof(t_redir));
 			check_order(data);
 			init_redirs(data);
 			exit = setup_redirs(data);
@@ -115,4 +116,3 @@ int handle_redir(t_data *data)
 	}
 	return (0);
 }
-
