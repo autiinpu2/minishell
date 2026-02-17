@@ -6,7 +6,7 @@
 /*   By: apuyane <apuyane@student.42angouleme.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/10 00:46:40 by apuyane           #+#    #+#             */
-/*   Updated: 2026/02/17 02:40:47 by apuyane          ###   ########.fr       */
+/*   Updated: 2026/02/17 03:57:09 by apuyane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void	expand_variable(char **tab_split, t_data *data, int *j)
 				*j + 1, data);
 		*j = -1;
 	}
-	if (str[*j] && str[*j] == '~')
+	else if (str[*j] && str[*j] == '~')
 	{
 		reminder = *j + 1;
 		(*j)++;
@@ -50,27 +50,45 @@ void	expand_variable(char **tab_split, t_data *data, int *j)
 	}
 }
 
-void	expand(char **tab_split, t_data *data)
+// void	expand(char **tab_split, t_data *data)
+// {
+// 	int	i;
+// 	int	j;
+
+// 	i = 0;
+// 	while (tab_split[i])
+// 	{
+// 		j = 0;
+// 		while (tab_split[i])
+// 		{
+// 			if (tab_split[i][j] == '$' && (tab_split[i][j + 1] == '\"'
+// 				|| tab_split[i][j + 1] == '\'')
+// 				&& get_quote_state(tab_split[i], j) == 0)
+// 			{
+// 				tab_split[i] = remove_char_i(tab_split[i], j);
+// 				continue ;
+// 			}
+// 			expand_variable(&tab_split[i], data, &j);
+// 			j++;
+// 		}
+// 		i++;
+// 	}
+// }
+
+void	expand(char **line, t_data *data)
 {
-	int	i;
 	int	j;
 
-	i = 0;
-	while (tab_split[i])
+	j = 0;
+	while ((*line)[j])
 	{
-		j = 0;
-		while (tab_split[i][j])
+		if ((*line)[j] == '$' && ((*line)[j + 1] == '\"'
+			|| (*line)[j + 1] == '\'') && get_quote_state(*line, j) == 0)
 		{
-			if (tab_split[i][j] == '$' && (tab_split[i][j + 1] == '\"'
-				|| tab_split[i][j + 1] == '\'')
-				&& get_quote_state(tab_split[i], j) == 0)
-			{
-				tab_split[i] = remove_char_i(tab_split[i], j);
-				continue ;
-			}
-			expand_variable(&tab_split[i], data, &j);
-			j++;
+			(*line) = remove_char_i((*line), j);
+			continue ;
 		}
-		i++;
+		expand_variable(line, data, &j);
+		j++;
 	}
 }

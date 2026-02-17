@@ -6,7 +6,7 @@
 /*   By: apuyane <apuyane@student.42angouleme.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/05 05:21:42 by apuyane           #+#    #+#             */
-/*   Updated: 2026/02/17 01:10:21 by apuyane          ###   ########.fr       */
+/*   Updated: 2026/02/17 03:31:53 by apuyane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,5 +80,12 @@ void	signals(void);
 int		ft_mark(t_data *data, t_cmd cmd);
 char	*get_prefix(t_data *data);
 char	*get_path(t_data *data, char *file);
+
+void	expand(char **tab_split, t_data *data);
+char	*get_expanded_string(char *string, int begin, int end, t_data *data);
+char	*get_expanded_home(char *string, int begin, int end, t_data *data);
+char	*ft_exit_code(t_data *data, char *str_begin);
+char	*remove_char_i(char *str, int index);
+int		get_quote_state(char *string, size_t pos);
 
 #endif

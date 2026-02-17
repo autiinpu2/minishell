@@ -6,7 +6,7 @@
 /*   By: apuyane <apuyane@student.42angouleme.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/05 05:22:34 by apuyane           #+#    #+#             */
-/*   Updated: 2026/02/15 09:06:50 by apuyane          ###   ########.fr       */
+/*   Updated: 2026/02/17 03:27:26 by apuyane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,6 @@ t_data	*load_data(t_data *data, char *input)
 	tab_split = ft_split_quotes(input, '|');
 	data->size = count_pipe(input) + 1;
 	data->cmds = ft_calloc(data->size + 2, sizeof(t_cmd));
-	expand(tab_split, data);
 	while ((size_t)i < data->size)
 	{
 		new_cmd(tab_split[i], data, i);
