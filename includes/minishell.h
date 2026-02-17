@@ -6,7 +6,7 @@
 /*   By: apuyane <apuyane@student.42angouleme.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/05 05:21:42 by apuyane           #+#    #+#             */
-/*   Updated: 2026/02/17 01:02:04 by apuyane          ###   ########.fr       */
+/*   Updated: 2026/02/17 01:10:21 by apuyane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ void	ft_add_history(char *line, t_data *data);
 
 void	minishellrc(t_data *data);
 
-void	signals(t_data *data);
+void	signals(void);
 
 int		ft_mark(t_data *data, t_cmd cmd);
 char	*get_prefix(t_data *data);

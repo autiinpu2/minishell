@@ -6,7 +6,7 @@
 /*   By: apuyane <apuyane@student.42angouleme.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/05 05:22:21 by apuyane           #+#    #+#             */
-/*   Updated: 2026/02/15 15:16:37 by apuyane          ###   ########.fr       */
+/*   Updated: 2026/02/17 01:09:32 by apuyane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,6 +89,6 @@ int	wait_all_pids(t_data *data)
 		}
 		i++;
 	}
-	signals(data);
+	signals();
 	return (exit_code);
 }

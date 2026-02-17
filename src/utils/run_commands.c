@@ -6,7 +6,7 @@
 /*   By: apuyane <apuyane@student.42angouleme.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/16 22:50:25 by apuyane           #+#    #+#             */
-/*   Updated: 2026/02/17 00:30:06 by apuyane          ###   ########.fr       */
+/*   Updated: 2026/02/17 01:10:50 by apuyane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 #include "exec.h"
 #include "free.h"
 
-void		run_single_cmd(t_data *data, char *line)
+void	run_single_cmd(t_data *data, char *line)
 {
 	int	exit_code;
 
@@ -73,9 +73,9 @@ void	minishellrc_run(t_data *data, int run_cmd)
 
 void	minishellrc(t_data *data)
 {
-	int	run_cmd;
+	int		run_cmd;
 	char	*path;
-	
+
 	path = get_path(data, "/.minishellrc");
 	run_cmd = open(path, O_RDWR | O_CREAT, 0664);
 	free(path);
