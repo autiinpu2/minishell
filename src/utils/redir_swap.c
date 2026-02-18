@@ -6,20 +6,12 @@
 /*   By: apuyane <apuyane@student.42angouleme.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/17 04:34:29 by apuyane           #+#    #+#             */
-/*   Updated: 2026/02/17 06:43:51 by apuyane          ###   ########.fr       */
+/*   Updated: 2026/02/18 03:36:52 by apuyane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include "free.h"
-
-int	is_redir(char *arg)
-{
-	if (ft_strcmp(arg, ">") && ft_strcmp(arg, ">>")
-		&& ft_strcmp(arg, "<") && ft_strcmp(arg, "<<"))
-		return (0);
-	return (1);
-}
 
 void	add_cmds(char **tab, char **new_tab, int *j)
 {

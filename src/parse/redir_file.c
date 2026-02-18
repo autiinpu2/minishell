@@ -6,7 +6,7 @@
 /*   By: apuyane <apuyane@student.42angouleme.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/17 05:13:28 by mcomin            #+#    #+#             */
-/*   Updated: 2026/02/17 07:03:30 by apuyane          ###   ########.fr       */
+/*   Updated: 2026/02/18 03:27:48 by apuyane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,15 +48,15 @@ int	redir_3(t_data *data, int i)
 {
 	int	fd;
 
-	if (data->cmds->outfile)
-		close(data->cmds->outfile);
+	if (data->cmds->infile)
+		close(data->cmds->infile);
 	fd = open(data->cmds->redirs[i].file, O_RDONLY);
-	if (fd == -1)
+	if (fd < 0)
 	{
 		data->exit_code = 1;
 		return (1);
 	}
-	data->cmds->outfile = fd;
+	data->cmds->infile = fd;
 	return (0);
 }
 
@@ -69,7 +69,7 @@ int	redir_4(t_data *data, int i)
 		close(data->cmds->outfile);
 	//fd = heredoc
 	fd = 0;
-	if (fd == -1)
+	if (fd < 0)
 	{
 		data->exit_code = 1;
 		return (1);

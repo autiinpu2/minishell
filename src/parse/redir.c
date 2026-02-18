@@ -6,7 +6,7 @@
 /*   By: apuyane <apuyane@student.42angouleme.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/17 03:02:09 by mcomin            #+#    #+#             */
-/*   Updated: 2026/02/17 06:58:57 by apuyane          ###   ########.fr       */
+/*   Updated: 2026/02/18 03:27:07 by apuyane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,14 +47,14 @@ void	init_redirs(t_data *data)
 	while (j < data->cmds->redir_count)
 	{
 		if (!ft_strcmp(data->cmds->args[i], ">"))
-			data->cmds->redirs->type = 1;
+			data->cmds->redirs[j].type = 1;
 		else if (!ft_strcmp(data->cmds->args[i], ">>"))
-			data->cmds->redirs->type = 2;
+			data->cmds->redirs[j].type = 2;
 		else if (!ft_strcmp(data->cmds->args[i], "<"))
-			data->cmds->redirs->type = 3;
+			data->cmds->redirs[j].type = 3;
 		else
-			data->cmds->redirs->type = 4;
-		data->cmds->redirs->file = ft_strdup(data->cmds->args[i + 1]);
+			data->cmds->redirs[j].type = 4;
+		data->cmds->redirs[j].file = ft_strdup(data->cmds->args[i + 1]);
 		j++;
 		i += 2;
 	}
