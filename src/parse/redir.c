@@ -6,7 +6,7 @@
 /*   By: apuyane <apuyane@student.42angouleme.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/17 03:02:09 by mcomin            #+#    #+#             */
-/*   Updated: 2026/02/18 05:07:52 by apuyane          ###   ########.fr       */
+/*   Updated: 2026/02/18 05:10:33 by apuyane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,8 @@ void	init_redirs(t_data *data, int cmd_idx)
 				data->cmds[cmd_idx].redirs[redir_idx].type = 3;
 			else if (!ft_strcmp(data->cmds[cmd_idx].args[arg_idx], "<<"))
 				data->cmds[cmd_idx].redirs[redir_idx].type = 4;
-			data->cmds[cmd_idx].redirs[redir_idx].file = ft_strdup(data->cmds[cmd_idx].args[arg_idx + 1]);
+			data->cmds[cmd_idx].redirs[redir_idx].file
+				= ft_strdup(data->cmds[cmd_idx].args[arg_idx + 1]);
 			redir_idx++;
 			arg_idx++;
 		}
@@ -95,7 +96,7 @@ int	redir_count(char **args)
 
 int	handle_redir(t_data *data)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (data->cmds[i].args)
@@ -103,7 +104,8 @@ int	handle_redir(t_data *data)
 		data->cmds[i].redir_count = redir_count(data->cmds[i].args);
 		if (data->cmds[i].redir_count > 0)
 		{
-			data->cmds[i].redirs = ft_calloc(data->cmds[i].redir_count + 1, sizeof(t_redir));
+			data->cmds[i].redirs = ft_calloc(data->cmds[i].redir_count + 1,
+					sizeof(t_redir));
 			init_redirs(data, i);
 			if (setup_redirs(data, i))
 				return (1);

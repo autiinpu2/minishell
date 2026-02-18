@@ -6,7 +6,7 @@
 /*   By: apuyane <apuyane@student.42angouleme.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/04 01:46:10 by mcomin            #+#    #+#             */
-/*   Updated: 2026/02/18 00:10:30 by apuyane          ###   ########.fr       */
+/*   Updated: 2026/02/18 05:09:47 by apuyane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,8 @@ int	check_redirections(char *input)
 	{
 		if (is_redir(input + i) && !is_in_quotes(input, i))
 		{
-			if ((input[i] == '>' || input[i] == '<') && input[i] == input[i + 1])
+			if ((input[i] == '>' || input[i] == '<')
+				&& input[i] == input[i + 1])
 				i += 2;
 			else
 				i += 1;
