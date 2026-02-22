@@ -6,7 +6,7 @@
 /*   By: apuyane <apuyane@student.42angouleme.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/17 03:02:09 by mcomin            #+#    #+#             */
-/*   Updated: 2026/02/18 05:10:33 by apuyane          ###   ########.fr       */
+/*   Updated: 2026/02/19 05:21:20 by apuyane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,16 +19,16 @@ int	setup_redirs(t_data *data, int cmd_idx)
 
 	i = 0;
 	error = 0;
-	while (i < data->cmds->redir_count)
+	while (i < data->cmds[cmd_idx].redir_count)
 	{
 		if (data->cmds[cmd_idx].redirs[i].type == 1)
-			error = redir_1(data, i);
+			error = redir_1(data, i, cmd_idx);
 		else if (data->cmds[cmd_idx].redirs[i].type == 2)
-			error = redir_2(data, i);
+			error = redir_2(data, i, cmd_idx);
 		else if (data->cmds[cmd_idx].redirs[i].type == 3)
-			error = redir_3(data, i);
+			error = redir_3(data, i, cmd_idx);
 		else if (data->cmds[cmd_idx].redirs[i].type == 4)
-			error = redir_4(data, i);
+			error = redir_4(data, i, cmd_idx);
 		if (error)
 			return (1);
 		i++;
@@ -36,46 +36,83 @@ int	setup_redirs(t_data *data, int cmd_idx)
 	return (0);
 }
 
-void	init_redirs(t_data *data, int cmd_idx)
+char	**trim_args(char **old)
 {
-	int	arg_idx;
-	int	redir_idx;
+	int i;
+	int	j;
+	char	**new_arg;
 
-	arg_idx = 0;
-	redir_idx = 0;
-	while (data->cmds[cmd_idx].args[arg_idx])
-	{
-		if (is_redir(data->cmds[cmd_idx].args[arg_idx]))
-		{
-			if (!ft_strcmp(data->cmds[cmd_idx].args[arg_idx], ">"))
-				data->cmds[cmd_idx].redirs[redir_idx].type = 1;
-			else if (!ft_strcmp(data->cmds[cmd_idx].args[arg_idx], ">>"))
-				data->cmds[cmd_idx].redirs[redir_idx].type = 2;
-			else if (!ft_strcmp(data->cmds[cmd_idx].args[arg_idx], "<"))
-				data->cmds[cmd_idx].redirs[redir_idx].type = 3;
-			else if (!ft_strcmp(data->cmds[cmd_idx].args[arg_idx], "<<"))
-				data->cmds[cmd_idx].redirs[redir_idx].type = 4;
-			data->cmds[cmd_idx].redirs[redir_idx].file
-				= ft_strdup(data->cmds[cmd_idx].args[arg_idx + 1]);
-			redir_idx++;
-			arg_idx++;
-		}
-		arg_idx++;
-	}
-}
-
-void	check_order(t_data *data)
-{
-	int	i;
 
 	i = 0;
-	while (data->cmds->args[i])
+	j = 0;
+	while (old[i])
 	{
-		if ((i == 0) && (is_redir(data->cmds->args[i])))
-		{
-			
-		}
+		if (!ft_strcmp(old[i], "REDIR_MARKER"))
+			j++;
+		i++;
 	}
+	new_arg = ft_calloc(i - j + 1, sizeof(char *));
+	if (!new_arg)
+    {
+        free_tab(old);
+        return (NULL);
+    }
+	i = 0;
+	j = 0;
+	while (old[i])
+	{
+		if (ft_strcmp(old[i], "REDIR_MARKER"))
+		{
+			new_arg[j] = ft_strdup(old[i]);
+			j++;
+		}
+		i++;
+	}
+	free_tab(old);
+	return (new_arg);
+}
+
+void    init_redirs(t_data *data, int cmd_idx)
+{
+    int     i;
+    int     redir_idx;
+    char    **args;
+
+    i = 0;
+    redir_idx = 0;
+    args = data->cmds[cmd_idx].args;
+    while (args && args[i])
+    {
+        if (is_redir(args[i]))
+        {
+            // CRITICAL: Prevent Invalid Read on NULL
+            if (!args[i + 1])
+                break;
+
+            // Type Identification
+            if (!ft_strcmp(args[i], ">"))
+                data->cmds[cmd_idx].redirs[redir_idx].type = 1;
+            else if (!ft_strcmp(args[i], ">>"))
+                data->cmds[cmd_idx].redirs[redir_idx].type = 2;
+            else if (!ft_strcmp(args[i], "<"))
+                data->cmds[cmd_idx].redirs[redir_idx].type = 3;
+            else if (!ft_strcmp(args[i], "<<"))
+                data->cmds[cmd_idx].redirs[redir_idx].type = 4;
+
+            data->cmds[cmd_idx].redirs[redir_idx].file = ft_strdup(args[i + 1]);
+            
+            // Clean up old strings before marking
+            free(args[i]);
+            free(args[i + 1]);
+            args[i] = ft_strdup("REDIR_MARKER");
+            args[i + 1] = ft_strdup("REDIR_MARKER");
+            
+            redir_idx++;
+            i++; // Skip the filename index
+        }
+        i++;
+    }
+    data->cmds[cmd_idx].args = trim_args(data->cmds[cmd_idx].args);
 }
 
 int	redir_count(char **args)

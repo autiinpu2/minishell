@@ -6,7 +6,7 @@
 /*   By: apuyane <apuyane@student.42angouleme.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/30 07:27:45 by mcomin            #+#    #+#             */
-/*   Updated: 2026/02/17 23:15:50 by apuyane          ###   ########.fr       */
+/*   Updated: 2026/02/19 03:55:40 by apuyane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ char	*is_path(char *prefix_cmd_name, char **tab_paths, t_cmd *cmd);
 char	*cmd_path(t_env *env, char *cmd_name, t_cmd *cmd);
 int		is_empty_or_spaces(char *input);
 
-void	expand(char **tab_split, t_data *data);
+void	expand(char **line, t_data *data);
 char	*get_expanded_string(char *string, int begin, int end, t_data *data);
 char	*get_expanded_home(char *string, int begin, int end, t_data *data);
 char	*ft_exit_code(t_data *data, char *str_begin);
@@ -36,9 +36,9 @@ char	*remove_char_i(char *str, int index);
 int		get_quote_state(char *string, size_t pos);
 bool	is_redir(char *arg);
 int		handle_redir(t_data *data);
-int		redir_1(t_data *data, int i);
-int		redir_2(t_data *data, int i);
-int		redir_3(t_data *data, int i);
-int		redir_4(t_data *data, int i);
+int		redir_1(t_data *data, int i, int cmd_idx);
+int		redir_2(t_data *data, int i, int cmd_idx);
+int		redir_3(t_data *data, int i, int cmd_idx);
+int		redir_4(t_data *data, int i, int cmd_idx);
 
 #endif

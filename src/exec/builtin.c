@@ -6,7 +6,7 @@
 /*   By: apuyane <apuyane@student.42angouleme.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/03 09:56:58 by apuyane           #+#    #+#             */
-/*   Updated: 2026/02/15 22:32:53 by apuyane          ###   ########.fr       */
+/*   Updated: 2026/02/18 07:24:33 by apuyane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,8 @@ int	ft_env(t_data *data, t_cmd cmd)
 	duplicate_fds(cmd.infile, cmd.outfile, &stdin, &stdout);
 	while (node)
 	{
-		ft_dprintf(1, "%s\n", node->text);
+		if (node->text)
+            ft_putendl_fd(node->text, STDOUT_FILENO);
 		node = node->next;
 	}
 	restore_fds(stdin, stdout);

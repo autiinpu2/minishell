@@ -53,6 +53,7 @@ $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
 clean:
 	@$(RM) $(OBJ_DIR)
 	@$(MAKE) -C $(LIBFT_DIR) clean
+	@echo "nda-cunh est super beau"
 	@echo "\033[1;32mObjects cleaned.\033[0m"
 
 fclean: clean

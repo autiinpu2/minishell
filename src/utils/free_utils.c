@@ -6,7 +6,7 @@
 /*   By: apuyane <apuyane@student.42angouleme.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/26 08:16:06 by apuyane           #+#    #+#             */
-/*   Updated: 2026/02/11 05:47:11 by apuyane          ###   ########.fr       */
+/*   Updated: 2026/02/19 05:08:02 by apuyane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,14 +38,30 @@ void	free_tab(char **tab)
 	int	i;
 
 	i = 0;
-	if (!tab)
+	if (!tab || !*tab)
 		return ;
 	while (tab[i])
 	{
 		free_single(tab[i]);
+		tab[i] = NULL;
 		i++;
 	}
 	free_single(tab);
+}
+
+void	free_redirs(t_redir *redir)
+{
+	int i;
+
+	i = 0;
+	if (!redir)
+		return ;
+	while (redir[i].file)
+	{
+		free_single(redir[i].file);
+		i++;
+	}
+	free_single(redir);
 }
 
 void	free_cmds(t_data *data)
@@ -62,6 +78,7 @@ void	free_cmds(t_data *data)
 		free_tab(data->cmds[i].args);
 		free_single(data->cmds[i].function_name);
 		free_single(data->cmds[i].path);
+		free_redirs(data->cmds[i].redirs);
 		i++;
 	}
 	free_single(data->cmds);

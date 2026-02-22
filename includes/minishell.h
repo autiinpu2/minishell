@@ -6,7 +6,7 @@
 /*   By: apuyane <apuyane@student.42angouleme.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/05 05:21:42 by apuyane           #+#    #+#             */
-/*   Updated: 2026/02/17 06:53:49 by apuyane          ###   ########.fr       */
+/*   Updated: 2026/02/19 03:55:37 by apuyane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,9 @@ typedef struct s_cmd
 	t_redir	*redirs;
 	int		redir_count;
 	int		infile;
+	bool	is_infile_pipe;
 	int		outfile;
+	bool	is_outfile_pipe;
 	bool	is_built_in;
 	int		pid;
 	int		access;
@@ -81,7 +83,7 @@ int		ft_mark(t_data *data, t_cmd cmd);
 char	*get_prefix(t_data *data);
 char	*get_path(t_data *data, char *file);
 
-void	expand(char **tab_split, t_data *data);
+void	expand(char **line, t_data *data);
 char	*get_expanded_string(char *string, int begin, int end, t_data *data);
 char	*get_expanded_home(char *string, int begin, int end, t_data *data);
 char	*ft_exit_code(t_data *data, char *str_begin);

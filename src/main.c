@@ -6,7 +6,7 @@
 /*   By: apuyane <apuyane@student.42angouleme.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/25 04:17:27 by apuyane           #+#    #+#             */
-/*   Updated: 2026/02/17 05:51:57 by apuyane          ###   ########.fr       */
+/*   Updated: 2026/02/19 03:56:31 by apuyane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@ int	is_invalid(char *line, t_data *data)
 	{
 		if (check_syntax(line))
 			data->exit_code = 2;
-		free_single(line);
 		return (1);
 	}
 	return (0);
@@ -49,6 +48,7 @@ void	process_input(t_data *data, char *line)
 		if (!parsing(data, line))
 			data->exit_code = exec(data);
 	}
+	free_single(line);
 	free_cmds(data);
 }
 
@@ -68,6 +68,7 @@ void	loop(t_data *data)
 			break ;
 		process_input(data, line);
 	}
+	rl_clear_history();
 	if (!line)
 		ft_dprintf(2, "exit\n");
 }
