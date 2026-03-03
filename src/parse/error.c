@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   error.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apuyane <apuyane@student.42angouleme.fr    +#+  +:+       +#+        */
+/*   By: mcomin <mcomin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/04 01:46:10 by mcomin            #+#    #+#             */
-/*   Updated: 2026/02/14 08:09:46 by apuyane          ###   ########.fr       */
+/*   Updated: 2026/03/03 02:27:45 by mcomin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ int	check_pipes(char *input)
 			i++;
 			while (input[i] && ft_isspace(input[i]))
 				i++;
-			if (input[i] == '|' || input[i] == '\0')
+			if (input[i] == '|' || !input[i])
 				return (1);
 		}
 		else
@@ -82,24 +82,28 @@ int	check_pipes(char *input)
 int	check_redirections(char *input)
 {
 	int		i;
-	char	redir_char;
 
 	i = 0;
 	while (input[i])
 	{
-		if ((input[i] == '<' || input[i] == '>') && !is_in_quotes(input, i))
+		if (!input[i])
+			break ;
+		if (is_redir(input + i) && !is_in_quotes(input, i))
 		{
-			redir_char = input[i];
-			i++;
-			if (input[i] == redir_char)
-				i++;
+			if ((input[i] == '>' || input[i] == '<')
+				&& input[i] == input[i + 1])
+				i += 2;
+			else
+				i += 1;
 			while (input[i] && ft_isspace(input[i]))
 				i++;
-			if (input[i] == '\0' || input[i] == '|' || input[i] == '<'
-				|| input[i] == '>')
+			if (!input[i] || is_redir(input + i) || input[i] == '|')
 				return (1);
+			while (input[i] && !ft_isspace(input[i]) && !is_redir(input + i))
+				i++;
 		}
-		i++;
+		else
+			i++;
 	}
 	return (0);
 }

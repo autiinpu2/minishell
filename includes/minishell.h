@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apuyane <apuyane@student.42angouleme.fr    +#+  +:+       +#+        */
+/*   By: mcomin <mcomin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/02/05 05:21:42 by apuyane           #+#    #+#             */
-/*   Updated: 2026/02/17 08:33:58 by apuyane          ###   ########.fr       */
+/*   Created: 2026/03/03 03:13:25 by mcomin            #+#    #+#             */
+/*   Updated: 2026/03/03 03:30:26 by mcomin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ extern int	g_signal_status;
 
 typedef struct s_redir
 {
-	int		type; // 1">"" 2">>"" 3"<" 4"<<"
+	int		type;
 	char	*file;
 }				t_redir;
 
@@ -46,7 +46,9 @@ typedef struct s_cmd
 	t_redir	*redirs;
 	int		redir_count;
 	int		infile;
+	bool	is_infile_pipe;
 	int		outfile;
+	bool	is_outfile_pipe;
 	bool	is_built_in;
 	int		pid;
 	int		access;
@@ -80,5 +82,13 @@ void	signals(void);
 int		ft_mark(t_data *data, t_cmd cmd);
 char	*get_prefix(t_data *data);
 char	*get_path(t_data *data, char *file);
+
+void	expand(char **line, t_data *data);
+char	*get_expanded_string(char *string, int begin, int end, t_data *data);
+char	*get_expanded_home(char *string, int begin, int end, t_data *data);
+char	*ft_exit_code(t_data *data, char *str_begin);
+char	*remove_char_i(char *str, int index);
+int		get_quote_state(char *string, size_t pos);
+void	redir_swap(char ***tab);
 
 #endif
