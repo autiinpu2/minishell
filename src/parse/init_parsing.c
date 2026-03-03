@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_parsing.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apuyane <apuyane@student.42angouleme.fr    +#+  +:+       +#+        */
+/*   By: mcomin <mcomin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/05 05:22:34 by apuyane           #+#    #+#             */
-/*   Updated: 2026/02/19 05:28:23 by apuyane          ###   ########.fr       */
+/*   Updated: 2026/03/03 00:38:19 by mcomin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ t_cmd	new_cmd(char *token, t_data *data, int i)
 	}
 	data->cmds[i].args = ft_split_quotes(token, ' ');
 	cmd_is_pipe(data, i);
-	// handle_redir(data);
+	handle_redir(data);
 	data->cmds[i].function_name = ft_strdup(data->cmds[i].args[0]);
 	data->cmds[i].is_built_in = is_built_in(data->cmds[i].function_name);
 	if (count_quotes_closed(data->cmds[i].function_name))

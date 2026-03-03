@@ -1,6 +1,6 @@
 NAME        := minishell
 CC          := cc
-CFLAGS      := -Wall -Wextra -Werror -g -I includes -D_XOPEN_SOURCE=700
+CFLAGS      := -Wall -Wextra -Werror -g -I includes -D_XOPEN_SOURCE=700 -fsanitize=address
 RM          := rm -rf
 MAKE        := make --no-print-directory
 
@@ -53,7 +53,6 @@ $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
 clean:
 	@$(RM) $(OBJ_DIR)
 	@$(MAKE) -C $(LIBFT_DIR) clean
-	@echo "nda-cunh est super beau"
 	@echo "\033[1;32mObjects cleaned.\033[0m"
 
 fclean: clean

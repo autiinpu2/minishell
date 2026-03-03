@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   error.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apuyane <apuyane@student.42angouleme.fr    +#+  +:+       +#+        */
+/*   By: mcomin <mcomin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/04 01:46:10 by mcomin            #+#    #+#             */
-/*   Updated: 2026/02/18 05:09:47 by apuyane          ###   ########.fr       */
+/*   Updated: 2026/03/03 02:27:45 by mcomin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,8 @@ int	check_redirections(char *input)
 	i = 0;
 	while (input[i])
 	{
+		if (!input[i])
+			break ;
 		if (is_redir(input + i) && !is_in_quotes(input, i))
 		{
 			if ((input[i] == '>' || input[i] == '<')
@@ -101,11 +103,7 @@ int	check_redirections(char *input)
 				i++;
 		}
 		else
-		{
-			if ((input[i] == '>' || input[i] == '<') && !is_in_quotes(input, i))
-				return (1);
 			i++;
-		}
 	}
 	return (0);
 }

@@ -3,14 +3,30 @@
 /*                                                        :::      ::::::::   */
 /*   redir_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apuyane <apuyane@student.42angouleme.fr    +#+  +:+       +#+        */
+/*   By: mcomin <mcomin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/17 03:47:14 by mcomin            #+#    #+#             */
-/*   Updated: 2026/02/18 05:09:29 by apuyane          ###   ########.fr       */
+/*   Updated: 2026/03/03 02:33:59 by mcomin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parsing.h"
+
+int	redir_count(char **args)
+{
+	int	i;
+	int	count;
+
+	i = 0;
+	count = 0;
+	while (args[i])
+	{
+		if (is_redir(args[i]))
+			count++;
+		i++;
+	}
+	return (count);
+}
 
 bool	is_redir(char *arg)
 {
@@ -29,4 +45,30 @@ bool	is_redir(char *arg)
 		return (true);
 	}
 	return (false);
+}
+
+int	is_in_tab(char **tab, char *str)
+{
+	int	i;
+	int	count;
+
+	i = 0;
+	count = 0;
+	while (tab[i])
+	{
+		if (!ft_strcmp(tab[i], str))
+			count++;
+		i++;
+	}
+	return (count);
+}
+
+int	tab_size(char **tab)
+{
+	int	i;
+
+	i = 0;
+	while (tab[i])
+		i++;
+	return (i);
 }

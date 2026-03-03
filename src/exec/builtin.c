@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apuyane <apuyane@student.42angouleme.fr    +#+  +:+       +#+        */
+/*   By: mcomin <mcomin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/03 09:56:58 by apuyane           #+#    #+#             */
-/*   Updated: 2026/02/18 07:24:33 by apuyane          ###   ########.fr       */
+/*   Updated: 2026/03/02 23:56:52 by mcomin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int	ft_env(t_data *data, t_cmd cmd)
 	while (node)
 	{
 		if (node->text)
-            ft_putendl_fd(node->text, STDOUT_FILENO);
+			ft_putendl_fd(node->text, STDOUT_FILENO);
 		node = node->next;
 	}
 	restore_fds(stdin, stdout);
