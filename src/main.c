@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apuyane <apuyane@student.42angouleme.fr    +#+  +:+       +#+        */
+/*   By: mcomin <mcomin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/25 04:17:27 by apuyane           #+#    #+#             */
-/*   Updated: 2026/02/17 08:13:50 by apuyane          ###   ########.fr       */
+/*   Updated: 2026/03/03 03:44:41 by mcomin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,12 +30,27 @@ bool	is_invalid(char *line, t_data *data)
 
 int	check_signal(t_data *data)
 {
-	if (g_signal_status == SIGINT)
+	if (g_signal_status != 0)
 	{
-		data->exit_code = 128 + SIGINT;
+		data->exit_code = 128 + g_signal_status;
+		g_signal_status = 0;
+		return (1);
 	}
-	g_signal_status = 0;
-	return (data->exit_code);
+	return (0);
+}
+
+void	process_input(t_data *data, char *line)
+{
+	if (*line)
+		ft_add_history(line, data);
+	expand(&line, data);
+	if (!is_invalid(line, data))
+	{
+		if (!parsing(data, line))
+			data->exit_code = exec(data);
+	}
+	free_single(line);
+	free_cmds(data);
 }
 
 void	loop(t_data *data)
@@ -43,28 +58,20 @@ void	loop(t_data *data)
 	char	*line;
 	char	*prefix;
 
-	while (true)
+	while (!data->exit)
 	{
 		prefix = get_prefix(data);
 		line = readline(prefix);
 		free_single(prefix);
-		data->exit_code = check_signal(data);
-		if (!line)
-		{
-			ft_dprintf(2, "exit\n");
-			return ;
-		}
-		if (*line)
-			ft_add_history(line, data);
-		if (is_invalid(line, data))
+		if (check_signal(data) != 0)
 			continue ;
-		if (!parsing(data, line))
-			data->exit_code = exec(data);
-		free_cmds(data);
-		free_single(line);
-		if (data->exit)
-			return ;
+		if (!line)
+			break ;
+		process_input(data, line);
 	}
+	rl_clear_history();
+	if (!line)
+		ft_dprintf(2, "exit\n");
 }
 
 int	main(int ac, char **av, char **envp)

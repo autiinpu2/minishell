@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_parsing.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apuyane <apuyane@student.42angouleme.fr    +#+  +:+       +#+        */
+/*   By: mcomin <mcomin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/05 05:22:34 by apuyane           #+#    #+#             */
-/*   Updated: 2026/02/17 08:41:14 by apuyane          ###   ########.fr       */
+/*   Updated: 2026/03/03 03:33:30 by mcomin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,8 @@ t_cmd	cmd_is_pipe(t_data *data, int i)
 		}
 		data->cmds[i].outfile = pipes[1];
 		data->cmds[i + 1].infile = pipes[0];
+		data->cmds[i].is_outfile_pipe = true;
+		data->cmds[i + 1].is_infile_pipe = true;
 	}
 	else
 		data->cmds[i].outfile = STDOUT_FILENO;
@@ -44,6 +46,8 @@ t_cmd	new_cmd(char *token, t_data *data, int i)
 		return (data->cmds[i]);
 	}
 	data->cmds[i].args = ft_split_quotes(token, ' ');
+	cmd_is_pipe(data, i);
+	handle_redir(data);
 	data->cmds[i].function_name = ft_strdup(data->cmds[i].args[0]);
 	data->cmds[i].is_built_in = is_built_in(data->cmds[i].function_name);
 	if (count_quotes_closed(data->cmds[i].function_name))
@@ -58,8 +62,6 @@ t_cmd	new_cmd(char *token, t_data *data, int i)
 				data->cmds[i].function_name, &data->cmds[i]);
 	else
 		data->cmds[i].path = ft_strdup(data->cmds[i].function_name);
-	cmd_is_pipe(data, i);
-	i++;
 	return (data->cmds[i]);
 }
 

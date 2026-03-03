@@ -6,7 +6,7 @@
 /*   By: apuyane <apuyane@student.42angouleme.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/04 00:35:21 by mcomin            #+#    #+#             */
-/*   Updated: 2026/02/15 09:12:33 by apuyane          ###   ########.fr       */
+/*   Updated: 2026/02/18 07:15:21 by apuyane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,11 +68,8 @@ char	*is_path(char *prefix_cmd_name, char **tab_paths, t_cmd *cmd)
 			return (NULL);
 		if (stat(test_path, &st) == 0)
 		{
-			if (S_ISREG(st.st_mode) && access(test_path, X_OK) == 0)
-			{
-				cmd->access = 0;
+			if (check_access(test_path, cmd) == 0)
 				return (test_path);
-			}
 		}
 		free(test_path);
 		i++;
