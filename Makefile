@@ -1,6 +1,6 @@
 NAME        := minishell
 CC          := cc
-CFLAGS      := -Wall -Wextra -Werror -g -I includes -D_XOPEN_SOURCE=700 -fsanitize=address
+CFLAGS      := -Wall -Wextra -Werror -g -I includes -D_XOPEN_SOURCE=700
 RM          := rm -rf
 MAKE        := make --no-print-directory
 
