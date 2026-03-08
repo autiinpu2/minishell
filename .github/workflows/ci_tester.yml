@@ -35,8 +35,9 @@ jobs:
           
           echo "Running Standard Tests..."
           timeout 120s ./tester -j 1 ../minishell > ../test_output.txt 2>&1 || true
-          
+          cat test_output.txt
           echo "Running Leak Tests (Valgrind)..."
+          cat test_output_leaks.txt
           timeout 240s ./tester -v ../minishell > ../test_output_leaks.txt 2>&1 || true
 
       # 3. PRINT LOGS

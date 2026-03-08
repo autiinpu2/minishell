@@ -100,13 +100,16 @@ char	**ft_split_quotes(char const *s, char c)
 	if (!str)
 		return (NULL);
 	fill(s, str, c);
-	while (str[i])
+	if (!str)
 	{
-		free(str[i]);
-		str[i] = NULL;
-		i++;
+		while (str[i])
+		{
+			free(str[i]);
+			str[i] = NULL;
+			i++;
+		}
+		free(str);
+		str = NULL;
 	}
-	free(str);
-	str = NULL;
 	return (str);
 }
