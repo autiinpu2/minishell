@@ -6,7 +6,7 @@
 /*   By: mcomin <mcomin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/05 05:22:34 by apuyane           #+#    #+#             */
-/*   Updated: 2026/03/03 03:33:30 by mcomin           ###   ########.fr       */
+/*   Updated: 2026/03/05 04:38:53 by mcomin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,6 +114,8 @@ t_data	*init_data(char **envp)
 	data = ft_calloc(1, sizeof(t_data));
 	if (!data)
 		return (NULL);
+	data->cmds = NULL;
+	data->size = 0;
 	data->env = load_envp(envp);
 	update_shlvl(data);
 	data->exit_code = EXIT_SUCCESS;
