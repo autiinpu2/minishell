@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apuyane <apuyane@student.42angouleme.fr    +#+  +:+       +#+        */
+/*   By: mcomin <mcomin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/25 04:17:27 by apuyane           #+#    #+#             */
-/*   Updated: 2026/02/19 03:56:31 by apuyane          ###   ########.fr       */
+/*   Updated: 2026/03/03 03:44:41 by mcomin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,15 +16,16 @@
 #include "exec.h"
 #include "free.h"
 
-int	is_invalid(char *line, t_data *data)
+bool	is_invalid(char *line, t_data *data)
 {
 	if (is_empty_or_spaces(line) || check_syntax(line))
 	{
 		if (check_syntax(line))
 			data->exit_code = 2;
-		return (1);
+		free_single(line);
+		return (true);
 	}
-	return (0);
+	return (false);
 }
 
 int	check_signal(t_data *data)
@@ -80,10 +81,12 @@ int	main(int ac, char **av, char **envp)
 
 	(void)ac;
 	(void)av;
-	data = new_data(envp);
+	data = init_data(envp);
+	if (!data)
+		return (1);
 	load_history(data);
-	signals();
 	minishellrc(data);
+	signals();
 	loop(data);
 	exit_code = data->exit_code;
 	free_data(data);

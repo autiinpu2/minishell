@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   forks.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apuyane <apuyane@student.42angouleme.fr    +#+  +:+       +#+        */
+/*   By: mcomin <mcomin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/05 09:08:22 by apuyane           #+#    #+#             */
-/*   Updated: 2026/02/18 08:44:02 by apuyane          ###   ########.fr       */
+/*   Updated: 2026/03/03 03:30:51 by mcomin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,8 +44,7 @@ static void	check_pipes(t_cmd cmd)
 	}
 	if (cmd.outfile == -1)
 	{
-		if (cmd.infile != -1)
-			close(cmd.infile);
+		close(cmd.infile);
 		exit(1);
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: apuyane <apuyane@student.42angouleme.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/16 22:50:25 by apuyane           #+#    #+#             */
-/*   Updated: 2026/02/17 01:10:50 by apuyane          ###   ########.fr       */
+/*   Updated: 2026/02/17 08:31:03 by apuyane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,8 @@ static char	*remove_n(char *line)
 	i = 0;
 	len = ft_strlen(line);
 	s = ft_calloc(len, sizeof(char));
+	if (!s)
+		return (s);
 	while (i + 1 < len)
 	{
 		s[i] = line[i];
@@ -58,11 +60,9 @@ void	minishellrc_run(t_data *data, int run_cmd)
 	bool	first_run;
 
 	first_run = true;
-	line = "";
-	while (line || first_run)
+	while (first_run || line)
 	{
-		if (first_run)
-			first_run = false;
+		first_run = false;
 		line = get_next_line(run_cmd);
 		if (!line)
 			return ;
@@ -77,6 +77,8 @@ void	minishellrc(t_data *data)
 	char	*path;
 
 	path = get_path(data, "/.minishellrc");
+	if (!path)
+		return ;
 	run_cmd = open(path, O_RDWR | O_CREAT, 0664);
 	free(path);
 	if (run_cmd < 0)

@@ -6,7 +6,7 @@
 /*   By: mcomin <mcomin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/03 03:13:25 by mcomin            #+#    #+#             */
-/*   Updated: 2026/03/03 03:13:30 by mcomin           ###   ########.fr       */
+/*   Updated: 2026/03/03 03:30:26 by mcomin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,11 +64,11 @@ typedef struct s_data
 }			t_data;
 
 int		parsing(t_data *data, char *line);
-t_data	*new_data(char **envp);
+t_data	*init_data(char **envp);
 int		check_syntax(char *input);
 int		is_empty_or_spaces(char *input);
 bool	is_built_in(char *name);
-int		is_invalid(char *line, t_data *data);
+bool	is_invalid(char *line, t_data *data);
 
 int		get_args_number(char **args);
 

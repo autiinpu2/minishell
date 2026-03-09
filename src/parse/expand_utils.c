@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expand_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apuyane <apuyane@student.42angouleme.fr    +#+  +:+       +#+        */
+/*   By: mcomin <mcomin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/13 06:33:48 by apuyane           #+#    #+#             */
-/*   Updated: 2026/02/19 03:57:10 by apuyane          ###   ########.fr       */
+/*   Updated: 2026/03/03 03:31:30 by mcomin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ char	*get_expanded_home(char *string, int begin, int end, t_data *data)
 	total = ft_strjoin(str_begin, var);
 	str_end = ft_substr(string, end, ft_strlen(string));
 	total = ft_strjoin_free(total, str_end);
-	free_double(str_begin, var);
+	free_single(str_begin);
 	free_double(str_end, string);
 	return (total);
 }
