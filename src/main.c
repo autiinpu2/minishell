@@ -6,7 +6,7 @@
 /*   By: mcomin <mcomin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/25 04:17:27 by apuyane           #+#    #+#             */
-/*   Updated: 2026/03/03 03:44:41 by mcomin           ###   ########.fr       */
+/*   Updated: 2026/03/10 07:13:45 by mcomin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 #include "minishell.h"
 #include "exec.h"
 #include "free.h"
+#include "parsing.h"
 
 bool	is_invalid(char *line, t_data *data)
 {
@@ -22,7 +23,6 @@ bool	is_invalid(char *line, t_data *data)
 	{
 		if (check_syntax(line))
 			data->exit_code = 2;
-		free_single(line);
 		return (true);
 	}
 	return (false);
@@ -41,11 +41,21 @@ int	check_signal(t_data *data)
 
 void	process_input(t_data *data, char *line)
 {
+	int		redir;
+	char	*tmp;
+
 	if (*line)
 		ft_add_history(line, data);
 	expand(&line, data);
+	redir = count_redir_input(line);
 	if (!is_invalid(line, data))
 	{
+		if (redir)
+		{
+			tmp = ft_strdup(line);
+			free_single(line);
+			line = reload_input_redir(tmp, redir);
+		}
 		if (!parsing(data, line))
 			data->exit_code = exec(data);
 	}
