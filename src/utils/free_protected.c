@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free_protected.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apuyane <apuyane@student.42angouleme.fr    +#+  +:+       +#+        */
+/*   By: mcomin <mcomin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/06 17:02:40 by apuyane           #+#    #+#             */
-/*   Updated: 2026/02/13 04:48:02 by apuyane          ###   ########.fr       */
+/*   Updated: 2026/03/10 00:18:18 by mcomin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	free_single(void *s)
 {
-	if (s)
+	if (!s)
 		free(s);
 }
 
