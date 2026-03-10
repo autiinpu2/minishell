@@ -6,7 +6,7 @@
 /*   By: mcomin <mcomin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/30 07:27:45 by mcomin            #+#    #+#             */
-/*   Updated: 2026/03/03 02:47:11 by mcomin           ###   ########.fr       */
+/*   Updated: 2026/03/10 07:02:29 by mcomin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,5 +43,7 @@ int		redir_4(t_data *data, int i, int cmd_idx);
 int		is_in_tab(char **tab, char *str);
 int		tab_size(char **tab);
 int		redir_count(char **args);
+char	*reload_input_redir(char *input, int redir);
+int		count_redir_input(char *input);
 
 #endif

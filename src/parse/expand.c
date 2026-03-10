@@ -6,7 +6,7 @@
 /*   By: mcomin <mcomin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/10 00:46:40 by apuyane           #+#    #+#             */
-/*   Updated: 2026/03/10 00:02:50 by mcomin           ###   ########.fr       */
+/*   Updated: 2026/03/10 02:24:53 by mcomin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ char	*expand_variable(char *line, t_data *data, int *j)
 		reminder = *j + 1;
 		(*j)++;
 		str = get_expanded_home(str, reminder, *j, data);
-		*j = -1;
+		*j = *j -1;
 	}
 	return (str);
 }
