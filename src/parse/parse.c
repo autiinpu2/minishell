@@ -6,11 +6,17 @@
 /*   By: mcomin <mcomin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/30 01:11:37 by mcomin            #+#    #+#             */
-/*   Updated: 2026/03/10 05:59:28 by mcomin           ###   ########.fr       */
+/*   Updated: 2026/03/11 05:05:15 by mcomin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parsing.h"
+
+void	init_initial_input(t_data *data, char *line)
+{
+	free_single(data->initial_input);
+	data->initial_input = ft_strdup(line);
+}
 
 int	count_quotes_closed(char *str)
 {

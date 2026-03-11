@@ -6,7 +6,7 @@
 /*   By: mcomin <mcomin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/25 04:17:27 by apuyane           #+#    #+#             */
-/*   Updated: 2026/03/10 07:13:45 by mcomin           ###   ########.fr       */
+/*   Updated: 2026/03/11 04:13:23 by mcomin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,8 @@ void	process_input(t_data *data, char *line)
 			data->exit_code = exec(data);
 	}
 	free_single(line);
+	free_single(data->initial_input);
+	data->initial_input = NULL;
 	free_cmds(data);
 }
 

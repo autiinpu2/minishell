@@ -6,7 +6,7 @@
 /*   By: mcomin <mcomin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/05 05:22:34 by apuyane           #+#    #+#             */
-/*   Updated: 2026/03/10 02:49:06 by mcomin           ###   ########.fr       */
+/*   Updated: 2026/03/11 03:37:20 by mcomin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,6 @@ t_data	*load_data(t_data *data, char *input)
 	data->cmds = ft_calloc(data->size + 2, sizeof(t_cmd));
 	if (!data->cmds)
 		return (NULL);
-	expand(tab_split, data);
 	while ((size_t)i < data->size)
 	{
 		new_cmd(tab_split[i], data, i);

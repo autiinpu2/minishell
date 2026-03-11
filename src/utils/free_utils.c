@@ -6,7 +6,7 @@
 /*   By: mcomin <mcomin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/26 08:16:06 by apuyane           #+#    #+#             */
-/*   Updated: 2026/03/03 00:39:20 by mcomin           ###   ########.fr       */
+/*   Updated: 2026/03/11 05:10:44 by mcomin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,5 +90,6 @@ void	free_data(t_data *data)
 {
 	free_cmds(data);
 	free_env(data->env);
+	free_single(data->initial_input);
 	free_single(data);
 }
