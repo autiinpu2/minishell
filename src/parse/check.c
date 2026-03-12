@@ -6,7 +6,7 @@
 /*   By: mcomin <mcomin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/10 02:59:44 by mcomin            #+#    #+#             */
-/*   Updated: 2026/03/12 06:46:20 by mcomin           ###   ########.fr       */
+/*   Updated: 2026/03/12 07:51:18 by mcomin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,8 @@ int	count_redir_input(char *input)
 	count = 0;
 	while (input[i])
 	{
-		if ((!is_in_quotes(input, i)) && (input[i] == '>' || input[i] == '<'))
+		if (input[i + 1] && (!is_in_quotes(input, i))
+			&& (input[i] == '>' || input[i] == '<'))
 		{
 			i++;
 			count++;
