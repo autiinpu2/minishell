@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   history.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apuyane <apuyane@student.42angouleme.fr    +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/13 03:32:53 by apuyane           #+#    #+#             */
-/*   Updated: 2026/02/17 08:33:20 by apuyane          ###   ########.fr       */
+/*   Updated: 2026/03/12 20:16:47 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ void	ft_add_history(char *line, t_data *data)
 	char	*last;
 	int		fd;
 
-	if (!line || !*line)
+	if (!line || !*line || !isatty(0))
 		return ;
 	path = get_path(data, "/.minishell_history");
 	last = get_last_line(path);

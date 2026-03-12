@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcomin <mcomin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/25 04:17:27 by apuyane           #+#    #+#             */
-/*   Updated: 2026/03/12 06:53:29 by mcomin           ###   ########.fr       */
+/*   Updated: 2026/03/12 19:40:52 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,7 @@ void	process_input(t_data *data, char *line)
 			tmp = ft_strdup(line);
 			free_single(line);
 			line = reload_input_redir(tmp, redir);
+			free(tmp);
 		}
 		if (!parsing(data, line))
 			data->exit_code = exec(data);

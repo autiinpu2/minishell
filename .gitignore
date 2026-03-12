@@ -4,3 +4,4 @@ minishell
 build
 libs/libft/libft.a
 .vscode
+minishell_tester

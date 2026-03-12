@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redir.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcomin <mcomin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/17 03:02:09 by mcomin            #+#    #+#             */
-/*   Updated: 2026/03/03 02:45:04 by mcomin           ###   ########.fr       */
+/*   Updated: 2026/03/12 20:11:52 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ char	**trim_args(char **old)
 
 	i = 0;
 	j = 0;
-	new_arg = ft_calloc(tab_size(old) - is_in_tab(old, "REDIR_MAKER") + 1,
+	new_arg = ft_calloc(tab_size(old) - is_in_tab(old, "REDIR_MARKER"),
 			sizeof(char *));
 	if (!new_arg)
 	{
@@ -101,7 +101,6 @@ void	init_redirs(t_data *data, int cmd_idx)
 				break ;
 			process_redir(data, cmd_idx, i, redir_idx);
 			redir_idx++;
-			i++;
 		}
 		i++;
 	}
