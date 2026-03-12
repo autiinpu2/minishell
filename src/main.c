@@ -6,7 +6,7 @@
 /*   By: mcomin <mcomin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/25 04:17:27 by apuyane           #+#    #+#             */
-/*   Updated: 2026/03/10 07:13:45 by mcomin           ###   ########.fr       */
+/*   Updated: 2026/03/12 06:53:29 by mcomin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,6 @@ void	process_input(t_data *data, char *line)
 
 	if (*line)
 		ft_add_history(line, data);
-	expand(&line, data);
 	redir = count_redir_input(line);
 	if (!is_invalid(line, data))
 	{
