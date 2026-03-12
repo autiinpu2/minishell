@@ -6,7 +6,7 @@
 /*   By: mcomin <mcomin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/10 00:46:40 by apuyane           #+#    #+#             */
-/*   Updated: 2026/03/12 11:19:24 by mcomin           ###   ########.fr       */
+/*   Updated: 2026/03/12 11:28:48 by mcomin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,14 +39,15 @@ char	*expand_variable(char *line, t_data *data, int *j)
 			skip_chars(str, j);
 		str = get_expanded_string(str, reminder,
 				*j + 1, data);
+		*j = reminder - 2;
 	}
 	else if (str[*j] == '~')
 	{
 		reminder = *j + 1;
 		(*j)++;
 		str = get_expanded_home(str, reminder, *j, data);
+		*j = reminder - 2;
 	}
-	*j = reminder - 2;
 	return (str);
 }
 
