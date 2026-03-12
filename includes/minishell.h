@@ -6,7 +6,7 @@
 /*   By: mcomin <mcomin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/03 03:13:25 by mcomin            #+#    #+#             */
-/*   Updated: 2026/03/11 03:38:57 by mcomin           ###   ########.fr       */
+/*   Updated: 2026/03/12 06:53:15 by mcomin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,6 @@ typedef struct s_data
 	t_env	*env;
 	int		exit_code;
 	bool	exit;
-	char	*initial_input;
 }			t_data;
 
 int		parsing(t_data *data, char *line);

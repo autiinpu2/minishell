@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init_parsing.c                                     :+:      :+:    :+:   */
+/*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mcomin <mcomin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/05 05:22:34 by apuyane           #+#    #+#             */
-/*   Updated: 2026/03/11 03:37:20 by mcomin           ###   ########.fr       */
+/*   Updated: 2026/03/12 06:50:52 by mcomin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,7 @@ t_data	*load_data(t_data *data, char *input)
 		return (NULL);
 	while ((size_t)i < data->size)
 	{
+		expand(&tab_split[i], data);
 		new_cmd(tab_split[i], data, i);
 		i++;
 	}
