@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redir_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcomin <mcomin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/17 03:47:14 by mcomin            #+#    #+#             */
-/*   Updated: 2026/03/10 03:43:01 by mcomin           ###   ########.fr       */
+/*   Updated: 2026/03/12 20:13:32 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ int	tab_size(char **tab)
 	int	i;
 
 	i = 0;
-	while (tab[i])
+	while (tab[i] && tab[i][0])
 		i++;
-	return (i);
+	return (i + 1);
 }
