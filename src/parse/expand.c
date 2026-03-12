@@ -6,7 +6,7 @@
 /*   By: mcomin <mcomin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/10 00:46:40 by apuyane           #+#    #+#             */
-/*   Updated: 2026/03/12 10:37:41 by mcomin           ###   ########.fr       */
+/*   Updated: 2026/03/12 11:19:24 by mcomin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,13 +62,10 @@ void	expand(char **line, t_data *data)
 		if ((*line)[j] == '$' && (*line)[j + 1] &&
 			((*line)[j + 1] == '\"' || (*line)[j + 1] == '\'') &&
 				get_quote_state(*line, j) == 0)
-		{
 			*line = remove_char_i(*line, j);
-			continue ;
-		}
-		if (((*line)[j] == '$' && (*line)[j + 1] && (*line)[j + 1] != ' ' 
-			&& get_quote_state(*line, j) != 1)
-			|| (*line)[j] == '~')
+		else if (((*line)[j] == '$' && (*line)[j + 1] && (*line)[j + 1] != ' ' 
+			&& (*line)[j + 1] != '\"' && get_quote_state(*line, j) != 1)
+				|| (*line)[j] == '~')
 			*line = expand_variable(*line, data, &j);
 		j++;
 	}
