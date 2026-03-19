@@ -33,7 +33,7 @@ jobs:
           retention-days: 1
 
   testing-basic-minishell:
-    name: Test minishell
+    name: Test minishell Basic
     runs-on: ubuntu-22.04
     needs: make
     steps:
@@ -57,7 +57,7 @@ jobs:
           make
           ./tester -j 1
   testing-leak-minishell:
-    name: Test minishell
+    name: Test minishell Leaks
     runs-on: ubuntu-22.04
     needs: make
     steps:
@@ -81,7 +81,7 @@ jobs:
           make
           ./tester -v -j 1
   testing-fd-minishell:
-    name: Test minishell
+    name: Test minishell FD
     runs-on: ubuntu-22.04
     needs: make
     steps:
