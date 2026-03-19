@@ -72,29 +72,29 @@ int	redir_3(t_data *data, int i, int cmd_idx)
 
 int	redir_4(t_data *data, int i, int cmd_idx)
 {
-    int				fd;
-    int				rand_fd;
-    unsigned int	rand_num;
-    char			*num_str;
-    char			*name;
+	int				fd;
+	int				rand_fd;
+	unsigned int	rand_num;
+	char			*num_str;
+	char			*name;
 
-    rand_fd = open("/dev/urandom", O_RDONLY);
-    if (rand_fd < 0)
-        return (1);
-    read(rand_fd, &rand_num, sizeof(rand_num));
-    close(rand_fd);
-    num_str = ft_itoa(rand_num);
-    name = ft_strjoin("/tmp/sh-thd-", num_str);
-    free(num_str);
-    fd = open(name, O_WRONLY | O_CREAT | O_TRUNC, 0644);
-    if (fd < 0)
-    {
-        free(name);
-        return (1);
-    }
-    data->cmds[cmd_idx].infile = fd;
-    read_heredoc(data->cmds[cmd_idx].redirs[i].file, data->cmds[cmd_idx]);
-    data->cmds[cmd_idx].infile = open(name, O_RDONLY);
-    free(name);
-    return (0);
+	rand_fd = open("/dev/urandom", O_RDONLY);
+	if (rand_fd < 0)
+		return (1);
+	read(rand_fd, &rand_num, sizeof(rand_num));
+	close(rand_fd);
+	num_str = ft_itoa(rand_num);
+	name = ft_strjoin("/tmp/sh-thd-", num_str);
+	free(num_str);
+	fd = open(name, O_WRONLY | O_CREAT | O_TRUNC, 0644);
+	if (fd < 0)
+	{
+		free(name);
+		return (1);
+	}
+	data->cmds[cmd_idx].infile = fd;
+	read_heredoc(data->cmds[cmd_idx].redirs[i].file, data->cmds[cmd_idx]);
+	data->cmds[cmd_idx].infile = open(name, O_RDONLY);
+	free(name);
+	return (0);
 }
