@@ -29,7 +29,6 @@ jobs:
           path: minishell
           retention-days: 1
 
-jobs:
   make-tester:
     runs-on: ubuntu-22.04
     setps:
@@ -47,7 +46,6 @@ jobs:
           name: tester-x86_64
           path: minishell_tester/tester
           retention-days: 1
-jobs:
   basic:
     needs: [make, make-tester] 
     runs-on: ubuntu-22.04
@@ -62,8 +60,6 @@ jobs:
         with:
           name: tester-x86_64
           path: .
-        
-      # 2. RUN TESTS
       - name: Run All Tests
         run: |
           echo "Running Standard Tests..."
@@ -73,8 +69,6 @@ jobs:
         run: |
           echo -e "\n--- STANDARD TEST LOGS ---"
           cat test_output.txt
-    
-jobs:
   leak:
     needs: [make, make-tester] 
     runs-on: ubuntu-22.04
@@ -97,7 +91,6 @@ jobs:
         run: |
           echo -e "\n--- LEAK TEST LOGS ---"
           cat test_output_leaks.txt
-jobs:
   fd:
     needs: [make, make-tester] 
     runs-on: ubuntu-22.04
