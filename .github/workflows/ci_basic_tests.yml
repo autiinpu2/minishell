@@ -91,11 +91,7 @@ jobs:
           fi
       
       - name: Compilation
-        run: |
-          make
-          make clean
-          make fclean
-          make re
+        run: make re
 
       - name: Basic tests
         run: |

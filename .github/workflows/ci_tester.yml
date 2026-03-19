@@ -6,7 +6,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  run-tester:
+  make:
     runs-on: ubuntu-22.04
 
     steps:
@@ -16,69 +16,107 @@ jobs:
       - name: Install Dependencies
         run: |
           sudo apt-get update
-          sudo apt-get install -y libreadline-dev valac libglib2.0-dev build-essential valgrind
+          sudo apt-get install -y libreadline-dev build-essential
 
       # 1. COMPILATION
       - name: Build Minishell
-        run: make re
+        run: make
 
+      - name: Create artifact
+        uses: actions/upload-artifact@v6
+        with:
+          name: minishell-x86_64
+          path: minishell
+          retention-days: 1
+
+jobs:
+  make-tester:
+    runs-on: ubuntu-22.04
+    setps:
+      - name: Install packages
+        run: |
+          sudo apt-get update
+          sudo apt-get -y install libreadline-dev valac valgrind
       - name: Setup Tester
         run: |
-          git clone https://gitlab.com/nda-cunh/minishell_tester.git tester_repo
+          git clone https://gitlab.com/nda-cunh/minishell_tester.git
           cd tester_repo && make
-          # We leave 'tester' inside 'tester_repo' so it can find '../minishell'
-
+      - name: Create artifact
+        uses: actions/upload-artifact@v6
+        with:
+          name: tester-x86_64
+          path: minishell_tester/tester
+          retention-days: 1
+jobs:
+  basic:
+    needs: [make, make-tester] 
+    runs-on: ubuntu-22.04
+    setps:
+      - name: Download minishell
+        uses: actions/download-artifact@v4
+        with:
+          name: minishell-x86_64
+          path: .
+      - name: Download tester
+        uses: actions/download-artifact@v4
+        with:
+          name: tester-x86_64
+          path: .
+        
       # 2. RUN TESTS
       - name: Run All Tests
         run: |
-          # Change directory into the tester folder so '../minishell' works
-          cd tester_repo
-          
           echo "Running Standard Tests..."
-          timeout 120s ./tester -j 1 ../minishell > ../test_output.txt 2>&1 || true
-          echo "Running Leak Tests (Valgrind)..."
-          timeout 240s ./tester -v ../minishell > ../test_output_leaks.txt 2>&1 || true
-          echo "Running Leak Tests (Valgrind track-fd)..."
-          timeout 240s ./tester -vf ../minishell > ../test_output_leaks_fd.txt 2>&1 || true
+          ./tester -j 1 ./minishell > ./test_output.txt 2>&1 || true
 
-      # 3. PRINT LOGS
       - name: Print Raw Logs
         run: |
           echo -e "\n--- STANDARD TEST LOGS ---"
           cat test_output.txt
+    
+jobs:
+  leak:
+    needs: [make, make-tester] 
+    runs-on: ubuntu-22.04
+    setps:
+      - name: Download minishell
+        uses: actions/download-artifact@v4
+        with:
+          name: minishell-x86_64
+          path: .
+      - name: Download tester
+        uses: actions/download-artifact@v4
+        with:
+          name: tester-x86_64
+          path: .
+      - name: test
+        run: |
+          echo "Running Leak Tests (Valgrind)..."
+          ./tester -v ./minishell > ./test_output_leaks.txt 2>&1 || true
+      - name: Print
+        run: |
           echo -e "\n--- LEAK TEST LOGS ---"
           cat test_output_leaks.txt
+jobs:
+  fd:
+    needs: [make, make-tester] 
+    runs-on: ubuntu-22.04
+    setps:
+      - name: Download minishell
+        uses: actions/download-artifact@v4
+        with:
+          name: minishell-x86_64
+          path: .
+      - name: Download tester
+        uses: actions/download-artifact@v4
+        with:
+          name: tester-x86_64
+          path: .
+      - name: test FD
+        run: |
+          echo "Running Leak Tests (Valgrind track-fd)..."
+          ./tester -vf ../minishell > ../test_output_leaks_fd.txt 2>&1 || true
+      - name: Print Raw Logs
+        run: |
           echo -e "\n--- LEAK FD TEST LOGS ---"
           cat test_output_leaks_fd.txt
-
-      # 4. PRINT RESULT
-      - name: Print Final Result
-        if: always()
-        run: |
-          echo -e "\n\033[1;34m==========================================\033[0m"
-          echo -e "\033[1;34m          MINISHELL FINAL REPORT          \033[0m"
-          echo -e "\033[1;34m==========================================\033[0m\n"
-          
-          SCORE=$(grep "\[Total\]:" test_output.txt | sed 's/\[Total\]: //' || echo "N/A")
-          LEAK_SCORE=$(grep "\[Total\]:" test_output_leaks.txt | sed 's/\[Total\]: //' || echo "N/A")
-          FD_SCORE=$(grep "\[Total\]:" test_output_leaks_fd.txt | sed 's/\[Total\]: //' || echo "N/A")
-          
-          if [[ "$SCORE" == *"/"* ]]; then
-            echo -e "\033[1;32m[✓] MANDATORY SCORE: $SCORE\033[0m"
-          else
-            echo -e "\033[1;31m[!] MANDATORY SCORE: FAILED/TIMEOUT\033[0m"
-          fi
-          
-          if [[ "$LEAK_SCORE" == *"/"* ]]; then
-            echo -e "\033[1;32m[✓] LEAK SCORE:      $LEAK_SCORE\033[0m"
-          else
-            echo -e "\033[1;31m[!] LEAK SCORE:      FAILED/TIMEOUT\033[0m"
-          fi
-
-          if [[ "$FD_SCORE" == *"/"* ]]; then
-            echo -e "\033[1;32m[✓] LEAK FD SCORE:   $FD_SCORE\033[0m"
-          else
-            echo -e "\033[1;31m[!] LEAK FD SCORE:   FAILED/TIMEOUT\033[0m"
-          fi
-          
-          echo -e "\n\033[1;34m==========================================\033[0m"
