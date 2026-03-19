@@ -38,7 +38,7 @@ jobs:
       - name: Setup Tester
         run: |
           git clone https://gitlab.com/nda-cunh/minishell_tester.git
-          cd tester_repo && make
+          cd minishell_tester && make
       - name: Create artifact
         uses: actions/upload-artifact@v6
         with:
