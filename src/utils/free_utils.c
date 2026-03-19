@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mcomin <mcomin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/26 08:16:06 by apuyane           #+#    #+#             */
-/*   Updated: 2026/03/12 20:08:35 by marvin           ###   ########.fr       */
+/*   Updated: 2026/03/19 04:50:16 by mcomin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #include "libft.h"
 #include "free.h"
 #include "minishell.h"
+#include "parsing.h"
 
 void	free_env(t_env *env)
 {
@@ -38,7 +39,7 @@ void	free_tab(char **tab)
 	int	i;
 
 	i = 0;
-	if (!tab || !*tab)
+	if (!tab)
 		return ;
 	while (tab[i])
 	{
