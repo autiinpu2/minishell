@@ -6,7 +6,7 @@
 /*   By: mcomin <mcomin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/30 07:27:45 by mcomin            #+#    #+#             */
-/*   Updated: 2026/03/12 06:54:01 by mcomin           ###   ########.fr       */
+/*   Updated: 2026/03/19 04:32:28 by mcomin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,5 +45,6 @@ int		tab_size(char **tab);
 int		redir_count(char **args);
 char	*reload_input_redir(char *input, int redir);
 int		count_redir_input(char *input);
+void	free_redirs(t_redir *redir);
 
 #endif
