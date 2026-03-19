@@ -6,7 +6,7 @@
 /*   By: apuyane <apuyane@student.42angouleme.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/04 00:35:21 by mcomin            #+#    #+#             */
-/*   Updated: 2026/02/18 07:15:21 by apuyane          ###   ########.fr       */
+/*   Updated: 2026/03/19 08:50:06 by apuyane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,7 @@ char	*cmd_path(t_env *env, char *cmd_name, t_cmd *cmd)
 	char	*prefix;
 	char	*res_path;
 
-	if (!cmd_name)
+	if (!cmd_name || (cmd->args[0] && is_only_quotes(cmd->args[0])))
 	{
 		cmd->access = 1;
 		return (NULL);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   forks.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: apuyane <apuyane@student.42angouleme.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/05 09:08:22 by apuyane           #+#    #+#             */
-/*   Updated: 2026/03/13 00:03:06 by marvin           ###   ########.fr       */
+/*   Updated: 2026/03/19 08:33:06 by apuyane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ void	run_cmd(t_data *data, t_cmd cmd)
 {
 	char	**envp;
 
-	if (cmd.path && !cmd.path[0])
+	if ((cmd.path && !cmd.path[0]) || cmd.infile == -1 || cmd.outfile == -1)
 		exit (data->exit_code);
 	err(cmd, data);
 	envp = env_to_envp(data->env);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: apuyane <apuyane@student.42angouleme.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/05 05:22:21 by apuyane           #+#    #+#             */
-/*   Updated: 2026/03/12 23:57:20 by marvin           ###   ########.fr       */
+/*   Updated: 2026/03/19 08:39:15 by apuyane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@ int	run_built_in(t_cmd cmd, t_data *data)
 	int	exit_code;
 
 	exit_code = 2;
+	if (cmd.infile < 0 || cmd.outfile < 0)
+		return (exit_code);
 	if (!ft_strcmp(cmd.function_name, "env"))
 		exit_code = ft_env(data, cmd);
 	else if (!ft_strcmp(cmd.function_name, "pwd"))
