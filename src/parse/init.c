@@ -38,8 +38,6 @@ t_cmd	cmd_is_pipe(t_data *data, int i)
 
 t_cmd	new_cmd(char *token, t_data *data, int i)
 {
-	char	*tmp;
-
 	if (!token || !*token)
 	{
 		data->cmds[i].access = -1;
@@ -50,13 +48,7 @@ t_cmd	new_cmd(char *token, t_data *data, int i)
 	handle_redir(data);
 	data->cmds[i].function_name = ft_strdup(data->cmds[i].args[0]);
 	data->cmds[i].is_built_in = is_built_in(data->cmds[i].function_name);
-	if (count_quotes_closed(data->cmds[i].function_name))
-	{
-		tmp = ft_strdup(data->cmds[i].function_name);
-		free_single(data->cmds[i].function_name);
-		data->cmds[i].function_name = supp_quotes(tmp);
-		free_single(tmp);
-	}
+	in_quotes(data->cmds[i].function_name);
 	if (!data->cmds[i].is_built_in)
 		data->cmds[i].path = cmd_path(data->env,
 				data->cmds[i].function_name, &data->cmds[i]);
