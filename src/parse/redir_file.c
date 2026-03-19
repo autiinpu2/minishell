@@ -72,19 +72,29 @@ int	redir_3(t_data *data, int i, int cmd_idx)
 
 int	redir_4(t_data *data, int i, int cmd_idx)
 {
-	int	fd;
+	int				fd;
+	int				rand_fd;
+	unsigned int	rand_num;
+	char			*num_str;
+	char			*name;
 
-	(void)i;
-	if (data->cmds[cmd_idx].infile > 2)
-		close(data->cmds[cmd_idx].infile);
-	fd = 0;
-	data->cmds[cmd_idx].infile = fd;
+	rand_fd = open("/dev/urandom", O_RDONLY);
+	if (rand_fd < 0)
+		return (1);
+	read(rand_fd, &rand_num, sizeof(rand_num));
+	close(rand_fd);
+	num_str = ft_itoa(rand_num);
+	name = ft_strjoin("/tmp/sh-thd-", num_str);
+	free(num_str);
+	fd = open(name, O_WRONLY | O_CREAT | O_TRUNC, 0644);
 	if (fd < 0)
 	{
-		data->exit_code = 1;
-		ft_dprintf(2, "minishell: %s: No such file or directory\n",
-			data->cmds[cmd_idx].redirs[i].file);
+		free(name);
 		return (1);
 	}
+	data->cmds[cmd_idx].infile = fd;
+	read_heredoc(data->cmds[cmd_idx].redirs[i].file, data->cmds[cmd_idx]);
+	data->cmds[cmd_idx].infile = open(name, O_RDONLY);
+	free(name);
 	return (0);
 }

@@ -75,8 +75,8 @@ void	handle_token(t_data *data)
 		y = 0;
 		while (data->cmds[i].args && data->cmds[i].args[y])
 		{
-			if (strchr(data->cmds[i].args[y], '\'')
-				|| (strchr(data->cmds[i].args[y], '\"')))
+			if (ft_strchr(data->cmds[i].args[y], '\'')
+				|| (ft_strchr(data->cmds[i].args[y], '\"')))
 			{
 				tmp = supp_quotes(data->cmds[i].args[y]);
 				free_single(data->cmds[i].args[y]);

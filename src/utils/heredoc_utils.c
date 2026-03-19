@@ -1,26 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   quotes_utils.c                                     :+:      :+:    :+:   */
+/*   heredoc_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: apuyane <apuyane@student.42angouleme.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/03/19 05:40:43 by mcomin            #+#    #+#             */
-/*   Updated: 2026/03/19 07:08:57 by apuyane          ###   ########.fr       */
+/*   Created: 2026/03/17 00:52:23 by apuyane           #+#    #+#             */
+/*   Updated: 2026/03/19 07:02:18 by apuyane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parsing.h"
+#include "minishell.h"
+#include "libft.h"
 
-void	in_quotes(char **str)
+void	read_heredoc(char *delimiter, t_cmd cmd)
 {
-	char	*tmp;
+	char	*line;
 
-	if (count_quotes_closed(*str))
+	while (1)
 	{
-		tmp = supp_quotes(*str);
-		free_single(*str);
-		*str = ft_strdup(tmp);
-		free_single(tmp);
+		line = readline("heredoc>");
+		if (!line)
+			break ;
+		if (!ft_strcmp(line, delimiter))
+			break ;
+		ft_putstr_fd(line, cmd.infile);
+		ft_putstr_fd("\n", cmd.infile);
+		free(line);
 	}
+	free(line);
+	close(cmd.infile);
 }
