@@ -6,7 +6,7 @@
 /*   By: mcomin <mcomin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/19 05:40:43 by mcomin            #+#    #+#             */
-/*   Updated: 2026/03/19 05:51:57 by mcomin           ###   ########.fr       */
+/*   Updated: 2026/03/19 06:09:16 by mcomin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,9 @@ void	in_quotes(char *str)
 
 	if (count_quotes_closed(str))
 	{
-		tmp = ft_strdup(str);
+		tmp = supp_quotes(str);
 		free_single(str);
-		str = supp_quotes(tmp);
+		str = ft_strdup(tmp);
 		free_single(tmp);
 	}
 }
