@@ -2,8 +2,12 @@ name: Minishell Tester
 
 on:
   push:
-    branches: [ "main" ]
+    branches: [ "*" ]
   workflow_dispatch:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
 
 jobs:
   make:
@@ -28,87 +32,75 @@ jobs:
           path: minishell
           retention-days: 1
 
-  make-tester:
+  testing-basic-minishell:
+    name: Test minishell
     runs-on: ubuntu-22.04
+    needs: make
     steps:
       - name: Install packages
         run: |
           sudo apt-get update
           sudo apt-get -y install libreadline-dev valac valgrind
-      - name: Setup Tester
-        run: |
-          git clone https://gitlab.com/nda-cunh/minishell_tester.git
-          cd minishell_tester && make
-      - name: Create artifact
-        uses: actions/upload-artifact@v6
-        with:
-          name: tester-x86_64
-          path: minishell_tester/tester
-          retention-days: 1
-  basic:
-    needs: [make, make-tester] 
-    runs-on: ubuntu-22.04
-    steps:
-      - name: Download minishell
+      - name: Download artifact
         uses: actions/download-artifact@v4
         with:
           name: minishell-x86_64
           path: .
-      - name: Download tester
-        uses: actions/download-artifact@v4
-        with:
-          name: tester-x86_64
-          path: .
-      - name: Run All Tests
+      - name : Chmod minishell BIN
         run: |
-          echo "Running Standard Tests..."
-          ./tester -j 1 ./minishell > ./test_output.txt 2>&1 || true
-
-      - name: Print Raw Logs
+          chmod u+x minishell
+      - name: Git clone tester
+        run: git clone https://gitlab.com/nda-cunh/minishell_tester.git
+      - name: compile tester and run
         run: |
-          echo -e "\n--- STANDARD TEST LOGS ---"
-          cat test_output.txt
-  leak:
-    needs: [make, make-tester] 
+          cd minishell_tester/
+          make
+          ./tester -j 1
+  testing-leak-minishell:
+    name: Test minishell
     runs-on: ubuntu-22.04
+    needs: make
     steps:
-      - name: Download minishell
+      - name: Install packages
+        run: |
+          sudo apt-get update
+          sudo apt-get -y install libreadline-dev valac valgrind
+      - name: Download artifact
         uses: actions/download-artifact@v4
         with:
           name: minishell-x86_64
           path: .
-      - name: Download tester
-        uses: actions/download-artifact@v4
-        with:
-          name: tester-x86_64
-          path: .
-      - name: test
+      - name : Chmod minishell BIN
         run: |
-          echo "Running Leak Tests (Valgrind)..."
-          ./tester -v ./minishell > ./test_output_leaks.txt 2>&1 || true
-      - name: Print
+          chmod u+x minishell
+      - name: Git clone tester
+        run: git clone https://gitlab.com/nda-cunh/minishell_tester.git
+      - name: compile tester and run
         run: |
-          echo -e "\n--- LEAK TEST LOGS ---"
-          cat test_output_leaks.txt
-  fd:
-    needs: [make, make-tester] 
+          cd minishell_tester/
+          make
+          ./tester -v -j 1
+  testing-fd-minishell:
+    name: Test minishell
     runs-on: ubuntu-22.04
+    needs: make
     steps:
-      - name: Download minishell
+      - name: Install packages
+        run: |
+          sudo apt-get update
+          sudo apt-get -y install libreadline-dev valac valgrind
+      - name: Download artifact
         uses: actions/download-artifact@v4
         with:
           name: minishell-x86_64
           path: .
-      - name: Download tester
-        uses: actions/download-artifact@v4
-        with:
-          name: tester-x86_64
-          path: .
-      - name: test FD
+      - name : Chmod minishell BIN
         run: |
-          echo "Running Leak Tests (Valgrind track-fd)..."
-          ./tester -vf ../minishell > ../test_output_leaks_fd.txt 2>&1 || true
-      - name: Print Raw Logs
+          chmod u+x minishell
+      - name: Git clone tester
+        run: git clone https://gitlab.com/nda-cunh/minishell_tester.git
+      - name: compile tester and run
         run: |
-          echo -e "\n--- LEAK FD TEST LOGS ---"
-          cat test_output_leaks_fd.txt
+          cd minishell_tester/
+          make
+          ./tester -vf -j 1
