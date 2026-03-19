@@ -38,6 +38,8 @@ jobs:
           timeout 120s ./tester -j 1 ../minishell > ../test_output.txt 2>&1 || true
           echo "Running Leak Tests (Valgrind)..."
           timeout 240s ./tester -v ../minishell > ../test_output_leaks.txt 2>&1 || true
+          echo "Running Leak Tests (Valgrind track-fd)..."
+          timeout 240s ./tester -vf ../minishell > ../test_output_leaks_fd.txt 2>&1 || true
 
       # 3. PRINT LOGS
       - name: Print Raw Logs
@@ -46,6 +48,8 @@ jobs:
           cat test_output.txt
           echo -e "\n--- LEAK TEST LOGS ---"
           cat test_output_leaks.txt
+          echo -e "\n--- LEAK FD TEST LOGS ---"
+          cat test_output_leaks_fd.txt
 
       # 4. PRINT RESULT
       - name: Print Final Result
@@ -57,6 +61,7 @@ jobs:
           
           SCORE=$(grep "\[Total\]:" test_output.txt | sed 's/\[Total\]: //' || echo "N/A")
           LEAK_SCORE=$(grep "\[Total\]:" test_output_leaks.txt | sed 's/\[Total\]: //' || echo "N/A")
+          FD_SCORE=$(grep "\[Total\]:" test_output_leaks_fd.txt | sed 's/\[Total\]: //' || echo "N/A")
           
           if [[ "$SCORE" == *"/"* ]]; then
             echo -e "\033[1;32m[✓] MANDATORY SCORE: $SCORE\033[0m"
@@ -68,6 +73,12 @@ jobs:
             echo -e "\033[1;32m[✓] LEAK SCORE:      $LEAK_SCORE\033[0m"
           else
             echo -e "\033[1;31m[!] LEAK SCORE:      FAILED/TIMEOUT\033[0m"
+          fi
+
+          if [[ "$FD_SCORE" == *"/"* ]]; then
+            echo -e "\033[1;32m[✓] LEAK FD SCORE:   $FD_SCORE\033[0m"
+          else
+            echo -e "\033[1;31m[!] LEAK FD SCORE:   FAILED/TIMEOUT\033[0m"
           fi
           
           echo -e "\n\033[1;34m==========================================\033[0m"
