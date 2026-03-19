@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcomin <mcomin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: apuyane <apuyane@student.42angouleme.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/30 07:27:45 by mcomin            #+#    #+#             */
-/*   Updated: 2026/03/19 05:47:21 by mcomin           ###   ########.fr       */
+/*   Updated: 2026/03/19 07:09:06 by apuyane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ int		redir_count(char **args);
 char	*reload_input_redir(char *input, int redir);
 int		count_redir_input(char *input);
 void	free_redirs(t_redir *redir);
-void	in_quotes(char *str);
+void	in_quotes(char **str);
+void	read_heredoc(char *delimiter, t_cmd cmd);
 
 #endif

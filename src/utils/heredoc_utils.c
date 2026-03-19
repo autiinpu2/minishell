@@ -6,7 +6,7 @@
 /*   By: apuyane <apuyane@student.42angouleme.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/17 00:52:23 by apuyane           #+#    #+#             */
-/*   Updated: 2026/03/19 06:28:33 by apuyane          ###   ########.fr       */
+/*   Updated: 2026/03/19 07:02:18 by apuyane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,8 @@
 
 void	read_heredoc(char *delimiter, t_cmd cmd)
 {
-	char	*content;
 	char	*line;
 
-	content = ft_strdup("");
 	while (1)
 	{
 		line = readline("heredoc>");
