@@ -6,7 +6,7 @@
 /*   By: apuyane <apuyane@student.42angouleme.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/15 12:28:36 by apuyane           #+#    #+#             */
-/*   Updated: 2026/02/15 13:38:36 by apuyane          ###   ########.fr       */
+/*   Updated: 2026/03/20 07:29:22 by apuyane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,10 @@
 #include "exec.h"
 #include "free.h"
 
-#define RESET "\033[0m"
-#define GREEN "\033[1;32m"
-#define RED "\033[1;31m"
-#define BROWN "\033[;33m"
+#define RESET "\001\033[0m\002"
+#define GREEN "\001\033[1;32m\002" // Fixed 'm'
+#define RED   "\001\033[1;31m\002"
+#define BROWN "\001\033[0;33m\002" // Added '0' for standard color
 
 char	*color(char *s, char *color)
 {
@@ -86,7 +86,7 @@ static char	*get_exit_code(t_data *data)
 	char	*prompt;
 
 	exit_code = ft_itoa(data->exit_code);
-	exit_code = ft_strjoin_free(exit_code, " ➜ ");
+	exit_code = ft_strjoin_free(exit_code, " -> ");
 	if (data->exit_code == 0)
 		prompt = ft_strjoin(GREEN, exit_code);
 	else
@@ -110,8 +110,8 @@ char	*get_prefix(t_data *data)
 		pwd = ft_strdup(pwd);
 	prompt = ft_strjoin_free(prompt, pwd);
 	free(pwd);
-	git = get_git(data);
 	prompt = ft_strjoin_free(prompt, "> ");
+	git = get_git(data);
 	prompt = ft_strjoin_free(prompt, git);
 	free(git);
 	return (prompt);
