@@ -6,7 +6,7 @@
 /*   By: apuyane <apuyane@student.42angouleme.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/30 07:27:45 by mcomin            #+#    #+#             */
-/*   Updated: 2026/03/20 01:26:58 by apuyane          ###   ########.fr       */
+/*   Updated: 2026/03/20 02:00:51 by apuyane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,5 +50,9 @@ void	in_quotes(char **str);
 void	read_heredoc(char *delimiter, t_cmd cmd);
 bool	is_only_quotes(char *arg);
 char	*wildcard(char *expr);
+char	**clone_charstar(char **old);
+char	**add_dir(char *directory, char **old_dir);
+int		strmatch(char *pattern, char *name);
+char	*get_matching(char *pattern, char **elements);
 
 #endif

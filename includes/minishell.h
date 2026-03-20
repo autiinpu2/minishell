@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcomin <mcomin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: apuyane <apuyane@student.42angouleme.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/03 03:13:25 by mcomin            #+#    #+#             */
-/*   Updated: 2026/03/12 06:53:15 by mcomin           ###   ########.fr       */
+/*   Updated: 2026/03/20 02:01:24 by apuyane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@
 # include <sys/wait.h>
 # include <termios.h>
 # include <sys/ioctl.h>
+# include <dirent.h>
 # include "env.h"
 
 extern int	g_signal_status;
