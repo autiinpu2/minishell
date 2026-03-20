@@ -6,7 +6,7 @@
 /*   By: apuyane <apuyane@student.42angouleme.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/05 09:08:22 by apuyane           #+#    #+#             */
-/*   Updated: 2026/03/20 00:07:26 by apuyane          ###   ########.fr       */
+/*   Updated: 2026/03/20 06:30:31 by apuyane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,8 +88,10 @@ void	run_cmd(t_data *data, t_cmd cmd)
 	dup2(cmd.outfile, 1);
 	close_every_pipe(data->cmds, -1);
 	execve(cmd.path, cmd.args, envp);
-	perror("execve failed");
 	free_data(data);
+	if (errno == ENOEXEC)
+		exit(0);
+	perror("execve failed");
 	exit(1);
 }
 

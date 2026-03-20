@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free_protected.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcomin <mcomin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: apuyane <apuyane@student.42angouleme.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/06 17:02:40 by apuyane           #+#    #+#             */
-/*   Updated: 2026/03/10 01:52:20 by mcomin           ###   ########.fr       */
+/*   Updated: 2026/03/20 06:38:41 by apuyane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ void	free_single(void *s)
 {
 	if (s)
 		free(s);
+	s = NULL;
 }
 
 void	free_double(void *s1, void *s2)

@@ -73,6 +73,7 @@ t_data	*load_data(t_data *data, char *input)
 	while ((size_t)i < data->size)
 	{
 		expand(&tab_split[i], data);
+		tab_split[i] = wildcard(tab_split[i]);
 		new_cmd(tab_split[i], data, i);
 		i++;
 	}
@@ -88,6 +89,13 @@ void	update_shlvl(t_data *data)
 	char	*endptr;
 
 	actual_value = get_env_from_name("SHLVL", data->env);
+	if (!actual_value)
+	{
+		new_value = ft_itoa(1);
+		change_env_value(data, "SHLVL", new_value);
+		free(new_value);
+		return ;
+	}
 	value = ft_strtol(actual_value, &endptr);
 	if (*endptr != '\0')
 		value = 0;

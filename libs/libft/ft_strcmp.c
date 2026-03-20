@@ -6,7 +6,7 @@
 /*   By: apuyane <apuyane@student.42angouleme.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/24 04:13:17 by apuyane           #+#    #+#             */
-/*   Updated: 2026/01/24 04:13:38 by apuyane          ###   ########.fr       */
+/*   Updated: 2026/03/20 02:06:54 by apuyane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,4 +24,18 @@ int	ft_strcmp(const char *s1, const char *s2)
 	while (s1b[i] && s2b[i] && s1b[i] == s2b[i])
 		i++;
 	return (s1b[i] - s2b[i]);
+}
+
+int	ft_strcmp_case(const char *s1, const char *s2)
+{
+	size_t			i;
+	unsigned char	*s1b;
+	unsigned char	*s2b;
+
+	s1b = (unsigned char *)s1;
+	s2b = (unsigned char *)s2;
+	i = 0;
+	while (s1b[i] && s2b[i] && ft_tolower(s1b[i]) == ft_tolower(s2b[i]))
+		i++;
+	return (ft_tolower(s1b[i]) - ft_tolower(s2b[i]));
 }
