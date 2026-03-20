@@ -6,7 +6,7 @@
 /*   By: apuyane <apuyane@student.42angouleme.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/15 21:41:58 by apuyane           #+#    #+#             */
-/*   Updated: 2026/03/20 02:08:03 by apuyane          ###   ########.fr       */
+/*   Updated: 2026/03/20 06:40:57 by apuyane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,6 +111,14 @@ char	*wildcard(char *expr)
 	char	**tab;
 	int		i;
 
+	i = -1;
+	while (expr[++i])
+	{
+		if (expr[i] == '*' && !is_in_quotes(expr, i))
+			break ;
+	}
+	if (!expr[i])
+		return (expr);
 	i = 0;
 	tab = ft_split(expr, ' ');
 	line = ft_strdup("");
