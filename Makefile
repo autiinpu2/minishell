@@ -26,7 +26,7 @@ SRC_UTILS       := envp_utils.c free_utils.c builtin_utils.c free_protected.c fd
 
 SRC_PARSE_DIR   := $(SRC_DIR)/parse
 SRC_PARSE       := init.c parse.c path.c error.c split_quotes.c expand.c expand_utils.c redir_file.c \
-					redir.c check.c
+					redir.c check.c wildcards.c
 
 SRC_EXEC_DIR    := $(SRC_DIR)/exec
 SRC_EXEC        := exec.c builtin.c ft_cd.c ft_unset.c ft_export.c forks.c ft_echo.c ft_export_utils.c mark.c

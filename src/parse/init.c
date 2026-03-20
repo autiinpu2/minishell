@@ -73,6 +73,7 @@ t_data	*load_data(t_data *data, char *input)
 	while ((size_t)i < data->size)
 	{
 		expand(&tab_split[i], data);
+		tab_split[i] = wildcard(tab_split[i]);
 		new_cmd(tab_split[i], data, i);
 		i++;
 	}
