@@ -29,4 +29,4 @@ To launch the program, you have this command
 # Ressources
 This project is using our [Libft](libs/libft/Readme.md)
 
-...
+We used AI for debugging, and to understand clearer the functions we needed to use
