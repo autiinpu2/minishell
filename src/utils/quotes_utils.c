@@ -6,7 +6,7 @@
 /*   By: apuyane <apuyane@student.42angouleme.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/19 05:40:43 by mcomin            #+#    #+#             */
-/*   Updated: 2026/03/19 08:51:06 by apuyane          ###   ########.fr       */
+/*   Updated: 2026/03/21 04:25:34 by apuyane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,5 +27,8 @@ void	in_quotes(char **str)
 
 bool	is_only_quotes(char *arg)
 {
-	return (!ft_strcmp(arg, "\"\"") || !ft_strcmp(arg, "\'\'"));
+	int	ret;
+
+	ret = (!ft_strcmp(arg, "\"\"")) || (!ft_strcmp(arg, "\'\'"));
+	return (ret);
 }

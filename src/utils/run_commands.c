@@ -6,7 +6,7 @@
 /*   By: apuyane <apuyane@student.42angouleme.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/16 22:50:25 by apuyane           #+#    #+#             */
-/*   Updated: 2026/02/17 08:31:03 by apuyane          ###   ########.fr       */
+/*   Updated: 2026/03/21 03:33:00 by apuyane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ static char	*remove_n(char *line)
 		s[i] = line[i];
 		i++;
 	}
-	free(line);
+	free_single(line);
 	return (s);
 }
 
@@ -80,7 +80,7 @@ void	minishellrc(t_data *data)
 	if (!path)
 		return ;
 	run_cmd = open(path, O_RDWR | O_CREAT, 0664);
-	free(path);
+	free_single(path);
 	if (run_cmd < 0)
 		return ;
 	minishellrc_run(data, run_cmd);

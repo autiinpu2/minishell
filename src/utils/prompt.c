@@ -6,7 +6,7 @@
 /*   By: apuyane <apuyane@student.42angouleme.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/15 12:28:36 by apuyane           #+#    #+#             */
-/*   Updated: 2026/03/20 07:29:22 by apuyane          ###   ########.fr       */
+/*   Updated: 2026/03/21 04:33:30 by apuyane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,9 @@
 #include "free.h"
 
 #define RESET "\001\033[0m\002"
-#define GREEN "\001\033[1;32m\002" // Fixed 'm'
+#define GREEN "\001\033[1;32m\002"
 #define RED   "\001\033[1;31m\002"
-#define BROWN "\001\033[0;33m\002" // Added '0' for standard color
+#define BROWN "\001\033[0;33m\002"
 
 char	*color(char *s, char *color)
 {
@@ -43,7 +43,7 @@ char	*get_branch_name(t_data *data)
 		return (NULL);
 	path = ft_strjoin(path, "/.git/HEAD");
 	fd = open(path, O_RDONLY);
-	free(path);
+	free_single(path);
 	if (fd < 0)
 		return (NULL);
 	bytes = read(fd, buff, 99);
@@ -76,7 +76,7 @@ char	*get_git(t_data *data)
 	git = ft_strjoin_free(git, BROWN);
 	git = ft_strjoin_free(git, ") ");
 	git = ft_strjoin_free(git, RESET);
-	free(branch_name);
+	free_single(branch_name);
 	return (git);
 }
 
@@ -86,7 +86,7 @@ static char	*get_exit_code(t_data *data)
 	char	*prompt;
 
 	exit_code = ft_itoa(data->exit_code);
-	exit_code = ft_strjoin_free(exit_code, " -> ");
+	exit_code = ft_strjoin_free(exit_code, " ➜ ");
 	if (data->exit_code == 0)
 		prompt = ft_strjoin(GREEN, exit_code);
 	else
@@ -102,6 +102,8 @@ char	*get_prefix(t_data *data)
 	char	*prompt;
 	char	*git;
 
+	if (!isatty(STDIN_FILENO))
+		return (NULL);
 	prompt = get_exit_code(data);
 	pwd = get_env_from_name("PWD", data->env);
 	if (!pwd)
@@ -109,10 +111,10 @@ char	*get_prefix(t_data *data)
 	else
 		pwd = ft_strdup(pwd);
 	prompt = ft_strjoin_free(prompt, pwd);
-	free(pwd);
+	free_single(pwd);
 	prompt = ft_strjoin_free(prompt, "> ");
 	git = get_git(data);
 	prompt = ft_strjoin_free(prompt, git);
-	free(git);
+	free_single(git);
 	return (prompt);
 }

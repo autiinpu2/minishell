@@ -6,7 +6,7 @@
 /*   By: apuyane <apuyane@student.42angouleme.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/25 06:09:40 by apuyane           #+#    #+#             */
-/*   Updated: 2026/02/17 08:32:45 by apuyane          ###   ########.fr       */
+/*   Updated: 2026/03/21 04:06:26 by apuyane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 #include "exec.h"
 #include "minishell.h"
 
-t_env	*change_env_value(t_data *data, char *key, char *new_value)
+void	change_env_value(t_data *data, char *key, char *new_value)
 {
 	t_env_node	*node;
 	char		*new_val;
@@ -31,7 +31,7 @@ t_env	*change_env_value(t_data *data, char *key, char *new_value)
 			node->text = ft_strdup(node->key);
 			node->text = ft_strjoin_free(node->text, "=");
 			node->text = ft_strjoin_free(node->text, new_value);
-			return (data->env);
+			return ;
 		}
 		node = node->next;
 	}
@@ -39,7 +39,6 @@ t_env	*change_env_value(t_data *data, char *key, char *new_value)
 	new_val = ft_strjoin_free(new_val, new_value);
 	add_new_env_node(data, new_val);
 	free_single(new_val);
-	return (data->env);
 }
 
 static t_env	*fill_env(t_env *env, char **envp)

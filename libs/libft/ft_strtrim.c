@@ -6,7 +6,7 @@
 /*   By: apuyane <apuyane@student.42angouleme.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/24 04:18:20 by apuyane           #+#    #+#             */
-/*   Updated: 2026/01/24 04:18:20 by apuyane          ###   ########.fr       */
+/*   Updated: 2026/03/21 03:24:59 by apuyane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ char	*ft_strtrim(char const *s1, char const *set)
 		i++;
 	if (j < i)
 		j = i;
-	s2 = malloc(j - i + 1);
+	s2 = ft_calloc(j - i + 1, sizeof(char));
 	if (!s2)
 		return (NULL);
 	while (j > i)

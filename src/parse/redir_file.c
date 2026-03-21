@@ -85,16 +85,16 @@ int	redir_4(t_data *data, int i, int cmd_idx)
 	close(rand_fd);
 	num_str = ft_itoa(rand_num);
 	name = ft_strjoin("/tmp/sh-thd-", num_str);
-	free(num_str);
+	free_single(num_str);
 	fd = open(name, O_WRONLY | O_CREAT | O_TRUNC, 0644);
 	if (fd < 0)
 	{
-		free(name);
+		free_single(name);
 		return (1);
 	}
 	data->cmds[cmd_idx].infile = fd;
 	read_heredoc(data->cmds[cmd_idx].redirs[i].file, data->cmds[cmd_idx]);
 	data->cmds[cmd_idx].infile = open(name, O_RDONLY);
-	free(name);
+	free_single(name);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: apuyane <apuyane@student.42angouleme.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/15 21:41:58 by apuyane           #+#    #+#             */
-/*   Updated: 2026/03/20 06:40:57 by apuyane          ###   ########.fr       */
+/*   Updated: 2026/03/21 03:34:44 by apuyane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ char	*find_files(char *expr, char *folder)
 	char	**elements;
 	char	*line;
 
-	elements = malloc(sizeof(char *));
+	elements = ft_calloc(1, sizeof(char *));
 	elements[0] = NULL;
 	elements = add_dir(folder, elements);
 	sort(elements);
@@ -98,7 +98,7 @@ char	**open_folder(char *directory)
 			break ;
 		if (entry->d_name[0] == '.')
 			continue ;
-		file_list[i++] = strdup(entry->d_name);
+		file_list[i++] = ft_strdup(entry->d_name);
 	}
 	closedir(dir);
 	return (file_list);
@@ -129,6 +129,6 @@ char	*wildcard(char *expr)
 		line = ft_strjoin_free(line, " ");
 		i++;
 	}
-	free(expr);
+	free_single(expr);
 	return (line);
 }

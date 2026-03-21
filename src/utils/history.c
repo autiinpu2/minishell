@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   history.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: apuyane <apuyane@student.42angouleme.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/13 03:32:53 by apuyane           #+#    #+#             */
-/*   Updated: 2026/03/12 20:16:47 by marvin           ###   ########.fr       */
+/*   Updated: 2026/03/21 03:32:26 by apuyane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,16 +46,16 @@ char	*get_last_line(char *path)
 	fd = open(path, O_RDONLY);
 	if (fd < 0)
 		return (NULL);
-	buf = malloc(sizeof(char) * (st.st_size + 1));
+	buf = ft_calloc(st.st_size + 1, sizeof(char));
 	if (read(fd, buf, st.st_size) <= 0)
 	{
-		free(buf);
+		free_single(buf);
 		close(fd);
 		return (NULL);
 	}
 	buf[st.st_size] = '\0';
 	last = find_last_line(buf, st.st_size);
-	free(buf);
+	free_single(buf);
 	close(fd);
 	return (last);
 }
@@ -83,6 +83,5 @@ void	ft_add_history(char *line, t_data *data)
 			}
 		}
 	}
-	free(path);
-	free(last);
+	free_double(path, last);
 }

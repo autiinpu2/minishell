@@ -6,7 +6,7 @@
 /*   By: apuyane <apuyane@student.42angouleme.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/03 03:13:25 by mcomin            #+#    #+#             */
-/*   Updated: 2026/03/20 02:01:24 by apuyane          ###   ########.fr       */
+/*   Updated: 2026/03/21 04:56:48 by apuyane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,5 +91,6 @@ char	*ft_exit_code(t_data *data, char *str_begin);
 char	*remove_char_i(char *str, int index);
 int		get_quote_state(char *string, size_t pos);
 void	redir_swap(char ***tab);
+int		check_signal(t_data *data);
 
 #endif

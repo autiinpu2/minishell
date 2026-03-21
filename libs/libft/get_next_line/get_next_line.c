@@ -6,7 +6,7 @@
 /*   By: apuyane <apuyane@student.42angouleme.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/30 14:28:34 by aubin             #+#    #+#             */
-/*   Updated: 2026/01/25 04:51:03 by apuyane          ###   ########.fr       */
+/*   Updated: 2026/03/21 03:26:33 by apuyane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ char	*get_next_line(int fd)
 	int			bytes_read;
 	int			error;
 
-	buff = malloc((BUFFER_SIZE + 1) * sizeof(char));
+	buff = ft_calloc((BUFFER_SIZE + 1), sizeof(char));
 	if (!fd_protect(fd, &buff))
 		return (NULL);
 	bytes_read = BUFFER_SIZE;

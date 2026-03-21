@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcomin <mcomin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: apuyane <apuyane@student.42angouleme.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/10 02:59:44 by mcomin            #+#    #+#             */
-/*   Updated: 2026/03/12 07:51:18 by mcomin           ###   ########.fr       */
+/*   Updated: 2026/03/21 05:59:29 by apuyane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,22 +40,25 @@ char	*reload_input_redir(char *input, int redir)
 	int		i;
 	int		j;
 
-	new_input = ft_calloc(ft_strlen(input) + (redir * 2) + 1, sizeof(char));
-	i = 0;
+	new_input = ft_calloc(ft_strlen(input) + (redir * 4) + 1, sizeof(char));
+	if (!new_input)
+		return (NULL);
+	i = -1;
 	j = 0;
-	while (input[i])
+	while (input[++i])
 	{
 		if ((!is_in_quotes(input, i)) && (input[i] == '>' || input[i] == '<'))
 		{
-			new_input[j++] = ' ';
+			if (j > 0 && new_input[j - 1] != ' ')
+				new_input[j++] = ' ';
 			new_input[j++] = input[i];
 			if (input[i + 1] == input[i])
 				new_input[j++] = input[++i];
-			new_input[j++] = ' ';
+			if (input[i + 1] != ' ' && input[i + 1] != '\0')
+				new_input[j++] = ' ';
 		}
 		else
 			new_input[j++] = input[i];
-		i++;
 	}
 	return (new_input);
 }

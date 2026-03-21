@@ -6,7 +6,7 @@
 /*   By: apuyane <apuyane@student.42angouleme.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/05 05:22:21 by apuyane           #+#    #+#             */
-/*   Updated: 2026/03/19 08:39:15 by apuyane          ###   ########.fr       */
+/*   Updated: 2026/03/21 04:56:01 by apuyane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,8 @@ void	run_processes(t_data *data)
 
 int	exec(t_data	*data)
 {
+	if (check_signal(data))
+		return (data->exit_code);
 	run_processes(data);
 	data->exit_code = wait_all_pids(data);
 	return (data->exit_code);

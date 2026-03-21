@@ -6,7 +6,7 @@
 /*   By: apuyane <apuyane@student.42angouleme.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/24 04:16:51 by apuyane           #+#    #+#             */
-/*   Updated: 2026/01/24 04:28:53 by apuyane          ###   ########.fr       */
+/*   Updated: 2026/03/21 03:25:09 by apuyane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 		len = 0;
 	else if (len > s_len - start)
 		len = s_len - start;
-	sub = malloc((len + 1) * sizeof(char));
+	sub = ft_calloc((len + 1), sizeof(char));
 	if (!sub)
 		return (NULL);
 	ft_strlcpy(sub, s + start, len + 1);

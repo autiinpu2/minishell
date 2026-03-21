@@ -6,7 +6,7 @@
 /*   By: apuyane <apuyane@student.42angouleme.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/03 14:51:56 by aubin             #+#    #+#             */
-/*   Updated: 2026/02/15 02:07:17 by apuyane          ###   ########.fr       */
+/*   Updated: 2026/03/21 03:26:24 by apuyane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ char	*extract_line(char *text)
 	i = 0;
 	while (text[i] && text[i] != '\n')
 		i++;
-	line = malloc((i + (text[i] == '\n') + 1) * sizeof(char));
+	line = ft_calloc((i + (text[i] == '\n') + 1), sizeof(char));
 	if (!line)
 		return (NULL);
 	i = 0;
@@ -80,7 +80,7 @@ char	*save_rest(char *text)
 		i++;
 	if (text[i] == '\n')
 		i++;
-	rest = malloc(ft_strlen(text) - i + 1);
+	rest = ft_calloc(ft_strlen(text) - i + 1, sizeof(char));
 	if (!rest)
 	{
 		free(text);

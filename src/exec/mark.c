@@ -6,7 +6,7 @@
 /*   By: apuyane <apuyane@student.42angouleme.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/15 14:31:00 by apuyane           #+#    #+#             */
-/*   Updated: 2026/02/15 15:54:59 by apuyane          ###   ########.fr       */
+/*   Updated: 2026/03/21 03:50:00 by apuyane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ char	*load_file_content(char *path)
 		bytes_read = read(fd, buffer, 4096);
 		if (bytes_read == -1)
 		{
-			free(content);
+			free_single(content);
 			break ;
 		}
 		buffer[bytes_read] = '\0';
@@ -55,7 +55,7 @@ int	add_mark(t_data *data, t_cmd cmd)
 		return (1);
 	path = get_path(data, "/.minishell_marks");
 	fd = open(path, O_WRONLY | O_APPEND | O_CREAT, 0644);
-	free(path);
+	free_single(path);
 	if (fd < 0)
 		return (1);
 	ft_putstr_fd(cmd.args[2], fd);
@@ -73,7 +73,7 @@ int	function(char *content, t_data *data, t_cmd cmd)
 	char	**pair;
 
 	lines = ft_split(content, '\n');
-	free(content);
+	free_single(content);
 	i = -1;
 	while (lines && lines[++i])
 	{
@@ -99,7 +99,7 @@ int	go_to_mark(t_data *data, t_cmd cmd)
 
 	path = get_path(data, "/.minishell_marks");
 	content = load_file_content(path);
-	free(path);
+	free_single(path);
 	if (!content)
 	{
 		ft_dprintf(2, "mark: no marks saved yet\n");
