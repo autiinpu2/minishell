@@ -15,21 +15,22 @@
 int	is_in_quotes(char const *s, size_t pos)
 {
 	size_t	i;
-	int		single_quotes;
-	int		double_quotes;
+	char	quote;
 
 	i = 0;
-	single_quotes = 0;
-	double_quotes = 0;
+	quote = '\0';
 	while (i < pos)
 	{
-		if (s[i] == '\"')
-			double_quotes = !double_quotes;
-		if (s[i] == '\'')
-			single_quotes = !single_quotes;
+		if (quote == '\0')
+		{
+			if (s[i] == '\"' || s[i] == '\'')
+				quote = s[i];
+		}
+		else if (s[i] == quote)
+			quote = '\0';
 		i++;
 	}
-	return (single_quotes | double_quotes);
+	return (quote != 0);
 }
 
 static char	**wordsmalloc(char const *s, char c)
@@ -104,11 +105,11 @@ char	**ft_split_quotes(char const *s, char c)
 	{
 		while (str[i])
 		{
-			free(str[i]);
+			free_single(str[i]);
 			str[i] = NULL;
 			i++;
 		}
-		free(str);
+		free_single(str);
 		str = NULL;
 	}
 	return (str);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expand.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcomin <mcomin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: apuyane <apuyane@student.42angouleme.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/10 00:46:40 by apuyane           #+#    #+#             */
-/*   Updated: 2026/03/12 11:50:53 by mcomin           ###   ########.fr       */
+/*   Updated: 2026/03/21 06:33:54 by apuyane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,6 @@ char	*expand_variable(char *line, t_data *data, int *j)
 	char	*str;
 
 	str = line;
-	reminder = 0;
 	if (str[*j] == '$' && str[*j + 1]
 		&& (ft_isalpha(str[*j + 1]) || str[*j + 1] == '_'
 			|| str[*j + 1] == '?') && get_quote_state(str, *j) != 1)
@@ -41,7 +40,7 @@ char	*expand_variable(char *line, t_data *data, int *j)
 				*j + 1, data);
 		*j = reminder - 2;
 	}
-	else if (str[*j] == '~')
+	else if (str[*j] == '~' && get_quote_state(str, *j) == 0)
 	{
 		reminder = *j + 1;
 		(*j)++;

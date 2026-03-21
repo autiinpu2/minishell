@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcomin <mcomin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: apuyane <apuyane@student.42angouleme.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/03 09:56:58 by apuyane           #+#    #+#             */
-/*   Updated: 2026/03/02 23:56:52 by mcomin           ###   ########.fr       */
+/*   Updated: 2026/03/21 04:36:49 by apuyane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,8 @@ void	ft_exit_utils(t_data *data)
 	if (data->size == 1)
 	{
 		data->exit = true;
+		if (isatty(STDIN_FILENO))
+			return ;
 		ft_dprintf(2, "exit\n");
 	}
 }

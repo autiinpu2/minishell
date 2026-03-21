@@ -93,7 +93,7 @@ void	update_shlvl(t_data *data)
 	{
 		new_value = ft_itoa(1);
 		change_env_value(data, "SHLVL", new_value);
-		free(new_value);
+		free_single(new_value);
 		return ;
 	}
 	value = ft_strtol(actual_value, &endptr);
@@ -104,7 +104,7 @@ void	update_shlvl(t_data *data)
 	if (!new_value)
 		return ;
 	change_env_value(data, "SHLVL", new_value);
-	free(new_value);
+	free_single(new_value);
 }
 
 t_data	*init_data(char **envp)

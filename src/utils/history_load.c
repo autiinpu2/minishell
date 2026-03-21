@@ -6,7 +6,7 @@
 /*   By: apuyane <apuyane@student.42angouleme.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/15 10:46:29 by apuyane           #+#    #+#             */
-/*   Updated: 2026/02/17 08:33:41 by apuyane          ###   ########.fr       */
+/*   Updated: 2026/03/21 03:32:11 by apuyane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,11 +58,11 @@ void	load_history(t_data *data)
 		return ;
 	if (stat(path, &st) == -1 || st.st_size <= 0)
 	{
-		free(path);
+		free_single(path);
 		return ;
 	}
 	fd = open(path, O_RDONLY);
-	free(path);
+	free_single(path);
 	if (fd < 0)
 		return ;
 	buf = ft_calloc(st.st_size + 1, sizeof(char));
@@ -70,6 +70,6 @@ void	load_history(t_data *data)
 		return ;
 	if (read(fd, buf, st.st_size) > 0)
 		parse_history_buffer(buf);
-	free(buf);
+	free_single(buf);
 	close(fd);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expand_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcomin <mcomin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: apuyane <apuyane@student.42angouleme.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/13 06:33:48 by apuyane           #+#    #+#             */
-/*   Updated: 2026/03/03 03:31:30 by mcomin           ###   ########.fr       */
+/*   Updated: 2026/03/21 06:29:59 by apuyane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,6 +115,6 @@ char	*remove_char_i(char *str, int index)
 			new_str[k++] = str[i];
 		i++;
 	}
-	free(str);
+	free_single(str);
 	return (new_str);
 }

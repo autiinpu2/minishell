@@ -6,7 +6,7 @@
 /*   By: apuyane <apuyane@student.42angouleme.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/20 01:50:06 by apuyane           #+#    #+#             */
-/*   Updated: 2026/03/20 02:09:56 by apuyane          ###   ########.fr       */
+/*   Updated: 2026/03/21 03:34:46 by apuyane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ char	**clone_charstar(char **old)
 	j = 0;
 	while (old && old[i])
 		i++;
-	new = malloc((i + 2) * sizeof(char *));
+	new = ft_calloc((i + 2), sizeof(char *));
 	if (!new)
 		return (NULL);
 	while (j < i)
@@ -56,9 +56,9 @@ void	fill_dir(DIR *dir, char ***new_dir)
 			i++;
 		temp = *new_dir;
 		*new_dir = clone_charstar(temp);
-		(*new_dir)[i] = strdup(entry->d_name);
+		(*new_dir)[i] = ft_strdup(entry->d_name);
 		(*new_dir)[i + 1] = NULL;
-		free(temp);
+		free_single(temp);
 	}
 }
 
@@ -112,7 +112,7 @@ char	*get_matching(char *pattern, char **elements)
 	}
 	if (found == 0)
 	{
-		free(line);
+		free_single(line);
 		line = ft_strdup(pattern);
 	}
 	return (line);

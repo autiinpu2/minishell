@@ -6,7 +6,7 @@
 /*   By: apuyane <apuyane@student.42angouleme.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/17 03:02:09 by mcomin            #+#    #+#             */
-/*   Updated: 2026/03/19 07:10:15 by apuyane          ###   ########.fr       */
+/*   Updated: 2026/03/21 05:13:18 by apuyane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,8 +79,8 @@ void	process_redir(t_data *data, int cmd_idx, int i, int redir_idx)
 		data->cmds[cmd_idx].redirs[redir_idx].type = 4;
 	data->cmds[cmd_idx].redirs[redir_idx].file = ft_strdup(args[i + 1]);
 	in_quotes(&data->cmds[cmd_idx].redirs[redir_idx].file);
-	free(args[i]);
-	free(args[i + 1]);
+	free_single(args[i]);
+	free_single(args[i + 1]);
 	args[i] = ft_strdup("REDIR_MARKER");
 	args[i + 1] = ft_strdup("REDIR_MARKER");
 }

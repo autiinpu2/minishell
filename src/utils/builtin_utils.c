@@ -6,13 +6,14 @@
 /*   By: apuyane <apuyane@student.42angouleme.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/03 07:26:31 by apuyane           #+#    #+#             */
-/*   Updated: 2026/02/15 15:40:28 by apuyane          ###   ########.fr       */
+/*   Updated: 2026/03/21 03:44:35 by apuyane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 #include "libft.h"
 #include "exec.h"
+#include "free.h"
 
 bool	is_built_in(char *name)
 {
@@ -65,7 +66,7 @@ void	call_chdir(char *path, t_data *data)
 			get_env_from_name("PWD", data->env));
 		change_env_value(data, "PWD", tmp);
 		data->exit_code = 0;
-		free(tmp);
+		free_single(tmp);
 		return ;
 	}
 }

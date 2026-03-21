@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcomin <mcomin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: apuyane <apuyane@student.42angouleme.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/26 08:16:06 by apuyane           #+#    #+#             */
-/*   Updated: 2026/03/19 04:50:16 by mcomin           ###   ########.fr       */
+/*   Updated: 2026/03/21 03:40:16 by apuyane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,14 +24,13 @@ void	free_env(t_env *env)
 	node = env->top;
 	while (node)
 	{
-		free_single(node->key);
-		free_single(node->value);
+		free_double(node->key, node->value);
 		free_single(node->text);
 		tmp = node->next;
 		free_single(node);
 		node = tmp;
 	}
-	free(env);
+	free_single(env);
 }
 
 void	free_tab(char **tab)
@@ -47,7 +46,7 @@ void	free_tab(char **tab)
 		tab[i] = NULL;
 		i++;
 	}
-	free(tab);
+	free_single(tab);
 }
 
 void	free_redirs(t_redir *redir)
