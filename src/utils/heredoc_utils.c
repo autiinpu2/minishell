@@ -6,7 +6,7 @@
 /*   By: apuyane <apuyane@student.42angouleme.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/17 00:52:23 by apuyane           #+#    #+#             */
-/*   Updated: 2026/03/21 23:06:42 by apuyane          ###   ########.fr       */
+/*   Updated: 2026/03/24 00:57:29 by apuyane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include "libft.h"
 #include "free.h"
 
-char *get_rand_numbers(int n)
+char	*get_rand_numbers(int n)
 {
 	int		rand_fd;
 	char	*rand_num;
