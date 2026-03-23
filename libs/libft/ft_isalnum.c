@@ -6,7 +6,7 @@
 /*   By: apuyane <apuyane@student.42angouleme.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/18 20:27:21 by apuyane           #+#    #+#             */
-/*   Updated: 2026/02/14 08:45:54 by apuyane          ###   ########.fr       */
+/*   Updated: 2026/03/21 22:51:49 by apuyane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,5 +28,7 @@ bool	ft_isalnum_string(char *s)
 			return (false);
 		i++;
 	}
+	if (i == 0)
+		return (false);
 	return (true);
 }
