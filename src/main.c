@@ -49,11 +49,14 @@ void	process_input(t_data *data, char *line)
 	redir = count_redir_input(line);
 	if (!is_invalid(line, data))
 	{
-		if (redir)
+		if (redir || ft_strchr(line, '\t'))
 		{
 			tmp = ft_strdup(line);
 			free_single(line);
-			line = reload_input_redir(tmp, redir);
+			if (ft_strchr(tmp, '\t'))
+				line = reload_input_tab(tmp);
+			else
+				line = reload_input_redir(tmp, redir);
 			free(tmp);
 		}
 		if (!parsing(data, line))

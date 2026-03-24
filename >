@@ -1,0 +1,10 @@
+>
+>>
+build
+includes
+libs
+Makefile
+minishell
+Readme.md
+src
+valgrind_supp
