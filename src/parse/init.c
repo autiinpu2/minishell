@@ -43,7 +43,7 @@ t_cmd	new_cmd(char *token, t_data *data, int i)
 		data->cmds[i].access = -1;
 		return (data->cmds[i]);
 	}
-	data->cmds[i].args = ft_split_quotes(token, ' ');
+	data->cmds[i].args = ft_split_space(token);
 	cmd_is_pipe(data, i);
 	handle_redir(data);
 	data->cmds[i].function_name = ft_strdup(data->cmds[i].args[0]);

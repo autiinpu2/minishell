@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcomin <mcomin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: apuyane <apuyane@student.42angouleme.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/30 07:27:45 by mcomin            #+#    #+#             */
-/*   Updated: 2026/03/24 04:43:26 by mcomin           ###   ########.fr       */
+/*   Updated: 2026/03/24 06:02:34 by apuyane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ char	*supp_quotes(char *str);
 int		count_quotes_closed(char *str);
 int		is_in_quotes(char const *s, size_t pos);
 char	**ft_split_quotes(char const *s, char c);
+char	**ft_split_space(char const *s);
 t_data	*load_data(t_data *data, char *input);
 int		count_pipe(char *input);
 char	*is_path(char *prefix_cmd_name, char **tab_paths, t_cmd *cmd);

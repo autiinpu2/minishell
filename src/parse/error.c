@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   error.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcomin <mcomin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: apuyane <apuyane@student.42angouleme.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/04 01:46:10 by mcomin            #+#    #+#             */
-/*   Updated: 2026/03/24 05:23:16 by mcomin           ###   ########.fr       */
+/*   Updated: 2026/03/24 06:28:48 by apuyane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ int	check_quotes(char *input)
 		i++;
 	}
 	if (quotes)
-		return (1);
+		return (i - 1);
 	return (0);
 }
 
@@ -61,7 +61,7 @@ int	check_pipes(char *input)
 	while (ft_isspace(input[i]))
 		i++;
 	if (input[i] == '|')
-		return (1);
+		return (-1);
 	i = 0;
 	while (input[i])
 	{
@@ -71,7 +71,7 @@ int	check_pipes(char *input)
 			while (input[i] && ft_isspace(input[i]))
 				i++;
 			if (input[i] == '|' || !input[i])
-				return (1);
+				return (i);
 		}
 		else
 			i++;
@@ -92,12 +92,12 @@ int	check_redirections(char *input)
 		{
 			i += check_count_redir(input + i);
 			if (i == -1)
-				return (1);
+				return (-1);
 			while (input[i] && ft_isspace(input[i]))
 				i++;
 			if (!input[i] || (input[i] == '>' || input[i] == '<')
 				|| input[i] == '|')
-				return (1);
+				return (i);
 		}
 		else
 			i++;
@@ -107,11 +107,28 @@ int	check_redirections(char *input)
 
 int	check_syntax(char *input)
 {
-	if (check_quotes(input))
+	int	i;
+	int	j;
+	int	k;
+	int	id;
+
+	i = check_quotes(input);
+	j = check_pipes(input);
+	k = check_redirections(input);
+	if (i || j || k)
+	{
+		if (i > 0 || j > 0 || k > 0)
+		{
+			id = 2147483647;
+			if (i > 0 && i < id)
+				id = i;
+			if (j > 0 && j < id)
+				id = j;
+			if (k > 0 && k < id)
+				id = k;
+			ft_dprintf(2, "minishell: syntax error near `%c'\n", input[id]);
+		}
 		return (1);
-	if (check_pipes(input))
-		return (1);
-	if (check_redirections(input))
-		return (1);
+	}
 	return (0);
 }
