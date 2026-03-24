@@ -1,4 +1,3 @@
->>
 build
 includes
 libs
@@ -6,4 +5,5 @@ Makefile
 minishell
 Readme.md
 src
+test
 valgrind_supp

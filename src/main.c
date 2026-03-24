@@ -19,10 +19,11 @@
 
 bool	is_invalid(char *line, t_data *data)
 {
-	if (is_empty_or_spaces(line) || check_syntax(line))
+	if (is_empty_or_spaces(line))
+		return (true);
+	else if (check_syntax(line))
 	{
-		if (check_syntax(line))
-			data->exit_code = 2;
+		data->exit_code = 2;
 		return (true);
 	}
 	return (false);
