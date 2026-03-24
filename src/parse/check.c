@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcomin <mcomin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: apuyane <apuyane@student.42angouleme.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/10 02:59:44 by mcomin            #+#    #+#             */
-/*   Updated: 2026/03/24 04:44:00 by mcomin           ###   ########.fr       */
+/*   Updated: 2026/03/24 05:32:03 by apuyane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,6 @@ int	check_count_redir(char *input)
 		if (count > 2)
 			return (-1);
 	}
-	if (input[i] != input[0] && input[i] != ' ')
-		return (-1);
 	return (i);
 }
 
