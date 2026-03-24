@@ -3,14 +3,36 @@
 /*                                                        :::      ::::::::   */
 /*   check.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apuyane <apuyane@student.42angouleme.fr    +#+  +:+       +#+        */
+/*   By: mcomin <mcomin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/10 02:59:44 by mcomin            #+#    #+#             */
-/*   Updated: 2026/03/21 05:59:29 by apuyane          ###   ########.fr       */
+/*   Updated: 2026/03/24 03:39:57 by mcomin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parsing.h"
+
+char	*reload_input_tab(char *input)
+{
+	char	*new_input;
+	int		i;
+	int		j;
+
+	new_input = ft_calloc(ft_strlen(input) + 1, sizeof(char));
+	if (!new_input)
+		return (NULL);
+	i = -1;
+	j = 0;
+	while (input[++i])
+	{
+		if (input[i] == '\t')
+			new_input[j] = ' ';
+		else
+			new_input[j] = input[i];
+		j++;
+	}
+	return (new_input);
+}
 
 int	count_redir_input(char *input)
 {
