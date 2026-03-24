@@ -91,10 +91,8 @@ static void	fill(char const *s, char **str, char c)
 
 char	**ft_split_quotes(char const *s, char c)
 {
-	size_t	i;
 	char	**str;
 
-	i = 0;
 	if (!s)
 		return (NULL);
 	str = wordsmalloc(s, c);
