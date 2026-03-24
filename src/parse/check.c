@@ -6,7 +6,7 @@
 /*   By: mcomin <mcomin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/10 02:59:44 by mcomin            #+#    #+#             */
-/*   Updated: 2026/03/24 04:44:00 by mcomin           ###   ########.fr       */
+/*   Updated: 2026/03/24 05:34:50 by mcomin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,6 @@ int	check_count_redir(char *input)
 		if (count > 2)
 			return (-1);
 	}
-	if (input[i] != input[0] && input[i] != ' ')
-		return (-1);
 	return (i);
 }
 
