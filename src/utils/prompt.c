@@ -6,7 +6,7 @@
 /*   By: apuyane <apuyane@student.42angouleme.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/15 12:28:36 by apuyane           #+#    #+#             */
-/*   Updated: 2026/03/21 04:33:30 by apuyane          ###   ########.fr       */
+/*   Updated: 2026/03/24 08:04:27 by apuyane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,14 +85,13 @@ static char	*get_exit_code(t_data *data)
 	char	*exit_code;
 	char	*prompt;
 
-	exit_code = ft_itoa(data->exit_code);
-	exit_code = ft_strjoin_free(exit_code, " ➜ ");
+	exit_code = ft_strjoin_free(ft_itoa(data->exit_code), " ➜ ");
 	if (data->exit_code == 0)
 		prompt = ft_strjoin(GREEN, exit_code);
 	else
 		prompt = ft_strjoin(RED, exit_code);
-	prompt = ft_strjoin_free(prompt, RESET);
 	free_single(exit_code);
+	prompt = ft_strjoin_free(prompt, RESET);
 	return (prompt);
 }
 

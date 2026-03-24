@@ -6,7 +6,7 @@
 /*   By: apuyane <apuyane@student.42angouleme.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/25 06:09:40 by apuyane           #+#    #+#             */
-/*   Updated: 2026/03/24 06:50:01 by apuyane          ###   ########.fr       */
+/*   Updated: 2026/03/24 08:08:19 by apuyane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,10 +48,12 @@ static t_env	*fill_env(t_env *env, char **envp)
 	t_env_node	*node;
 	t_env_node	*last;
 
-	i = 0;
-	while (envp[i])
+	i = -1;
+	while (envp[++i])
 	{
 		node = ft_calloc(1, sizeof(t_env_node));
+		if (!node)
+			return (NULL);
 		j = 0;
 		while (envp[i][j] != '=')
 			j++;
@@ -63,7 +65,6 @@ static t_env	*fill_env(t_env *env, char **envp)
 		else
 			last->next = node;
 		last = node;
-		i++;
 	}
 	env->size = i;
 	return (env);
@@ -81,6 +82,8 @@ t_env	*load_envp(char **envp)
 	if (!env)
 		return (NULL);
 	env = fill_env(env, envp);
+	if (!env)
+		return (NULL);
 	env->size = i;
 	return (env);
 }

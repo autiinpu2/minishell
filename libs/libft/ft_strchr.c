@@ -6,7 +6,7 @@
 /*   By: apuyane <apuyane@student.42angouleme.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/15 01:01:21 by apuyane           #+#    #+#             */
-/*   Updated: 2026/01/24 04:03:09 by apuyane          ###   ########.fr       */
+/*   Updated: 2026/03/24 07:45:42 by apuyane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@ char	*ft_strchr(const char *s, int c)
 
 	st = (char *)s;
 	i = 0;
+	if (!st)
+		return (NULL);
 	while (st[i])
 	{
 		if (st[i] == (unsigned char)c)
