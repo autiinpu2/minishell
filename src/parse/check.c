@@ -6,11 +6,30 @@
 /*   By: mcomin <mcomin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/10 02:59:44 by mcomin            #+#    #+#             */
-/*   Updated: 2026/03/24 03:39:57 by mcomin           ###   ########.fr       */
+/*   Updated: 2026/03/24 04:44:00 by mcomin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parsing.h"
+
+int	check_count_redir(char *input)
+{
+	int	i;
+	int	count;
+
+	i = 0;
+	count = 0;
+	while (input[i] == input[0])
+	{
+		count++;
+		i++;
+		if (count > 2)
+			return (-1);
+	}
+	if (input[i] != input[0] && input[i] != ' ')
+		return (-1);
+	return (i);
+}
 
 char	*reload_input_tab(char *input)
 {
