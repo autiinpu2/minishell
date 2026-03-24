@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apuyane <apuyane@student.42angouleme.fr    +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/03 05:48:25 by apuyane           #+#    #+#             */
-/*   Updated: 2026/03/21 04:06:11 by apuyane          ###   ########.fr       */
+/*   Updated: 2026/03/24 04:03:26 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,5 +47,10 @@ int		ft_echo(t_cmd cmd);
 
 void	run_forks(t_cmd cmd, t_data *data, int id);
 void	call_chdir(char *path, t_data *data);
+int		run_built_in(t_cmd cmd, t_data *data);
+void	run_built_in_fork(t_data *data, t_cmd cmd);
+void	err(t_cmd cmd, t_data *data);
+void	close_every_pipe(t_cmd *cmd, int id);
+void	check_pipes_errors(t_cmd cmd);
 
 #endif

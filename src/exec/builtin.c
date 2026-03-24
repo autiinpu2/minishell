@@ -6,7 +6,7 @@
 /*   By: apuyane <apuyane@student.42angouleme.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/03 09:56:58 by apuyane           #+#    #+#             */
-/*   Updated: 2026/03/21 04:36:49 by apuyane          ###   ########.fr       */
+/*   Updated: 2026/03/24 04:58:17 by apuyane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #include "env.h"
 #include "libft.h"
 #include "exec.h"
+#include "free.h"
 
 int	ft_env(t_data *data, t_cmd cmd)
 {
@@ -94,4 +95,25 @@ int	ft_exit(t_data *data, t_cmd cmd)
 		ft_dprintf(2, "minishell: exit: too many arguments\n");
 	}
 	return (data->exit_code);
+}
+
+void	run_built_in_fork(t_data *data, t_cmd cmd)
+{
+	int	exit_code;
+
+	if ((cmd.path && !cmd.path[0]) || cmd.infile == -1 || cmd.outfile == -1)
+	{
+		close_every_pipe(data->cmds, -1);
+		exit(data->exit_code);
+	}
+	err(cmd, data);
+	check_pipes_errors(cmd);
+	dup2(cmd.infile, 0);
+	dup2(cmd.outfile, 1);
+	close_every_pipe(data->cmds, -1);
+	exit_code = run_built_in(cmd, data);
+	free_data(data);
+	if (errno == ENOEXEC)
+		exit(0);
+	exit(exit_code);
 }
