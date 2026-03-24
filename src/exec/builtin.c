@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: apuyane <apuyane@student.42angouleme.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/03 09:56:58 by apuyane           #+#    #+#             */
-/*   Updated: 2026/03/24 04:15:41 by marvin           ###   ########.fr       */
+/*   Updated: 2026/03/24 04:58:17 by apuyane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,7 @@ int	ft_exit(t_data *data, t_cmd cmd)
 
 void	run_built_in_fork(t_data *data, t_cmd cmd)
 {
-	int exit_code;
+	int	exit_code;
 
 	if ((cmd.path && !cmd.path[0]) || cmd.infile == -1 || cmd.outfile == -1)
 	{
