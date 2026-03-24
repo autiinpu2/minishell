@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apuyane <apuyane@student.42angouleme.fr    +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/05 05:22:21 by apuyane           #+#    #+#             */
-/*   Updated: 2026/03/21 04:56:01 by apuyane          ###   ########.fr       */
+/*   Updated: 2026/03/24 04:07:24 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ void	run_processes(t_data *data)
 		return ;
 	while (data->cmds[i].function_name)
 	{
-		if (data->cmds[i].is_built_in)
+		if (data->cmds[i].is_built_in && data->size <= 1)
 			data->exit_code = run_built_in(data->cmds[i], data);
 		else
 			run_forks(data->cmds[i], data, i);
@@ -81,7 +81,7 @@ int	wait_all_pids(t_data *data)
 	signal(SIGINT, SIG_IGN);
 	while (i < data->size)
 	{
-		if (data->cmds[i].is_built_in == true)
+		if (data->cmds[i].is_built_in == true && data->size <= 1)
 			exit_code = data->exit_code;
 		else
 		{

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   forks.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apuyane <apuyane@student.42angouleme.fr    +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/05 09:08:22 by apuyane           #+#    #+#             */
-/*   Updated: 2026/03/20 06:30:31 by apuyane          ###   ########.fr       */
+/*   Updated: 2026/03/24 04:03:45 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void	close_every_pipe(t_cmd *cmd, int id)
 	}
 }
 
-static void	check_pipes(t_cmd cmd)
+void	check_pipes_errors(t_cmd cmd)
 {
 	if (cmd.infile == -1)
 	{
@@ -83,7 +83,7 @@ void	run_cmd(t_data *data, t_cmd cmd)
 	}
 	err(cmd, data);
 	envp = env_to_envp(data->env);
-	check_pipes(cmd);
+	check_pipes_errors(cmd);
 	dup2(cmd.infile, 0);
 	dup2(cmd.outfile, 1);
 	close_every_pipe(data->cmds, -1);
@@ -118,5 +118,8 @@ void	run_forks(t_cmd cmd, t_data *data, int id)
 	}
 	signal(SIGINT, SIG_DFL);
 	signal(SIGQUIT, SIG_DFL);
-	run_cmd(data, cmd);
+	if (cmd.is_built_in)
+		run_built_in_fork(data, cmd);
+	else
+		run_cmd(data, cmd);
 }
