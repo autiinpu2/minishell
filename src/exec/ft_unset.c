@@ -6,7 +6,7 @@
 /*   By: apuyane <apuyane@student.42angouleme.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/04 07:33:49 by apuyane           #+#    #+#             */
-/*   Updated: 2026/02/10 02:16:03 by apuyane          ###   ########.fr       */
+/*   Updated: 2026/03/24 06:49:03 by apuyane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,7 @@ static void	remove_env_node(t_env *env, char *key)
 				prev->next = curr->next;
 			else
 				env->top = curr->next;
-			free_double(curr->key, curr->value);
-			free_double(curr->text, curr);
+			free_var(4, curr->key, curr->value, curr->text, curr);
 			env->size -= 1;
 			return ;
 		}

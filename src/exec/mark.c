@@ -6,7 +6,7 @@
 /*   By: apuyane <apuyane@student.42angouleme.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/15 14:31:00 by apuyane           #+#    #+#             */
-/*   Updated: 2026/03/21 03:50:00 by apuyane          ###   ########.fr       */
+/*   Updated: 2026/03/24 06:50:57 by apuyane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ int	add_mark(t_data *data, t_cmd cmd)
 	return (0);
 }
 
-int	function(char *content, t_data *data, t_cmd cmd)
+int	search_mark(char *content, t_data *data, t_cmd cmd)
 {
 	int		i;
 	char	**lines;
@@ -105,7 +105,7 @@ int	go_to_mark(t_data *data, t_cmd cmd)
 		ft_dprintf(2, "mark: no marks saved yet\n");
 		return (1);
 	}
-	err = function(content, data, cmd);
+	err = search_mark(content, data, cmd);
 	if (err == 1)
 		ft_dprintf(2, "mark: %s: mark not found\n", cmd.args[1]);
 	return (err);

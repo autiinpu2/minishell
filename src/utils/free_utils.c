@@ -6,7 +6,7 @@
 /*   By: apuyane <apuyane@student.42angouleme.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/26 08:16:06 by apuyane           #+#    #+#             */
-/*   Updated: 2026/03/21 03:40:16 by apuyane          ###   ########.fr       */
+/*   Updated: 2026/03/24 06:50:20 by apuyane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,7 @@ void	free_env(t_env *env)
 	node = env->top;
 	while (node)
 	{
-		free_double(node->key, node->value);
-		free_single(node->text);
+		free_var(3, node->key, node->value, node->text);
 		tmp = node->next;
 		free_single(node);
 		node = tmp;
