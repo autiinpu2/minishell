@@ -6,7 +6,7 @@
 /*   By: apuyane <apuyane@student.42angouleme.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/06 17:02:40 by apuyane           #+#    #+#             */
-/*   Updated: 2026/03/20 06:38:41 by apuyane          ###   ########.fr       */
+/*   Updated: 2026/03/24 06:52:38 by apuyane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,20 @@ void	free_single(void *s)
 	s = NULL;
 }
 
-void	free_double(void *s1, void *s2)
+void	free_var(int n, ...)
 {
-	free_single(s1);
-	free_single(s2);
+	int		i;
+	va_list	args;
+	void	*ptr;
+
+	i = 0;
+	va_start(args, n);
+	while (i < n)
+	{
+		ptr = va_arg(args, void *);
+		if (ptr)
+			free_single(ptr);
+		i++;
+	}
+	va_end(args);
 }

@@ -6,7 +6,7 @@
 /*   By: apuyane <apuyane@student.42angouleme.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/25 06:09:40 by apuyane           #+#    #+#             */
-/*   Updated: 2026/03/21 04:06:26 by apuyane          ###   ########.fr       */
+/*   Updated: 2026/03/24 06:50:01 by apuyane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	change_env_value(t_data *data, char *key, char *new_value)
 	{
 		if (!ft_strcmp(node->key, key))
 		{
-			free_double(node->value, node->text);
+			free_var(2, node->value, node->text);
 			node->value = ft_strdup(new_value);
 			node->text = ft_strdup(node->key);
 			node->text = ft_strjoin_free(node->text, "=");
