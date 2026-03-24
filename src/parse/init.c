@@ -57,7 +57,7 @@ t_cmd	new_cmd(char *token, t_data *data, int i)
 	return (data->cmds[i]);
 }
 
-t_data	*load_data(t_data *data, char *input)
+t_data	*		load_data(t_data *data, char *input)
 {
 	char		**tab_split;
 	int			i;
