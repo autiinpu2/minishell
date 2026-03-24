@@ -6,7 +6,7 @@
 /*   By: mcomin <mcomin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/04 01:46:10 by mcomin            #+#    #+#             */
-/*   Updated: 2026/03/03 02:27:45 by mcomin           ###   ########.fr       */
+/*   Updated: 2026/03/24 04:44:12 by mcomin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,19 +88,16 @@ int	check_redirections(char *input)
 	{
 		if (!input[i])
 			break ;
-		if (is_redir(input + i) && !is_in_quotes(input, i))
+		if ((input[i] == '>' || input[i] == '<') && !is_in_quotes(input, i))
 		{
-			if ((input[i] == '>' || input[i] == '<')
-				&& input[i] == input[i + 1])
-				i += 2;
-			else
-				i += 1;
+			i = check_count_redir(input + i);
+			if (i == -1)
+				return (1);
 			while (input[i] && ft_isspace(input[i]))
 				i++;
-			if (!input[i] || is_redir(input + i) || input[i] == '|')
+			if (!input[i] || (input[i] == '>' || input[i] == '<')
+				|| input[i] == '|')
 				return (1);
-			while (input[i] && !ft_isspace(input[i]) && !is_redir(input + i))
-				i++;
 		}
 		else
 			i++;

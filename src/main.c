@@ -19,10 +19,11 @@
 
 bool	is_invalid(char *line, t_data *data)
 {
-	if (is_empty_or_spaces(line) || check_syntax(line))
+	if (is_empty_or_spaces(line))
+		return (true);
+	else if (check_syntax(line))
 	{
-		if (check_syntax(line))
-			data->exit_code = 2;
+		data->exit_code = 2;
 		return (true);
 	}
 	return (false);
@@ -49,11 +50,14 @@ void	process_input(t_data *data, char *line)
 	redir = count_redir_input(line);
 	if (!is_invalid(line, data))
 	{
-		if (redir)
+		if (redir || ft_strchr(line, '\t'))
 		{
 			tmp = ft_strdup(line);
 			free_single(line);
-			line = reload_input_redir(tmp, redir);
+			if (ft_strchr(tmp, '\t'))
+				line = reload_input_tab(tmp);
+			else
+				line = reload_input_redir(tmp, redir);
 			free(tmp);
 		}
 		if (!parsing(data, line))

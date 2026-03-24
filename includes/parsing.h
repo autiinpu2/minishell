@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apuyane <apuyane@student.42angouleme.fr    +#+  +:+       +#+        */
+/*   By: mcomin <mcomin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/30 07:27:45 by mcomin            #+#    #+#             */
-/*   Updated: 2026/03/21 22:44:09 by apuyane          ###   ########.fr       */
+/*   Updated: 2026/03/24 04:43:26 by mcomin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,5 +55,7 @@ char	**add_dir(char *directory, char **old_dir);
 int		strmatch(char *pattern, char *name);
 char	*get_matching(char *pattern, char **elements);
 char	*get_rand_numbers(int n);
+char	*reload_input_tab(char *input);
+int		check_count_redir(char *input);
 
 #endif
