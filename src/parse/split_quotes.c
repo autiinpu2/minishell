@@ -103,13 +103,7 @@ char	**ft_split_quotes(char const *s, char c)
 	fill(s, str, c);
 	if (!str)
 	{
-		while (str[i])
-		{
-			free_single(str[i]);
-			str[i] = NULL;
-			i++;
-		}
-		free_single(str);
+		free_tab(str);
 		str = NULL;
 	}
 	return (str);

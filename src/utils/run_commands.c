@@ -6,7 +6,7 @@
 /*   By: apuyane <apuyane@student.42angouleme.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/16 22:50:25 by apuyane           #+#    #+#             */
-/*   Updated: 2026/03/21 03:33:00 by apuyane          ###   ########.fr       */
+/*   Updated: 2026/03/24 07:25:49 by apuyane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,10 @@ static char	*remove_n(char *line)
 	len = ft_strlen(line);
 	s = ft_calloc(len, sizeof(char));
 	if (!s)
-		return (s);
+	{
+		free(line);
+		return (NULL);
+	}
 	while (i + 1 < len)
 	{
 		s[i] = line[i];
@@ -67,6 +70,8 @@ void	minishellrc_run(t_data *data, int run_cmd)
 		if (!line)
 			return ;
 		line = remove_n(line);
+		if (!line)
+			return ;
 		run_single_cmd(data, line);
 	}
 }

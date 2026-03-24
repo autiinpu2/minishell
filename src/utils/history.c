@@ -6,7 +6,7 @@
 /*   By: apuyane <apuyane@student.42angouleme.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/13 03:32:53 by apuyane           #+#    #+#             */
-/*   Updated: 2026/03/24 06:50:34 by apuyane          ###   ########.fr       */
+/*   Updated: 2026/03/24 08:10:10 by apuyane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,6 @@ char	*get_last_line(char *path)
 		close(fd);
 		return (NULL);
 	}
-	buf[st.st_size] = '\0';
 	last = find_last_line(buf, st.st_size);
 	free_single(buf);
 	close(fd);

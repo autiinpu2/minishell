@@ -6,7 +6,7 @@
 /*   By: apuyane <apuyane@student.42angouleme.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/13 06:33:48 by apuyane           #+#    #+#             */
-/*   Updated: 2026/03/24 06:49:50 by apuyane          ###   ########.fr       */
+/*   Updated: 2026/03/24 07:59:24 by apuyane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,11 @@ char	*get_expanded_home(char *string, int begin, int end, t_data *data)
 	else
 		str_begin = ft_strdup("");
 	var = get_env_from_name("HOME", data->env);
+	if (!str_begin || !var)
+	{
+		free_var(3, string, str_begin, var);
+		return (NULL);
+	}
 	total = ft_strjoin(str_begin, var);
 	str_end = ft_substr(string, end, ft_strlen(string));
 	total = ft_strjoin_free(total, str_end);
@@ -86,6 +91,11 @@ char	*get_expanded_string(char *string, int begin, int end, t_data *data)
 	else
 		str_begin = ft_strdup("");
 	var = ft_substr(string, begin, end - begin);
+	if (!var || !str_begin)
+	{
+		free_var(3, string, str_begin, var);
+		return (NULL);
+	}
 	if (!ft_strcmp(var, "?"))
 		total = ft_exit_code(data, str_begin);
 	else
@@ -106,7 +116,10 @@ char	*remove_char_i(char *str, int index)
 	k = 0;
 	new_str = ft_calloc(ft_strlen(str), sizeof(char));
 	if (!new_str)
+	{
+		free_single(str);
 		return (NULL);
+	}
 	while (str[i])
 	{
 		if (i != index)
